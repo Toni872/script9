@@ -1,0 +1,452 @@
+/**
+ * Script9 Premium Effects
+ * Efectos visuales de última generación
+ * Color principal: #B502CE (Script9 Magenta)
+ */
+
+/* ============================================
+   GLASSMORPHISM
+   ============================================ */
+
+.glass-script9 {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-script9-dark {
+  background: rgba(181, 2, 206, 0.1);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(181, 2, 206, 0.2);
+}
+
+.glass-script9-strong {
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(181, 2, 206, 0.1);
+}
+
+/* ============================================
+   ANIMATED GRADIENTS
+   ============================================ */
+
+.gradient-animated {
+  background: linear-gradient(45deg,
+      #b502ce,
+      #d946ef,
+      #f0abfc,
+      #b502ce);
+  background-size: 300% 300%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-hover-shift {
+  background: linear-gradient(135deg,
+      #b502ce 0%,
+      #d946ef 50%,
+      #f0abfc 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  transition: background-position 0.5s ease;
+}
+
+.gradient-hover-shift:hover {
+  background-position: 100% 50%;
+}
+
+/* ============================================
+   SHIMMER EFFECT
+   ============================================ */
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  animation: shimmer-slide 2s infinite;
+}
+
+@keyframes shimmer-slide {
+  0% {
+    left: -150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+.glow-script9 {
+  box-shadow: 0 0 20px rgba(181, 2, 206, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-script9:hover {
+  box-shadow: 0 0 40px rgba(181, 2, 206, 0.6);
+}
+
+.glow-script9-pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(181, 2, 206, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(181, 2, 206, 0.6);
+  }
+}
+
+.text-glow-script9 {
+  text-shadow: 0 0 20px rgba(181, 2, 206, 0.5);
+}
+
+/* ============================================
+   3D TRANSFORM EFFECTS
+   ============================================ */
+
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+}
+
+.card-3d-content {
+  transform: translateZ(50px);
+}
+
+/* ============================================
+   RIPPLE EFFECT
+   ============================================ */
+
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(181, 2, 206, 0.3);
+  transform: scale(0);
+  animation: ripple-animation 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   BORDER ANIMATIONS
+   ============================================ */
+
+.border-animate {
+  position: relative;
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #b502ce, #d946ef, #f0abfc) border-box;
+  background-size: 200% 200%;
+  animation: border-flow 3s ease infinite;
+}
+
+@keyframes border-flow {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.border-glow {
+  position: relative;
+}
+
+.border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #b502ce, #d946ef);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.border-glow:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   FLOATING ANIMATIONS
+   ============================================ */
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ============================================
+   SKELETON LOADING
+   ============================================ */
+
+.skeleton {
+  background: linear-gradient(90deg,
+      rgba(181, 2, 206, 0.05) 0%,
+      rgba(181, 2, 206, 0.15) 50%,
+      rgba(181, 2, 206, 0.05) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ============================================
+   TEXT ANIMATIONS
+   ============================================ */
+
+.text-gradient-animate {
+  background: linear-gradient(90deg,
+      #b502ce,
+      #d946ef,
+      #f0abfc,
+      #b502ce);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-gradient-flow 5s linear infinite;
+}
+
+@keyframes text-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+.text-reveal {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+  animation: text-reveal 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes text-reveal {
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* ============================================
+   MAGNETIC EFFECT
+   ============================================ */
+
+.magnetic {
+  transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ============================================
+   PARALLAX LAYERS
+   ============================================ */
+
+.parallax-layer {
+  will-change: transform;
+}
+
+.parallax-slow {
+  transform: translateZ(-1px) scale(1.5);
+}
+
+.parallax-fast {
+  transform: translateZ(0);
+}
+
+/* ============================================
+   SCROLL SNAP
+   ============================================ */
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================
+   BACKDROP EFFECTS
+   ============================================ */
+
+.backdrop-blur-script9 {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.backdrop-blur-strong {
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* ============================================
+   HOVER TRANSFORMS
+   ============================================ */
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(181, 2, 206, 0.25);
+}
+
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
+
+.progress-bar-script9 {
+  height: 4px;
+  background: linear-gradient(90deg, #b502ce, #d946ef, #f0abfc);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ============================================
+   SMOOTH TRANSITIONS
+   ============================================ */
+
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.transition-bounce {
+  transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCE MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .parallax-layer {
+    transform: none !important;
+  }
+}

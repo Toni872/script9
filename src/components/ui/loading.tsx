@@ -1,0 +1,52 @@
+import { cn } from '@/lib/utils';
+
+interface LoadingSpinnerProps {
+  className?: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+export function LoadingSpinner({ className, size = 'md' }: LoadingSpinnerProps) {
+  const sizeClasses = {
+    sm: 'h-4 w-4',
+    md: 'h-8 w-8',
+    lg: 'h-12 w-12',
+  };
+
+  return (
+    <div className={cn('flex items-center justify-center', className)}>
+      <div
+        className={cn(
+          'animate-spin rounded-full border-2 border-current border-t-transparent text-primary',
+          sizeClasses[size]
+        )}
+      />
+    </div>
+  );
+}
+
+interface LoadingSkeletonProps {
+  className?: string;
+}
+
+export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
+  return (
+    <div
+      className={cn(
+        'animate-pulse rounded-md bg-muted',
+        className
+      )}
+    />
+  );
+}
+
+export function PropertyCardSkeleton() {
+  return (
+    <div className="space-y-3">
+      <LoadingSkeleton className="h-48 w-full rounded-lg" />
+      <LoadingSkeleton className="h-4 w-3/4" />
+      <LoadingSkeleton className="h-4 w-1/2" />
+      <LoadingSkeleton className="h-4 w-full" />
+    </div>
+  );
+}
+

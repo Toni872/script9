@@ -1,0 +1,7 @@
+{
+    "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "react/style-prop-object": "off",
+        "no-inline-styles": "off"
+    }
+}

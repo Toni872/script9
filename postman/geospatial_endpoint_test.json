@@ -1,0 +1,42 @@
+{
+    "info": {
+        "name": "Geospatial Endpoint Test",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Test Geospatial Endpoint",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/api/geospatial?lat=40.416775&lon=-3.703790&radius=10000",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "api",
+                        "geospatial"
+                    ],
+                    "query": [
+                        {
+                            "key": "lat",
+                            "value": "40.416775"
+                        },
+                        {
+                            "key": "lon",
+                            "value": "-3.703790"
+                        },
+                        {
+                            "key": "radius",
+                            "value": "10000"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}

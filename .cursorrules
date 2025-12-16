@@ -1,0 +1,13 @@
+# Cursor Rules - Vilok Project
+
+## Ignore CSS/Tailwind warnings
+- No validar archivos .css con linter CSS
+- Ignorar warnings de @tailwind y @apply en archivos CSS
+- Estos son directivas válidas de Tailwind CSS
+
+## CSS Files
+- globals.css usa Tailwind CSS directives (@tailwind, @apply)
+- Estos NO son errores - son parte de Tailwind CSS
+- No mostrar warnings para estas directivas
+
+

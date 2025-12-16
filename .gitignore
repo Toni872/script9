@@ -1,0 +1,74 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+*.test.js
+*.test.ts
+*.test.tsx
+/e2e
+/tests
+/__mocks__
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.cursor/
+.idea/
+
+# temp files
+*.tmp
+*.temp
+*_TEMP.*
+VERCEL_TEST.txt
+BUILD_TRIGGER.txt
+verify-files.js
+VERCEL_VARIABLES_LISTAS.txt
+COPIAR_VARIABLES_VERCEL.txt
+vercel-env-import.txt
+vercel-env-solo-nuevas.txt
+vercel-env-sin-comillas.txt
+
+# Supabase
+/supabase/.branches
+/supabase/.temp
+
+# config files with sensitive data
+config.json
+.env*.local
