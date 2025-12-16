@@ -52,8 +52,12 @@ export async function POST(request: NextRequest) {
             const newUser = newUserResult as { id: string; email: string; name: string } | null;
 
             if (createError || !newUser) {
-                console.error('❌ Error creando usuario en checkout:', createError);
-                return NextResponse.json({ error: 'Usuario no encontrado y no se pudo crear.' }, { status: 404 });
+                console.error('❌ Error CRÍTICO creando usuario en checkout:', JSON.stringify(createError, null, 2));
+                // Add more details to the response for debugging (temporarily)
+                return NextResponse.json({
+                    error: 'Usuario no encontrado y no se pudo crear.',
+                    details: createError
+                }, { status: 404 });
             }
 
             console.log('✅ Usuario creado dinámicamente:', newUser.email);
