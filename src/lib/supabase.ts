@@ -4,7 +4,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 // Crear cliente solo si las variables están disponibles
-export const supabase = supabaseUrl && supabaseAnonKey 
+export const supabase = supabaseUrl && supabaseAnonKey
     ? createClient(supabaseUrl, supabaseAnonKey)
     : null as any; // Fallback para build time
 
@@ -21,5 +21,11 @@ export const createServerSupabaseClient = () => {
         throw new Error('Missing Supabase Service Role Key');
     }
 
-    return createClient(supabaseUrl, serviceRoleKey);
+    return createClient(supabaseUrl, serviceRoleKey, {
+        auth: {
+            persistSession: false,
+            autoRefreshToken: false,
+            detectSessionInUrl: false
+        }
+    });
 };
