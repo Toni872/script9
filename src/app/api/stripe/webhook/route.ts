@@ -67,7 +67,7 @@ async function handlePaymentSuccess(paymentIntent: any) {
     console.log('✅ Payment succeeded for booking:', bookingId);
 
     // Actualizar el estado de la reserva a 'confirmed'
-    const { data: booking, error } = await supabase
+    const { data: bookingRaw, error } = await supabase
         .from('bookings')
         .update({
             status: 'confirmed',
@@ -81,6 +81,18 @@ async function handlePaymentSuccess(paymentIntent: any) {
         `)
         .single();
 
+    // Explicit interface for joined query result
+    interface BookingWithDetails {
+        id: string;
+        start_time: string;
+        end_time: string;
+        total_price: number;
+        users: { id: string; name: string; email: string; } | null;
+        properties: { id: string; title: string; address: string; city: string; host_id: string; } | null;
+    }
+
+    const booking = bookingRaw as unknown as BookingWithDetails | null;
+
     if (error) {
         console.error('Error updating booking:', error);
         throw error;
@@ -92,14 +104,16 @@ async function handlePaymentSuccess(paymentIntent: any) {
     }
 
     // Obtener información del host
-    const { data: host } = await supabase
+    const { data: hostRaw } = await supabase
         .from('users')
         .select('id, name, email')
-        .eq('id', booking.properties.host_id)
+        .eq('id', booking.properties?.host_id)
         .single();
 
+    const host = hostRaw as { id: string; name: string; email: string } | null;
+
     // Enviar emails de confirmación
-    if (booking.users && host) {
+    if (booking.users && host && booking.properties) {
         try {
             // Email al huésped
             await EmailService.sendBookingConfirmation({
@@ -141,7 +155,7 @@ async function handlePaymentFailed(paymentIntent: any) {
     console.log('❌ Payment failed for booking:', bookingId);
 
     // Opcional: Actualizar el estado de la reserva o registrar el fallo
-    const { data: booking } = await supabase
+    const { data: bookingRaw } = await supabase
         .from('bookings')
         .select(`
             *,
@@ -149,6 +163,13 @@ async function handlePaymentFailed(paymentIntent: any) {
         `)
         .eq('id', bookingId)
         .single();
+
+    interface BookingSimple {
+        id: string;
+        users: { id: string; name: string; email: string; } | null;
+    }
+
+    const booking = bookingRaw as unknown as BookingSimple | null;
 
     if (booking && booking.users) {
         try {
@@ -178,7 +199,7 @@ async function handleCheckoutSessionCompleted(session: any) {
         console.log(`🚀 Processing promotion for Property ${propertyId}`);
         const { error } = await supabase
             .from('properties')
-            .update({ is_script9_select: true })
+            .update({ is_script9_select: true } as any) // Explicit cast to avoid type errors if column is missing in generated types
             .eq('id', propertyId);
 
         if (error) console.error('Error upgrading property:', error);
@@ -199,7 +220,7 @@ async function handleCheckoutSessionCompleted(session: any) {
         const fee = parseFloat(platformFee || '0');
 
         // Insertar la "Reserva" (Orden)
-        const { data: booking, error } = await supabase
+        const { data: bookingRaw, error } = await supabase
             .from('bookings')
             .insert({
                 property_id: propertyId,
@@ -211,9 +232,11 @@ async function handleCheckoutSessionCompleted(session: any) {
                 host_payout: (amountTotal - fee) / 100,
                 start_time: new Date().toISOString(), // Default to now
                 end_time: new Date().toISOString()    // Default to now
-            })
+            } as any)
             .select()
             .single();
+
+        const booking = bookingRaw as { id: string } | null;
 
         if (error) {
             console.error('Error creating service order:', error);
@@ -221,7 +244,9 @@ async function handleCheckoutSessionCompleted(session: any) {
             return;
         }
 
-        console.log(`✅ Service Order created: ${booking.id}`);
+        if (booking) {
+            console.log(`✅ Service Order created: ${booking.id}`);
+        }
 
         // Opcional: Enviar emails (Podemos reusar EmailService si es necesario)
         // await sendConfirmationEmails(booking.id); (Implement later if needed)

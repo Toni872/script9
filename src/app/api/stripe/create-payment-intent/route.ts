@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
         // Obtener la reserva de la base de datos
         const supabase = createServerSupabaseClient();
-        const { data: booking, error: bookingError } = await supabase
+        const { data: bookingRaw, error: bookingError } = await supabase
             .from('bookings')
             .select(`
                 id,
@@ -57,6 +57,24 @@ export async function POST(request: NextRequest) {
             .eq('id', bookingId)
             .single();
 
+        // Define interface explicitly to avoid Supabase inference errors
+        interface BookingWithProperty {
+            id: string;
+            total_price: number;
+            status: string;
+            guest_id: string;
+            property_id: string;
+            check_in: string;
+            check_out: string;
+            properties: {
+                id: string;
+                title: string;
+                host_id: string;
+            } | null;
+        }
+
+        const booking = bookingRaw as unknown as BookingWithProperty | null;
+
         if (bookingError || !booking) {
             return NextResponse.json(
                 { error: 'Reserva no encontrada' },
@@ -65,11 +83,13 @@ export async function POST(request: NextRequest) {
         }
 
         // Verificar que el usuario sea el dueño de la reserva
-        const { data: user } = await supabase
+        const { data: userRaw } = await supabase
             .from('users')
             .select('id')
             .eq('email', session.user.email)
             .single();
+
+        const user = userRaw as { id: string } | null;
 
         if (!user || booking.guest_id !== user.id) {
             return NextResponse.json(
@@ -91,6 +111,9 @@ export async function POST(request: NextRequest) {
         const platformFee = Math.round(amount * 0.10); // 10% comisión
         const hostPayout = amount - platformFee; // Lo que recibe el experto
 
+        const propertyTitle = booking.properties?.title || 'propiedad';
+        const hostId = booking.properties?.host_id || '';
+
         const paymentIntent = await stripe.paymentIntents.create({
             amount,
             currency: STRIPE_CONFIG.currency,
@@ -99,14 +122,14 @@ export async function POST(request: NextRequest) {
                 bookingId: booking.id,
                 propertyId: booking.property_id,
                 guestId: booking.guest_id,
-                hostId: (booking.properties as any)?.host_id || '',
-                propertyTitle: (booking.properties as any)?.title || '',
+                hostId: hostId,
+                propertyTitle: propertyTitle,
                 startTime: booking.check_in,
                 endTime: booking.check_out,
                 platformFee: platformFee.toString(), // Guardar en metadata de Stripe
                 hostPayout: hostPayout.toString()
             },
-            description: `Reserva de ${(booking.properties as any)?.title || 'propiedad'} (Comisión 10% incl.)`,
+            description: `Reserva de ${propertyTitle} (Comisión 10% incl.)`,
         });
 
         // Actualizar la reserva con el payment intent ID y los datos de comisión
@@ -115,10 +138,10 @@ export async function POST(request: NextRequest) {
             .update({
                 stripe_payment_id: paymentIntent.id,
                 updated_at: new Date().toISOString(),
-                // @ts-ignore: Las columnas existen en BD tras migración
-                platform_fee: platformFee / 100, // Guardar en euros
+                // Campos agregados explicitamente con casteo si no estan en type definition aun
+                platform_fee: platformFee / 100,
                 host_payout: hostPayout / 100
-            })
+            } as any)
             .eq('id', bookingId);
 
         return NextResponse.json({

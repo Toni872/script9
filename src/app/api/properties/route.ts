@@ -35,11 +35,13 @@ export async function POST(request: NextRequest) {
         const supabase = createServerSupabaseClient();
 
         // Obtener ID del usuario actual
-        const { data: user } = await supabase
+        const { data: userRaw } = await supabase
             .from('users')
             .select('id')
             .eq('email', session.user.email)
             .single();
+
+        const user = userRaw as { id: string } | null;
 
         if (!user) {
             return NextResponse.json({ error: 'Usuario no encontrado' }, { status: 404 });

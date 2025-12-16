@@ -30,11 +30,13 @@ export async function POST(request: NextRequest) {
         const supabase = createServerSupabaseClient();
 
         // Verificar si el usuario ya existe
-        const { data: existingUser } = await supabase
-            .from('users')
+        const { data: existingUserRaw } = await supabase
+            .from('users') // Explicitly using 'users'
             .select('id')
             .eq('email', email)
             .single();
+
+        const existingUser = existingUserRaw as { id: string } | null;
 
         if (existingUser) {
             return NextResponse.json(
@@ -71,7 +73,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Crear usuario en la tabla users
-        const { data: newUser, error: dbError } = await supabase
+        const { data: newUserRaw, error: dbError } = await supabase
             .from('users')
             .insert({
                 id: authData.user.id,
@@ -83,7 +85,9 @@ export async function POST(request: NextRequest) {
             .select()
             .single();
 
-        if (dbError) {
+        const newUser = newUserRaw as { id: string; name: string; email: string; role: string } | null;
+
+        if (dbError || !newUser) {
             console.error('Error al crear usuario en BD:', dbError);
             // Intentar eliminar el usuario de Auth si falla la BD
             await supabase.auth.admin.deleteUser(authData.user.id);

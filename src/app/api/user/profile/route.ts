@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -18,14 +19,75 @@ export async function GET(req: NextRequest) {
         const supabase = createServerSupabaseClient();
 
         // Buscar usuario por email en lugar de ID
-        const { data: user, error } = await supabase
+        const { data: userRaw, error } = await supabase
             .from('users')
             .select('id, name, email, phone, role, created_at')
             .eq('email', session.user.email)
             .single();
 
+        const user = userRaw as { id: string; name: string; email: string; phone: string | null; role: string; created_at: string; } | null;
+
+        if (!user && !error) {
+            // Lazy creation for users logging in via Social Auth (NextAuth) who are not in Supabase yet
+            console.log('⚠️ Usuario no encontrado en profile GET. Intentando crear...');
+            const newUserId = crypto.randomUUID();
+
+            const { data: newUser, error: createError } = await supabase
+                .from('users')
+                .insert([
+                    {
+                        id: newUserId,
+                        email: session.user.email,
+                        name: session.user.name || 'Usuario Script9',
+                        role: 'guest'
+                    }
+                ])
+                .select('id, name, email, phone, role, created_at')
+                .single();
+
+            if (createError || !newUser) {
+                console.error('❌ Error creating user in profile:', createError);
+                return NextResponse.json(
+                    { error: 'Error al crear perfil de usuario' },
+                    { status: 500 }
+                );
+            }
+
+            return NextResponse.json({ user: newUser });
+        }
+
         if (error) {
             console.error('Error fetching user:', error);
+            // Ignore PRGST116 (0 rows) if handled above, but here error is usually real DB error
+            if (error.code === 'PGRST116') {
+                // Should have been caught by !user if .single() wasn't throwing, 
+                // but supabase .single() throws on 0 rows.
+                // So we need to handle creation INSIDE this error block or use .maybeSingle().
+            }
+
+            // RETRY LOGIC for .single() error variant:
+            if (error.code === 'PGRST116') { // No result found
+                console.log('⚠️ Usuario no encontrado (PGRST116). Intentando crear...');
+                const newUserId = crypto.randomUUID();
+                const { data: newUser, error: createError } = await supabase
+                    .from('users')
+                    .insert([
+                        {
+                            id: newUserId,
+                            email: session.user.email,
+                            name: session.user.name || 'Usuario Script9',
+                            role: 'guest'
+                        }
+                    ])
+                    .select('id, name, email, phone, role, created_at')
+                    .single();
+
+                if (createError || !newUser) {
+                    return NextResponse.json({ error: 'Error creando usuario' }, { status: 500 });
+                }
+                return NextResponse.json({ user: newUser });
+            }
+
             return NextResponse.json(
                 { error: 'Error al obtener datos del usuario' },
                 { status: 500 }
@@ -66,7 +128,7 @@ export async function PUT(req: NextRequest) {
 
         const supabase = createServerSupabaseClient();
 
-        const { data: updatedUser, error } = await supabase
+        const { data: updatedUserRaw, error } = await supabase
             .from('users')
             .update({
                 name: fullName.trim(),
@@ -75,6 +137,8 @@ export async function PUT(req: NextRequest) {
             .eq('email', session.user.email)
             .select()
             .single();
+
+        const updatedUser = updatedUserRaw as { id: string; name: string; email: string; phone: string | null; role: string; created_at: string; } | null;
 
         if (error) {
             console.error('Error updating user:', error);

@@ -16,11 +16,13 @@ export async function GET() {
 
         // Verificar en la base de datos si el usuario es admin
         const supabase = createServerSupabaseClient();
-        const { data: user, error } = await supabase
+        const { data: userRaw, error } = await supabase
             .from('users')
             .select('role')
             .eq('email', session.user.email)
             .single();
+
+        const user = userRaw as { role: string } | null;
 
         if (error || !user) {
             return NextResponse.json(

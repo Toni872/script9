@@ -108,11 +108,13 @@ export async function POST(request: NextRequest) {
 
         // Obtener el UUID del usuario desde la base de datos usando su email
         const supabase = createServerSupabaseClient();
-        const { data: user, error: userError } = await supabase
+        const { data: userRaw, error: userError } = await supabase
             .from('users')
             .select('id')
             .eq('email', session.user.email)
             .single();
+
+        const user = userRaw as { id: string } | null;
 
         if (userError || !user) {
             console.log('❌ Usuario no encontrado en BD:', userError);

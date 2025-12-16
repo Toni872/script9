@@ -24,22 +24,26 @@ export async function POST(request: NextRequest) {
         const supabase = createServerSupabaseClient();
 
         // 1. Obtener ID del usuario actual
-        const { data: user } = await supabase
+        const { data: userRaw } = await supabase
             .from('users')
             .select('id')
             .eq('email', session.user.email)
             .single();
+
+        const user = userRaw as { id: string } | null;
 
         if (!user) {
             return NextResponse.json({ error: 'Usuario no encontrado' }, { status: 404 });
         }
 
         // 2. Obtener propiedad y verificar dueño
-        const { data: property } = await supabase
+        const { data: propertyRaw } = await supabase
             .from('properties')
             .select('id, title, host_id')
             .eq('id', propertyId)
             .single();
+
+        const property = propertyRaw as { id: string; title: string; host_id: string } | null;
 
         if (!property) {
             return NextResponse.json({ error: 'Propiedad no encontrada' }, { status: 404 });

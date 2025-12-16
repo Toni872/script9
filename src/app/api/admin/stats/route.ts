@@ -42,10 +42,12 @@ export async function GET(req: NextRequest) {
             .gte('start_time', new Date().toISOString());
 
         // Ingresos totales (suma de total_price de reservas confirmadas y completadas)
-        const { data: revenueData } = await supabase
+        const { data: revenueDataRaw } = await supabase
             .from('bookings')
             .select('total_price')
             .in('status', ['confirmed', 'completed', 'paid']);
+
+        const revenueData = revenueDataRaw as { total_price: number }[] | null;
 
         const totalRevenue = revenueData?.reduce((sum, booking) => sum + (booking.total_price || 0), 0) || 0;
 
@@ -72,18 +74,22 @@ export async function GET(req: NextRequest) {
             : 0;
 
         // Crecimiento de ingresos (últimos 30 días vs 30 días anteriores)
-        const { data: recentRevenue } = await supabase
+        const { data: recentRevenueRaw } = await supabase
             .from('bookings')
             .select('total_price')
             .in('status', ['confirmed', 'completed', 'paid'])
             .gte('created_at', thirtyDaysAgo.toISOString());
 
-        const { data: previousRevenue } = await supabase
+        const recentRevenue = recentRevenueRaw as { total_price: number }[] | null;
+
+        const { data: previousRevenueRaw } = await supabase
             .from('bookings')
             .select('total_price')
             .in('status', ['confirmed', 'completed', 'paid'])
             .gte('created_at', sixtyDaysAgo.toISOString())
             .lt('created_at', thirtyDaysAgo.toISOString());
+
+        const previousRevenue = previousRevenueRaw as { total_price: number }[] | null;
 
         const recentRevenueSum = recentRevenue?.reduce((sum, b) => sum + (b.total_price || 0), 0) || 0;
         const previousRevenueSum = previousRevenue?.reduce((sum, b) => sum + (b.total_price || 0), 0) || 0;

@@ -78,8 +78,8 @@
     "@eslint/eslintrc": "^3",
     "@types/jest": "^30.0.0",
     "dotenv": "^17.2.3",
-    "eslint": "^9.35.0",
-    "eslint-config-next": "^15.5.3",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
     "ts-node": "^10.9.2"
   },
   "overrides": {},

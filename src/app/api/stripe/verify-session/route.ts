@@ -27,11 +27,19 @@ export async function GET(request: NextRequest) {
 
         // 2. Fetch Property Details from Supabase
         const supabase = createServerSupabaseClient();
-        const { data: property, error } = await supabase
+        const { data: propertyRaw, error } = await supabase
             .from('properties')
             .select('id, title, price_per_hour, city, image_urls')
             .eq('id', propertyId)
             .single();
+
+        const property = propertyRaw as {
+            id: string;
+            title: string;
+            price_per_hour: number;
+            city: string;
+            image_urls: string[] | null;
+        } | null;
 
         if (error || !property) {
             return NextResponse.json({ error: 'Property not found' }, { status: 404 });

@@ -92,7 +92,7 @@ export class EmailService {
                   <span class="detail-value">${new Date(checkOutDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">Huéspedes:</span>
+                  <span class="detail-label">Clientes:</span>
                   <span class="detail-value">${guests} persona(s)</span>
                 </div>
                 <div class="detail-row">
@@ -186,7 +186,7 @@ export class EmailService {
                   <span class="detail-value">${new Date(checkOutDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">Huéspedes:</span>
+                  <span class="detail-label">Usuarios:</span>
                   <span class="detail-value">${guests} persona(s)</span>
                 </div>
                 <div class="detail-row">
@@ -264,7 +264,7 @@ export class EmailService {
               <div class="booking-details">
                 <h2>Detalles de la Reserva</h2>
                 <div class="detail-row">
-                  <span class="detail-label">Huésped:</span>
+                  <span class="detail-label">Cliente:</span>
                   <span class="detail-value">${guestName}</span>
                 </div>
                 <div class="detail-row">
@@ -276,7 +276,7 @@ export class EmailService {
                   <span class="detail-value">${new Date(checkOutDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">Número de Huéspedes:</span>
+                  <span class="detail-label">Usuarios/Licencias:</span>
                   <span class="detail-value">${guests} persona(s)</span>
                 </div>
                 <div class="detail-row">
@@ -358,7 +358,7 @@ export class EmailService {
                   <span class="detail-value">${propertyName}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">${cancelledBy === 'guest' ? 'Anfitrión' : 'Huésped'}:</span>
+                  <span class="detail-label">${cancelledBy === 'guest' ? 'Experto' : 'Cliente'}:</span>
                   <span class="detail-value">${cancelledBy === 'guest' ? hostName : guestName}</span>
                 </div>
                 <div class="detail-row">
@@ -587,8 +587,8 @@ export class EmailService {
               <ul>
                 <li><strong>Check-in:</strong> ${new Date(checkInDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</li>
                 <li><strong>Dirección:</strong> ${propertyAddress}</li>
-                <li><strong>Huéspedes:</strong> ${guests} persona(s)</li>
-                <li><strong>Anfitrión:</strong> ${hostName}</li>
+                <li><strong>Usuarios:</strong> ${guests} persona(s)</li>
+                <li><strong>Experto:</strong> ${hostName}</li>
               </ul>
 
               <div class="checklist">
@@ -763,7 +763,7 @@ export class EmailService {
               <div class="booking-details">
                 <h2>Detalles de la Reserva</h2>
                 <div class="detail-row">
-                  <span class="detail-label">Huésped:</span>
+                  <span class="detail-label">Cliente:</span>
                   <span class="detail-value">${guestName}</span>
                 </div>
                 <div class="detail-row">

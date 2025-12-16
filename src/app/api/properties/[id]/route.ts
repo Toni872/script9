@@ -77,9 +77,9 @@ export async function GET(
             let review_count = 0;
 
             try {
-                // @ts-ignore
+                // Cast table name to any to access 'reviews' if it's missing from generated types
                 const { data: reviewsRaw } = await supabase
-                    .from('reviews')
+                    .from('reviews' as any)
                     .select('rating')
                     .eq('property_id', propertyId);
 

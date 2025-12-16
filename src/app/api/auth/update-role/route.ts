@@ -38,12 +38,14 @@ export async function POST(request: NextRequest) {
 
         // Actualizar role en Supabase
         const supabase = createServerSupabaseClient();
-        const { data: updatedUser, error } = await supabase
+        const { data: updatedUserRaw, error } = await supabase
             .from('users')
             .update({ role })
             .eq('email', session.user.email)
             .select('id, email, name, role')
             .single();
+
+        const updatedUser = updatedUserRaw as { id: string; email: string; name: string; role: string } | null;
 
         if (error) {
             console.error('Error actualizando role:', error);

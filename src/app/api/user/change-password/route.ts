@@ -31,11 +31,13 @@ export async function POST(req: NextRequest) {
         const supabase = createServerSupabaseClient();
 
         // Obtener hash actual del usuario
-        const { data: user, error: fetchError } = await supabase
+        const { data: userRaw, error: fetchError } = await supabase
             .from('users')
             .select('password_hash')
             .eq('id', session.user.id)
             .single();
+
+        const user = userRaw as { password_hash: string } | null;
 
         if (fetchError || !user) {
             return NextResponse.json(

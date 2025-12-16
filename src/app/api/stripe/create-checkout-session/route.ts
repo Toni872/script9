@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { stripe } from '@/lib/stripe';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -21,28 +22,34 @@ export async function POST(request: NextRequest) {
         const supabase = createServerSupabaseClient();
 
         // 1. Obtener ID del usuario actual (Comprador)
-        let { data: user } = await supabase
+        const { data: fetchedUser } = await supabase
             .from('users')
             .select('id, email, name')
             .eq('email', session.user.email)
             .single();
 
+        // Cast explicitly to avoid "SelectQueryError" inference issues
+        let user = fetchedUser as { id: string; email: string; name: string } | null;
+
         if (!user) {
             console.warn(`⚠️ Usuario ${session.user.email} no encontrado en 'users'. Intentando crear...`);
 
             // Intento de auto-creación del usuario (Lazy Creation)
-            const { data: newUser, error: createError } = await supabase
+            const newUserId = crypto.randomUUID();
+            const { data: newUserResult, error: createError } = await supabase
                 .from('users')
                 .insert([
                     {
+                        id: newUserId,
                         email: session.user.email,
                         name: session.user.name || 'Usuario Script9',
-                        // image: session.user.image, // Optional, depending on DB schema
-                        // role: 'guest' (default en DB)
+                        role: 'guest'
                     }
                 ])
                 .select('id, email, name')
                 .single();
+
+            const newUser = newUserResult as { id: string; email: string; name: string } | null;
 
             if (createError || !newUser) {
                 console.error('❌ Error creando usuario en checkout:', createError);
@@ -54,11 +61,13 @@ export async function POST(request: NextRequest) {
         }
 
         // 2. Obtener detalles del servicio (precio, título)
-        const { data: property, error: propertyError } = await supabase
+        const { data: propertyData, error: propertyError } = await supabase
             .from('properties')
             .select('id, title, price_per_hour, host_id')
             .eq('id', propertyId)
             .single();
+
+        const property = propertyData as any;
 
         if (propertyError || !property) {
             return NextResponse.json({ error: 'Servicio no encontrado' }, { status: 404 });
