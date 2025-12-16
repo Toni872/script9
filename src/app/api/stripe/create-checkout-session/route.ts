@@ -34,8 +34,42 @@ export async function POST(request: NextRequest) {
         if (!user) {
             console.warn(`⚠️ Usuario ${session.user.email} no encontrado en 'users'. Intentando crear...`);
 
-            // Intento de auto-creación del usuario (Lazy Creation)
-            const newUserId = crypto.randomUUID();
+            let newUserId = crypto.randomUUID();
+
+            // 1. Try to create user in Auth (auth.users) to satisfy FK, if possible
+            try {
+                const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+                    email: session.user.email,
+                    email_confirm: true,
+                    user_metadata: { name: session.user.name }
+                });
+
+                if (authData.user) {
+                    console.log('✅ Usuario creado en Auth.users con ID:', authData.user.id);
+                    newUserId = authData.user.id;
+                } else if (authError) {
+                    console.warn('⚠️ Nota sobre Auth.users:', authError.message);
+                    // If user already exists in Auth, we MUST use their existing ID
+                    if (authError.message?.includes('already registered') || authError.status === 422) {
+                        try {
+                            // Try to find the user in the first 100 users (optimistic search)
+                            const { data: listData } = await supabase.auth.admin.listUsers({ page: 1, perPage: 100 });
+                            const existingUser = listData.users.find(u => u.email === session.user.email);
+                            if (existingUser) {
+                                console.log('✅ Usuario encontrado en Auth.users:', existingUser.id);
+                                newUserId = existingUser.id;
+                            }
+                        } catch (listErr) {
+                            console.error('Error buscando usuario en Auth:', listErr);
+                        }
+                    }
+                }
+
+            } catch (e) {
+                console.error('Error gestionando Auth.users (continuando con ID aleatorio):', e);
+            }
+
+            // 2. Insert into public.users
             const { data: newUserResult, error: createError } = await supabase
                 .from('users')
                 .insert([
@@ -53,14 +87,13 @@ export async function POST(request: NextRequest) {
 
             if (createError || !newUser) {
                 console.error('❌ Error CRÍTICO creando usuario en checkout:', JSON.stringify(createError, null, 2));
-                // Add more details to the response for debugging (temporarily)
                 return NextResponse.json({
                     error: 'Usuario no encontrado y no se pudo crear.',
                     details: createError
                 }, { status: 404 });
             }
 
-            console.log('✅ Usuario creado dinámicamente:', newUser.email);
+            console.log('✅ Usuario creado dinámicamente en public.users:', newUser.email);
             user = newUser;
         }
 
