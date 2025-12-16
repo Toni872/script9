@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
             // RETRY LOGIC for .single() error variant:
             if (error.code === 'PGRST116') { // No result found
                 console.log('⚠️ Usuario no encontrado (PGRST116). Intentando crear...');
-                const newUserId = crypto.randomUUID();
+                let newUserId = crypto.randomUUID();
                 // 1. Try to create user in Auth (auth.users)
                 try {
                     const { data: authData, error: authError } = await supabase.auth.admin.createUser({
