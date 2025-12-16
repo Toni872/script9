@@ -69,6 +69,26 @@ export async function GET(req: NextRequest) {
             if (error.code === 'PGRST116') { // No result found
                 console.log('⚠️ Usuario no encontrado (PGRST116). Intentando crear...');
                 const newUserId = crypto.randomUUID();
+                // 1. Try to create user in Auth (auth.users)
+                try {
+                    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+                        email: session.user.email,
+                        email_confirm: true,
+                        user_metadata: { name: session.user.name }
+                    });
+
+                    if (authData.user) {
+                        newUserId = authData.user.id;
+                    } else if (authError && (authError.message?.includes('already registered') || authError.status === 422)) {
+                        try {
+                            const { data: listData } = await supabase.auth.admin.listUsers({ page: 1, perPage: 100 });
+                            const existingUser = listData.users.find(u => u.email === session.user.email);
+                            if (existingUser) newUserId = existingUser.id;
+                        } catch (e) { /* ignore */ }
+                    }
+                } catch (e) { console.error('Auth creation error:', e); }
+
+                // 2. Insert into public.users
                 const { data: newUser, error: createError } = await supabase
                     .from('users')
                     .insert([
