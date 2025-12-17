@@ -87,7 +87,7 @@ export default function Registro() {
                 {/* Background Image */}
                 <div className="absolute inset-0">
                     <Image
-                        src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=3840&h=2160&fit=crop&q=90"
+                        src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=3840&auto=format&fit=crop"
                         alt="Script9 - Servicios de IA"
                         fill
                         className="object-cover"

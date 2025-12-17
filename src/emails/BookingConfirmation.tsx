@@ -116,7 +116,7 @@ export const BookingConfirmationEmail = ({
 
                 {/* CTA Button */}
                 <Section style={buttonSection}>
-                    <Button style={button} href={`${process.env.NEXT_PUBLIC_APP_URL}/usuario/reservas`}>
+                    <Button style={button} href={`${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pedidos`}>
                         Ver Mis Reservas
                     </Button>
                 </Section>

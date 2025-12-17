@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { Avatar } from '@/components/ui/avatar';
-import { Search, User, LogOut, Grid3x3, X, MessageCircle, Menu, Home, BookOpen, ChevronRight } from 'lucide-react';
+import { Search, User, LogOut, Grid3x3, X, MessageCircle, Menu, Home, BookOpen, ChevronRight, BarChart3 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MessagesButton from '@/components/messaging/MessagesButton';
 
@@ -119,7 +119,8 @@ export default function Header() {
                                                     <p className="text-sm font-semibold text-gray-900">{session.user?.name}</p>
                                                     <p className="text-xs text-gray-500 truncate">{session.user?.email}</p>
                                                 </div>
-                                                <MenuLink href="/usuario/perfil" icon={User}>Mi Perfil</MenuLink>
+                                                <MenuLink href="/dashboard" icon={BarChart3}>Panel de Control</MenuLink>
+                                                <MenuLink href="/perfil" icon={User}>Mi Perfil</MenuLink>
                                                 <MenuLink href="/mensajes" icon={MessageCircle}>Mensajes</MenuLink>
                                                 {(isHost || isAdmin) && (
                                                     <MenuLink href="/host/properties" icon={Grid3x3}>Panel Vendedor</MenuLink>
@@ -254,7 +255,14 @@ export default function Header() {
                                             </div>
                                         </div>
                                         <Link
-                                            href="/usuario/perfil"
+                                            href="/dashboard"
+                                            onClick={() => setMobileMenuOpen(false)}
+                                            className="block w-full py-2.5 px-4 bg-blue-50 text-[#003D82] rounded-lg font-medium mb-2"
+                                        >
+                                            Panel de Control
+                                        </Link>
+                                        <Link
+                                            href="/perfil"
                                             onClick={() => setMobileMenuOpen(false)}
                                             className="block w-full py-2.5 px-4 bg-gray-50 rounded-lg text-gray-700 font-medium"
                                         >

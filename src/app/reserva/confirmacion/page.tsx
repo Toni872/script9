@@ -222,7 +222,7 @@ export default function ConfirmacionPedido() {
                                 <h3 className="font-bold text-[#333333] mb-4">Acciones Rápidas</h3>
                                 <div className="space-y-3">
                                     <Button
-                                        onClick={() => router.push('/usuario/dashboard')}
+                                        onClick={() => router.push('/dashboard')}
                                         className="w-full bg-[#EF4444] hover:bg-[#DC2626] text-white shadow-md hover:shadow-lg transition-all h-12 text-base font-semibold"
                                     >
                                         Ir a mi Dashboard

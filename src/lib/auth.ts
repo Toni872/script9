@@ -72,12 +72,74 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials) {
-                // TODO: Implementar autenticación con Supabase
                 if (!credentials?.email || !credentials?.password) {
                     return null;
                 }
-                // Por ahora, retorna null (sin autenticación)
-                return null;
+
+                try {
+                    // 1. Inicializar cliente Supabase (ANON KEY es suficiente para signInWithPassword)
+                    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+                    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+                    if (!supabaseUrl || !supabaseKey) {
+                        console.error('❌ [AUTH] Faltan variables de entorno de Supabase');
+                        return null;
+                    }
+
+                    const { createClient } = await import('@supabase/supabase-js');
+                    const supabase = createClient(supabaseUrl, supabaseKey, {
+                        auth: { persistSession: false }
+                    });
+
+                    // 2. Verificar credenciales con Supabase Auth
+                    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+                        email: credentials.email,
+                        password: credentials.password,
+                    });
+
+                    if (authError || !authData.user) {
+                        console.error('❌ [AUTH] Error en autenticación:', authError?.message);
+                        return null;
+                    }
+
+                    // 3. Obtener datos adicionales del usuario (rol, nombre) desde la tabla 'users'
+                    // Usamos el cliente con SERVICE ROLE para asegurar acceso a la tabla users si RLS es estricto
+                    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+                    if (serviceKey) {
+                        const adminSupabase = createClient(supabaseUrl, serviceKey, {
+                            auth: { persistSession: false }
+                        });
+
+                        const { data: userProfile } = await adminSupabase
+                            .from('users')
+                            .select('name, role')
+                            .eq('id', authData.user.id)
+                            .single();
+
+                        if (userProfile) {
+                            return {
+                                id: authData.user.id,
+                                email: authData.user.email,
+                                name: userProfile.name || authData.user.user_metadata?.name,
+                                role: userProfile.role || 'guest',
+                                image: authData.user.user_metadata?.avatar_url,
+                            };
+                        }
+                    }
+
+                    // Fallback si no podemos leer la tabla users (usar metadatos)
+                    return {
+                        id: authData.user.id,
+                        email: authData.user.email,
+                        name: authData.user.user_metadata?.name,
+                        role: authData.user.user_metadata?.role || 'guest',
+                        image: authData.user.user_metadata?.avatar_url,
+                    };
+
+                } catch (error) {
+                    console.error('❌ [AUTH] Error inesperado en authorize:', error);
+                    return null;
+                }
             }
         }),
     ],

@@ -3,9 +3,9 @@
 import { Suspense } from "react";
 import { SessionProvider } from "next-auth/react";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import AuthRoleSync from "@/components/AuthRoleSync";
+
+import Header from "@/components/Header";
 
 export default function RootLayoutClient({
     children,
@@ -16,12 +16,11 @@ export default function RootLayoutClient({
         <SessionProvider>
             <ReactQueryProvider>
                 <div className="flex flex-col min-h-screen">
-                    <Suspense fallback={<div className="h-16 bg-[#003D82]" />}>
+                    <Suspense fallback={null}>
                         <AuthRoleSync />
-                        <Header />
                     </Suspense>
-                    <main className="flex-grow">{children}</main>
-                    <Footer />
+                    <Header />
+                    {children}
                 </div>
             </ReactQueryProvider>
         </SessionProvider>

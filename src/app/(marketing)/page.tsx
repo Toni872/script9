@@ -18,6 +18,7 @@ import SearchBar, { SearchParams } from "@/components/SearchBar";
 import Section from "@/components/common/Section";
 import { staggerContainer, staggerItem } from "@/utils/animations";
 import { useScrollReveal } from "@/hooks/useAnimations";
+import { PricingSection } from "@/components/PricingSection";
 
 export default function Home() {
   const router = useRouter();
@@ -234,6 +235,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* PRICING */}
+      <PricingSection />
 
       {/* FINAL CTA */}
       <section className="py-24 bg-[#003D82] text-white relative overflow-hidden">

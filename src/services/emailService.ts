@@ -23,7 +23,9 @@ interface BookingEmailData {
 }
 
 export class EmailService {
-  private static readonly FROM_EMAIL = process.env.FROM_EMAIL || 'notifications@script9.com';
+  // NOTA: Sin dominio verificado, Resend solo permite enviar desde 'onboarding@resend.dev'
+  // y solo al email con el que te registraste.
+  private static readonly FROM_EMAIL = process.env.FROM_EMAIL || 'onboarding@resend.dev';
 
   /**
    * Método genérico para enviar emails
@@ -106,7 +108,7 @@ export class EmailService {
               </div>
 
               <p style="text-align: center;">
-                <a href="${process.env.NEXT_PUBLIC_BASE_URL}/bookings/${bookingId}" class="button">Ver Reserva y Pagar</a>
+                <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'}/dashboard" class="button">Ver Reserva y Pagar</a>
               </p>
 
               <p style="color: #666; font-size: 0.9em;">
@@ -524,7 +526,7 @@ export class EmailService {
               </ul>
 
               <p style="text-align: center;">
-                <a href="${process.env.NEXT_PUBLIC_BASE_URL}/bookings/${bookingId}/payment" class="button">Reintentar Pago</a>
+                <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'}/catalogo" class="button">Intentar Nuevamente</a>
               </p>
 
               <p style="color: #666; font-size: 0.9em; margin-top: 30px;">
@@ -670,12 +672,12 @@ export class EmailService {
                   <span class="detail-value">${propertyAddress}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">Check-in:</span>
-                  <span class="detail-value">${new Date(checkInDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                  <span class="detail-label">Inicio:</span>
+                  <span class="detail-value">${new Date(checkInDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">Check-out:</span>
-                  <span class="detail-value">${new Date(checkOutDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                  <span class="detail-label">Entrega Estimada:</span>
+                  <span class="detail-value">${new Date(checkOutDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
                 <div class="detail-row">
                   <span class="detail-label">Total Pagado:</span>
@@ -692,14 +694,14 @@ export class EmailService {
               </div>
 
               <p style="text-align: center;">
-                <a href="${process.env.NEXT_PUBLIC_BASE_URL}/dashboard" class="button">Ver Mi Reserva</a>
+                <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'}/dashboard" class="button">Ir a mi Dashboard</a>
               </p>
 
               <p style="color: #666; font-size: 0.9em;">
                 <strong>Próximos pasos:</strong><br>
-                - Recibirás más información del anfitrión antes de tu llegada<br>
-                - Puedes contactar al anfitrión a través de la plataforma<br>
-                - Revisa los detalles de acceso y normas de la propiedad
+                - Puedes descargar tu factura en el detalle del pedido<br>
+                - El equipo de Script9 comenzará a trabajar en tu servicio<br>
+                - Recibirás notificaciones sobre el avance
               </p>
             </div>
             <div class="footer">

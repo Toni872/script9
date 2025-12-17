@@ -2,8 +2,9 @@ export interface User {
     id: string;
     name: string;
     email: string;
-    role: 'host' | 'guest';
-    created_at: string;
+    role?: 'host' | 'guest' | 'admin';
+    subscription_tier?: 'free' | 'starter' | 'pro' | 'enterprise';
+    created_at?: string;
     updated_at: string;
 }
 

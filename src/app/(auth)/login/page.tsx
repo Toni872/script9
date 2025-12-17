@@ -65,7 +65,7 @@ export default function Login() {
                 {/* Background Image */}
                 <div className="absolute inset-0">
                     <Image
-                        src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=3840&h=2160&fit=crop&q=90"
+                        src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=3840&auto=format&fit=crop"
                         alt="Script9 - Automatiza tu negocio"
                         fill
                         className="object-cover"
