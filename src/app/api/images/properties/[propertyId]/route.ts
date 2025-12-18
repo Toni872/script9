@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PropertyService } from '@/services/propertyService';
+import { CatalogService } from '@/services/catalogService';
 import { getImageUrl } from '@/lib/r2';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -21,7 +21,7 @@ export async function GET(
     { params }: { params: { propertyId: string } }
 ) {
     try {
-        const property = await PropertyService.getPropertyById(params.propertyId);
+        const property = await CatalogService.getServiceById(params.propertyId);
         if (!property) {
             return NextResponse.json(
                 { success: false, error: 'Property not found' },
@@ -131,7 +131,7 @@ export async function POST(
             );
         }
 
-        const propertyImage = await PropertyService.addPropertyImage(
+        const propertyImage = await CatalogService.addPropertyImage(
             params.propertyId,
             validatedData.imageKey,
             validatedData.isPrimary
@@ -224,7 +224,7 @@ export async function DELETE(
             );
         }
 
-        await PropertyService.removePropertyImage(imageId);
+        await CatalogService.removePropertyImage(imageId);
 
         return NextResponse.json({
             success: true,

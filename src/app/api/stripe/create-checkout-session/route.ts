@@ -13,9 +13,10 @@ export async function POST(request: NextRequest) {
         }
 
         const body = await request.json();
-        const { propertyId } = body;
+        const { serviceId, propertyId } = body;
+        const id = serviceId || propertyId;
 
-        if (!propertyId) {
+        if (!id) {
             return NextResponse.json({ error: 'ID de servicio requerido' }, { status: 400 });
         }
 
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
         if (!user) {
             console.warn(`⚠️ Usuario ${session.user.email} no encontrado en 'users'. Intentando crear...`);
 
-            let newUserId = crypto.randomUUID();
+            let newUserId = crypto.randomUUID() as string;
 
             // 1. Try to create user in Auth (auth.users) to satisfy FK, if possible
             try {
@@ -98,32 +99,33 @@ export async function POST(request: NextRequest) {
         }
 
         // 2. Obtener detalles del servicio (precio, título)
-        const { data: propertyData, error: propertyError } = await supabase
+        const { data: serviceData, error: serviceError } = await supabase
             .from('properties')
             .select('id, title, price_per_hour, host_id')
-            .eq('id', propertyId)
+            .eq('id', id)
             .single();
 
-        const property = propertyData as any;
+        const service = serviceData as any;
 
-        if (propertyError || !property) {
+        if (serviceError || !service) {
             return NextResponse.json({ error: 'Servicio no encontrado' }, { status: 404 });
         }
 
         // Validate price
-        if (!property.price_per_hour || property.price_per_hour <= 0) {
+        if (!service.price_per_hour || service.price_per_hour <= 0) {
             return NextResponse.json({ error: 'El precio del servicio no es válido' }, { status: 400 });
         }
 
         // 3. Crear sesión de Checkout
-        const priceInCents = Math.round(property.price_per_hour * 100);
+        // Treat price_per_hour as FIXED PRICE for the project
+        const priceInCents = Math.round(service.price_per_hour * 100);
 
         // Platform Fee logic can be added here (e.g., application_fee_amount in payment_intent_data)
         // For now, we charge the full amount and will handle payouts separately, or use metadata to track fees.
         const platformFee = Math.round(priceInCents * 0.10); // 10%
 
         // Check host_id, fallback to platform if null
-        const sellerId = property.host_id || 'platform';
+        const sellerId = service.host_id || 'platform';
 
         const checkoutSession = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -132,8 +134,8 @@ export async function POST(request: NextRequest) {
                     price_data: {
                         currency: 'eur',
                         product_data: {
-                            name: `Servicio: ${property.title}`,
-                            description: 'Contratación de servicio digital en Script9.',
+                            name: `Servicio: ${service.title}`,
+                            description: 'Contratación de servicio digital en Script9 (Pago Único).',
                         },
                         unit_amount: priceInCents,
                     },
@@ -143,10 +145,11 @@ export async function POST(request: NextRequest) {
             mode: 'payment',
             customer_email: user.email, // Pre-fill email
             success_url: `${process.env.NEXTAUTH_URL}/reserva/confirmacion?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.NEXTAUTH_URL}/catalogo/${propertyId}`,
+            cancel_url: `${process.env.NEXTAUTH_URL}/catalogo/${id}`,
             metadata: {
                 type: 'service_purchase',
-                propertyId: property.id,
+                serviceId: service.id,
+                propertyId: service.id, // Legacy compat
                 buyerId: user.id,
                 sellerId: sellerId,
                 platformFee: platformFee.toString()

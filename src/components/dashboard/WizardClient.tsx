@@ -25,9 +25,9 @@ export function WizardClient() {
     };
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
+        <Card className="h-full min-h-[calc(100vh-8rem)] bg-white border-gray-200 shadow-sm flex flex-col">
             {/* Header Wizard */}
-            <div className="bg-white border-b border-gray-100 py-6 px-4">
+            <div className="border-b border-gray-100 py-6 px-8">
                 <div className="max-w-3xl mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <Link href="/dashboard" className="text-gray-400 hover:text-gray-600 transition-colors">
@@ -49,8 +49,8 @@ export function WizardClient() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 flex items-center justify-center p-4">
-                <div className="max-w-2xl w-full">
+            <div className="flex-1 p-8">
+                <div className="max-w-2xl w-full mx-auto pt-8">
                     <AnimatePresence mode="wait">
                         {step === 1 && (
                             <motion.div
@@ -181,7 +181,7 @@ export function WizardClient() {
                     </AnimatePresence>
                 </div>
             </div>
-        </div>
+        </Card>
     );
 }
 

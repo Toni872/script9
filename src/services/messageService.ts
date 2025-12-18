@@ -67,7 +67,7 @@ export class MessageService {
             .single();
 
         if (existingConversation) {
-            return existingConversation;
+            return existingConversation as unknown as Conversation;
         }
 
         // Verificar que la reserva existe y que los IDs coinciden
@@ -82,7 +82,8 @@ export class MessageService {
         }
 
         // Validar que los IDs corresponden a la reserva
-        if (booking.guest_id !== data.guestId || booking.host_id !== data.hostId) {
+        const bookingData = booking as any;
+        if (bookingData.guest_id !== data.guestId || bookingData.host_id !== data.hostId) {
             throw new BadRequestError('Los IDs no corresponden a la reserva');
         }
 
@@ -108,7 +109,7 @@ export class MessageService {
             throw new DatabaseError(`Error al crear conversación: ${error.message}`);
         }
 
-        return conversation;
+        return conversation as unknown as Conversation;
     }
 
     /**
@@ -126,8 +127,11 @@ export class MessageService {
             throw new NotFoundError('Conversación');
         }
 
+        // Tipo explícito para evitar error TS
+        const conv = conversation as any;
+
         // Verificar permisos
-        if (conversation.guest_id !== data.senderId && conversation.host_id !== data.senderId) {
+        if (conv.guest_id !== data.senderId && conv.host_id !== data.senderId) {
             throw new ForbiddenError('No tienes permiso para enviar mensajes en esta conversación');
         }
 
@@ -160,7 +164,7 @@ export class MessageService {
 
         // El trigger de la BD se encargará de actualizar la conversación
 
-        return message;
+        return message as unknown as Message;
     }
 
     /**
@@ -194,7 +198,7 @@ export class MessageService {
                 return createPaginatedResponse([], 0, page, limit);
             }
 
-            return createPaginatedResponse(conversations || [], count || 0, page, limit);
+            return createPaginatedResponse((conversations || []) as unknown as Conversation[], count || 0, page, limit);
         } catch (error) {
             console.error('Error en getUserConversations:', error);
             return createPaginatedResponse([], 0, 1, 20);
@@ -223,7 +227,8 @@ export class MessageService {
             throw new NotFoundError('Conversación');
         }
 
-        if (conversation.guest_id !== userId && conversation.host_id !== userId) {
+        const conv = conversation as any;
+        if (conv.guest_id !== userId && conv.host_id !== userId) {
             throw new ForbiddenError('No tienes acceso a esta conversación');
         }
 
@@ -243,7 +248,7 @@ export class MessageService {
             throw new DatabaseError(`Error al obtener mensajes: ${error.message}`);
         }
 
-        return createPaginatedResponse(messages || [], count || 0, page, limit);
+        return createPaginatedResponse((messages || []) as unknown as Message[], count || 0, page, limit);
     }
 
     /**
@@ -261,7 +266,8 @@ export class MessageService {
             throw new NotFoundError('Conversación');
         }
 
-        if (conversation.guest_id !== userId && conversation.host_id !== userId) {
+        const conv = conversation as any;
+        if (conv.guest_id !== userId && conv.host_id !== userId) {
             throw new ForbiddenError('No tienes acceso a esta conversación');
         }
 
@@ -305,7 +311,8 @@ export class MessageService {
             if (!conversations) return 0;
 
             // Sumar los contadores según el rol del usuario
-            const totalUnread = conversations.reduce((sum, conv) => {
+            const totalUnread = (conversations || []).reduce((sum, convRaw) => {
+                const conv = convRaw as any;
                 if (conv.guest_id === userId) {
                     return sum + conv.guest_unread_count;
                 } else if (conv.host_id === userId) {
@@ -342,11 +349,12 @@ export class MessageService {
         }
 
         // Verificar acceso
-        if (conversation.guest_id !== userId && conversation.host_id !== userId) {
+        const conv = conversation as any;
+        if (conv.guest_id !== userId && conv.host_id !== userId) {
             throw new ForbiddenError('No tienes acceso a esta conversación');
         }
 
-        return conversation;
+        return conversation as unknown as Conversation;
     }
 
     /**
@@ -373,11 +381,12 @@ export class MessageService {
         }
 
         // Verificar acceso
-        if (conversation.guest_id !== userId && conversation.host_id !== userId) {
+        const conv = conversation as any;
+        if (conv.guest_id !== userId && conv.host_id !== userId) {
             throw new ForbiddenError('No tienes acceso a esta conversación');
         }
 
-        return conversation;
+        return conversation as unknown as Conversation;
     }
 
     /**

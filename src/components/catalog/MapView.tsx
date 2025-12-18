@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Property } from '@/components/PropertyCard';
+import { Service } from '@/types';
 import { MapPin, Euro, Users, Loader2 } from 'lucide-react';
 
 // Importar Leaflet dinámicamente para evitar problemas de SSR
@@ -27,11 +27,11 @@ const Popup = dynamic(
 );
 
 interface MapViewProps {
-    properties: Property[];
-    onPropertySelect?: (propertyId: string) => void;
+    services: Service[];
+    onServiceSelect?: (serviceId: string) => void;
 }
 
-export default function MapView({ properties, onPropertySelect }: MapViewProps) {
+export default function MapView({ services, onServiceSelect }: MapViewProps) {
     const [isClient, setIsClient] = useState(false);
     const [L, setL] = useState<typeof import('leaflet') | null>(null);
 
@@ -67,26 +67,26 @@ export default function MapView({ properties, onPropertySelect }: MapViewProps) 
     }
 
     // Calcular el centro del mapa basado en las propiedades
-    const validProperties = properties.filter(p => p.latitude && p.longitude);
+    const validServices = services.filter(p => p.latitude && p.longitude);
 
-    if (validProperties.length === 0) {
+    if (validServices.length === 0) {
         return (
             <div className="bg-white rounded-2xl p-12 text-center min-h-[600px] flex items-center justify-center">
                 <div>
                     <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                        No hay propiedades con ubicación
+                        No hay servicios con ubicación
                     </h3>
                     <p className="text-gray-600">
-                        Las propiedades necesitan coordenadas para mostrarse en el mapa
+                        Los servicios necesitan coordenadas para mostrarse en el mapa
                     </p>
                 </div>
             </div>
         );
     }
 
-    const centerLat = validProperties.reduce((sum, p) => sum + (p.latitude || 0), 0) / validProperties.length;
-    const centerLng = validProperties.reduce((sum, p) => sum + (p.longitude || 0), 0) / validProperties.length;
+    const centerLat = validServices.reduce((sum, p) => sum + (p.latitude || 0), 0) / validServices.length;
+    const centerLng = validServices.reduce((sum, p) => sum + (p.longitude || 0), 0) / validServices.length;
 
     return (
         <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
@@ -102,45 +102,45 @@ export default function MapView({ properties, onPropertySelect }: MapViewProps) 
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {validProperties.map((property) => (
+                    {validServices.map((service) => (
                         <Marker
-                            key={property.id}
-                            position={[property.latitude!, property.longitude!]}
+                            key={service.id}
+                            position={[service.latitude!, service.longitude!]}
                             eventHandlers={{
                                 click: () => {
-                                    if (onPropertySelect) {
-                                        onPropertySelect(property.id);
+                                    if (onServiceSelect) {
+                                        onServiceSelect(service.id);
                                     }
                                 },
                             }}
                         >
                             <Popup>
                                 <div className="min-w-[250px]">
-                                    {property.images && property.images.length > 0 && (
+                                    {service.image_urls && service.image_urls.length > 0 && (
                                         <img
-                                            src={property.images[0]}
-                                            alt={property.title}
+                                            src={service.image_urls[0]}
+                                            alt={service.title}
                                             className="w-full h-32 object-cover rounded-lg mb-2"
                                         />
                                     )}
                                     <h3 className="font-semibold text-gray-900 mb-1">
-                                        {property.title}
+                                        {service.title}
                                     </h3>
                                     <p className="text-sm text-gray-600 mb-2">
-                                        {property.city}
+                                        {service.city}
                                     </p>
                                     <div className="flex items-center gap-4 text-sm text-gray-700 mb-2">
                                         <div className="flex items-center gap-1">
                                             <Euro className="h-4 w-4" />
-                                            <span>{property.price_per_hour}/hora</span>
+                                            <span>{service.price}/hora</span>
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <Users className="h-4 w-4" />
-                                            <span>{property.max_guests}</span>
+                                            <span>{service.max_guests}</span>
                                         </div>
                                     </div>
                                     <a
-                                        href={`/propiedades/${property.id}`}
+                                        href={`/catalogo/${service.id}`}
                                         className="block w-full text-center py-2 bg-[#8B5CF6] text-white rounded-lg hover:bg-[#7c3aed] transition-colors text-sm font-medium"
                                     >
                                         Ver Detalles
@@ -157,7 +157,7 @@ export default function MapView({ properties, onPropertySelect }: MapViewProps) 
                 <div className="flex items-center justify-between text-sm text-gray-600">
                     <div className="flex items-center gap-2">
                         <MapPin className="h-4 w-4 text-[#8B5CF6]" />
-                        <span>{validProperties.length} espacios en el mapa</span>
+                        <span>{validServices.length} servicios en el mapa</span>
                     </div>
                     <span className="text-xs">Haz clic en los marcadores para ver detalles</span>
                 </div>

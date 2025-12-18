@@ -142,7 +142,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             {review.host_response && (
                 <div className="bg-[#f5f5f7] rounded-xl p-4 mt-4">
                     <p className="text-sm font-semibold text-[#1d1d1f] mb-2">
-                        Respuesta del anfitrión
+                        Respuesta del proveedor
                     </p>
                     <p className="text-sm text-[#1d1d1f] mb-2">{review.host_response}</p>
                     {review.host_response_date && (

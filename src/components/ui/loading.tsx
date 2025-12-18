@@ -39,7 +39,7 @@ export function LoadingSkeleton({ className }: LoadingSkeletonProps) {
   );
 }
 
-export function PropertyCardSkeleton() {
+export function ServiceCardSkeleton() {
   return (
     <div className="space-y-3">
       <LoadingSkeleton className="h-48 w-full rounded-lg" />

@@ -8,19 +8,34 @@ export interface User {
     updated_at: string;
 }
 
-export interface Property {
+// Renamed from Property to match new "Digital Service" model
+// This interface represents a Service/Product in the marketplace
+export interface Service {
     id: string;
     title: string;
     description: string;
-    address: string;
-    city: string;
-    region: string;
-    location: string;
-    price_per_hour: number;
-    price_per_day: number;
-    min_booking_hours: number;
-    max_guests: number;
-    host_id: string;
+    // Mapped fields from DB 'properties' table
+    category: string; // was address/city/region loosely used for categories
+    price: number;    // was price_per_hour
+    unit: string;     // 'hour', 'project', 'month'
+
+    // Legacy fields kept for DB compatibility until migration
+    location?: string;
+    city?: string;
+    region?: string;
+    latitude?: number;
+    longitude?: number;
+    price_per_hour?: number;
+    is_script9_select?: boolean; // rebranding field
+    capacity?: number;  // new field
+    max_guests?: number; // legacy
+    property_type?: string; // legacy
+    amenities?: string[]; // legacy
+    images?: string[]; // legacy alias for image_urls
+
+    provider_id: string; // was host_id
+    host_id: string;     // kept for DB compatibility
+
     rating: number;
     review_count: number;
     image_urls: string[];
@@ -29,13 +44,12 @@ export interface Property {
         name: string;
         icon?: string;
     }>;
-    coordinates?: {
-        lat: number;
-        lng: number;
-    };
     created_at: string;
     updated_at: string;
 }
+
+// Alias for backward compatibility during refactor
+export type Property = Service;
 
 export interface PropertyFeature {
     property_id: string;
@@ -52,76 +66,110 @@ export interface PropertyImage {
 
 export interface Booking {
     id: string;
-    property_id: string;
-    guest_id: string;
-    host_id: string;
-    check_in: string;
-    check_out: string;
+    service_id: string; // was property_id
+    property_id: string; // kept for DB compatibility
+
+    client_id: string;   // was guest_id
+    guest_id: string;    // kept for DB compatibility
+
+    provider_id: string; // was host_id
+    host_id: string;     // kept for DB compatibility
+
+    start_date: string;  // was check_in
+    check_in: string;    // kept for DB compatibility
+
+    completion_date: string; // was check_out
+    check_out: string;       // kept for DB compatibility
+
     booking_date: string;
     total_hours: number;
     price_per_hour: number;
     subtotal: number;
     service_fee: number;
-    total_price: number; // Nombre real en BD
+    total_price: number;
     status: 'pending' | 'confirmed' | 'cancelled' | 'completed' | 'refunded';
-    stripe_payment_id?: string; // Nombre real en BD
+    stripe_payment_id?: string;
     payment_intent_id?: string;
     stripe_charge_id?: string;
     paid_at?: string;
     cancelled_at?: string;
     cancelled_by?: string;
     cancellation_reason?: string;
-    guest_notes?: string;
-    host_notes?: string;
+    notes?: string;      // was guest_notes
+    guest_notes?: string; // kept for DB compatibility
+
     created_at: string;
     updated_at: string;
-    // Campos opcionales de relaciones
-    property?: Property;
-    guest?: User;
-    host?: User;
+
+    // Relations
+    service?: Service;
+    property?: Service; // Alias
+    client?: User;
+    guest?: User; // Alias
+    provider?: User;
+    host?: User; // Alias
 }
 
 export interface Review {
     id: string;
     booking_id: string;
-    property_id: string;
-    guest_id: string;
-    host_id: string;
+    service_id: string; // was property_id
+    property_id: string; // legacy
+
+    client_id: string; // was guest_id
+    guest_id: string;  // legacy
+
+    provider_id: string; // was host_id
+    host_id: string;     // legacy
+
     rating: number;
-    cleanliness_rating?: number;
-    communication_rating?: number;
-    accuracy_rating?: number;
-    location_rating?: number;
-    value_rating?: number;
     review_text: string;
-    host_response?: string;
-    host_response_date?: string;
+    response?: string;         // was host_response
+    host_response?: string;    // legacy
+
     created_at: string;
     updated_at: string;
-    // Relaciones opcionales
+
+    client?: User;
     guest?: User;
-    property?: Property;
+    service?: Service;
+    property?: Service;
+    provider?: User;
     host?: User;
 }
 
-// Tipos para el sistema de mensajería
+// Tipos para el sistema de mensajería (Chat)
 export interface Conversation {
     id: string;
     booking_id: string;
-    guest_id: string;
-    host_id: string;
-    property_id: string;
+
+    client_id: string; // was guest_id
+    guest_id: string;  // legacy
+
+    provider_id: string; // was host_id
+    host_id: string;     // legacy
+
+    service_id: string; // was property_id
+    property_id: string; // legacy
+
     last_message_at: string;
     last_message_preview: string;
-    guest_unread_count: number;
-    host_unread_count: number;
+    client_unread_count: number; // was guest_unread_count
+    guest_unread_count: number;  // legacy
+
+    provider_unread_count: number; // was host_unread_count
+    host_unread_count: number;     // legacy
+
     created_at: string;
     updated_at: string;
-    // Relaciones opcionales
+
     booking?: Booking;
+    client?: User;
     guest?: User;
+    provider?: User;
     host?: User;
-    property?: Property;
+    service?: Service;
+    property?: Service;
 }
 
 export interface Message {
@@ -132,7 +180,6 @@ export interface Message {
     is_read: boolean;
     read_at?: string;
     created_at: string;
-    // Relaciones opcionales
     sender?: User;
     conversation?: Conversation;
 }

@@ -20,7 +20,10 @@ import {
     ChevronRight,
 } from 'lucide-react';
 import ReviewCard from '@/components/ReviewCard';
-import { Property } from '@/components/PropertyCard';
+import { Service } from '@/types';
+
+// Alias for easier refactor inside this file, or rename everything
+type Property = Service;
 
 interface Review {
     id: string;
@@ -76,14 +79,37 @@ export default function PropertyDetail() {
 
             // Transformar datos del API al formato Property
             // El API retorna directamente los campos de la BD
-            const transformedProperty: Property = {
-                ...data,
-                // Asegurar que los campos estén en el formato correcto
+            const transformedProperty: Service = {
+                id: data.id,
+                title: data.title || data.name,
+                description: data.description,
+                category: data.category || data.property_type || 'General', // map category
+                price: data.price || data.price_per_hour,
+                unit: data.unit || 'project',
+                location: data.address || data.location,
+                city: data.city,
+                region: data.region,
+
+                // Mappings
                 capacity: data.max_guests || data.capacity || 10,
-                images: Array.isArray(data.image_urls) ? data.image_urls :
+                max_guests: data.max_guests || data.capacity || 10, // legacy
+
+                image_urls: Array.isArray(data.image_urls) ? data.image_urls :
                     Array.isArray(data.images) ? data.images : [],
+
                 rating: data.average_rating || data.rating || 0,
-                location: data.address || data.location || '',
+                review_count: data.review_count || 0,
+
+                features: data.features || [],
+                amenities: data.amenities || [], // legacy
+
+                provider_id: data.host_id,
+                host_id: data.host_id,
+                created_at: data.created_at || new Date().toISOString(),
+                updated_at: data.updated_at || new Date().toISOString(),
+
+                is_script9_select: data.is_script9_select || false,
+                property_type: data.property_type,
             };
 
             console.log('✅ Propiedad transformada:', transformedProperty);
@@ -124,17 +150,17 @@ export default function PropertyDetail() {
     };
 
     const nextImage = () => {
-        if (property?.images && property.images.length > 0) {
+        if (property?.image_urls && property.image_urls.length > 0) {
             setCurrentImageIndex((prev) =>
-                prev === property.images!.length - 1 ? 0 : prev + 1
+                prev === property.image_urls!.length - 1 ? 0 : prev + 1
             );
         }
     };
 
     const prevImage = () => {
-        if (property?.images && property.images.length > 0) {
+        if (property?.image_urls && property.image_urls.length > 0) {
             setCurrentImageIndex((prev) =>
-                prev === 0 ? property.images!.length - 1 : prev - 1
+                prev === 0 ? property.image_urls!.length - 1 : prev - 1
             );
         }
     };
@@ -188,8 +214,8 @@ export default function PropertyDetail() {
                 <div className="relative h-[500px] rounded-3xl overflow-hidden">
                     <Image
                         src={
-                            property.images?.[currentImageIndex] ||
-                            'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=1000&fit=crop'
+                            property.image_urls?.[currentImageIndex] ||
+                            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600'
                         }
                         alt={property.title}
                         fill
@@ -197,7 +223,7 @@ export default function PropertyDetail() {
                     />
 
                     {/* Navigation Arrows */}
-                    {property.images && property.images.length > 1 && (
+                    {property.image_urls && property.image_urls.length > 1 && (
                         <>
                             <button
                                 onClick={prevImage}
@@ -218,7 +244,7 @@ export default function PropertyDetail() {
 
                     {/* Image Counter */}
                     <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
-                        {currentImageIndex + 1} / {property.images?.length || 1}
+                        {currentImageIndex + 1} / {property.image_urls?.length || 1}
                     </div>
 
                     {/* Actions */}

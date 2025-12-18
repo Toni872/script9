@@ -42,11 +42,14 @@ export class ReviewService {
       throw new NotFoundError('Reserva');
     }
 
-    if (booking.status !== 'completed') {
+    // Cast booking to any to avoid property access issues if types are missing
+    const bookingData = booking as any;
+
+    if (bookingData.status !== 'completed') {
       throw new BadRequestError('Solo se pueden dejar reviews para reservas completadas');
     }
 
-    if (booking.guest_id !== data.guestId) {
+    if (bookingData.guest_id !== data.guestId) {
       throw new ForbiddenError('No tienes permiso para dejar una review para esta reserva');
     }
 
@@ -71,9 +74,9 @@ export class ReviewService {
       .from('reviews')
       .insert({
         booking_id: data.bookingId,
-        property_id: booking.property_id,
+        property_id: bookingData.property_id,
         guest_id: data.guestId,
-        host_id: booking.host_id,
+        host_id: bookingData.host_id,
         rating: data.rating,
         cleanliness_rating: data.cleanlinessRating,
         communication_rating: data.communicationRating,
@@ -170,12 +173,13 @@ export class ReviewService {
     }
 
     // Verificar permisos
-    if (existingReview.guest_id !== userId) {
+    const reviewData = existingReview as any;
+    if (reviewData.guest_id !== userId) {
       throw new ForbiddenError('No tienes permiso para editar esta review');
     }
 
     // Verificar que no han pasado más de 24h
-    const createdAt = new Date(existingReview.created_at);
+    const createdAt = new Date(reviewData.created_at);
     const now = new Date();
     const hoursSinceCreation = (now.getTime() - createdAt.getTime()) / (1000 * 60 * 60);
 
@@ -249,7 +253,7 @@ export class ReviewService {
       throw new DatabaseError(`Error al responder review: ${error.message}`);
     }
 
-    return updatedReview as Review;
+    return updatedReview as unknown as Review;
   }
 
   /**
@@ -304,14 +308,19 @@ export class ReviewService {
     }
 
     const totalReviews = reviews.length;
-    const averageRating = reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews;
+
+
+    // Cast reviews to any[] for calculations
+    const revs = reviews as any[];
+
+    const averageRating = revs.reduce((sum, r) => sum + r.rating, 0) / totalReviews;
 
     const categoryAverages = {
-      cleanliness: reviews.filter(r => r.cleanliness_rating).reduce((sum, r) => sum + (r.cleanliness_rating || 0), 0) / reviews.filter(r => r.cleanliness_rating).length || 0,
-      communication: reviews.filter(r => r.communication_rating).reduce((sum, r) => sum + (r.communication_rating || 0), 0) / reviews.filter(r => r.communication_rating).length || 0,
-      accuracy: reviews.filter(r => r.accuracy_rating).reduce((sum, r) => sum + (r.accuracy_rating || 0), 0) / reviews.filter(r => r.accuracy_rating).length || 0,
-      location: reviews.filter(r => r.location_rating).reduce((sum, r) => sum + (r.location_rating || 0), 0) / reviews.filter(r => r.location_rating).length || 0,
-      value: reviews.filter(r => r.value_rating).reduce((sum, r) => sum + (r.value_rating || 0), 0) / reviews.filter(r => r.value_rating).length || 0,
+      cleanliness: revs.filter(r => r.cleanliness_rating).reduce((sum, r) => sum + (r.cleanliness_rating || 0), 0) / revs.filter(r => r.cleanliness_rating).length || 0,
+      communication: revs.filter(r => r.communication_rating).reduce((sum, r) => sum + (r.communication_rating || 0), 0) / revs.filter(r => r.communication_rating).length || 0,
+      accuracy: revs.filter(r => r.accuracy_rating).reduce((sum, r) => sum + (r.accuracy_rating || 0), 0) / revs.filter(r => r.accuracy_rating).length || 0,
+      location: revs.filter(r => r.location_rating).reduce((sum, r) => sum + (r.location_rating || 0), 0) / revs.filter(r => r.location_rating).length || 0,
+      value: revs.filter(r => r.value_rating).reduce((sum, r) => sum + (r.value_rating || 0), 0) / revs.filter(r => r.value_rating).length || 0,
     };
 
     return {

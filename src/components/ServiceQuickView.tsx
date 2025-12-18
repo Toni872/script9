@@ -10,10 +10,10 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Property } from '@/components/PropertyCard';
+import { Service } from '@/types';
 
-interface PropertyQuickViewProps {
-    property: Property;
+interface ServiceQuickViewProps {
+    service: Service;
     isOpen: boolean;
     onClose: () => void;
 }
@@ -40,29 +40,30 @@ const techLabels: Record<string, string> = {
     web_scraping: 'Web Scraping',
 };
 
-export default function PropertyQuickView({ property, isOpen, onClose }: PropertyQuickViewProps) {
+export default function ServiceQuickView({ service, isOpen, onClose }: ServiceQuickViewProps) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const nextImage = () => {
-        if (property.image_urls) {
-            setCurrentImageIndex((prev) => (prev + 1) % property.image_urls!.length);
+        if (service.image_urls) {
+            setCurrentImageIndex((prev) => (prev + 1) % service.image_urls.length);
         }
     };
 
     const prevImage = () => {
-        if (property.image_urls) {
-            setCurrentImageIndex((prev) => (prev - 1 + property.image_urls!.length) % property.image_urls!.length);
+        if (service.image_urls) {
+            setCurrentImageIndex((prev) => (prev - 1 + service.image_urls.length) % service.image_urls.length);
         }
     };
 
     // Obtener configuración del tipo de servicio
-    const serviceType = property.property_type || 'automatizacion';
+    // Use fallback for property_type legacy
+    const serviceType = (service as any).property_type || service.category || 'automatizacion';
     const config = serviceTypeConfig[serviceType] || serviceTypeConfig.automatizacion;
     const ServiceIcon = config.icon;
 
-    // Convertir nivel
+    // Convertir nivel / capacity
     const getServiceLevel = () => {
-        const capacity = property.max_guests || property.capacity;
+        const capacity = service.capacity || service.max_guests || 10;
         if (capacity <= 10) return { label: 'Básico', color: 'bg-gray-100 text-gray-700' };
         if (capacity <= 25) return { label: 'Standard', color: 'bg-blue-100 text-blue-700' };
         if (capacity <= 50) return { label: 'Profesional', color: 'bg-purple-100 text-purple-700' };
@@ -70,6 +71,8 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
     };
 
     const level = getServiceLevel();
+    const technologies = service.features?.map(f => f.name) || (service as any).amenities || [];
+    const displayRating = service.rating || (service as any).average_rating || 0;
 
     return (
         <AnimatePresence>
@@ -109,14 +112,14 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
                                 {/* Left Side - Images */}
                                 <div className="relative h-96 md:h-full bg-gradient-script9-soft">
                                     <Image
-                                        src={property.image_urls?.[currentImageIndex] || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800'}
-                                        alt={property.title}
+                                        src={service.image_urls?.[currentImageIndex] || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800'}
+                                        alt={service.title}
                                         fill
                                         className="object-cover"
                                     />
 
                                     {/* Image Navigation */}
-                                    {property.image_urls && property.image_urls.length > 1 && (
+                                    {service.image_urls && service.image_urls.length > 1 && (
                                         <>
                                             <button
                                                 onClick={prevImage}
@@ -134,7 +137,7 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
                                             </button>
                                             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 glass-script9 rounded-full shadow-script9-sm">
                                                 <span className="text-sm font-semibold text-brand-neutral-800">
-                                                    {currentImageIndex + 1} / {property.image_urls.length}
+                                                    {currentImageIndex + 1} / {service.image_urls.length}
                                                 </span>
                                             </div>
                                         </>
@@ -142,7 +145,7 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
 
                                     {/* Badges */}
                                     <div className="absolute top-4 left-4 flex flex-col gap-2">
-                                        {property.is_script9_select && (
+                                        {service.is_script9_select && (
                                             <Badge className="bg-gradient-script9 text-white border-0 shadow-script9-md">
                                                 <Sparkles className="h-3.5 w-3.5 mr-1" />
                                                 Script9 Select
@@ -160,20 +163,20 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
                                     {/* Header */}
                                     <div>
                                         <h2 className="text-3xl font-bold font-heading text-brand-neutral-900 mb-3">
-                                            {property.title}
+                                            {service.title}
                                         </h2>
                                         <div className="flex items-center gap-3 text-brand-neutral-600">
                                             <span className={`px-3 py-1 rounded-full text-sm font-medium ${level.color}`}>
                                                 {level.label}
                                             </span>
-                                            {property.review_count && property.review_count > 0 && (
+                                            {service.review_count > 0 && (
                                                 <div className="flex items-center bg-gradient-script9-soft px-2.5 py-1 rounded-full">
                                                     <Star className="h-4 w-4 fill-brand-primary-600 text-brand-primary-600 mr-1" />
                                                     <span className="font-bold text-sm text-brand-primary-700">
-                                                        {property.rating?.toFixed(1)}
+                                                        {displayRating.toFixed(1)}
                                                     </span>
                                                     <span className="text-xs text-brand-primary-600 ml-1">
-                                                        ({property.review_count} reviews)
+                                                        ({service.review_count} reviews)
                                                     </span>
                                                 </div>
                                             )}
@@ -184,9 +187,11 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
                                     <div className="p-4 bg-gradient-script9-soft rounded-xl border border-brand-primary-100">
                                         <div className="flex items-baseline gap-2">
                                             <span className="text-3xl font-bold font-heading bg-gradient-script9 bg-clip-text text-transparent">
-                                                €{property.price_per_hour}
+                                                €{service.price}
                                             </span>
-                                            <span className="text-brand-neutral-600">/ proyecto</span>
+                                            <span className="text-brand-neutral-600">
+                                                {service.unit === 'project' ? '/ proyecto' : `/ ${service.unit || 'proyecto'}`}
+                                            </span>
                                         </div>
                                     </div>
 
@@ -194,16 +199,16 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
                                     <div>
                                         <h3 className="font-semibold text-brand-neutral-900 mb-2">Descripción del Servicio</h3>
                                         <p className="text-sm text-brand-neutral-700 line-clamp-4 leading-relaxed">
-                                            {property.description}
+                                            {service.description}
                                         </p>
                                     </div>
 
                                     {/* Technologies */}
-                                    {property.amenities && property.amenities.length > 0 && (
+                                    {technologies.length > 0 && (
                                         <div>
                                             <h3 className="font-semibold text-brand-neutral-900 mb-2">Tecnologías Utilizadas</h3>
                                             <div className="flex flex-wrap gap-2">
-                                                {property.amenities.slice(0, 6).map((tech, index) => (
+                                                {technologies.slice(0, 6).map((tech: string, index: number) => (
                                                     <div
                                                         key={index}
                                                         className="flex items-center gap-1.5 text-xs bg-brand-primary-50 text-brand-primary-700 px-3 py-1.5 rounded-full border border-brand-primary-100"
@@ -212,9 +217,9 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
                                                         {techLabels[tech] || tech}
                                                     </div>
                                                 ))}
-                                                {property.amenities.length > 6 && (
+                                                {technologies.length > 6 && (
                                                     <span className="text-xs text-brand-primary-600 px-3 py-1.5 bg-brand-primary-50 rounded-full font-medium">
-                                                        +{property.amenities.length - 6} más
+                                                        +{technologies.length - 6} más
                                                     </span>
                                                 )}
                                             </div>
@@ -223,7 +228,7 @@ export default function PropertyQuickView({ property, isOpen, onClose }: Propert
 
                                     {/* CTA Buttons */}
                                     <div className="space-y-3 pt-4">
-                                        <Link href={`/catalogo/${property.id}`} onClick={onClose}>
+                                        <Link href={`/catalogo/${service.id}`} onClick={onClose}>
                                             <Button className="w-full bg-gradient-script9 text-white hover:shadow-script9-glow border-0 font-semibold py-6 rounded-xl">
                                                 Ver Detalles Completos
                                             </Button>

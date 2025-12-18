@@ -20,14 +20,15 @@ export default function AppLayout({
             if (user) {
                 setUserName(user.user_metadata?.name || user.email?.split('@')[0] || 'Cliente');
 
-                const { data: profile } = await supabase
+                const { data } = await supabase
                     .from('users')
                     .select('subscription_tier')
                     .eq('email', user.email)
                     .single();
 
+                const profile = data as unknown as { subscription_tier: 'free' | 'starter' | 'pro' | 'enterprise' } | null;
+
                 if (profile?.subscription_tier) {
-                    // @ts-ignore
                     setUserTier(profile.subscription_tier);
                 }
             }

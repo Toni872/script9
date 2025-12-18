@@ -10,24 +10,22 @@ import { Card } from '@/components/ui/card';
 interface BookingModalProps {
     isOpen: boolean;
     onClose: () => void;
-    property: {
+    service: {
         id: string;
         title: string;
-        price_per_hour: number;
-        images?: string[];
+        price: number;
+        price_per_hour?: number; // legacy fallback
+        image_urls?: string[];
+        images?: string[]; // legacy fallback
     };
 }
 
-export default function BookingModal({ isOpen, onClose, property }: BookingModalProps) {
+export default function BookingModal({ isOpen, onClose, service }: BookingModalProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Form state
-    // State for simple redirect flow
-
-
-    const total = property.price_per_hour;
+    const total = service.price || service.price_per_hour || 0;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -38,7 +36,7 @@ export default function BookingModal({ isOpen, onClose, property }: BookingModal
             const res = await fetch('/api/stripe/create-checkout-session', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ propertyId: property.id }),
+                body: JSON.stringify({ propertyId: service.id }), // Keep propertyId for API compatibility
             });
 
             const data = await res.json();
@@ -56,7 +54,6 @@ export default function BookingModal({ isOpen, onClose, property }: BookingModal
             setError(err.message || 'Error al procesar el pago. Por favor intenta de nuevo.');
             setLoading(false);
         }
-        // Note: We don't set loading false on success because we are redirecting
     };
 
     if (!isOpen) return null;
@@ -71,7 +68,7 @@ export default function BookingModal({ isOpen, onClose, property }: BookingModal
                             <h2 className="text-2xl font-bold font-heading text-brand-neutral-900 mb-1">
                                 Contratar Servicio
                             </h2>
-                            <p className="text-sm text-brand-neutral-600">{property.title}</p>
+                            <p className="text-sm text-brand-neutral-600">{service.title}</p>
                         </div>
                         <button
                             onClick={onClose}

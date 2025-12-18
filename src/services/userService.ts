@@ -56,7 +56,7 @@ export class UserService {
             throw new DatabaseError('No se pudo crear el usuario');
         }
 
-        return user;
+        return user as unknown as User;
     }
 
     /**
@@ -76,7 +76,7 @@ export class UserService {
             throw new DatabaseError(`Error al obtener usuario: ${error.message}`);
         }
 
-        return user;
+        return user as unknown as User;
     }
 
     /**
@@ -96,7 +96,7 @@ export class UserService {
             throw new DatabaseError(`Error al buscar usuario: ${error.message}`);
         }
 
-        return user;
+        return user as unknown as User;
     }
 
     /**
@@ -121,7 +121,7 @@ export class UserService {
             throw new DatabaseError('No se pudo actualizar el usuario');
         }
 
-        return user;
+        return user as unknown as User;
     }
 
     /**
@@ -164,7 +164,7 @@ export class UserService {
             throw new DatabaseError(`Error al buscar usuarios: ${error.message}`);
         }
 
-        return createPaginatedResponse(users || [], count || 0, page, limit);
+        return createPaginatedResponse((users || []) as unknown as User[], count || 0, page, limit);
     }
 
     /**
@@ -189,7 +189,7 @@ export class UserService {
             throw new DatabaseError(`Error al obtener usuarios recientes: ${error.message}`);
         }
 
-        return users || [];
+        return (users || []) as unknown as User[];
     }
 
     /**

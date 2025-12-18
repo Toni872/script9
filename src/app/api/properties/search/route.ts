@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PropertyService } from '@/services/propertyService';
-import { searchMockProperties } from '@/lib/mockData';
+import { CatalogService } from '@/services/catalogService';
+import { searchMockServices } from '@/lib/mockData';
 import { z } from 'zod';
 
 // Esquema de validación para búsqueda avanzada
@@ -106,29 +106,29 @@ async function performSearch(searchParams: z.infer<typeof advancedSearchSchema>)
             filters.radiusKm = searchParams.location.radiusKm;
         }
 
-        // Buscar propiedades
+        // Buscar servicios
         // Note: Real service might ignore new filters if not updated, but we prioritize Mock data for now since supbase is likely not fully set up for these custom columns
-        const result = await PropertyService.searchProperties(filters);
+        const result = await CatalogService.searchServices(filters);
         properties = result.data;
     } catch (dbError) {
         // Si falla Supabase, usar datos mock para desarrollo del MVP
         // console.warn('Usando datos mock - Supabase no disponible:', dbError); // Reduce log noise
 
-        const mockResult = searchMockProperties({
+        const mockResult = searchMockServices({
             query: searchParams.query,
             location: searchParams.city || searchParams.region,
-            capacity_min: searchParams.minGuests,
+            // capacity_min: searchParams.minGuests, // Legacy
             price_min: searchParams.minPricePerHour,
             price_max: searchParams.maxPricePerHour,
             types: searchParams.propertyTypes?.join(',') || searchParams.features?.join(','), // Map propertyTypes to types
-            amenities: searchParams.amenities?.join(','), // Map amenitites
+            // amenities: searchParams.amenities?.join(','), // Map amenitites
             page: Math.floor(searchParams.offset / searchParams.limit) + 1,
             limit: searchParams.limit,
         });
 
         return NextResponse.json({
             success: true,
-            properties: mockResult.properties,
+            properties: mockResult.services, // Updated to services
             pagination: mockResult.pagination,
             _usingMockData: true, // Indicador para desarrollo
         });

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BookingService } from '@/services/bookingService';
-import { PropertyService } from '@/services/propertyService';
+import { CatalogService } from '@/services/catalogService';
 import { z } from 'zod';
 
 // Esquema de validación para verificar disponibilidad
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         const endTime = new Date(validatedData.endTime);
 
         // Verificar que la propiedad existe
-        const property = await PropertyService.getPropertyById(validatedData.propertyId);
+        const property = await CatalogService.getServiceById(validatedData.propertyId);
         if (!property) {
             return NextResponse.json(
                 { success: false, error: 'Property not found' },

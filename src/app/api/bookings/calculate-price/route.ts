@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BookingService } from '@/services/bookingService';
-import { PropertyService } from '@/services/propertyService';
+import { CatalogService } from '@/services/catalogService';
 import { z } from 'zod';
 
 // Esquema de validación para calcular precio
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         const endTime = new Date(validatedData.endTime);
 
         // Verificar que la propiedad existe
-        const property = await PropertyService.getPropertyById(validatedData.propertyId);
+        const property = await CatalogService.getServiceById(validatedData.propertyId);
         if (!property) {
             return NextResponse.json(
                 { success: false, error: 'Property not found' },
@@ -37,23 +37,18 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Calcular precio
-        const totalPrice = await BookingService.calculateBookingPrice(
-            validatedData.propertyId,
-            startTime,
-            endTime
-        );
-
         // Calcular detalles adicionales
         const durationMs = endTime.getTime() - startTime.getTime();
         const durationHours = durationMs / (1000 * 60 * 60);
         const durationDays = Math.ceil(durationHours / 24);
 
-        // Determinar si se está usando precio por hora o por día
-        const pricingType = durationHours >= 24 ? 'daily' : 'hourly';
-        const unitPrice = pricingType === 'daily' ? property.price_per_day :
-            property.price_per_hour;
-        const units = pricingType === 'daily' ? durationDays : Math.ceil(durationHours);
+        // Fixed Pricing Model: Price is per project, regardless of duration
+        const pricingType = 'project';
+        const unitPrice = property.price;
+        const units = 1;
+
+        // Override BookingService calculation for now to enforce fixed price
+        const totalPrice = unitPrice;
 
         return NextResponse.json({
             success: true,

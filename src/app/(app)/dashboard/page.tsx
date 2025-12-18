@@ -25,8 +25,11 @@ export default function UsuarioDashboard() {
         async function getTier() {
             const { data: { user } } = await supabase.auth.getUser();
             if (user) {
-                const { data: profile } = await supabase.from('users').select('subscription_tier').eq('email', user.email).single();
-                if (profile?.subscription_tier) setUserTier(profile.subscription_tier as any);
+                const { data } = await supabase.from('users').select('subscription_tier').eq('email', user.email).single();
+                // Cast to unknown first to handle the SelectQueryError type mismatch, then to expected shape
+                const profile = data as unknown as { subscription_tier: 'free' | 'starter' | 'pro' | 'enterprise' } | null;
+
+                if (profile?.subscription_tier) setUserTier(profile.subscription_tier);
             }
         }
         getTier();

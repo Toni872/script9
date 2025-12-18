@@ -100,6 +100,8 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
+import { AIChatWidget } from "@/components/support/AIChatWidget";
+
 export default function RootLayout({
   children,
 }: {
@@ -172,6 +174,7 @@ export default function RootLayout({
       </head>
       <body className={`${heading.variable} ${body.variable} font-body antialiased`}>
         <RootLayoutClient>{children}</RootLayoutClient>
+        <AIChatWidget />
       </body>
     </html>
   );

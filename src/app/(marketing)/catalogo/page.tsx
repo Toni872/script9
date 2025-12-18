@@ -5,7 +5,8 @@ export const dynamic = 'force-dynamic';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import SearchBar, { SearchParams } from '@/components/SearchBar';
-import PropertyCard, { Property } from '@/components/PropertyCard';
+import ServiceCard from '@/components/ServiceCard';
+import { Service } from '@/types';
 import AdvancedFilters from '@/components/catalog/AdvancedFilters';
 import { Button } from '@/components/ui/button';
 import { Loader2, Zap, SlidersHorizontal, Grid3x3, LayoutGrid, Sparkles, Code, Bot, Globe } from 'lucide-react';
@@ -23,7 +24,7 @@ interface AdvancedFilterOptions {
 
 export default function Catalogo() {
     const searchParams = useSearchParams();
-    const [properties, setProperties] = useState<Property[]>([]);
+    const [properties, setProperties] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [showFilters, setShowFilters] = useState(false);
@@ -103,22 +104,27 @@ export default function Catalogo() {
                 setTotalPages(data.pagination.totalPages || 1);
             }
 
-            // Transform API data to match Property interface
-            const transformedProperties: Property[] = data.properties?.map((prop: any) => ({
+            // Transform API data to match Service interface
+            const transformedProperties: Service[] = data.properties?.map((prop: any) => ({
                 id: prop.id,
                 title: prop.title || prop.name,
                 description: prop.description,
-                price_per_hour: prop.price_per_hour,
+                price: prop.price || prop.price_per_hour,
+                unit: prop.unit || 'project',
                 location: prop.address || prop.location,
                 city: prop.city,
                 region: prop.region,
                 capacity: prop.max_guests || prop.capacity,
                 max_guests: prop.max_guests || prop.capacity,
-                images: prop.image_urls || [],
+                features: prop.features || prop.amenities?.map((a: string) => ({ id: a, name: a })) || [],
+                amenities: prop.amenities || [], // legacy
+                image_urls: prop.image_urls || [],
                 rating: prop.average_rating,
                 review_count: prop.review_count,
-                amenities: prop.amenities || [],
-                property_type: prop.property_type,
+                provider_id: prop.host_id,
+                host_id: prop.host_id,
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
                 is_script9_select: prop.is_script9_select || false,
                 latitude: prop.latitude,
                 longitude: prop.longitude,
@@ -288,10 +294,10 @@ export default function Catalogo() {
                         ) : (
                             <>
                                 <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-                                    {properties.map((property) => (
-                                        <PropertyCard
-                                            key={property.id}
-                                            property={property}
+                                    {properties.map((service) => (
+                                        <ServiceCard
+                                            key={service.id}
+                                            service={service}
                                             onFavoriteToggle={handleFavoriteToggle}
                                         />
                                     ))}

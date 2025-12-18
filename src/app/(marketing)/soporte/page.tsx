@@ -5,11 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Mail, MessageSquare, Phone, Send, Loader2 } from 'lucide-react';
+import { Mail, MessageSquare, Phone, Send, Loader2, Bot, Headphones } from 'lucide-react';
+import { AIChatWidget } from '@/components/support/AIChatWidget';
 
 export default function SoportePage() {
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
+
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,15 +51,69 @@ export default function SoportePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Contact Info */}
                     <div className="space-y-6">
-                        <Card className="border-gray-200 shadow-sm">
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <MessageSquare className="w-5 h-5 text-[#003D82]" /> Chat en Vivo
+                        <Card className="border-gray-200 shadow-sm overflow-hidden">
+                            <CardHeader className="bg-gray-50/50 border-b border-gray-100 pb-4">
+                                <CardTitle className="flex items-center gap-2 text-lg">
+                                    <MessageSquare className="w-5 h-5 text-[#003D82]" /> Asistencia Inmediata
                                 </CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                <p className="text-gray-600 mb-4">Nuestros agentes están disponibles de 9:00 a 18:00 (Hora Madrid).</p>
-                                <Button className="w-full bg-[#003D82] text-white">Iniciar Chat</Button>
+                            <CardContent className="p-0">
+                                <div className="divide-y divide-gray-100">
+                                    {/* AI Agent Option */}
+                                    <div className="p-4 hover:bg-blue-50/50 transition-colors group cursor-pointer" onClick={() => setIsChatOpen(true)}>
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                                                <Bot className="w-6 h-6 text-indigo-600" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center justify-between mb-1">
+                                                    <h3 className="font-semibold text-gray-900">S9-Bot (IA)</h3>
+                                                    <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full flex items-center gap-1">
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                                        Online 24/7
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-gray-600 mb-3">
+                                                    Respuestas instantáneas sobre documentación, precios y capacidades técnicas.
+                                                </p>
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    className="w-full border-indigo-200 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setIsChatOpen(true);
+                                                    }}
+                                                >
+                                                    Chat con IA
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Human Agent Option */}
+                                    <div className="p-4 hover:bg-blue-50/50 transition-colors group cursor-pointer">
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-10 h-10 rounded-full bg-[#003D82]/10 flex items-center justify-center flex-shrink-0">
+                                                <Headphones className="w-6 h-6 text-[#003D82]" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center justify-between mb-1">
+                                                    <h3 className="font-semibold text-gray-900">Ingeniero de Automatización</h3>
+                                                    <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
+                                                        09:00 - 18:00
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-gray-600 mb-3">
+                                                    Validación técnica detallada y consultoría para proyectos a medida.
+                                                </p>
+                                                <Button size="sm" className="w-full bg-[#003D82] text-white hover:bg-[#002E5C]">
+                                                    Hablar con Experto
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </CardContent>
                         </Card>
 
@@ -97,6 +154,8 @@ export default function SoportePage() {
                     </Card>
                 </div>
             </div>
+
+            {/* The Global AI Chat Widget is now mounted in layout.tsx */}
         </div>
     );
 }

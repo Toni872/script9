@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
             .insert({
                 title: validation.data.title,
                 description: validation.data.description,
-                price_per_day: validation.data.price, // Usamos price_per_day como campo de precio genérico
-                max_guests: 1, // Default para scripts
+                price_per_hour: validation.data.price, // Store fixed price in price_per_hour as standard
+                max_guests: 1, // Default for services
                 host_id: user.id,
                 product_type: validation.data.product_type,
                 download_url: validation.data.download_url

@@ -104,7 +104,7 @@ export class SearchService {
     // Log de búsqueda para analytics
     await this.logSearch(filters.query || '', filters, count || 0);
 
-    return createPaginatedResponse(properties || [], count || 0, page, limit);
+    return createPaginatedResponse((properties || []) as unknown as Property[], count || 0, page, limit);
   }
 
   /**
@@ -126,7 +126,8 @@ export class SearchService {
     }
 
     const suggestions = new Set<string>();
-    data?.forEach((prop) => {
+    (data || [])?.forEach((propRaw) => {
+      const prop = propRaw as any;
       if (prop.title?.toLowerCase().includes(query.toLowerCase())) {
         suggestions.add(prop.title);
       }
@@ -156,7 +157,8 @@ export class SearchService {
 
     // Contar frecuencia
     const queryCounts: Record<string, number> = {};
-    data?.forEach((log) => {
+    (data || [])?.forEach((logRaw) => {
+      const log = logRaw as any;
       const query = log.search_query.toLowerCase().trim();
       if (query) {
         queryCounts[query] = (queryCounts[query] || 0) + 1;
@@ -203,7 +205,7 @@ export class SearchService {
       throw new DatabaseError(`Error en búsqueda: ${error.message}`);
     }
 
-    return data || [];
+    return (data || []) as unknown as Property[];
   }
 
   /**
@@ -226,7 +228,7 @@ export class SearchService {
       throw new DatabaseError(`Error en búsqueda geoespacial: ${error.message}`);
     }
 
-    return data || [];
+    return (data || []) as unknown as Property[];
   }
 }
 
