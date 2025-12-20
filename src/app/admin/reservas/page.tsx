@@ -116,7 +116,7 @@ export default function AdminReservas() {
             pending: 'bg-yellow-100 text-yellow-700',
             confirmed: 'bg-green-100 text-green-700',
             completed: 'bg-blue-100 text-blue-700',
-            cancelled: 'bg-red-100 text-red-700',
+            cancelled: 'bg-emerald-100 text-emerald-700',
         };
 
         const labels = {
@@ -361,11 +361,11 @@ export default function AdminReservas() {
                                                         booking.status === 'pending') && (
                                                             <button
                                                                 onClick={() => handleCancelBooking(booking.id)}
-                                                                className="p-2 hover:bg-red-50 rounded-lg transition-colors"
+                                                                className="p-2 hover:bg-emerald-50 rounded-lg transition-colors"
                                                                 title="Cancelar reserva"
                                                                 aria-label="Cancelar reserva"
                                                             >
-                                                                <Ban className="w-4 h-4 text-red-600" />
+                                                                <Ban className="w-4 h-4 text-emerald-600" />
                                                             </button>
                                                         )}
                                                 </div>

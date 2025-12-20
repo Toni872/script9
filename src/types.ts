@@ -183,3 +183,41 @@ export interface Message {
     sender?: User;
     conversation?: Conversation;
 }
+
+export interface DatabaseProperty {
+    id: string;
+    title: string;
+    description: string;
+    price_per_hour: number;
+    host_id: string;
+    created_at: string;
+    updated_at: string;
+
+    // Optional / Nullable fields
+    address?: string;
+    city?: string;
+    region?: string;
+    latitude?: number;
+    longitude?: number;
+    average_rating?: number;
+    review_count?: number;
+    property_type?: string;
+    max_guests?: number;
+    is_script9_select?: boolean;
+    status?: string;
+    search_vector?: any;
+
+    // Legacy or simplified fields occasionally used
+    images?: string[];
+
+    // Joins
+    property_images?: {
+        id?: string;
+        image_url: string;
+        is_primary: boolean;
+    }[];
+
+    property_features?: {
+        feature: string;
+    }[];
+}

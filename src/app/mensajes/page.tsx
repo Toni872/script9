@@ -48,7 +48,7 @@ export default function MessagesPage() {
     if (status === 'loading' || loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <Loader2 className="w-8 h-8 animate-spin text-[#8B5CF6]" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#10B981]" />
             </div>
         );
     }
@@ -75,10 +75,10 @@ export default function MessagesPage() {
                 {/* Header */}
                 <div className="mb-6">
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                        <MessageCircle className="w-8 h-8 text-[#8B5CF6]" />
+                        <MessageCircle className="w-8 h-8 text-[#10B981]" />
                         Mensajes
                         {unreadCount > 0 && (
-                            <span className="inline-flex items-center justify-center w-6 h-6 bg-red-500 text-white text-sm font-bold rounded-full">
+                            <span className="inline-flex items-center justify-center w-6 h-6 bg-[#10B981] text-white text-sm font-bold rounded-full">
                                 {unreadCount > 9 ? '9+' : unreadCount}
                             </span>
                         )}

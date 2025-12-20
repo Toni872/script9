@@ -131,8 +131,8 @@ export const authOptions: NextAuthOptions = {
                     return {
                         id: authData.user.id,
                         email: authData.user.email,
-                        name: authData.user.user_metadata?.name,
-                        role: authData.user.user_metadata?.role || 'guest',
+                        name: authData.user.user_metadata?.name || '',
+                        role: (authData.user.user_metadata?.role as string) || 'guest',
                         image: authData.user.user_metadata?.avatar_url,
                     };
 

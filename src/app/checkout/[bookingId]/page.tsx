@@ -79,7 +79,7 @@ export default function CheckoutPage() {
         return (
             <div className="container mx-auto px-4 py-16 max-w-2xl">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#EF4444] mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#10B981] mx-auto mb-4"></div>
                     <p className="text-gray-600">Cargando checkout...</p>
                 </div>
             </div>
@@ -89,12 +89,12 @@ export default function CheckoutPage() {
     if (error) {
         return (
             <div className="container mx-auto px-4 py-16 max-w-2xl">
-                <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-                    <h2 className="text-xl font-bold text-red-800 mb-2">Error</h2>
-                    <p className="text-red-700">{error}</p>
+                <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6">
+                    <h2 className="text-xl font-bold text-emerald-800 mb-2">Error</h2>
+                    <p className="text-emerald-700">{error}</p>
                     <button
                         onClick={() => router.push('/dashboard')}
-                        className="mt-4 text-red-800 underline"
+                        className="mt-4 text-emerald-800 underline"
                     >
                         Volver al dashboard
                     </button>
@@ -112,7 +112,7 @@ export default function CheckoutPage() {
         appearance: {
             theme: 'stripe' as const,
             variables: {
-                colorPrimary: '#EF4444',
+                colorPrimary: '#10B981',
             },
         },
     };
@@ -174,7 +174,7 @@ export default function CheckoutPage() {
                             <div className="border-t pt-3">
                                 <div className="flex justify-between items-center">
                                     <p className="text-gray-600">Total</p>
-                                    <p className="text-2xl font-bold text-[#EF4444]">
+                                    <p className="text-2xl font-bold text-[#10B981]">
                                         €{booking.total_price.toFixed(2)}
                                     </p>
                                 </div>

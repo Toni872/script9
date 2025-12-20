@@ -63,7 +63,7 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
                     {/* is_script9_select logic */}
                     {(service as any).is_script9_select && (
                         <div className="absolute top-3 right-3">
-                            <span className="px-3 py-1 rounded-full bg-[#EF4444] text-white text-xs font-bold shadow-sm">
+                            <span className="px-3 py-1 rounded-full bg-[#10B981] text-white text-xs font-bold shadow-sm">
                                 SELECT
                             </span>
                         </div>
@@ -111,7 +111,7 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
                                 {service.unit && service.unit !== 'project' && <span className="text-sm font-normal text-gray-500">/{service.unit}</span>}
                             </span>
                         </div>
-                        <button className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center text-[#333333] group-hover:bg-[#EF4444] group-hover:text-white transition-colors">
+                        <button className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center text-[#333333] group-hover:bg-[#10B981] group-hover:text-white transition-colors">
                             <ArrowRight className="w-5 h-5" />
                         </button>
                     </div>

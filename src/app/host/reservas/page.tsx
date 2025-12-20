@@ -126,7 +126,7 @@ export default function HostReservas() {
             pending: 'bg-yellow-100 text-yellow-700',
             confirmed: 'bg-green-100 text-green-700',
             completed: 'bg-blue-100 text-blue-700',
-            cancelled: 'bg-red-100 text-red-700',
+            cancelled: 'bg-emerald-100 text-emerald-700',
         };
 
         const labels = {
@@ -404,7 +404,7 @@ export default function HostReservas() {
                                                 {(booking.status === 'confirmed' || booking.status === 'pending') && (
                                                     <button
                                                         onClick={() => handleCancelBooking(booking.id)}
-                                                        className="flex items-center gap-2 px-4 py-2 border border-red-300 text-red-600 rounded-xl font-medium hover:bg-red-50 transition-colors"
+                                                        className="flex items-center gap-2 px-4 py-2 border border-emerald-300 text-emerald-600 rounded-xl font-medium hover:bg-emerald-50 transition-colors"
                                                     >
                                                         <XCircle className="w-4 h-4" />
                                                         Cancelar

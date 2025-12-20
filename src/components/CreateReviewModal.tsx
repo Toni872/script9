@@ -118,7 +118,7 @@ export default function CreateReviewModal({
                         >
                             <Star
                                 className={`w-8 h-8 ${star <= (hovered || value)
-                                    ? 'fill-[#8B5CF6] text-[#8B5CF6]'
+                                    ? 'fill-[#10B981] text-[#10B981]'
                                     : 'text-gray-300'
                                     }`}
                             />
@@ -171,8 +171,8 @@ export default function CreateReviewModal({
                             <form onSubmit={handleSubmit} className="p-6 space-y-6">
                                 {/* Error Message */}
                                 {error && (
-                                    <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-                                        <p className="text-sm text-red-600">{error}</p>
+                                    <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                                        <p className="text-sm text-emerald-600">{error}</p>
                                     </div>
                                 )}
 
@@ -222,7 +222,7 @@ export default function CreateReviewModal({
                                         onChange={(e) => setReviewText(e.target.value)}
                                         placeholder="Cuéntanos sobre tu experiencia en este espacio..."
                                         rows={6}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent resize-none"
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent resize-none"
                                         required
                                     />
                                     <p className="text-xs text-[#86868b] mt-2">
@@ -242,7 +242,7 @@ export default function CreateReviewModal({
                                     </button>
                                     <button
                                         type="submit"
-                                        className="flex-1 px-6 py-3 bg-[#8B5CF6] text-white rounded-xl font-semibold hover:bg-[#7c3aed] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="flex-1 px-6 py-3 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                         disabled={loading || rating === 0}
                                     >
                                         {loading ? 'Publicando...' : 'Publicar Reseña'}

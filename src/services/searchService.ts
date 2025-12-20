@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from '@/lib/supabase';
-import { Property } from '@/types';
+import { Property, DatabaseProperty } from '@/types';
 import { DatabaseError } from '@/utils/errors';
 import { calculatePagination, createPaginatedResponse, PaginatedResponse } from '@/utils/pagination';
 
@@ -127,7 +127,7 @@ export class SearchService {
 
     const suggestions = new Set<string>();
     (data || [])?.forEach((propRaw) => {
-      const prop = propRaw as any;
+      const prop = propRaw as unknown as DatabaseProperty;
       if (prop.title?.toLowerCase().includes(query.toLowerCase())) {
         suggestions.add(prop.title);
       }
@@ -158,7 +158,7 @@ export class SearchService {
     // Contar frecuencia
     const queryCounts: Record<string, number> = {};
     (data || [])?.forEach((logRaw) => {
-      const log = logRaw as any;
+      const log = logRaw as unknown as { search_query: string };
       const query = log.search_query.toLowerCase().trim();
       if (query) {
         queryCounts[query] = (queryCounts[query] || 0) + 1;
@@ -174,11 +174,11 @@ export class SearchService {
   /**
    * Registrar búsqueda para analytics
    */
-  private static async logSearch(query: string, filters: any, resultsCount: number): Promise<void> {
+  private static async logSearch(query: string, filters: AdvancedSearchFilters, resultsCount: number): Promise<void> {
     try {
       await supabase.from('search_logs').insert({
         search_query: query,
-        filters: filters,
+        filters: filters as any, // Filters object is JSONB compatible
         results_count: resultsCount,
       });
     } catch (error) {

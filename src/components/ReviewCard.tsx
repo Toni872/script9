@@ -33,7 +33,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                     <Star
                         key={star}
                         className={`w-4 h-4 ${star <= rating
-                            ? 'fill-[#8B5CF6] text-[#8B5CF6]'
+                            ? 'fill-[#10B981] text-[#10B981]'
                             : 'text-gray-300'
                             }`}
                     />
@@ -57,7 +57,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                     {/* Avatar */}
-                    <div className="h-12 w-12 rounded-full bg-[#8B5CF6]/10 flex items-center justify-center overflow-hidden">
+                    <div className="h-12 w-12 rounded-full bg-[#10B981]/10 flex items-center justify-center overflow-hidden">
                         {review.guest.avatar_url ? (
                             <img
                                 src={review.guest.avatar_url}
@@ -65,7 +65,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                                 className="w-full h-full object-cover"
                             />
                         ) : (
-                            <User className="w-6 h-6 text-[#8B5CF6]" />
+                            <User className="w-6 h-6 text-[#10B981]" />
                         )}
                     </div>
 

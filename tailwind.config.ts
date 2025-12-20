@@ -15,7 +15,7 @@ const config: Config = {
                 // Based on User Identity Document
                 script9: {
                     blue: '#003D82',        // Primary Corporate Blue
-                    red: '#EF4444',         // NEW Accent Corporate Red
+                    green: '#10B981',       // NEW Accent Corporate Green (Success/Growth)
                     gray: {
                         light: '#F5F5F5',   // Background
                         dark: '#333333',    // Text
@@ -36,17 +36,17 @@ const config: Config = {
                         900: '#000D1A',
                     },
                     accent: {
-                        DEFAULT: '#EF4444', // Corporate Red
-                        50: '#FEF2F2',
-                        100: '#FEE2E2',
-                        200: '#FECACA',
-                        300: '#FCA5A5',
-                        400: '#F87171',
-                        500: '#EF4444',     // MAIN ACCENT COLOR
-                        600: '#DC2626',
-                        700: '#B91C1C',
-                        800: '#991B1B',
-                        900: '#7F1D1D',
+                        DEFAULT: '#10B981', // Corporate Green (Emerald)
+                        50: '#ECFDF5',
+                        100: '#D1FAE5',
+                        200: '#A7F3D0',
+                        300: '#6EE7B7',
+                        400: '#34D399',
+                        500: '#10B981',     // MAIN ACCENT COLOR
+                        600: '#059669',
+                        700: '#047857',
+                        800: '#065F46',
+                        900: '#064E3B',
                     },
                     neutral: {
                         DEFAULT: '#333333', // Dark Gray Text
@@ -130,11 +130,11 @@ const config: Config = {
                 'script9-md': '0 4px 6px -1px rgba(0, 61, 130, 0.1), 0 2px 4px -1px rgba(0, 61, 130, 0.06)',
                 'script9-lg': '0 10px 15px -3px rgba(0, 61, 130, 0.1), 0 4px 6px -2px rgba(0, 61, 130, 0.05)',
                 'script9-xl': '0 20px 25px -5px rgba(0, 61, 130, 0.1), 0 10px 10px -5px rgba(0, 61, 130, 0.04)',
-                'script9-glow': '0 0 15px rgba(239, 68, 68, 0.5)', // Red glow
+                'script9-glow': '0 0 15px rgba(16, 185, 129, 0.5)', // Green glow
             },
             backgroundImage: {
                 'gradient-script9': 'linear-gradient(135deg, #003D82 0%, #0056b3 100%)', // Blue Corporate Gradient
-                'gradient-script9-accent': 'linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)', // Red Accent Gradient
+                'gradient-script9-accent': 'linear-gradient(135deg, #10B981 0%, #047857 100%)', // Green Accent Gradient
                 'gradient-script9-soft': 'linear-gradient(135deg, #F5F7FA 0%, #E6E9F0 100%)', // Soft Gray Gradient
             },
             animation: {
@@ -161,6 +161,22 @@ const config: Config = {
                     '100%': { transform: 'scale(1)', opacity: '1' },
                 },
             },
+        },
+        extensions: {
+            typography: {
+                DEFAULT: {
+                    css: {
+                        pre: {
+                            color: false,
+                            backgroundColor: false,
+                        },
+                        code: {
+                            color: false,
+                            backgroundColor: false,
+                        }
+                    }
+                }
+            }
         },
     },
     plugins: [require('tailwindcss-animate')],

@@ -104,7 +104,7 @@ export async function POST(
             );
         }
 
-        const property = await PropertyService.getPropertyById(params.propertyId);
+        const property = await CatalogService.getServiceById(params.propertyId);
         if (!property) {
             return NextResponse.json(
                 { success: false, error: 'Property not found' },
@@ -131,7 +131,7 @@ export async function POST(
             );
         }
 
-        const propertyImage = await CatalogService.addPropertyImage(
+        const propertyImage = await CatalogService.addServiceImage(
             params.propertyId,
             validatedData.imageKey,
             validatedData.isPrimary
@@ -199,7 +199,7 @@ export async function DELETE(
             );
         }
 
-        const property = await PropertyService.getPropertyById(params.propertyId);
+        const property = await CatalogService.getServiceById(params.propertyId);
         if (!property) {
             return NextResponse.json(
                 { success: false, error: 'Property not found' },
@@ -224,7 +224,7 @@ export async function DELETE(
             );
         }
 
-        await CatalogService.removePropertyImage(imageId);
+        await CatalogService.removeServiceImage(imageId);
 
         return NextResponse.json({
             success: true,

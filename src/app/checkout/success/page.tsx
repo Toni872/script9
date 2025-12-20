@@ -58,7 +58,7 @@ export default function CheckoutSuccessPage() {
         return (
             <div className="container mx-auto px-4 py-16 max-w-2xl">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#EF4444] mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#10B981] mx-auto mb-4"></div>
                     <p className="text-gray-600">Verificando pago...</p>
                 </div>
             </div>
@@ -135,7 +135,7 @@ export default function CheckoutSuccessPage() {
 
                             <div className="flex justify-between border-t pt-3">
                                 <span className="text-gray-600">Total pagado:</span>
-                                <span className="text-xl font-bold text-[#EF4444]">
+                                <span className="text-xl font-bold text-[#10B981]">
                                     €{booking.total_price.toFixed(2)}
                                 </span>
                             </div>
@@ -153,7 +153,7 @@ export default function CheckoutSuccessPage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
                         href="/dashboard"
-                        className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#EF4444] hover:bg-[#DC2626]"
+                        className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#10B981] hover:bg-[#059669]"
                     >
                         Ver mis reservas
                     </Link>

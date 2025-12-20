@@ -221,7 +221,7 @@ export default function PerfilUsuario() {
     if (status === 'loading') {
         return (
             <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#EF4444]" />
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#10B981]" />
             </div>
         );
     }
@@ -258,9 +258,9 @@ export default function PerfilUsuario() {
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="mb-6 bg-red-50 border border-red-200 rounded-xl p-4"
+                        className="mb-6 bg-emerald-50 border border-emerald-200 rounded-xl p-4"
                     >
-                        <p className="text-red-700 font-medium">{errorMessage}</p>
+                        <p className="text-emerald-700 font-medium">{errorMessage}</p>
                     </motion.div>
                 )}
 
@@ -278,7 +278,7 @@ export default function PerfilUsuario() {
                     <div className="flex items-center gap-6">
                         {/* Avatar Preview */}
                         <div className="relative">
-                            <div className="h-24 w-24 rounded-full overflow-hidden bg-[#EF4444]/10 flex items-center justify-center">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-[#10B981]/10 flex items-center justify-center">
                                 {avatarUrl ? (
                                     <Image
                                         src={avatarUrl}
@@ -287,14 +287,14 @@ export default function PerfilUsuario() {
                                         className="object-cover"
                                     />
                                 ) : (
-                                    <User className="w-12 h-12 text-[#EF4444]" />
+                                    <User className="w-12 h-12 text-[#10B981]" />
                                 )}
                             </div>
 
                             {/* Upload Button */}
                             <label
                                 htmlFor="avatar-upload"
-                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-[#EF4444] flex items-center justify-center cursor-pointer hover:bg-[#DC2626] transition-colors shadow-lg"
+                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-[#10B981] flex items-center justify-center cursor-pointer hover:bg-[#059669] transition-colors shadow-lg"
                                 aria-label="Subir foto de perfil"
                             >
                                 <Camera className="w-4 h-4 text-white" />
@@ -344,7 +344,7 @@ export default function PerfilUsuario() {
                                     type="text"
                                     value={fullName}
                                     onChange={(e) => setFullName(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-transparent"
+                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
                                     aria-label="Nombre completo"
                                     required
                                 />
@@ -383,7 +383,7 @@ export default function PerfilUsuario() {
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                     placeholder="+34 600 000 000"
-                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-transparent"
+                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
                                 />
                             </div>
                         </div>
@@ -392,7 +392,7 @@ export default function PerfilUsuario() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[#EF4444] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#DC2626] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full bg-[#10B981] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#059669] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
                             <Save className="w-5 h-5" />
                             {loading ? 'Guardando...' : 'Guardar Cambios'}
@@ -423,7 +423,7 @@ export default function PerfilUsuario() {
                                     type={showCurrentPassword ? 'text' : 'password'}
                                     value={currentPassword}
                                     onChange={(e) => setCurrentPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-transparent"
+                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
                                     aria-label="Contraseña actual"
                                     required
                                 />
@@ -453,7 +453,7 @@ export default function PerfilUsuario() {
                                     type={showNewPassword ? 'text' : 'password'}
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-transparent"
+                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
                                     aria-label="Nueva contraseña"
                                     required
                                 />
@@ -483,7 +483,7 @@ export default function PerfilUsuario() {
                                     type={showConfirmPassword ? 'text' : 'password'}
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-transparent"
+                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
                                     aria-label="Confirmar nueva contraseña"
                                     required
                                 />
@@ -506,7 +506,7 @@ export default function PerfilUsuario() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[#EF4444] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#DC2626] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full bg-[#10B981] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#059669] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
                             <Lock className="w-5 h-5" />
                             {loading ? 'Cambiando...' : 'Cambiar Contraseña'}

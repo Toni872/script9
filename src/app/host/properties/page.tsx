@@ -321,7 +321,7 @@ export default function HostPropertiesPage() {
                                                     ? 'bg-green-500 hover:bg-green-600'
                                                     : property.status === 'draft'
                                                         ? 'bg-[#86868b] hover:bg-gray-600'
-                                                        : 'bg-red-500 hover:bg-red-600'
+                                                        : 'bg-emerald-500 hover:bg-emerald-600'
                                                     } !text-white font-medium px-3 py-1 rounded-lg shadow-md`}
                                             >
                                                 {property.status === 'active' ? 'Activa' : property.status === 'draft' ? 'Borrador' : 'Inactiva'}
@@ -373,7 +373,7 @@ export default function HostPropertiesPage() {
                                             <button
                                                 type="button"
                                                 onClick={() => handleDelete(property.id)}
-                                                className="px-3 py-2.5 bg-white border-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-400 rounded-lg transition-all duration-300"
+                                                className="px-3 py-2.5 bg-white border-2 border-emerald-200 text-emerald-600 hover:bg-emerald-50 hover:border-emerald-400 rounded-lg transition-all duration-300"
                                                 aria-label="Eliminar propiedad"
                                             >
                                                 <Trash2 className="w-4 h-4" />

@@ -86,17 +86,17 @@ function CheckoutForm({ bookingId, amount }: { bookingId: string; amount: number
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3"
+                    className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-start gap-3"
                 >
-                    <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-red-800 text-sm">{message}</p>
+                    <AlertCircle className="h-5 w-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-emerald-800 text-sm">{message}</p>
                 </motion.div>
             )}
 
             {/* Submit Button */}
             <button
                 disabled={isLoading || !stripe || !elements}
-                className="w-full py-4 bg-[#8B5CF6] text-white text-[17px] font-semibold rounded-xl hover:bg-[#7c3aed] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-4 bg-[#10B981] text-white text-[17px] font-semibold rounded-xl hover:bg-[#059669] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
                 {isLoading ? (
                     <>
@@ -114,7 +114,7 @@ function CheckoutForm({ bookingId, amount }: { bookingId: string; amount: number
             {/* Terms */}
             <p className="text-xs text-gray-500 text-center">
                 Al realizar el pago, aceptas los{' '}
-                <a href="/terminos" className="text-[#8B5CF6] hover:underline">
+                <a href="/terminos" className="text-[#10B981] hover:underline">
                     Términos y Condiciones
                 </a>{' '}
                 de Script9
@@ -127,10 +127,10 @@ export default function StripeCheckoutForm({ clientSecret, bookingId, amount }: 
     const appearance = {
         theme: 'stripe' as const,
         variables: {
-            colorPrimary: '#8B5CF6',
+            colorPrimary: '#10B981',
             colorBackground: '#ffffff',
             colorText: '#1f2937',
-            colorDanger: '#ef4444',
+            colorDanger: '#10B981',
             fontFamily: 'system-ui, sans-serif',
             spacingUnit: '4px',
             borderRadius: '8px',

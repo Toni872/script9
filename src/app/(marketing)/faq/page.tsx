@@ -171,7 +171,7 @@ export default function FAQ() {
                                     placeholder="Busca tu pregunta..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent transition-all bg-white shadow-lg"
+                                    className="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent transition-all bg-white shadow-lg"
                                 />
                             </div>
                         </div>
@@ -191,7 +191,7 @@ export default function FAQ() {
                                     key={category.id}
                                     onClick={() => setSelectedCategory(category.id)}
                                     className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${selectedCategory === category.id
-                                        ? 'bg-[#8B5CF6] text-white shadow-lg'
+                                        ? 'bg-[#10B981] text-white shadow-lg'
                                         : 'bg-white text-gray-700 hover:bg-gray-50 shadow'
                                         }`}
                                 >
@@ -234,7 +234,7 @@ export default function FAQ() {
                                                 {faq.question}
                                             </span>
                                             <ChevronDown
-                                                className={`h-6 w-6 text-[#8B5CF6] flex-shrink-0 transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : ''
+                                                className={`h-6 w-6 text-[#10B981] flex-shrink-0 transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : ''
                                                     }`}
                                             />
                                         </button>
@@ -266,7 +266,7 @@ export default function FAQ() {
                         transition={{ duration: 0.6, delay: 0.6 }}
                         className="mt-16 text-center"
                     >
-                        <div className="bg-gradient-to-br from-[#8B5CF6] to-[#7c3aed] rounded-3xl p-12 shadow-2xl">
+                        <div className="bg-gradient-to-br from-[#10B981] to-[#059669] rounded-3xl p-12 shadow-2xl">
                             <h2 className="text-3xl font-bold text-white mb-4">
                                 ¿No encontraste lo que buscabas?
                             </h2>
@@ -275,7 +275,7 @@ export default function FAQ() {
                             </p>
                             <a
                                 href="/contacto"
-                                className="inline-block px-8 py-4 bg-white text-[#8B5CF6] font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
+                                className="inline-block px-8 py-4 bg-white text-[#10B981] font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
                             >
                                 Contáctanos
                             </a>

@@ -205,7 +205,7 @@ export default function Catalogo() {
                             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                                 <div className="p-4 bg-gray-50 border-b border-gray-200">
                                     <h3 className="font-semibold text-[#333333] flex items-center gap-2">
-                                        <SlidersHorizontal className="w-5 h-5 text-[#EF4444]" />
+                                        <SlidersHorizontal className="w-5 h-5 text-[#10B981]" />
                                         Filtros
                                     </h3>
                                 </div>
@@ -227,7 +227,7 @@ export default function Catalogo() {
                             onClick={() => setShowFilters(!showFilters)}
                             className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border border-gray-200 text-[#333333] hover:bg-gray-50 rounded-lg shadow-sm font-medium transition-colors"
                         >
-                            <SlidersHorizontal className="h-5 w-5 text-[#EF4444]" />
+                            <SlidersHorizontal className="h-5 w-5 text-[#10B981]" />
                             {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
                         </button>
 
@@ -254,13 +254,13 @@ export default function Catalogo() {
                             <div className="flex items-center gap-2 bg-white p-1 rounded-lg border border-gray-200">
                                 <button
                                     onClick={() => setViewMode('grid')}
-                                    className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-[#EF4444] text-white' : 'text-gray-400 hover:text-[#333333]'}`}
+                                    className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-[#10B981] text-white' : 'text-gray-400 hover:text-[#333333]'}`}
                                 >
                                     <Grid3x3 className="w-5 h-5" />
                                 </button>
                                 <button
                                     onClick={() => setViewMode('compact')}
-                                    className={`p-2 rounded-md transition-colors ${viewMode === 'compact' ? 'bg-[#EF4444] text-white' : 'text-gray-400 hover:text-[#333333]'}`}
+                                    className={`p-2 rounded-md transition-colors ${viewMode === 'compact' ? 'bg-[#10B981] text-white' : 'text-gray-400 hover:text-[#333333]'}`}
                                 >
                                     <LayoutGrid className="w-5 h-5" />
                                 </button>
@@ -270,13 +270,13 @@ export default function Catalogo() {
                         {/* Content States */}
                         {loading ? (
                             <div className="flex flex-col items-center justify-center py-20 text-center">
-                                <Loader2 className="h-12 w-12 animate-spin text-[#EF4444] mb-4" />
+                                <Loader2 className="h-12 w-12 animate-spin text-[#10B981] mb-4" />
                                 <p className="text-[#666666] font-medium">Buscando las mejores soluciones...</p>
                             </div>
                         ) : error ? (
-                            <div className="text-center py-20 bg-white rounded-xl border border-red-100 p-8">
-                                <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Zap className="h-8 w-8 text-red-500" />
+                            <div className="text-center py-20 bg-white rounded-xl border border-emerald-100 p-8">
+                                <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Zap className="h-8 w-8 text-emerald-500" />
                                 </div>
                                 <h3 className="text-xl font-bold text-[#333333] mb-2">Error al cargar</h3>
                                 <p className="text-[#666666] mb-6">{error}</p>

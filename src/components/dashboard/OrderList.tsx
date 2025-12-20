@@ -55,7 +55,7 @@ export function OrderList() {
         const styles = {
             confirmed: 'bg-green-100 text-green-700',
             pending: 'bg-blue-100 text-blue-700',
-            cancelled: 'bg-red-100 text-red-700'
+            cancelled: 'bg-emerald-100 text-emerald-700'
         };
         // @ts-ignore
         return <Badge className={styles[status] || styles.pending}>{status === 'confirmed' ? 'Activo' : status}</Badge>;

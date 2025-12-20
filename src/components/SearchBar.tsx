@@ -80,7 +80,7 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                         <div className="flex items-center">
                             <button
                                 type="submit"
-                                className="w-auto px-6 py-4 text-white text-[16px] font-medium rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 bg-[#EF4444] hover:bg-[#DC2626]"
+                                className="w-auto px-6 py-4 text-white text-[16px] font-medium rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 bg-[#10B981] hover:bg-[#059669]"
                             >
                                 <Search className="h-4 w-4" />
                                 <span>Buscar</span>
@@ -104,7 +104,7 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                 <motion.div
                     whileHover={{ scale: 1.003 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                    className={`flex items-center bg-white/10 backdrop-blur-xl rounded-2xl border transition-all duration-300 shadow-2xl p-2 ${isFocused ? 'border-[#EF4444]/50 bg-white/15' : 'border-white/20'
+                    className={`flex items-center bg-white/10 backdrop-blur-xl rounded-2xl border transition-all duration-300 shadow-2xl p-2 ${isFocused ? 'border-[#10B981]/50 bg-white/15' : 'border-white/20'
                         }`}
                 >
                     {/* Input de búsqueda */}
@@ -127,7 +127,7 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                     {/* Botón de búsqueda */}
                     <button
                         type="submit"
-                        className="h-12 px-8 text-[16px] font-semibold rounded-xl text-white transition-all duration-300 bg-[#EF4444] hover:bg-[#DC2626] hover:shadow-[0_4px_20px_rgba(239,68,68,0.4)] flex items-center justify-center gap-2 active:scale-[0.98]"
+                        className="h-12 px-8 text-[16px] font-semibold rounded-xl text-white transition-all duration-300 bg-[#10B981] hover:bg-[#059669] hover:shadow-[0_4px_20px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2 active:scale-[0.98]"
                     >
                         <Search className="h-5 w-5" />
                         <span className="hidden sm:inline">Buscar</span>
@@ -157,7 +157,7 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                             }}
                             className="group flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/80 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-white/20 hover:text-white transition-all duration-200"
                         >
-                            <suggestion.icon className="h-3.5 w-3.5 text-[#EF4444] group-hover:scale-110 transition-transform" />
+                            <suggestion.icon className="h-3.5 w-3.5 text-[#10B981] group-hover:scale-110 transition-transform" />
                             {suggestion.label}
                         </button>
                     ))}

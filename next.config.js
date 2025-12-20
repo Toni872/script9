@@ -28,6 +28,26 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'pub-3ef540b3cd2345318e67fed754584739.r2.dev',
             },
+            {
+                protocol: 'https',
+                hostname: 'raw.githubusercontent.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'upload.wikimedia.org',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cdn.worldvectorlogo.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'static.cdnlogo.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cdn.simpleicons.org',
+            },
         ],
     },
 

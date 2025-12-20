@@ -9,7 +9,7 @@ export function PricingSection() {
         <section className="py-24 bg-gray-50 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-opacity-30 relative overflow-hidden" id="precios">
             {/* Abstract Background Shapes */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#003D82]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#EF4444]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#10B981]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
             <div className="container-script9 relative z-10">
                 <div className="text-center max-w-2xl mx-auto mb-16">
@@ -64,7 +64,7 @@ export function PricingSection() {
 
                     {/* Pro Plan (Highlighted) */}
                     <div className="bg-[#003D82] rounded-2xl shadow-2xl p-8 transform md:-translate-y-4 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 bg-[#EF4444] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        <div className="absolute top-0 right-0 bg-[#10B981] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                             MÁS POPULAR
                         </div>
                         <div className="mb-8 relative z-10">
@@ -105,7 +105,7 @@ export function PricingSection() {
                             </li>
                         </ul>
                         <Link href="/catalogo?plan=pro">
-                            <Button className="w-full bg-[#EF4444] hover:bg-[#DC2626] text-white font-bold h-12 shadow-lg">
+                            <Button className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-bold h-12 shadow-lg">
                                 Empezar Transformación
                             </Button>
                         </Link>

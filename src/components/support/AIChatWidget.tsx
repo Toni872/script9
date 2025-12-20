@@ -145,7 +145,7 @@ export function AIChatWidget() {
                                         <p className="text-[10px] text-green-600 font-medium tracking-wide uppercase">Online 24/7</p>
                                     </div>
                                 </div>
-                                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors">
+                                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-gray-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-full transition-colors">
                                     <X className="w-4 h-4" />
                                 </Button>
                             </CardHeader>
@@ -163,8 +163,8 @@ export function AIChatWidget() {
                                             </div>
                                             <div
                                                 className={`p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                                                        ? 'bg-[#003D82] text-white rounded-tr-none shadow-md'
-                                                        : 'bg-white border border-gray-200 text-gray-700 rounded-tl-none shadow-sm'
+                                                    ? 'bg-[#003D82] text-white rounded-tr-none shadow-md'
+                                                    : 'bg-white border border-gray-200 text-gray-700 rounded-tl-none shadow-sm'
                                                     }`}
                                             >
                                                 {msg.text}

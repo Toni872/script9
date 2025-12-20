@@ -73,7 +73,7 @@ export default function ConversationList({
     if (loading) {
         return (
             <div className="flex items-center justify-center h-full">
-                <Loader2 className="w-8 h-8 animate-spin text-[#8B5CF6]" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#10B981]" />
             </div>
         );
     }
@@ -81,11 +81,11 @@ export default function ConversationList({
     if (error) {
         return (
             <div className="flex flex-col items-center justify-center h-full p-4 text-center">
-                <MessageCircle className="w-12 h-12 text-red-400 mb-3" />
-                <p className="text-red-400 font-medium">{error}</p>
+                <MessageCircle className="w-12 h-12 text-emerald-400 mb-3" />
+                <p className="text-emerald-400 font-medium">{error}</p>
                 <button
                     onClick={loadConversations}
-                    className="mt-4 px-4 py-2 bg-[#8B5CF6] text-white rounded-lg hover:bg-[#7c3aed] transition-colors"
+                    className="mt-4 px-4 py-2 bg-[#10B981] text-white rounded-lg hover:bg-[#059669] transition-colors"
                 >
                     Reintentar
                 </button>
@@ -118,7 +118,7 @@ export default function ConversationList({
                         placeholder="Buscar conversaciones..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
                     />
                 </div>
             </div>
@@ -140,12 +140,12 @@ export default function ConversationList({
                                 onClick={() => onSelectConversation(conversation)}
                                 className={`
                   p-4 border-b border-gray-200 cursor-pointer transition-all duration-200
-                  ${isSelected ? 'bg-[#8B5CF6]/10 border-l-4 border-l-[#8B5CF6]' : 'hover:bg-gray-50'}
+                  ${isSelected ? 'bg-[#10B981]/10 border-l-4 border-l-[#10B981]' : 'hover:bg-gray-50'}
                 `}
                             >
                                 <div className="flex items-start gap-3">
                                     {/* Avatar */}
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-[#8B5CF6] to-purple-400 flex items-center justify-center text-white font-semibold text-lg">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-[#10B981] to-purple-400 flex items-center justify-center text-white font-semibold text-lg">
                                         {otherUser?.name?.charAt(0).toUpperCase() || '?'}
                                     </div>
 
@@ -156,7 +156,7 @@ export default function ConversationList({
                                                 {otherUser?.name || 'Usuario'}
                                             </h4>
                                             {unreadCount > 0 && (
-                                                <span className="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 bg-[#8B5CF6] text-white text-xs font-bold rounded-full">
+                                                <span className="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 bg-[#10B981] text-white text-xs font-bold rounded-full">
                                                     {unreadCount > 9 ? '9+' : unreadCount}
                                                 </span>
                                             )}

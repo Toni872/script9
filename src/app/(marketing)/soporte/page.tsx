@@ -146,7 +146,7 @@ export default function SoportePage() {
                                     <label className="text-sm font-medium">Mensaje</label>
                                     <Textarea placeholder="Cuéntanos más detalles..." rows={5} required />
                                 </div>
-                                <Button type="submit" className="w-full bg-[#EF4444] text-white hover:bg-[#DC2626]" disabled={sending}>
+                                <Button type="submit" className="w-full bg-[#10B981] text-white hover:bg-[#059669]" disabled={sending}>
                                     {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Enviar Mensaje'}
                                 </Button>
                             </form>

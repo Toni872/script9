@@ -1,5 +1,5 @@
 -- ============================================================================
--- SCRIPT DE SEGURIDAD PARA VILOK
+-- SCRIPT DE SEGURIDAD PARA SCRIPT9
 -- Habilitar Row Level Security (RLS) y configurar políticas de acceso
 -- ============================================================================
 

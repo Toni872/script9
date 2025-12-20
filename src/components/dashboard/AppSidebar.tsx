@@ -62,7 +62,7 @@ export function AppSidebar({ subscriptionTier = 'free' }: SidebarProps) {
                             href="/nuevo-proyecto"
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium ${pathname === '/nuevo-proyecto' ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50'}`}
                         >
-                            <Sparkles className="h-5 w-5 text-[#EF4444]" />
+                            <Sparkles className="h-5 w-5 text-[#10B981]" />
                             <span>Nuevo Proyecto</span>
                         </Link>
 
@@ -76,7 +76,7 @@ export function AppSidebar({ subscriptionTier = 'free' }: SidebarProps) {
 
                         <Button
                             variant="ghost"
-                            className="w-full flex items-center justify-start gap-3 px-4 py-3 text-red-600 hover:bg-red-50 hover:text-red-700 transition-all mt-4"
+                            className="w-full flex items-center justify-start gap-3 px-4 py-3 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all mt-4"
                             onClick={() => signOut({ callbackUrl: '/' })}
                         >
                             <LogOut className="h-5 w-5" />

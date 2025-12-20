@@ -170,7 +170,7 @@ const logoSection = {
 };
 
 const logo = {
-    color: '#8B5CF6',
+    color: '#10B981',
     fontSize: '32px',
     fontWeight: '700',
     margin: '0',
@@ -260,7 +260,7 @@ const valueCell = {
 };
 
 const priceText = {
-    color: '#8B5CF6',
+    color: '#10B981',
     fontSize: '18px',
 };
 
@@ -281,7 +281,7 @@ const infoBox = {
     borderRadius: '12px',
     padding: '24px',
     margin: '24px 0',
-    borderLeft: '4px solid #8B5CF6',
+    borderLeft: '4px solid #10B981',
 };
 
 const list = {
@@ -302,7 +302,7 @@ const buttonSection = {
 };
 
 const button = {
-    backgroundColor: '#8B5CF6',
+    backgroundColor: '#10B981',
     borderRadius: '12px',
     color: '#ffffff',
     fontSize: '16px',
@@ -314,7 +314,7 @@ const button = {
 };
 
 const link = {
-    color: '#8B5CF6',
+    color: '#10B981',
     textDecoration: 'underline',
 };
 

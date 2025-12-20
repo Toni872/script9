@@ -365,7 +365,7 @@ export default function AdminPropiedades() {
                                         </button>
                                         <button
                                             onClick={() => handleDeleteProperty(property.id)}
-                                            className="p-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors"
+                                            className="p-2 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 transition-colors"
                                             title="Eliminar"
                                             aria-label="Eliminar propiedad"
                                         >

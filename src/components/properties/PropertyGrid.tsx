@@ -38,8 +38,8 @@ export const PropertyGrid: FC<PropertyGridProps> = ({
 
     if (error) {
         return (
-            <div className="text-center py-20 bg-white rounded-2xl shadow-script9-sm border border-red-100">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-600 mb-4">
+            <div className="text-center py-20 bg-white rounded-2xl shadow-script9-sm border border-emerald-100">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mb-4">
                     <AlertCircle className="h-8 w-8" />
                 </div>
                 <h3 className="text-lg font-semibold text-brand-neutral-900 mb-2">

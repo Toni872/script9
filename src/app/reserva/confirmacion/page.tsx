@@ -89,8 +89,8 @@ export default function ConfirmacionPedido() {
             <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center p-4">
                 <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-sm w-full border border-gray-100">
                     <div className="relative w-16 h-16 mx-auto mb-4">
-                        <div className="absolute inset-0 border-4 border-[#EF4444]/20 rounded-full animate-ping"></div>
-                        <div className="relative z-10 w-16 h-16 border-4 border-[#EF4444] border-t-transparent rounded-full animate-spin"></div>
+                        <div className="absolute inset-0 border-4 border-[#10B981]/20 rounded-full animate-ping"></div>
+                        <div className="relative z-10 w-16 h-16 border-4 border-[#10B981] border-t-transparent rounded-full animate-spin"></div>
                     </div>
                     <h3 className="text-lg font-bold text-[#333333] mb-2">Verificando pedido...</h3>
                     <p className="text-gray-500 text-sm">Por favor, espera un momento.</p>
@@ -155,7 +155,7 @@ export default function ConfirmacionPedido() {
                                             <div>
                                                 <h2 className="text-xl font-bold text-[#333333] mb-2">{orderData.serviceTitle}</h2>
                                                 <p className="text-gray-600 mb-2 line-clamp-2">Servicio de automatización profesional.</p>
-                                                <Link href={`/catalogo/${orderData.serviceId}`} className="text-[#003D82] hover:text-[#EF4444] text-sm font-semibold flex items-center gap-1 transition-colors">
+                                                <Link href={`/catalogo/${orderData.serviceId}`} className="text-[#003D82] hover:text-[#10B981] text-sm font-semibold flex items-center gap-1 transition-colors">
                                                     Ver detalles del servicio <ArrowRight className="w-4 h-4" />
                                                 </Link>
                                             </div>
@@ -184,7 +184,7 @@ export default function ConfirmacionPedido() {
                                                 </div>
                                             </div>
                                             <div className="flex items-start gap-3">
-                                                <div className="p-2 bg-pink-50 rounded-lg text-[#EF4444]">
+                                                <div className="p-2 bg-pink-50 rounded-lg text-[#10B981]">
                                                     <CreditCard className="w-5 h-5" />
                                                 </div>
                                                 <div>
@@ -223,7 +223,7 @@ export default function ConfirmacionPedido() {
                                 <div className="space-y-3">
                                     <Button
                                         onClick={() => router.push('/dashboard')}
-                                        className="w-full bg-[#EF4444] hover:bg-[#DC2626] text-white shadow-md hover:shadow-lg transition-all h-12 text-base font-semibold"
+                                        className="w-full bg-[#10B981] hover:bg-[#059669] text-white shadow-md hover:shadow-lg transition-all h-12 text-base font-semibold"
                                     >
                                         Ir a mi Dashboard
                                     </Button>

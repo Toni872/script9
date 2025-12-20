@@ -71,11 +71,11 @@ export default function Contacto() {
                         className="mb-16"
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full mb-6 border border-white/20">
-                            <Sparkles className="h-4 w-4 text-[#EF4444]" />
+                            <Sparkles className="h-4 w-4 text-[#10B981]" />
                             <span className="text-sm font-semibold text-white">Soporte Premium 24/7</span>
                         </div>
                         <h1 className="text-[56px] md:text-[72px] font-bold mb-6 text-white tracking-tight">
-                            Hablemos de <span className="text-[#EF4444]">Futuro</span>
+                            Hablemos de <span className="text-[#10B981]">Futuro</span>
                         </h1>
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto font-light">
                             Cuéntanos qué desafío enfrenta tu negocio y diseñaremos la solución automatizada perfecta para ti.
@@ -105,7 +105,7 @@ export default function Contacto() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-[#333333] mb-1">Email</h3>
-                                        <a href="mailto:hola@script9.com" className="text-gray-600 hover:text-[#EF4444] transition-colors">
+                                        <a href="mailto:hola@script9.com" className="text-gray-600 hover:text-[#10B981] transition-colors">
                                             hola@script9.com
                                         </a>
                                     </div>
@@ -117,7 +117,7 @@ export default function Contacto() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-[#333333] mb-1">Teléfono</h3>
-                                        <a href="tel:+34900000000" className="text-gray-600 hover:text-[#EF4444] transition-colors">
+                                        <a href="tel:+34900000000" className="text-gray-600 hover:text-[#10B981] transition-colors">
                                             +34 900 000 000
                                         </a>
                                     </div>
@@ -137,7 +137,7 @@ export default function Contacto() {
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-br from-[#EF4444] to-[#DC2626] rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                        <div className="bg-gradient-to-br from-[#10B981] to-[#059669] rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
                             <div className="relative z-10">
                                 <h3 className="text-xl font-bold mb-4">
                                     ¿Empresa Enterprise?
@@ -147,7 +147,7 @@ export default function Contacto() {
                                 </p>
                                 <a
                                     href="/como-funciona"
-                                    className="inline-block px-6 py-3 bg-white text-[#EF4444] font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm"
+                                    className="inline-block px-6 py-3 bg-white text-[#10B981] font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm"
                                 >
                                     Consultar Servicios
                                 </a>
@@ -187,10 +187,10 @@ export default function Contacto() {
                                 <motion.div
                                     initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3"
+                                    className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3"
                                 >
-                                    <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
-                                    <p className="text-red-800">{error}</p>
+                                    <AlertCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
+                                    <p className="text-emerald-800">{error}</p>
                                 </motion.div>
                             )}
 

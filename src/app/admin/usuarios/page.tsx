@@ -68,7 +68,7 @@ export default function AdminUsuarios() {
 
     const getRoleBadge = (role: string) => {
         const styles = {
-            admin: 'bg-red-100 text-red-700',
+            admin: 'bg-emerald-100 text-emerald-700',
             host: 'bg-purple-100 text-purple-700',
             guest: 'bg-blue-100 text-blue-700',
         };

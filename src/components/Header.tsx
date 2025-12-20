@@ -8,6 +8,7 @@ import { Avatar } from '@/components/ui/avatar';
 import { Search, User, LogOut, Grid3x3, X, MessageCircle, Menu, Home, BookOpen, ChevronRight, BarChart3 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MessagesButton from '@/components/messaging/MessagesButton';
+import { Logo } from '@/components/ui/Logo';
 
 export default function Header() {
     const { data: session } = useSession();
@@ -56,11 +57,7 @@ export default function Header() {
                         href="/"
                         className="flex items-center gap-2 group"
                     >
-                        {/* Logo Mark */}
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#003D82] to-[#EF4444] flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-script9-glow transition-all duration-300">
-                            S9
-                        </div>
-                        <span className="text-xl font-bold text-white tracking-tight">Script9</span>
+                        <Logo variant="light" />
                     </Link>
 
                     {/* Desktop Nav */}
@@ -103,7 +100,7 @@ export default function Header() {
                                         <Avatar
                                             src={session.user?.image || undefined}
                                             fallback={session.user?.name?.[0] || 'U'}
-                                            className="h-8 w-8 border-2 border-[#EF4444]"
+                                            className="h-8 w-8 border-2 border-[#10B981]"
                                         />
                                         <div className="text-left hidden lg:block pr-2">
                                             <p className="text-sm font-medium text-white leading-none">{session.user?.name?.split(' ')[0]}</p>
@@ -128,7 +125,7 @@ export default function Header() {
                                                 <div className="border-t border-gray-50 mt-1">
                                                     <button
                                                         onClick={() => signOut({ callbackUrl: '/' })}
-                                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors bg-white hover:bg-gray-50"
+                                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors bg-white hover:bg-gray-50"
                                                     >
                                                         <LogOut className="w-4 h-4" />
                                                         Cerrar Sesión
@@ -145,7 +142,7 @@ export default function Header() {
                                     </Link>
                                     <Link
                                         href="/registro"
-                                        className="bg-[#EF4444] hover:bg-[#DC2626] text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-lg shadow-[#EF4444]/20 hover:shadow-[#EF4444]/40"
+                                        className="bg-[#10B981] hover:bg-[#059669] text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-lg shadow-[#10B981]/20 hover:shadow-[#10B981]/40"
                                     >
                                         Registrarse
                                     </Link>
@@ -227,10 +224,9 @@ export default function Header() {
                     >
                         <div className="flex items-center justify-between p-4 border-b border-gray-100">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#003D82] to-[#EF4444] flex items-center justify-center text-white font-bold text-sm shadow-md">
-                                    S9
+                                <div className="flex items-center gap-2">
+                                    <Logo variant="dark" />
                                 </div>
-                                <span className="text-xl font-bold text-[#003D82]">Script9</span>
                             </div>
                             <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-gray-500">
                                 <X className="w-6 h-6" />
@@ -273,7 +269,7 @@ export default function Header() {
                                                 setMobileMenuOpen(false);
                                                 signOut({ callbackUrl: '/' });
                                             }}
-                                            className="w-full py-2.5 px-4 bg-red-50 text-red-600 rounded-lg font-medium text-left"
+                                            className="w-full py-2.5 px-4 bg-emerald-50 text-emerald-600 rounded-lg font-medium text-left"
                                         >
                                             Cerrar Sesión
                                         </button>
@@ -290,7 +286,7 @@ export default function Header() {
                                         <Link
                                             href="/registro"
                                             onClick={() => setMobileMenuOpen(false)}
-                                            className="flex justify-center py-3 px-4 bg-[#EF4444] text-white rounded-xl font-semibold hover:bg-[#DC2626]"
+                                            className="flex justify-center py-3 px-4 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669]"
                                         >
                                             Crear Cuenta Gratis
                                         </Link>
@@ -312,7 +308,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
             className="text-sm font-medium text-blue-100 hover:text-white transition-colors relative group py-2"
         >
             {children}
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EF4444] transition-all duration-300 group-hover:w-full" />
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#10B981] transition-all duration-300 group-hover:w-full" />
         </Link>
     );
 }

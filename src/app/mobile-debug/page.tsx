@@ -43,7 +43,7 @@ export default function MobileDebug() {
                 <div className="bg-white rounded-lg p-4 mb-4 shadow">
                     <h2 className="text-lg font-semibold mb-2">Estado de Sesión</h2>
                     <div className="space-y-2 text-sm">
-                        <p><strong>Status:</strong> <span className={status === 'authenticated' ? 'text-green-600' : 'text-red-600'}>{status}</span></p>
+                        <p><strong>Status:</strong> <span className={status === 'authenticated' ? 'text-green-600' : 'text-emerald-600'}>{status}</span></p>
                         {session && (
                             <>
                                 <p><strong>Email:</strong> {session.user?.email}</p>
@@ -94,7 +94,7 @@ export default function MobileDebug() {
                     </div>
                     <button
                         onClick={() => setLogs([])}
-                        className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
+                        className="mt-2 px-4 py-2 bg-[#10B981] text-white rounded hover:bg-[#059669] text-sm"
                     >
                         Limpiar Logs
                     </button>

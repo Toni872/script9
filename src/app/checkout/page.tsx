@@ -130,7 +130,7 @@ function CheckoutContent() {
     if (loading) {
         return (
             <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <Loader2 className="w-12 h-12 text-[#EF4444] animate-spin" />
+                <Loader2 className="w-12 h-12 text-[#10B981] animate-spin" />
             </div>
         );
     }
@@ -139,12 +139,12 @@ function CheckoutContent() {
         return (
             <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
                 <div className="text-center">
-                    <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+                    <AlertCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
                     <h2 className="text-2xl font-semibold text-[#1d1d1f] mb-2">Error</h2>
                     <p className="text-[#86868b] mb-6">{error}</p>
                     <button
                         onClick={() => router.push('/catalogo')}
-                        className="px-6 py-3 bg-[#EF4444] text-white rounded-xl font-semibold hover:bg-[#DC2626] transition-colors hero-text-white"
+                        className="px-6 py-3 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669] transition-colors hero-text-white"
                     >
                         Volver al catálogo
                     </button>
@@ -230,7 +230,7 @@ function CheckoutContent() {
 
                             <div className="flex justify-between items-baseline mt-4 mb-8">
                                 <span className="text-[17px] font-semibold text-[#1d1d1f]">Total</span>
-                                <span className="text-[32px] font-bold text-[#EF4444]">
+                                <span className="text-[32px] font-bold text-[#10B981]">
                                     €{totalPrice.toFixed(2)}
                                 </span>
                             </div>
@@ -238,7 +238,7 @@ function CheckoutContent() {
                             <button
                                 onClick={handleCheckout}
                                 disabled={processing}
-                                className="w-full px-6 py-4 bg-[#EF4444] text-white text-[17px] font-semibold rounded-xl hover:bg-[#DC2626] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 hero-text-white"
+                                className="w-full px-6 py-4 bg-[#10B981] text-white text-[17px] font-semibold rounded-xl hover:bg-[#059669] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 hero-text-white"
                             >
                                 {processing ? (
                                     <>
@@ -268,7 +268,7 @@ export default function CheckoutPage() {
     return (
         <Suspense fallback={
             <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <Loader2 className="w-12 h-12 text-[#EF4444] animate-spin" />
+                <Loader2 className="w-12 h-12 text-[#10B981] animate-spin" />
             </div>
         }>
             <CheckoutContent />

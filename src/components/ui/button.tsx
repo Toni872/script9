@@ -12,9 +12,9 @@ const buttonVariants = cva(
         default:
           "bg-[#003D82] text-white shadow-md hover:bg-[#002E5C] hover:shadow-lg active:scale-95",
         destructive:
-          "bg-red-500 text-white shadow-sm hover:bg-red-600",
+          "bg-emerald-500 text-white shadow-sm hover:bg-emerald-600",
         outline:
-          "border-2 border-[#EF4444] bg-transparent text-[#EF4444] hover:bg-[#EF4444] hover:text-white transition-colors active:scale-95",
+          "border-2 border-[#10B981] bg-transparent text-[#10B981] hover:bg-[#10B981] hover:text-white transition-colors active:scale-95",
         secondary:
           "bg-white text-[#003D82] border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-[#003D82]/30",
         ghost:
@@ -22,9 +22,9 @@ const buttonVariants = cva(
         link:
           "text-[#003D82] underline-offset-4 hover:underline",
         premium:
-          "bg-gradient-to-r from-[#003D82] to-[#EF4444] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 animate-gradient-x border-0",
+          "bg-gradient-to-r from-[#003D82] to-[#10B981] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 animate-gradient-x border-0",
         cta:
-          "bg-[#EF4444] text-white shadow-lg hover:bg-[#DC2626] hover:shadow-[#EF4444]/30 hover:-translate-y-1 active:translate-y-0 active:scale-95 duration-200",
+          "bg-[#10B981] text-white shadow-lg hover:bg-[#059669] hover:shadow-[#10B981]/30 hover:-translate-y-1 active:translate-y-0 active:scale-95 duration-200",
       },
       size: {
         default: "h-10 px-6 py-2.5",

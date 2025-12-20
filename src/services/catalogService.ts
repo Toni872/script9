@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from '@/lib/supabase';
-import { Service } from '../types';
+import { Service, DatabaseProperty } from '../types';
 import { NotFoundError, DatabaseError } from '@/utils/errors';
 import { calculatePagination, createPaginatedResponse, PaginatedResponse } from '@/utils/pagination';
 
@@ -34,7 +34,10 @@ export class CatalogService {
     /**
      * Crear un nuevo servicio
      */
-    static async createService(data: any): Promise<Service> {
+    /**
+     * Crear un nuevo servicio
+     */
+    static async createService(data: CreatePropertyData): Promise<Service> {
         // Implementation pending full backend refactor, keep placeholder
         // Mapping creation to 'properties' table
         const { data: service, error } = await supabase
@@ -42,31 +45,46 @@ export class CatalogService {
             .insert({
                 title: data.title,
                 description: data.description,
-                price_per_hour: data.price, // Store fixed price in price_per_hour column
-                max_guests: data.capacity,  // Store capacity in max_guests
-                host_id: data.provider_id,
+                price_per_hour: data.price_per_hour, // Store fixed price in price_per_hour column
+                max_guests: data.max_guests,  // Store capacity in max_guests
+                host_id: data.host_id,
+                // Add other mapped fields if necessary
             })
             .select()
             .single();
 
         if (error) throw new DatabaseError(`Error al crear el servicio: ${error.message}`);
-        return this.mapToService(service);
+        return this.mapToService(service as unknown as DatabaseProperty);
     }
 
     /**
      * Helper to map DB Property to Service
      */
-    private static mapToService(dbRecord: any): Service {
+    private static mapToService(dbRecord: DatabaseProperty): Service {
         return {
-            ...dbRecord,
+            id: dbRecord.id,
+            title: dbRecord.title,
+            description: dbRecord.description,
             price: dbRecord.price_per_hour, // Map DB column to 'price'
             unit: 'project', // Fixed unit
             category: dbRecord.property_type || 'General',
             provider_id: dbRecord.host_id,
-            image_urls: dbRecord.images || [], // Access images directly if generic json/array
-            features: dbRecord.property_features?.map((f: any) => ({ name: f.feature })) || [],
-            // Legacy fields for compat
+            host_id: dbRecord.host_id, // Compatibility
+            image_urls: dbRecord.images || dbRecord.property_images?.map(img => img.image_url) || [],
+            features: dbRecord.property_features?.map((f) => ({ id: f.feature, name: f.feature })) || [],
+
+            // Legacy/Compat fields
             price_per_hour: dbRecord.price_per_hour,
+            location: dbRecord.address,
+            city: dbRecord.city,
+            region: dbRecord.region,
+            latitude: dbRecord.latitude,
+            longitude: dbRecord.longitude,
+            rating: dbRecord.average_rating || 0,
+            review_count: dbRecord.review_count || 0,
+            created_at: dbRecord.created_at,
+            updated_at: dbRecord.updated_at,
+            is_script9_select: dbRecord.is_script9_select,
         } as Service;
     }
 
@@ -102,7 +120,7 @@ export class CatalogService {
             throw new DatabaseError(`Error al obtener el servicio: ${error.message}`);
         }
 
-        return this.mapToService(record);
+        return this.mapToService(record as unknown as DatabaseProperty);
     }
 
     /**

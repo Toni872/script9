@@ -44,18 +44,18 @@ export default function MessagesButton() {
             title="Mensajes"
             aria-label="Mensajes"
         >
-            <MessageCircle className="h-[18px] w-[18px] text-[#1d1d1f] transition-all duration-200 group-hover:text-[#8B5CF6] group-hover:scale-105" strokeWidth={1.5} />
+            <MessageCircle className="h-[18px] w-[18px] text-[#1d1d1f] transition-all duration-200 group-hover:text-[#10B981] group-hover:scale-105" strokeWidth={1.5} />
 
             {/* Badge de notificación */}
             {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-red-500 text-white text-[10px] font-bold rounded-full animate-pulse">
+                <span className="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-emerald-500 text-white text-[10px] font-bold rounded-full animate-pulse">
                     {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
             )}
 
             {/* Indicador de carga */}
             {loading && unreadCount === 0 && (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-2 h-2 bg-[#8B5CF6] rounded-full animate-pulse" />
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-2 h-2 bg-[#10B981] rounded-full animate-pulse" />
             )}
         </Link>
     );

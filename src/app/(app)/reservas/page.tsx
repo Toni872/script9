@@ -114,7 +114,7 @@ export default function MisReservas() {
             pending: 'bg-yellow-100 text-yellow-700',
             confirmed: 'bg-green-100 text-green-700',
             completed: 'bg-blue-100 text-blue-700',
-            cancelled: 'bg-red-100 text-red-700',
+            cancelled: 'bg-emerald-100 text-emerald-700',
         };
 
         const labels = {
@@ -154,7 +154,7 @@ export default function MisReservas() {
     if (loading) {
         return (
             <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <Loader2 className="w-12 h-12 animate-spin text-[#8B5CF6]" />
+                <Loader2 className="w-12 h-12 animate-spin text-[#10B981]" />
             </div>
         );
     }
@@ -188,7 +188,7 @@ export default function MisReservas() {
                     <button
                         onClick={() => setStatusFilter('all')}
                         className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${statusFilter === 'all'
-                            ? 'bg-[#8B5CF6] text-white'
+                            ? 'bg-[#10B981] text-white'
                             : 'bg-white text-[#1d1d1f] hover:bg-gray-50'
                             }`}
                     >
@@ -197,7 +197,7 @@ export default function MisReservas() {
                     <button
                         onClick={() => setStatusFilter('confirmed')}
                         className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${statusFilter === 'confirmed'
-                            ? 'bg-[#8B5CF6] text-white'
+                            ? 'bg-[#10B981] text-white'
                             : 'bg-white text-[#1d1d1f] hover:bg-gray-50'
                             }`}
                     >
@@ -206,7 +206,7 @@ export default function MisReservas() {
                     <button
                         onClick={() => setStatusFilter('completed')}
                         className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${statusFilter === 'completed'
-                            ? 'bg-[#8B5CF6] text-white'
+                            ? 'bg-[#10B981] text-white'
                             : 'bg-white text-[#1d1d1f] hover:bg-gray-50'
                             }`}
                     >
@@ -215,7 +215,7 @@ export default function MisReservas() {
                     <button
                         onClick={() => setStatusFilter('cancelled')}
                         className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${statusFilter === 'cancelled'
-                            ? 'bg-[#8B5CF6] text-white'
+                            ? 'bg-[#10B981] text-white'
                             : 'bg-white text-[#1d1d1f] hover:bg-gray-50'
                             }`}
                     >
@@ -241,7 +241,7 @@ export default function MisReservas() {
                         </p>
                         <button
                             onClick={() => router.push('/catalogo')}
-                            className="px-6 py-3 bg-[#8B5CF6] text-white rounded-xl font-semibold hover:bg-[#7c3aed] transition-colors"
+                            className="px-6 py-3 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669] transition-colors"
                             style={{ color: 'white' }} /* Forzar color blanco para botones premium */
                         >
                             Explorar Espacios
@@ -324,7 +324,7 @@ export default function MisReservas() {
                                                 {canLeaveReview(booking) && (
                                                     <button
                                                         onClick={() => openReviewModal(booking)}
-                                                        className="flex items-center gap-2 px-4 py-2 bg-[#8B5CF6] text-white rounded-xl font-medium hover:bg-[#7c3aed] transition-colors"
+                                                        className="flex items-center gap-2 px-4 py-2 bg-[#10B981] text-white rounded-xl font-medium hover:bg-[#059669] transition-colors"
                                                         style={{ color: 'white' }} /* Forzar color blanco */
                                                     >
                                                         <Star className="w-4 h-4" />
@@ -344,7 +344,7 @@ export default function MisReservas() {
                                                 {booking.status === 'confirmed' && (
                                                     <button
                                                         onClick={() => handleCancelBooking(booking.id)}
-                                                        className="flex items-center gap-2 px-4 py-2 border border-red-300 text-red-600 rounded-xl font-medium hover:bg-red-50 transition-colors"
+                                                        className="flex items-center gap-2 px-4 py-2 border border-emerald-300 text-emerald-600 rounded-xl font-medium hover:bg-emerald-50 transition-colors"
                                                     >
                                                         <X className="w-4 h-4" />
                                                         Cancelar

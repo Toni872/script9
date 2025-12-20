@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowUpRight, DollarSign, Package, Zap, Lock, TrendingUp } from 'lucide-react';
+import { ArrowUpRight, DollarSign, Package, Zap, Lock, TrendingUp, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -80,11 +80,14 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
                 <Card className="border-[#003D82] border-l-4 shadow-sm bg-white">
                     <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-4">
                         <div>
-                            <h3 className="text-lg font-bold text-[#333333] mb-1">🚀 Impulsa tu negocio hoy</h3>
+                            <h3 className="text-lg font-bold text-[#333333] mb-1 flex items-center gap-2">
+                                <Rocket className="w-5 h-5 text-[#10B981]" />
+                                Impulsa tu negocio hoy
+                            </h3>
                             <p className="text-gray-600 text-sm">Empieza tu primer proyecto de automatización desde 150€. Sin compromisos.</p>
                         </div>
                         <Link href="/nuevo-proyecto">
-                            <Button className="mt-4 bg-[#EF4444] text-white hover:bg-[#DC2626] shadow-lg shadow-blue-900/20 whitespace-nowrap">
+                            <Button className="mt-4 bg-[#10B981] text-white hover:bg-[#059669] shadow-lg shadow-green-900/20 whitespace-nowrap">
                                 <Zap className="w-4 h-4 mr-2" /> Empezar Ahora
                             </Button>
                         </Link>

@@ -20,7 +20,7 @@ interface ServiceQuickViewProps {
 
 // Mapeo de tipos de servicio a iconos y etiquetas
 const serviceTypeConfig: Record<string, { icon: typeof Zap; label: string; color: string }> = {
-    automatizacion: { icon: Zap, label: 'Automatización', color: 'bg-purple-100 text-purple-700' },
+    automatizacion: { icon: Zap, label: 'Automatización', color: 'bg-emerald-100 text-emerald-700' },
     ia_chatbot: { icon: Bot, label: 'IA & Chatbot', color: 'bg-blue-100 text-blue-700' },
     workflow: { icon: Settings, label: 'Workflow', color: 'bg-green-100 text-green-700' },
     script: { icon: Code, label: 'Script', color: 'bg-orange-100 text-orange-700' },
@@ -66,8 +66,8 @@ export default function ServiceQuickView({ service, isOpen, onClose }: ServiceQu
         const capacity = service.capacity || service.max_guests || 10;
         if (capacity <= 10) return { label: 'Básico', color: 'bg-gray-100 text-gray-700' };
         if (capacity <= 25) return { label: 'Standard', color: 'bg-blue-100 text-blue-700' };
-        if (capacity <= 50) return { label: 'Profesional', color: 'bg-purple-100 text-purple-700' };
-        return { label: 'Enterprise', color: 'bg-gradient-to-r from-purple-600 to-blue-600 text-white' };
+        if (capacity <= 50) return { label: 'Profesional', color: 'bg-emerald-100 text-emerald-700' };
+        return { label: 'Enterprise', color: 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white' };
     };
 
     const level = getServiceLevel();

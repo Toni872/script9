@@ -96,7 +96,7 @@ export class ReviewService {
       throw new DatabaseError(`Error al crear review: ${error.message}`);
     }
 
-    return review as Review;
+    return review as unknown as Review;
   }
 
   /**
@@ -207,7 +207,7 @@ export class ReviewService {
       throw new DatabaseError(`Error al actualizar review: ${error.message}`);
     }
 
-    return review as Review;
+    return review as unknown as Review;
   }
 
   /**

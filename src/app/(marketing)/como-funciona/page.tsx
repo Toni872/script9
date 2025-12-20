@@ -80,7 +80,7 @@ export default function ComoFunciona() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-6"
           >
-            <Sparkles className="h-4 w-4 text-[#EF4444]" />
+            <Sparkles className="h-4 w-4 text-[#10B981]" />
             <span className="text-sm font-semibold">Transformación Digital Real</span>
           </motion.div>
 
@@ -142,7 +142,7 @@ export default function ComoFunciona() {
                 <ul className="space-y-3">
                   {service.features.map((feature, i) => (
                     <li key={i} className="text-[14px] text-gray-600 flex items-center gap-2 font-medium">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                       {feature}
                     </li>
                   ))}
@@ -163,9 +163,9 @@ export default function ComoFunciona() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#EF4444]/10 rounded-full mb-4">
-              <Rocket className="h-4 w-4 text-[#EF4444]" />
-              <span className="text-sm font-semibold text-[#EF4444]">Proceso de Trabajo</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#10B981]/10 rounded-full mb-4">
+              <Rocket className="h-4 w-4 text-[#10B981]" />
+              <span className="text-sm font-semibold text-[#10B981]">Proceso de Trabajo</span>
             </div>
             <h2 className="text-[40px] md:text-[48px] font-bold text-[#333333] leading-[1.1] tracking-tight">
               Cómo trabajamos contigo
@@ -277,7 +277,7 @@ export default function ComoFunciona() {
               <button
                 type="button"
                 onClick={() => router.push('/catalogo')}
-                className="group relative px-10 py-4 bg-[#EF4444] text-white rounded-xl transition-all duration-300 hover:bg-[#DC2626] hover:shadow-lg hover:-translate-y-1 active:scale-[0.98] font-bold text-[17px] shadow-md"
+                className="group relative px-10 py-4 bg-[#10B981] text-white rounded-xl transition-all duration-300 hover:bg-[#059669] hover:shadow-lg hover:-translate-y-1 active:scale-[0.98] font-bold text-[17px] shadow-md"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Explorar Catálogo

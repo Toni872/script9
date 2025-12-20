@@ -267,7 +267,7 @@ export default function CreatorDashboard() {
                                         Mis Servicios Activos
                                     </h2>
                                     <Link href="/anfitrion/propiedades/nueva">
-                                        <Button className="bg-[#EF4444] text-white hover:bg-[#DC2626]">
+                                        <Button className="bg-[#10B981] text-white hover:bg-[#059669]">
                                             <Plus className="h-5 w-5 mr-2" />
                                             Nuevo Servicio
                                         </Button>
@@ -335,7 +335,7 @@ export default function CreatorDashboard() {
                                                     <Button
                                                         variant="outline"
                                                         size="sm"
-                                                        className="border-[#EF4444] text-[#EF4444] hover:bg-[#EF4444]/5 hover:text-[#DC2626]"
+                                                        className="border-[#10B981] text-[#10B981] hover:bg-[#10B981]/5 hover:text-[#059669]"
                                                         onClick={() => handlePromote(service.id)}
                                                     >
                                                         <Sparkles className="h-4 w-4 mr-1" />

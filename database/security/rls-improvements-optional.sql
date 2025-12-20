@@ -1,5 +1,5 @@
 -- ============================================================================
--- MEJORAS OPCIONALES DE RLS - VILOK
+-- MEJORAS OPCIONALES DE RLS - SCRIPT9
 -- Mejoras menores de seguridad (NO críticas, pueden aplicarse cuando convenga)
 -- ============================================================================
 

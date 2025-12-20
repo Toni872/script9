@@ -83,7 +83,7 @@ export default function Login() {
                         transition={{ duration: 0.8, delay: 0.1 }}
                     >
                         <Link href="/" className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#003D82] to-[#EF4444] flex items-center justify-center text-white font-bold text-xl shadow-xl">
+                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#003D82] to-[#10B981] flex items-center justify-center text-white font-bold text-xl shadow-xl">
                                 S9
                             </div>
                             <span className="text-white text-[32px] font-bold tracking-tight">Script9</span>
@@ -98,7 +98,7 @@ export default function Login() {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="text-[56px] md:text-[64px] font-semibold !text-white mb-8 leading-[1.05] tracking-tight"
                         >
-                            Tu automatización ideal<br />te está <span className="!text-[#EF4444]">esperando</span>
+                            Tu automatización ideal<br />te está <span className="!text-[#10B981]">esperando</span>
                         </motion.h2>
 
                         <motion.p
@@ -155,7 +155,7 @@ export default function Login() {
                     {/* Mobile Logo */}
                     <div className="lg:hidden text-center mb-8 sm:mb-12">
                         <Link href="/" className="inline-flex items-center gap-2">
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#003D82] to-[#EF4444] flex items-center justify-center text-white font-bold text-lg shadow-md">
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#003D82] to-[#10B981] flex items-center justify-center text-white font-bold text-lg shadow-md">
                                 S9
                             </div>
                             <span className="text-[#1d1d1f] text-[28px] sm:text-[32px] font-bold">Script9</span>
@@ -171,8 +171,8 @@ export default function Login() {
                         </p>
 
                         {error && (
-                            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-                                <p className="text-red-800 text-[15px] font-medium">{error}</p>
+                            <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+                                <p className="text-emerald-800 text-[15px] font-medium">{error}</p>
                             </div>
                         )}
 
@@ -190,7 +190,7 @@ export default function Login() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         placeholder="tu@email.com"
-                                        className="w-full pl-12 pr-4 py-4 sm:py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-transparent text-[16px]"
+                                        className="w-full pl-12 pr-4 py-4 sm:py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent text-[16px]"
                                         required
                                     />
                                 </div>
@@ -209,7 +209,7 @@ export default function Login() {
                                         value={formData.password}
                                         onChange={handleChange}
                                         placeholder="••••••••"
-                                        className="w-full pl-12 pr-12 py-4 sm:py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-transparent text-[16px]"
+                                        className="w-full pl-12 pr-12 py-4 sm:py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent text-[16px]"
                                         required
                                     />
                                     <button
@@ -234,13 +234,13 @@ export default function Login() {
                                         type="checkbox"
                                         checked={rememberMe}
                                         onChange={(e) => setRememberMe(e.target.checked)}
-                                        className="w-4 h-4 text-[#EF4444] border-gray-300 rounded focus:ring-[#EF4444]"
+                                        className="w-4 h-4 text-[#10B981] border-gray-300 rounded focus:ring-[#10B981]"
                                     />
                                     <span className="text-[15px] text-[#1d1d1f]">Recordarme</span>
                                 </label>
                                 <Link
                                     href="/forgot-password"
-                                    className="text-[15px] text-[#EF4444] hover:text-[#DC2626] font-medium"
+                                    className="text-[15px] text-[#10B981] hover:text-[#059669] font-medium"
                                 >
                                     ¿Olvidaste tu contraseña?
                                 </Link>
@@ -250,7 +250,7 @@ export default function Login() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-4 sm:py-3.5 bg-[#EF4444] text-white text-[16px] font-semibold rounded-xl hover:bg-[#DC2626] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 hero-text-white"
+                                className="w-full py-4 sm:py-3.5 bg-[#10B981] text-white text-[16px] font-semibold rounded-xl hover:bg-[#059669] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 hero-text-white"
                             >
                                 {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                             </button>
@@ -316,7 +316,7 @@ export default function Login() {
                         {/* Register Link */}
                         <p className="text-center text-[15px] text-[#86868b] mt-8">
                             ¿No tienes una cuenta?{' '}
-                            <Link href="/registro" className="text-[#EF4444] hover:text-[#DC2626] font-semibold">
+                            <Link href="/registro" className="text-[#10B981] hover:text-[#059669] font-semibold">
                                 Regístrate gratis
                             </Link>
                         </p>

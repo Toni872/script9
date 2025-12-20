@@ -106,7 +106,7 @@ export default function BookingModal({ isOpen, onClose, service }: BookingModalP
 
                     {/* Error Message */}
                     {error && (
-                        <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700">
+                        <div className="flex items-center gap-2 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700">
                             <AlertCircle className="h-5 w-5 flex-shrink-0" />
                             <p className="text-sm">{error}</p>
                         </div>

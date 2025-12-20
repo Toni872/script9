@@ -106,7 +106,7 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
                 {hasActiveFilters && (
                     <button
                         onClick={handleClear}
-                        className="text-xs font-semibold text-[#EF4444] hover:text-[#DC2626] uppercase tracking-wide transition-colors"
+                        className="text-xs font-semibold text-[#10B981] hover:text-[#059669] uppercase tracking-wide transition-colors"
                     >
                         Limpiar todo
                     </button>
@@ -122,7 +122,7 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
                             key={option.value}
                             onClick={() => handlePropertyTypeToggle(option.value)}
                             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${localFilters.propertyTypes?.includes(option.value)
-                                ? 'bg-[#EF4444]/10 text-[#EF4444] border-[#EF4444]'
+                                ? 'bg-[#10B981]/10 text-[#10B981] border-[#10B981]'
                                 : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
                                 }`}
                         >
