@@ -1,4 +1,5 @@
 
+import Image from 'next/image';
 
 interface LogoProps {
     variant?: 'light' | 'dark';
@@ -6,11 +7,19 @@ interface LogoProps {
 }
 
 export function Logo({ variant = 'light', className = '' }: LogoProps) {
-    const textColor = variant === 'light' ? 'text-white' : 'text-[#003D82]';
+    // Determine blend mode based on variant to handle background accordingly
+    // Screen mode works best to remove black background on dark surfaces
+    const blendMode = 'mix-blend-screen';
 
     return (
-        <div className={`font-bold text-2xl tracking-tighter ${textColor} ${className}`}>
-            Script9
+        <div className={`relative h-16 w-52 ${blendMode} ${className}`}>
+            <Image
+                src="/logo.png"
+                alt="Script9"
+                fill
+                className="object-contain"
+                priority
+            />
         </div>
     );
 }
