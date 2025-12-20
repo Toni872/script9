@@ -48,7 +48,7 @@ export default function Home() {
               Agencia de Automatización & IA
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold text-white tracking-tight mb-6 leading-[1.1]">
+            <h1 className="text-4xl lg:text-7xl font-bold text-white tracking-tight mb-6 leading-[1.1]">
               Automatización Inteligente y <span className="animate-text-gradient">Soluciones</span> de <span className="animate-text-gradient">IA</span> para Empresas
             </h1>
 
@@ -79,7 +79,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex items-center justify-center lg:h-[600px] w-full"
+            className="relative flex items-center justify-center lg:h-[600px] w-full scale-[0.55] sm:scale-75 md:scale-90 lg:scale-100"
           >
             <HeroAdvancedVisual />
           </motion.div>

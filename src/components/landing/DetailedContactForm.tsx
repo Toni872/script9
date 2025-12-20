@@ -58,7 +58,7 @@ export function DetailedContactForm() {
                     {/* Left Column: Premium Value Prop */}
                     <div className="space-y-8 text-white">
                         <div>
-                            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Empieza a Automatizar Hoy</h2>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-tight">Empieza a Automatizar Hoy</h2>
                             <p className="text-xl text-blue-100 leading-relaxed font-light">
                                 Completa el formulario y te responderemos en menos de 24 horas. Sin compromiso.
                             </p>
