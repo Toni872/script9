@@ -7,7 +7,6 @@ import { ArrowRight, Bot, Zap, Terminal, Code2 } from "lucide-react";
 import SearchBar, { SearchParams } from "@/components/SearchBar";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ServicePillars } from "@/components/landing/ServicePillars";
-import { ProcessSteps } from "@/components/landing/ProcessSteps";
 import { IndustryCases } from "@/components/landing/IndustryCases";
 import { DetailedContactForm } from "@/components/landing/DetailedContactForm";
 import { ProblemSolution } from "@/components/landing/ProblemSolution";
@@ -49,12 +48,13 @@ export default function LandingClient() {
                         </div>
 
                         <h1 className="text-4xl lg:text-7xl font-bold text-white tracking-tight mb-6 leading-[1.1]">
-                            Automatización Inteligente y <span className="animate-text-gradient">Soluciones</span> de <span className="animate-text-gradient">IA</span> para Empresas
+                            Escala tu Negocio <br className="hidden lg:block" />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">sin contratar</span> más personal.
                         </h1>
 
                         <p className="text-xl text-blue-100 mb-10 max-w-2xl leading-relaxed font-light">
-                            Desarrollamos soluciones a medida para eliminar tareas manuales y optimizar tu negocio.
-                            Desde chatbots 24/7 hasta integraciones de sistemas complejas.
+                            Delegamos tu trabajo manual a scripts de Inteligencia Artificial. <br className="hidden lg:block" />
+                            Recupera 20+ horas semanales y céntrate en lo que importa: <strong>Vender.</strong>
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -95,8 +95,7 @@ export default function LandingClient() {
             {/* SERVICE PILLARS (NEW) */}
             <ServicePillars />
 
-            {/* PROCESS (NEW) */}
-            <ProcessSteps />
+
 
             {/* INDUSTRY CASES (NEW) */}
             <IndustryCases />
