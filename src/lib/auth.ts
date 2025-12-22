@@ -217,7 +217,7 @@ export const authOptions: NextAuthOptions = {
                 token.sub = user.id || token.sub;
                 token.email = user.email || token.email;
                 token.name = user.name || token.name;
-                token.role = "guest"; // Rol por defecto
+                token.role = user.role || "guest"; // ✅ CORRECCIÓN: Usar el rol real del usuario
             }
 
             console.log('🟢 [MOBILE AUTH] ✅ Token JWT final:', {

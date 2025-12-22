@@ -13,27 +13,27 @@ export default function ComoFunciona() {
   const faqs = [
     {
       question: '¿Qué es Script9?',
-      answer: 'Script9 es una plataforma de servicios de automatización, inteligencia artificial, workflows y scripts a medida para negocios digitales. Te ayudamos a optimizar procesos, ahorrar tiempo y escalar tu negocio.',
+      answer: 'Script9 es una plataforma de soluciones avanzadas en automatización e inteligencia artificial, orientada a la optimización de procesos y al desarrollo de workflows y scripts personalizados para negocios tanto físicos como digitales. Nuestro objetivo es impulsar su crecimiento, mejorando la eficiencia operativa y facilitando la escalabilidad de sus operaciones.',
     },
     {
       question: '¿Qué tipo de automatizaciones ofrecen?',
-      answer: 'Ofrecemos automatizaciones de todo tipo: gestión de emails, procesamiento de datos, integraciones entre plataformas, chatbots con IA, workflows de ventas, automatización de marketing, y mucho más.',
+      answer: 'Desarrollamos automatizaciones a medida para optimizar procesos clave del negocio, abarcando desde la gestión de comunicaciones y datos hasta integraciones entre sistemas, chatbots con inteligencia artificial, workflows comerciales y estrategias de automatización de marketing, entre otras soluciones avanzadas.',
     },
     {
       question: '¿Cómo funciona el proceso de contratación?',
-      answer: 'Es muy sencillo: 1) Seleccionas el servicio en nuestro catálogo, 2) Realizas el pago seguro vía Stripe, 3) Un experto se pone en contacto contigo para la implementación inmediata.',
+      answer: 'Nuestro proceso de contratación es ágil y transparente. Primero, eliges el servicio desde nuestro catálogo. A continuación, completas el pago mediante Stripe, nuestra plataforma de pago seguro. Finalmente, recibirás las instrucciones para la implementación y, en caso de que tengas cualquier duda o necesites asistencia, uno de nuestros expertos se comunicará contigo para ayudarte y garantizar una correcta implementación.',
     },
     {
       question: '¿Cuánto cuesta un proyecto de automatización?',
-      answer: 'Nuestros precios son transparentes y por proyecto. Puedes ver el coste exacto en cada ficha de servicio. Sin costes ocultos ni suscripciones mensuales obligatorias.',
+      answer: 'El coste de los proyectos de automatización se define de forma transparente y se ajusta a las necesidades y al alcance específico de cada caso. El presupuesto se establece previamente, garantizando claridad desde el inicio, sin costes ocultos ni compromisos de suscripción recurrentes.',
     },
     {
       question: '¿Qué herramientas utilizan?',
-      answer: 'Trabajamos con las mejores herramientas del mercado: Python, Node.js, APIs REST, Make (Integromat), Zapier, n8n, OpenAI, y muchas más. Elegimos la mejor tecnología para cada proyecto.',
+      answer: 'Trabajamos con tecnologías y plataformas líderes del mercado, como Python, Node.js, APIs REST, Make (Integromat), Zapier, n8n y soluciones de inteligencia artificial como OpenAI, Perplexity, entre otras. Seleccionamos la tecnología más adecuada en función de los requisitos y objetivos de cada proyecto.',
     },
     {
       question: '¿Ofrecen soporte después de la implementación?',
-      answer: 'Sí, todos nuestros servicios incluyen un periodo de garantía y soporte post-implementación para asegurar que todo funcione correctamente.',
+      answer: 'Sí, todos nuestros servicios contemplan un período de garantía y soporte post-implementación, diseñado para garantizar el óptimo funcionamiento de las soluciones implementadas y proporcionar asistencia técnica especializada cuando sea requerida.',
     },
   ];
 
@@ -188,9 +188,7 @@ export default function ComoFunciona() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                  <span className="text-6xl font-black text-[#003D82]">{index + 1}</span>
-                </div>
+
                 <div className="w-12 h-12 rounded-xl bg-[#003D82] text-white flex items-center justify-center font-bold text-[18px] mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
                   {index + 1}
                 </div>

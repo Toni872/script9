@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { Avatar } from '@/components/ui/avatar';
-import { Search, User, LogOut, Grid3x3, X, MessageCircle, Menu, Home, BookOpen, ChevronRight, BarChart3 } from 'lucide-react';
+import { Search, User, LogOut, Grid3x3, X, MessageCircle, Menu, Home, BookOpen, ChevronRight, BarChart3, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MessagesButton from '@/components/messaging/MessagesButton';
 import { Logo } from '@/components/ui/Logo';
@@ -121,6 +121,9 @@ export default function Header() {
                                                 <MenuLink href="/mensajes" icon={MessageCircle}>Mensajes</MenuLink>
                                                 {(isHost || isAdmin) && (
                                                     <MenuLink href="/host/properties" icon={Grid3x3}>Panel Vendedor</MenuLink>
+                                                )}
+                                                {isAdmin && (
+                                                    <MenuLink href="/admin" icon={Shield}>Panel Admin</MenuLink>
                                                 )}
                                                 <div className="border-t border-gray-50 mt-1">
                                                     <button
@@ -257,6 +260,15 @@ export default function Header() {
                                         >
                                             Panel de Control
                                         </Link>
+                                        {isAdmin && (
+                                            <Link
+                                                href="/admin"
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="block w-full py-2.5 px-4 bg-purple-50 text-purple-700 rounded-lg font-medium mb-2"
+                                            >
+                                                Panel Admin
+                                            </Link>
+                                        )}
                                         <Link
                                             href="/perfil"
                                             onClick={() => setMobileMenuOpen(false)}

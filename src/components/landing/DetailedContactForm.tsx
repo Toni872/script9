@@ -81,7 +81,7 @@ export function DetailedContactForm() {
 
                         <div className="bg-[#002E5C]/60 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all">
                             <h3 className="text-xl font-bold mb-2">¿Prefieres hablar directamente?</h3>
-                            <p className="text-blue-200/80 mb-6">Agenda una videollamada de 15 min con un experto.</p>
+                            <p className="text-blue-200/80 mb-6">Agenda una videollamada de 45 min con un experto.</p>
                             <Button
                                 variant="secondary"
                                 className="w-full bg-white text-[#003D82] hover:bg-blue-50 font-bold h-12 shadow-lg hover:shadow-xl transition-all"
