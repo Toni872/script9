@@ -2,19 +2,22 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2, Building2, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 export default function Contacto() {
+    const searchParams = useSearchParams();
     const [formData, setFormData] = useState({
         nombre: '',
         email: '',
         telefono: '',
         empresa: '',
-        asunto: '',
-        mensaje: '',
+        // Pre-fill subject if provided in URL (e.g. from "Request Audit" button)
+        asunto: searchParams.get('subject') || '',
+        mensaje: '', // Could also pre-fill message if needed
     });
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);

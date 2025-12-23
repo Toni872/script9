@@ -301,6 +301,29 @@ export default function Catalogo() {
                                             onFavoriteToggle={handleFavoriteToggle}
                                         />
                                     ))}
+
+                                    {/* Custom Solution Card / Banner */}
+                                    <div className={`
+                                        rounded-xl border-2 border-dashed border-[#003D82]/20 bg-[#F0F9FF] 
+                                        flex flex-col items-center justify-center text-center p-8 
+                                        hover:border-[#003D82]/40 transition-colors group cursor-pointer
+                                        ${viewMode === 'grid' ? 'min-h-[400px]' : 'min-h-[200px]'}
+                                    `}
+                                        onClick={() => window.location.href = '/contacto?subject=Solicitud%20Personalizada'}
+                                    >
+                                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                                            <Sparkles className="w-8 h-8 text-[#003D82]" />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-[#003D82] mb-2">
+                                            ¿No encuentras lo que buscas?
+                                        </h3>
+                                        <p className="text-[#666666] mb-6 max-w-xs">
+                                            Diseñamos soluciones de automatización 100% a medida para tu negocio.
+                                        </p>
+                                        <span className="px-6 py-2 bg-[#003D82] text-white rounded-lg font-semibold group-hover:bg-[#002E5C] transition-colors">
+                                            Consultar Proyecto
+                                        </span>
+                                    </div>
                                 </div>
 
                                 {/* Pagination */}
