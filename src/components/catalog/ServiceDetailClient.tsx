@@ -103,11 +103,9 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
     };
 
     const handleReservation = () => {
-        if (!session) {
-            router.push('/login');
-            return;
-        }
-        router.push(`/checkout?propertyId=${propertyId}`);
+        // Pivot to High-Touch: Redirect to Contact instead of Checkout
+        const subject = encodeURIComponent(`Solicitud de Auditoría: ${property?.title}`);
+        router.push(`/contacto?subject=${subject}`);
     };
 
     const nextImage = () => {
@@ -402,7 +400,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 onClick={handleReservation}
                                 className="w-full px-6 py-4 bg-[#10B981] text-white rounded-xl font-semibold text-lg hover:bg-[#059669] transition-colors shadow-lg hover:shadow-xl hero-text-white"
                             >
-                                Contratar Servicio
+                                Solicitar Auditoría
                             </button>
 
                             <p className="text-center text-sm text-[#86868b] mt-4">

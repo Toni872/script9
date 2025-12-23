@@ -4,6 +4,7 @@ import { stripe } from '@/lib/stripe';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { createServerSupabaseClient } from '@/lib/supabase';
+import { getMockPropertyById } from '@/lib/mockData';
 
 export async function POST(request: NextRequest) {
     try {
@@ -102,13 +103,29 @@ export async function POST(request: NextRequest) {
         const { data: serviceData, error: serviceError } = await supabase
             .from('properties')
             .select('id, title, price_per_hour, host_id')
-            .eq('id', id)
             .single();
 
-        const service = serviceData as any;
+        let service = serviceData as any;
 
         if (serviceError || !service) {
-            return NextResponse.json({ error: 'Servicio no encontrado' }, { status: 404 });
+            console.warn('⚠️ Supabase fetch failed/empty. Trying Mock Data fallback for ID:', id);
+
+            // FALLBACK TO MOCK DATA (Crucial for Demo/Catalog items that are not in DB yet)
+            const mockService = getMockPropertyById(id);
+            if (mockService) {
+                console.log('✅ Found in Mock Data:', mockService.title);
+                // Adapt Mock Data to Expected Service Shape
+                // Note: Mock data uses 'price' or 'price_per_hour' depending on version. We standardize here.
+                service = {
+                    id: mockService.id,
+                    title: mockService.title,
+                    price_per_hour: mockService.price_per_hour || mockService.price || 99, // Fallback price
+                    host_id: 'platform' // Mock items belong to platform
+                };
+            } else {
+                console.error('❌ Error fetching service/property (DB & Mock):', { id, serviceError });
+                return NextResponse.json({ error: 'Servicio no encontrado' }, { status: 404 });
+            }
         }
 
         // Validate price
@@ -143,6 +160,9 @@ export async function POST(request: NextRequest) {
                 },
             ],
             mode: 'payment',
+            invoice_creation: {
+                enabled: true,
+            },
             customer_email: user.email, // Pre-fill email
             success_url: `${process.env.NEXTAUTH_URL}/reserva/confirmacion?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.NEXTAUTH_URL}/catalogo/${id}`,

@@ -19,6 +19,7 @@ interface OrderData {
     customerName: string;
     customerEmail: string;
     image?: string;
+    invoiceUrl?: string; // Add invoice URL
 }
 
 export default function ConfirmacionPedido() {
@@ -44,7 +45,8 @@ export default function ConfirmacionPedido() {
                         total: data.booking.total,
                         customerName: data.booking.customerName || 'Cliente',
                         customerEmail: data.booking.customerEmail || '',
-                        image: data.property.image
+                        image: data.property.image,
+                        invoiceUrl: data.booking.invoiceUrl // Map invoice URL
                     });
                     setOrderId(sessionId.slice(-8).toUpperCase());
                 })
@@ -81,7 +83,12 @@ export default function ConfirmacionPedido() {
     };
 
     const handleDownloadReceipt = () => {
-        alert('Tu factura estará disponible en tu panel de usuario en unos minutos.');
+        if (orderData?.invoiceUrl) {
+            window.open(orderData.invoiceUrl, '_blank');
+        } else {
+            // Fallback text if invoice is not yet ready (async generation)
+            alert('Tu factura se está generando. Por favor revisa tu correo en unos minutos.');
+        }
     };
 
     if (!orderData) {

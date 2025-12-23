@@ -140,14 +140,8 @@ export default function Header() {
                                 </div>
                             ) : (
                                 <>
-                                    <Link href="/login" className="text-sm font-medium text-blue-100 hover:text-white transition-colors">
-                                        Iniciar Sesión
-                                    </Link>
-                                    <Link
-                                        href="/registro"
-                                        className="bg-[#10B981] hover:bg-[#059669] text-white px-5 py-2 rounded-lg text-sm font-medium transition-all shadow-lg shadow-[#10B981]/20 hover:shadow-[#10B981]/40"
-                                    >
-                                        Registrarse
+                                    <Link href="/login" className="text-sm font-medium text-blue-100 hover:text-white transition-colors border border-blue-400/30 px-4 py-1.5 rounded-full hover:bg-white/10">
+                                        Acceso Clientes
                                     </Link>
                                 </>
                             )}
@@ -291,16 +285,9 @@ export default function Header() {
                                         <Link
                                             href="/login"
                                             onClick={() => setMobileMenuOpen(false)}
-                                            className="flex justify-center py-3 px-4 border border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50"
+                                            className="flex justify-center py-3 px-4 border border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 bg-gray-50"
                                         >
-                                            Iniciar Sesión
-                                        </Link>
-                                        <Link
-                                            href="/registro"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="flex justify-center py-3 px-4 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669]"
-                                        >
-                                            Crear Cuenta Gratis
+                                            Acceso Clientes
                                         </Link>
                                     </div>
                                 )}

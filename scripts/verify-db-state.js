@@ -1,7 +1,6 @@
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
-const fetch = require('node-fetch');
-global.fetch = fetch;
+
 
 // Cargar .env.local
 const envPath = path.resolve(__dirname, '../.env.local');
@@ -42,6 +41,27 @@ async function verifySchema() {
         }
     } catch (e) {
         console.log('❌ Error chequeando bookings:', e.message);
+    }
+
+    // 3. Verificar Contenido (Seeding)
+    try {
+        const { data: properties, error } = await supabase
+            .from('properties')
+            .select('title, id')
+            .eq('title', 'Automatización de Email Marketing (Demo)')
+            .limit(1);
+
+        if (error) {
+            console.log('❌ Error buscando servicio demo:', error.message);
+            allGood = false;
+        } else if (properties.length === 0) {
+            console.log('❌ Tabla PROPERTIES: Servicio "Automatización de Email Marketing (Demo)" NO encontrado.');
+            allGood = false;
+        } else {
+            console.log('✅ Tabla PROPERTIES: Servicio Demo encontrado con ID:', properties[0].id);
+        }
+    } catch (e) {
+        console.log('❌ Error chequeando contenido:', e.message);
     }
 
     console.log('\n' + '='.repeat(50));
