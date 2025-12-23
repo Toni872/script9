@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.10.0",
@@ -77,10 +79,14 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
     "@types/jest": "^30.0.0",
     "dotenv": "^17.2.3",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
     "ts-node": "^10.9.2"
   },
   "overrides": {},

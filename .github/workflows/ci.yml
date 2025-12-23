@@ -1,33 +1,41 @@
-name: Script9 CI
+name: Calidad y Seguridad (CI)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
     steps:
     - uses: actions/checkout@v4
 
-    - name: Use Node.js
+    - name: Usar Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: Install Dependencies
+    - name: Instalar Dependencias
       run: npm ci
 
-    - name: Lint Code
+    - name: Auditoría de Seguridad (NPM Audit)
+      run: npm audit --audit-level=high
+
+    - name: Linter (Calidad de Código)
       run: npm run lint
 
-    - name: Type Check & Build
+    - name: Checking de Tipos (TypeScript)
+      # Ejecutamos build para ver si falla la compilación de tipos.
+      # Nota: next build ya incluye chequeo de tipos y linter por defecto
       run: npm run build
-      env:
-        # Skip env validation during build validation
-        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+    - name: Tests Automáticos (Jest)
+      run: npm test
