@@ -2,40 +2,17 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle2, MessageSquare, Clock, Calendar, Send, Search } from 'lucide-react';
-import { Label } from '@/components/ui/label';
+import { CheckCircle2, Clock, Send, Search, TrendingUp, ShieldCheck, Loader2 } from 'lucide-react';
 
 export function DetailedContactForm() {
     const [formState, setFormState] = useState({
         name: '',
         email: '',
         company: '',
-        phone: '',
-        message: '',
-        services: [] as string[]
+        message: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
-
-    const services = [
-        'Chatbots con IA',
-        'Automatización de Datos',
-        'Generación de Documentos',
-        'Gestión de CRM'
-    ];
-
-    const handleServiceChange = (service: string, checked: boolean) => {
-        if (checked) {
-            setFormState(prev => ({ ...prev, services: [...prev.services, service] }));
-        } else {
-            setFormState(prev => ({ ...prev, services: prev.services.filter(s => s !== service) }));
-        }
-    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -46,170 +23,177 @@ export function DetailedContactForm() {
         setIsSuccess(true);
     };
 
-    return (
-        <section className="py-24 bg-[#003D82] relative" id="contacto">
-            {/* Background Texture */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none" />
+    const ContactFeature = ({ icon: Icon, title, desc }: any) => (
+        <div className="flex gap-4">
+            <div className="w-12 h-12 rounded-lg bg-slate-900 flex items-center justify-center text-emerald-400 border border-slate-800 flex-shrink-0">
+                <Icon className="w-6 h-6" />
+            </div>
+            <div>
+                <h3 className="text-lg font-bold text-white mb-1">{title}</h3>
+                <p className="text-slate-400 font-light text-sm leading-relaxed">{desc}</p>
+            </div>
+        </div>
+    );
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    return (
+        <section className="py-24 bg-slate-950 border-t border-slate-800 relative overflow-hidden" id="contacto">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-                    {/* Left Column: Premium Value Prop */}
-                    <div className="space-y-8 text-white">
-                        <div>
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-tight">Empieza a Automatizar Hoy</h2>
-                            <p className="text-xl text-blue-100 leading-relaxed font-light">
-                                Completa el formulario y te responderemos en menos de 24 horas. Sin compromiso.
-                            </p>
+                    {/* Left Column: Context & Value */}
+                    <div>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+                        >
+                            Hablemos de <br />
+                            <span className="text-emerald-400">Rentabilidad</span>
+                        </motion.h2>
+
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="text-xl text-slate-400 mb-12 font-light leading-relaxed"
+                        >
+                            ¿Tienes dudas sobre qué se puede automatizar en tu empresa?
+                            Agenda una auditoría gratuita y te diremos exactamente dónde estás perdiendo dinero.
+                        </motion.p>
+
+                        <div className="space-y-8">
+                            <ContactFeature
+                                icon={TrendingUp}
+                                title="Sin costes iniciales elevados"
+                                desc="Modelos de pago flexibles o basados en éxito."
+                            />
+                            <ContactFeature
+                                icon={ShieldCheck}
+                                title="Garantía de Privacidad"
+                                desc="Tus datos y procesos están blindados bajo NDA."
+                            />
+                            <ContactFeature
+                                icon={Clock}
+                                title="Respuesta en 24h"
+                                desc="No somos un bot (irónicamente). Te contestará un humano experto."
+                            />
                         </div>
 
-                        <div className="space-y-6">
-                            {[
-                                { icon: Search, text: "Análisis gratuito de tu situación actual" },
-                                { icon: CheckCircle2, text: "Propuesta personalizada sin compromiso" },
-                                { icon: Clock, text: "Respuesta en menos de 24 horas" },
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-center gap-4 group">
-                                    <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 flex items-center justify-center text-white group-hover:bg-[#10B981] transition-colors duration-300">
-                                        <item.icon className="w-6 h-6" />
-                                    </div>
-                                    <span className="font-medium text-blue-50 text-lg group-hover:translate-x-2 transition-transform duration-300">{item.text}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="bg-[#002E5C]/60 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all">
-                            <h3 className="text-xl font-bold mb-2">¿Prefieres hablar directamente?</h3>
-                            <p className="text-blue-200/80 mb-6">Agenda una videollamada de 45 min con un experto.</p>
-                            <Button
-                                variant="secondary"
-                                className="w-full bg-white text-[#003D82] hover:bg-blue-50 font-bold h-12 shadow-lg hover:shadow-xl transition-all"
-                                onClick={() => window.open('https://calendly.com', '_blank')}
-                            >
-                                <Calendar className="w-5 h-5 mr-2" /> Agendar Videollamada
-                            </Button>
+                        {/* Direct Contact Info */}
+                        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row gap-8">
+                            <div>
+                                <h4 className="text-white font-bold mb-2">Email Directo</h4>
+                                <a href="mailto:hola@script9.ai" className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                    hola@script9.ai
+                                </a>
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold mb-2">WhatsApp Business</h4>
+                                <a href="https://wa.me/34600000000" className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                    +34 600 000 000
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Right Column: Reformatted Form */}
-                    <Card className="border-none shadow-2xl bg-white/95 backdrop-blur-sm overflow-hidden">
-                        <div className="h-2 bg-gradient-to-r from-[#10B981] to-[#34D399] w-full" />
-                        <CardContent className="p-8 md:p-10">
-                            {isSuccess ? (
-                                <div className="text-center py-12">
-                                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <CheckCircle2 className="w-10 h-10 text-green-600" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">¡Mensaje Recibido!</h3>
-                                    <p className="text-gray-600 mb-8">
-                                        Gracias por contactarnos, {formState.name}. Un especialista revisará tu proyecto y te contactará pronto.
-                                    </p>
-                                    <Button onClick={() => setIsSuccess(false)} variant="outline">Enviar otro mensaje</Button>
+                    {/* Right Column: Form Card */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                        className="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl relative overflow-hidden"
+                    >
+                        {/* Form Glow */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none" />
+
+                        {isSuccess ? (
+                            <div className="text-center py-12">
+                                <div className="w-20 h-20 bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
+                                    <CheckCircle2 className="w-10 h-10 text-emerald-500" />
                                 </div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <h3 className="text-2xl font-bold text-gray-800 mb-6">Reserva directamente</h3>
-
-                                    <div className="space-y-4">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="name">Nombre <span className="text-emerald-500">*</span></Label>
-                                            <Input
-                                                id="name"
-                                                placeholder="Tu nombre"
-                                                required
-                                                value={formState.name}
-                                                onChange={e => setFormState({ ...formState, name: e.target.value })}
-                                                className="bg-gray-50 border-gray-200 h-12 focus:bg-white focus:ring-2 focus:ring-[#003D82]/20 transition-all"
-                                            />
-                                        </div>
-
-                                        <div className="grid md:grid-cols-2 gap-4">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="email">Email <span className="text-emerald-500">*</span></Label>
-                                                <Input
-                                                    id="email"
-                                                    type="email"
-                                                    placeholder="tu@email.com"
-                                                    required
-                                                    value={formState.email}
-                                                    onChange={e => setFormState({ ...formState, email: e.target.value })}
-                                                    className="bg-gray-50 border-gray-200 h-12 focus:bg-white focus:ring-2 focus:ring-[#003D82]/20 transition-all"
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="phone">Teléfono</Label>
-                                                <Input
-                                                    id="phone"
-                                                    type="tel"
-                                                    placeholder="+34 600 000 000"
-                                                    value={formState.phone}
-                                                    onChange={e => setFormState({ ...formState, phone: e.target.value })}
-                                                    className="bg-gray-50 border-gray-200 h-12 focus:bg-white focus:ring-2 focus:ring-[#003D82]/20 transition-all"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <Label htmlFor="company">Empresa</Label>
-                                            <Input
-                                                id="company"
-                                                placeholder="Tu empresa"
-                                                value={formState.company}
-                                                onChange={e => setFormState({ ...formState, company: e.target.value })}
-                                                className="bg-gray-50 border-gray-200 h-12 focus:bg-white focus:ring-2 focus:ring-[#003D82]/20 transition-all"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-3">
-                                            <Label>Servicios de interés</Label>
-                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                                {services.map((service) => (
-                                                    <div key={service} className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-100 hover:border-[#003D82] hover:bg-blue-50/50 transition-colors group cursor-pointer">
-                                                        <Checkbox
-                                                            id={service}
-                                                            onCheckedChange={(checked) => handleServiceChange(service, checked as boolean)}
-                                                            className="data-[state=checked]:bg-[#003D82] data-[state=checked]:border-[#003D82]"
-                                                        />
-                                                        <label
-                                                            htmlFor={service}
-                                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-600 group-hover:text-[#003D82]"
-                                                        >
-                                                            {service}
-                                                        </label>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <Label htmlFor="message">Mensaje</Label>
-                                            <Textarea
-                                                id="message"
-                                                placeholder="Cuéntanos sobre tu proyecto o necesidades..."
-                                                rows={4}
-                                                value={formState.message}
-                                                onChange={e => setFormState({ ...formState, message: e.target.value })}
-                                                className="bg-gray-50 border-gray-200 focus:bg-white focus:ring-2 focus:ring-[#003D82]/20 resize-none transition-all"
-                                            />
-                                        </div>
+                                <h3 className="text-2xl font-bold text-white mb-2">¡Mensaje Recibido!</h3>
+                                <p className="text-slate-400 mb-8">
+                                    Gracias por contactarnos, {formState.name}. Un especialista revisará tu proyecto y te contactará pronto.
+                                </p>
+                                <button
+                                    onClick={() => setIsSuccess(false)}
+                                    className="px-6 py-2 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                                >
+                                    Enviar otro mensaje
+                                </button>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-slate-300">Nombre</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={formState.name}
+                                            onChange={e => setFormState({ ...formState, name: e.target.value })}
+                                            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all placeholder:text-slate-600"
+                                            placeholder="Tu nombre"
+                                        />
                                     </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-slate-300">Empresa</label>
+                                        <input
+                                            type="text"
+                                            value={formState.company}
+                                            onChange={e => setFormState({ ...formState, company: e.target.value })}
+                                            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all placeholder:text-slate-600"
+                                            placeholder="Web o Nombre"
+                                        />
+                                    </div>
+                                </div>
 
-                                    <Button
-                                        type="submit"
-                                        className="w-full bg-[#10B981] hover:bg-[#059669] text-white h-14 text-lg font-bold shadow-lg hover:shadow-[0_4px_20px_rgba(16,185,129,0.4)] transition-all transform hover:-translate-y-1"
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'} <Send className="w-5 h-5 ml-2" />
-                                    </Button>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-slate-300">Email Profesional</label>
+                                    <input
+                                        type="email"
+                                        required
+                                        value={formState.email}
+                                        onChange={e => setFormState({ ...formState, email: e.target.value })}
+                                        className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all placeholder:text-slate-600"
+                                        placeholder="nombre@empresa.com"
+                                    />
+                                </div>
 
-                                    <p className="text-xs text-gray-500 text-center">
-                                        Al enviar, aceptas nuestra política de privacidad.
-                                    </p>
-                                </form>
-                            )}
-                        </CardContent>
-                    </Card>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-slate-300">¿Qué desafío quieres resolver?</label>
+                                    <textarea
+                                        rows={4}
+                                        value={formState.message}
+                                        onChange={e => setFormState({ ...formState, message: e.target.value })}
+                                        className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all placeholder:text-slate-600 resize-none"
+                                        placeholder="Ej: Paso 4 horas al día respondiendo emails repetitivos..."
+                                    />
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 rounded-lg shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    {isSubmitting ? (
+                                        <span className="flex items-center gap-2">
+                                            <Loader2 className="w-5 h-5 animate-spin" /> Enviando...
+                                        </span>
+                                    ) : (
+                                        <>Solicitar Auditoría Gratuita <Send className="w-5 h-5" /></>
+                                    )}
+                                </button>
+
+                                <p className="text-center text-xs text-slate-500">
+                                    Sin spam. Solo soluciones. Respuesta garantizada en 24h.
+                                </p>
+                            </form>
+                        )}
+                    </motion.div>
                 </div>
             </div>
         </section>

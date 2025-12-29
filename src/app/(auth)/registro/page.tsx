@@ -12,7 +12,6 @@ export default function Registro() {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [userType, setUserType] = useState<'user' | 'host'>('user');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [formData, setFormData] = useState({
@@ -47,7 +46,7 @@ export default function Registro() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     ...formData,
-                    role: userType === 'host' ? 'host' : 'guest',
+                    role: 'guest', // Default to guest (User)
                 }),
             });
 
@@ -97,7 +96,7 @@ export default function Registro() {
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 p-16 flex flex-col justify-between">
+                <div className="relative z-10 p-16 flex flex-col justify-between h-full">
                     {/* Logo */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -112,73 +111,45 @@ export default function Registro() {
                         </Link>
                     </motion.div>
 
-                    {/* Main Content - Dynamic */}
+                    {/* Main Content - Static */}
                     <div>
                         <motion.h2
-                            key={userType}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="text-[56px] md:text-[64px] font-semibold !text-white mb-8 leading-[1.05] tracking-tight"
                         >
-                            {userType === 'host'
-                                ? <>Convierte tus skills<br />en <span className="!text-[#10B981]">ingresos</span></>
-                                : <>Automatiza tu<br /><span className="!text-[#10B981]">negocio</span></>
-                            }
+                            Automatiza tu<br /><span className="!text-[#10B981]">negocio</span> hoy
                         </motion.h2>
 
                         <motion.p
-                            key={`desc-${userType}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.3 }}
                             className="text-[21px] !text-white/90 mb-12 leading-relaxed max-w-md"
                         >
-                            {userType === 'host'
-                                ? 'Únete a la comunidad de expertos y monetiza tus conocimientos de forma sencilla y segura'
-                                : 'Accede a automatizaciones, workflows y scripts inteligentes para escalar tu negocio'
-                            }
+                            Accede a la mayor plataforma de scripts, workflows y agentes de IA. Ahorra tiempo y escala sin límites.
                         </motion.p>
 
-                        {/* Stats - Dynamic */}
+                        {/* Stats - Static */}
                         <motion.div
-                            key={`stats-${userType}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="grid grid-cols-3 gap-8"
                         >
-                            {userType === 'host' ? (
-                                <>
-                                    <div>
-                                        <div className="text-[36px] font-bold !text-white mb-1">€2.5K</div>
-                                        <div className="text-[15px] !text-white/70">Media mensual</div>
-                                    </div>
-                                    <div>
-                                        <div className="text-[36px] font-bold !text-white mb-1">200+</div>
-                                        <div className="text-[15px] !text-white/70">Expertos</div>
-                                    </div>
-                                    <div>
-                                        <div className="text-[36px] font-bold !text-white mb-1">85%</div>
-                                        <div className="text-[15px] !text-white/70">Tasa ocupación</div>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <div>
-                                        <div className="text-[36px] font-bold !text-white mb-1">500+</div>
-                                        <div className="text-[15px] !text-white/70">Servicios</div>
-                                    </div>
-                                    <div>
-                                        <div className="text-[36px] font-bold !text-white mb-1">98%</div>
-                                        <div className="text-[15px] !text-white/70">Satisfacción</div>
-                                    </div>
-                                    <div>
-                                        <div className="text-[36px] font-bold !text-white mb-1">24/7</div>
-                                        <div className="text-[15px] !text-white/70">Soporte</div>
-                                    </div>
-                                </>
-                            )}
+                            <div>
+                                <div className="text-[36px] font-bold !text-white mb-1">500+</div>
+                                <div className="text-[15px] !text-white/70">Soluciones</div>
+                            </div>
+                            <div>
+                                <div className="text-[36px] font-bold !text-white mb-1">24/7</div>
+                                <div className="text-[15px] !text-white/70">Soporte</div>
+                            </div>
+                            <div>
+                                <div className="text-[36px] font-bold !text-white mb-1">100%</div>
+                                <div className="text-[15px] !text-white/70">Seguro</div>
+                            </div>
                         </motion.div>
                     </div>
 
@@ -195,7 +166,7 @@ export default function Registro() {
             </motion.div>
 
             {/* Right Column - Register Form */}
-            <div className="flex-1 flex items-center justify-center p-4 sm:p-8 bg-[#f5f5f7]">
+            <div className="flex-1 flex items-center justify-center p-4 sm:p-8 bg-slate-950">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -212,59 +183,35 @@ export default function Registro() {
                         </Link>
                     </div>
 
-                    <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-sm max-h-[85vh] overflow-y-auto">
-                        <h1 className="text-[32px] sm:text-[40px] font-semibold text-[#1d1d1f] mb-3 tracking-tight">
+                    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-xl max-h-[85vh] overflow-y-auto">
+                        <h1 className="text-[32px] sm:text-[40px] font-semibold text-white mb-3 tracking-tight">
                             Crear Cuenta
                         </h1>
-                        <p className="text-[16px] sm:text-[17px] text-[#86868b] mb-6 sm:mb-8">
+                        <p className="text-[16px] sm:text-[17px] text-slate-400 mb-6 sm:mb-8">
                             Únete a la comunidad Script9
                         </p>
 
-                        {/* User Type Toggle */}
-                        <div className="flex gap-2 sm:gap-3 mb-6 sm:mb-8 p-1 bg-[#f5f5f7] rounded-xl">
-                            <button
-                                type="button"
-                                onClick={() => setUserType('user')}
-                                className={`flex-1 py-2.5 text-[15px] font-semibold rounded-lg transition-all ${userType === 'user'
-                                    ? 'bg-white text-[#1d1d1f] shadow-sm'
-                                    : 'text-[#86868b] hover:text-[#1d1d1f]'
-                                    }`}
-                            >
-                                Soy Usuario
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setUserType('host')}
-                                className={`flex-1 py-2.5 text-[15px] font-semibold rounded-lg transition-all ${userType === 'host'
-                                    ? 'bg-white text-[#1d1d1f] shadow-sm'
-                                    : 'text-[#86868b] hover:text-[#1d1d1f]'
-                                    }`}
-                            >
-                                Soy Colaborador
-                            </button>
-                        </div>
-
                         {error && (
-                            <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
-                                <p className="text-emerald-800 text-[15px] font-medium">{error}</p>
+                            <div className="mb-6 p-4 bg-red-900/20 border border-red-500/50 rounded-xl">
+                                <p className="text-red-400 text-[15px] font-medium">{error}</p>
                             </div>
                         )}
 
                         <form onSubmit={handleSubmit} className="space-y-5">
                             {/* Name */}
                             <div>
-                                <label className="block text-[15px] font-medium text-[#1d1d1f] mb-2">
+                                <label className="block text-[15px] font-medium text-slate-300 mb-2">
                                     Nombre Completo
                                 </label>
                                 <div className="relative">
-                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#86868b]" />
+                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
                                     <input
                                         type="text"
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
                                         placeholder="Antonio García"
-                                        className="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent text-[17px]"
+                                        className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-[17px] text-white placeholder:text-slate-600"
                                         required
                                     />
                                 </div>
@@ -272,18 +219,18 @@ export default function Registro() {
 
                             {/* Email */}
                             <div>
-                                <label className="block text-[15px] font-medium text-[#1d1d1f] mb-2">
+                                <label className="block text-[15px] font-medium text-slate-300 mb-2">
                                     Correo Electrónico
                                 </label>
                                 <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#86868b]" />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
                                     <input
                                         type="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
                                         placeholder="tu@email.com"
-                                        className="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent text-[17px]"
+                                        className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-[17px] text-white placeholder:text-slate-600"
                                         required
                                     />
                                 </div>
@@ -291,18 +238,18 @@ export default function Registro() {
 
                             {/* Phone */}
                             <div>
-                                <label className="block text-[15px] font-medium text-[#1d1d1f] mb-2">
+                                <label className="block text-[15px] font-medium text-slate-300 mb-2">
                                     Teléfono
                                 </label>
                                 <div className="relative">
-                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#86868b]" />
+                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
                                     <input
                                         type="tel"
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
                                         placeholder="+34 600 000 000"
-                                        className="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent text-[17px]"
+                                        className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-[17px] text-white placeholder:text-slate-600"
                                         required
                                     />
                                 </div>
@@ -310,24 +257,24 @@ export default function Registro() {
 
                             {/* Password */}
                             <div>
-                                <label className="block text-[15px] font-medium text-[#1d1d1f] mb-2">
+                                <label className="block text-[15px] font-medium text-slate-300 mb-2">
                                     Contraseña
                                 </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#86868b]" />
+                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
                                     <input
                                         type={showPassword ? 'text' : 'password'}
                                         name="password"
                                         value={formData.password}
                                         onChange={handleChange}
                                         placeholder="••••••••"
-                                        className="w-full pl-12 pr-12 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent text-[17px]"
+                                        className="w-full pl-12 pr-12 py-3.5 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-[17px] text-white placeholder:text-slate-600"
                                         required
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[#86868b] hover:text-[#1d1d1f]"
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
                                     >
                                         {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                                     </button>
@@ -336,24 +283,24 @@ export default function Registro() {
 
                             {/* Confirm Password */}
                             <div>
-                                <label className="block text-[15px] font-medium text-[#1d1d1f] mb-2">
+                                <label className="block text-[15px] font-medium text-slate-300 mb-2">
                                     Confirmar Contraseña
                                 </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#86868b]" />
+                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
                                     <input
                                         type={showConfirmPassword ? 'text' : 'password'}
                                         name="confirmPassword"
                                         value={formData.confirmPassword}
                                         onChange={handleChange}
                                         placeholder="••••••••"
-                                        className="w-full pl-12 pr-12 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent text-[17px]"
+                                        className="w-full pl-12 pr-12 py-3.5 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-[17px] text-white placeholder:text-slate-600"
                                         required
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[#86868b] hover:text-[#1d1d1f]"
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
                                     >
                                         {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                                     </button>
@@ -367,15 +314,15 @@ export default function Registro() {
                                     name="acceptTerms"
                                     checked={formData.acceptTerms}
                                     onChange={handleChange}
-                                    className="mt-1 w-4 h-4 text-[#10B981] border-gray-300 rounded focus:ring-[#10B981]"
+                                    className="mt-1 w-4 h-4 text-emerald-500 border-slate-700 bg-slate-950 rounded focus:ring-emerald-500"
                                 />
-                                <span className="text-[15px] text-[#86868b]">
+                                <span className="text-[15px] text-slate-400">
                                     Acepto los{' '}
-                                    <Link href="/terminos" className="text-[#10B981] hover:text-[#059669]">
+                                    <Link href="/terminos" className="text-emerald-400 hover:text-emerald-300">
                                         términos y condiciones
                                     </Link>{' '}
                                     y la{' '}
-                                    <Link href="/privacidad" className="text-[#10B981] hover:text-[#059669]">
+                                    <Link href="/privacidad" className="text-emerald-400 hover:text-emerald-300">
                                         política de privacidad
                                     </Link>
                                 </span>
@@ -385,7 +332,7 @@ export default function Registro() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-4 bg-[#10B981] text-white text-[17px] font-semibold rounded-xl hover:bg-[#059669] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 hero-text-white"
+                                className="w-full py-4 bg-emerald-600 text-white text-[17px] font-semibold rounded-xl hover:bg-emerald-500 transition-all duration-300 shadow-lg shadow-emerald-900/20 hover:shadow-xl disabled:opacity-50"
                             >
                                 {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
                             </button>
@@ -393,9 +340,9 @@ export default function Registro() {
 
                         {/* Divider */}
                         <div className="flex items-center gap-4 my-8">
-                            <div className="flex-1 h-px bg-gray-200"></div>
-                            <span className="text-[13px] text-[#86868b]">O regístrate con</span>
-                            <div className="flex-1 h-px bg-gray-200"></div>
+                            <div className="flex-1 h-px bg-slate-800"></div>
+                            <span className="text-[13px] text-slate-500">O regístrate con</span>
+                            <div className="flex-1 h-px bg-slate-800"></div>
                         </div>
 
                         {/* Social Login */}
@@ -404,20 +351,13 @@ export default function Registro() {
                                 type="button"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    console.log('Click en botón Google, userType:', userType);
                                     try {
-                                        // Guardar el tipo de usuario en localStorage antes de redirigir
-                                        const roleToSave = userType === 'host' ? 'host' : 'guest';
-                                        localStorage.setItem('script9_pending_role', roleToSave);
-                                        console.log('Role guardado en localStorage:', roleToSave);
-
-                                        // Redirigir a Google OAuth
                                         signIn('google', { callbackUrl: '/' });
                                     } catch (error) {
                                         console.error('Error en onClick de Google:', error);
                                     }
                                 }}
-                                className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer"
+                                className="flex items-center justify-center gap-2 px-4 py-3 border border-slate-700 bg-slate-950 rounded-xl hover:bg-slate-900 hover:border-slate-600 transition-colors cursor-pointer"
                             >
                                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -425,24 +365,24 @@ export default function Registro() {
                                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                 </svg>
-                                <span className="text-[15px] font-medium">Google</span>
+                                <span className="text-[15px] font-medium text-white">Google</span>
                             </button>
                             <button
                                 type="button"
-                                className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors opacity-50 cursor-not-allowed"
+                                className="flex items-center justify-center gap-2 px-4 py-3 border border-slate-700 bg-slate-950 rounded-xl hover:bg-slate-900 transition-colors opacity-50 cursor-not-allowed"
                                 disabled
                             >
-                                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
                                 </svg>
-                                <span className="text-[15px] font-medium">Apple</span>
+                                <span className="text-[15px] font-medium text-white">Apple</span>
                             </button>
                         </div>
 
                         {/* Login Link */}
-                        <p className="text-center text-[15px] text-[#86868b] mt-8">
+                        <p className="text-center text-[15px] text-slate-500 mt-8">
                             ¿Ya tienes cuenta?{' '}
-                            <Link href="/login" className="text-[#10B981] hover:text-[#059669] font-semibold">
+                            <Link href="/login" className="text-emerald-400 hover:text-emerald-300 font-semibold">
                                 Inicia sesión
                             </Link>
                         </p>

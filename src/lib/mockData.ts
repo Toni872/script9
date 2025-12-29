@@ -9,6 +9,7 @@ export const mockServices = [
     description: 'Servicio de prueba para demostración. Automatización completa de campañas de email marketing incluyendo segmentación de audiencias, secuencias automatizadas, A/B testing y reporting en tiempo real.',
     price: 750, // was price_per_hour
     unit: 'project',
+    price_display_text: 'Consultar Presupuesto',
     price_per_hour: 750, // legacy
 
     category: 'Marketing Automation', // was address
@@ -46,6 +47,53 @@ export const mockServices = [
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
   },
+  {
+    id: 'plan-moves-agent',
+    title: 'Agente Comercial IA (Omnicanal)',
+    description: 'Transforma tu atención al cliente con un asistente inteligente capaz de resolver dudas en tiempo real, generar presupuestos conectados a tu ERP y gestionar leads automáticamente. Integración omnicanal (WhatsApp, Web, Email). Casos de éxito: Sector Energía (Plan Moves).',
+    price: 2500,
+    unit: 'project',
+    price_display_text: 'Consultar', // Custom pricing for high-ticket
+    price_per_hour: 2500,
+
+    category: 'AI Agents',
+    location: 'Servicio Online',
+    address: 'Servicio Online',
+
+    city: 'Remoto',
+    region: 'Global',
+
+    capacity: 100,
+    // max_guests: 100, // REMOVED
+    delivery_time: '2-3 semanas',
+    maintenance_support: 'Soporte prioritario post-lanzamiento',
+    tech_stack: ['OpenAI GPT-4o', 'Vector DB', 'Next.js', 'Supabase'],
+
+    image_urls: [
+      'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800', // Robot interaction
+      'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&q=80&w=800', // Payment/Business
+    ],
+    features: [
+      { id: 'f_rag', name: 'RAG Knowledge' },
+      { id: 'f_erp', name: 'Conexión ERP' },
+      { id: 'f_crm', name: 'Gestión CRM' },
+      { id: 'f_omni', name: 'WhatsApp & Email' }
+    ],
+    amenities: [], // Empty legacy list
+
+    property_type: 'ia_chatbot',
+    rating: 5.0,
+    average_rating: 5.0,
+
+    review_count: 5,
+    is_script9_select: true,
+    available: true,
+
+    provider_id: 'script9_official',
+    host_id: 'script9_official',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  }
 ];
 
 export const mockProperties = mockServices; // Alias for backward compatibility

@@ -239,8 +239,8 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                             {property.city}{property.region && `, ${property.region}`}
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Users className="w-5 h-5" />
-                                            Hasta {property.max_guests} personas
+                                            <Clock className="w-5 h-5" />
+                                            {property.delivery_time || `${property.capacity || 1} semanas`}
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <Home className="w-5 h-5" />
@@ -268,8 +268,8 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             </p>
                         </motion.div>
 
-                        {/* Amenities */}
-                        {property.amenities && property.amenities.length > 0 && (
+                        {/* Tech Stack */}
+                        {(property.tech_stack?.length || 0) > 0 && (
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -277,16 +277,16 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 className="bg-white rounded-2xl p-8"
                             >
                                 <h2 className="text-2xl font-semibold text-[#1d1d1f] mb-6">
-                                    Comodidades
+                                    Stack Tecnológico
                                 </h2>
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                    {property.amenities.map((amenity, index) => (
+                                    {property.tech_stack?.map((tech, index) => (
                                         <div
                                             key={index}
                                             className="flex items-center gap-3 text-[#1d1d1f]"
                                         >
                                             <Check className="w-5 h-5 text-[#10B981]" />
-                                            <span>{amenity}</span>
+                                            <span>{tech}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -364,14 +364,20 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             className="bg-white rounded-2xl p-8 shadow-lg sticky top-24"
                         >
                             <div className="mb-6">
-                                <div className="flex items-baseline gap-2 mb-2">
-                                    <span className="text-[40px] font-bold text-[#1d1d1f]">
-                                        €{property.price || property.price_per_hour}
+                                {property.price_display_text ? (
+                                    <span className="text-[32px] font-bold text-[#1d1d1f]">
+                                        {property.price_display_text}
                                     </span>
-                                    <span className="text-[#86868b]">/ proyecto</span>
-                                </div>
+                                ) : (
+                                    <div className="flex items-baseline gap-2">
+                                        <span className="text-[40px] font-bold text-[#1d1d1f]">
+                                            €{property.price || property.price_per_hour}
+                                        </span>
+                                        <span className="text-[#86868b]">/ proyecto</span>
+                                    </div>
+                                )}
                                 {reviews.length > 0 && (
-                                    <div className="flex items-center gap-2 text-sm">
+                                    <div className="flex items-center gap-2 text-sm mt-2">
                                         <Star className="w-4 h-4 fill-[#10B981] text-[#10B981]" />
                                         <span className="font-semibold">{averageRating}</span>
                                         <span className="text-[#86868b]">
@@ -384,15 +390,15 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             <div className="space-y-4 mb-6">
                                 <div className="flex items-center gap-3 text-[#86868b]">
                                     <Check className="w-5 h-5" />
-                                    <span>Entrega Digital / Implementación</span>
+                                    <span>{property.maintenance_support || 'Soporte incluido'}</span>
                                 </div>
                                 <div className="flex items-center gap-3 text-[#86868b]">
                                     <Clock className="w-5 h-5" />
-                                    <span>Soporte incluido</span>
+                                    <span>Entrega: {property.delivery_time || 'Consultar'}</span>
                                 </div>
                                 <div className="flex items-center gap-3 text-[#86868b]">
                                     <Users className="w-5 h-5" />
-                                    <span>Trato directo con el experto</span>
+                                    <span>Trato directo experto</span>
                                 </div>
                             </div>
 
@@ -407,16 +413,18 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 Pago seguro vía Stripe
                             </p>
 
-                            <div className="mt-6 pt-6 border-t border-gray-200">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-[#86868b]">Precio del servicio</span>
-                                    <span className="font-semibold">€{property.price || property.price_per_hour}</span>
+                            {!property.price_display_text && (
+                                <div className="mt-6 pt-6 border-t border-gray-200">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <span className="text-[#86868b]">Precio del servicio</span>
+                                        <span className="font-semibold">€{property.price || property.price_per_hour}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <span className="text-[#86868b]">Protección Script9</span>
+                                        <span className="font-semibold text-green-600">Incluida</span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-[#86868b]">Protección Script9</span>
-                                    <span className="font-semibold text-green-600">Incluida</span>
-                                </div>
-                            </div>
+                            )}
                         </motion.div>
                     </div>
                 </div>

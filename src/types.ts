@@ -18,19 +18,25 @@ export interface Service {
     category: string; // was address/city/region loosely used for categories
     price: number;    // was price_per_hour
     unit: string;     // 'hour', 'project', 'month'
+    price_display_text?: string; // Optional override e.g. "Desde 1000€"
 
-    // Legacy fields kept for DB compatibility until migration
+    // B2B Service Fields
+    delivery_time?: string;      // e.g. "2 semanas"
+    maintenance_support?: string; // e.g. "Soporte incluido 3 meses"
+    tech_stack?: string[];       // e.g. ["Python", "React"]
+
+    // Legacy fields (Deprecated)
     location?: string;
     city?: string;
     region?: string;
     latitude?: number;
     longitude?: number;
     price_per_hour?: number;
-    is_script9_select?: boolean; // rebranding field
-    capacity?: number;  // new field
-    max_guests?: number; // legacy
-    property_type?: string; // legacy
-    amenities?: string[]; // legacy
+    is_script9_select?: boolean;
+    capacity?: number;
+    max_guests?: number; // DEPRECATED: Do not use
+    property_type?: string;
+    amenities?: string[]; // DEPRECATED: Use features or tech_stack
     images?: string[]; // legacy alias for image_urls
 
     provider_id: string; // was host_id

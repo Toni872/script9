@@ -65,7 +65,7 @@ export function OrderList() {
         return (
             <div className="grid grid-cols-1 gap-4">
                 {[1, 2].map(i => (
-                    <Card key={i} className="animate-pulse h-48 bg-gray-100 border-0" />
+                    <Card key={i} className="animate-pulse h-48 bg-slate-900 border-slate-800" />
                 ))}
             </div>
         );
@@ -73,17 +73,17 @@ export function OrderList() {
 
     if (orders.length === 0) {
         return (
-            <Card className="border-gray-200 shadow-sm bg-white">
+            <Card className="border-slate-800 shadow-sm bg-slate-900">
                 <CardContent className="p-12 text-center">
-                    <Sparkles className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-[#333333] mb-2">
+                    <Sparkles className="h-16 w-16 text-slate-700 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-white mb-2">
                         No tienes proyectos activos
                     </h3>
-                    <p className="text-gray-500 mb-6">
+                    <p className="text-slate-400 mb-6">
                         Automatiza tu negocio hoy mismo con nuestros servicios.
                     </p>
                     <Link href="/catalogo">
-                        <Button className="bg-[#003D82] text-white hover:bg-[#002E5C]">
+                        <Button className="bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20">
                             Explorar Catálogo
                         </Button>
                     </Link>
@@ -94,22 +94,22 @@ export function OrderList() {
 
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-[#333333]">Mis Proyectos Activos</h2>
+            <h2 className="text-2xl font-bold text-white">Mis Proyectos Activos</h2>
             <div className="space-y-4">
                 {orders.map((order) => (
-                    <Card key={order.id} className="border-gray-200 shadow-sm hover:shadow-md transition-all bg-white group">
+                    <Card key={order.id} className="border-slate-800 shadow-sm hover:shadow-lg transition-all bg-slate-900 group">
                         <CardContent className="p-6">
                             <div className="flex flex-col md:flex-row gap-6">
                                 {/* Image / Icon */}
-                                <div className="w-full md:w-32 h-32 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 relative">
+                                <div className="w-full md:w-32 h-32 bg-slate-950 rounded-lg overflow-hidden flex-shrink-0 relative border border-slate-800">
                                     {order.properties?.image_urls?.[0] ? (
                                         <img
                                             src={order.properties.image_urls[0]}
                                             alt={order.properties.title}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                                         />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                        <div className="w-full h-full flex items-center justify-center text-slate-600">
                                             <Sparkles className="w-8 h-8" />
                                         </div>
                                     )}
@@ -119,37 +119,55 @@ export function OrderList() {
                                 <div className="flex-1">
                                     <div className="flex flex-col md:flex-row justify-between items-start mb-2">
                                         <div>
-                                            <h3 className="text-xl font-bold text-[#333333] group-hover:text-[#003D82] transition-colors">
+                                            <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
                                                 {order.properties?.title || 'Servicio Desconocido'}
                                             </h3>
-                                            <p className="text-sm text-gray-500 font-mono mb-2">
+                                            <p className="text-sm text-slate-500 font-mono mb-2">
                                                 ID: {order.id.slice(0, 8).toUpperCase()}
                                             </p>
                                         </div>
-                                        <p className="text-2xl font-bold text-[#003D82]">
+                                        <p className="text-2xl font-bold text-white">
                                             €{order.total_price?.toFixed(2)}
                                         </p>
                                     </div>
 
                                     <div className="flex flex-wrap gap-4 mb-4">
                                         {getStatusBadge(order.status)}
-                                        <div className="flex items-center gap-2 text-gray-600 text-sm">
+                                        <div className="flex items-center gap-2 text-slate-400 text-sm">
                                             <Calendar className="h-4 w-4" />
                                             {new Date(order.created_at).toLocaleDateString()}
                                         </div>
-                                        <div className="flex items-center gap-2 text-gray-600 text-sm">
-                                            <Clock className="h-4 w-4" />
-                                            Entrega Inmediata
-                                        </div>
                                     </div>
+
+                                    {/* AI Agent Status Simulation */}
+                                    {(order.properties?.title.includes('Agente') || order.properties?.title.includes('IA')) && (
+                                        <div className="mb-6 bg-slate-950/50 rounded-lg p-4 border border-slate-800">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <span className="text-sm font-semibold text-emerald-400 flex items-center gap-2">
+                                                    <Sparkles className="w-4 h-4" />
+                                                    Estado del Entrenamiento
+                                                </span>
+                                                <span className="text-sm font-bold text-emerald-400">82%</span>
+                                            </div>
+                                            <div className="w-full bg-slate-800 rounded-full h-2 mb-2">
+                                                <div
+                                                    className="bg-emerald-500 h-2 rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                                                    style={{ width: '82%' }}
+                                                ></div>
+                                            </div>
+                                            <p className="text-xs text-slate-500">
+                                                Fase actual: <span className="font-medium text-slate-300">Procesando base de conocimiento (RAG)...</span>
+                                            </p>
+                                        </div>
+                                    )}
 
                                     <div className="flex gap-3 mt-4">
                                         <Link href={`/factura/${order.id}`} target="_blank">
-                                            <Button variant="outline" size="sm" className="gap-2">
+                                            <Button variant="outline" size="sm" className="gap-2 border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800">
                                                 <Download className="w-4 h-4" /> Factura
                                             </Button>
                                         </Link>
-                                        <Button size="sm" className="bg-[#003D82] hover:bg-[#002E5C] text-white gap-2">
+                                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-500 text-white gap-2 border-none">
                                             Ver Detalles <ArrowRight className="w-4 h-4" />
                                         </Button>
                                     </div>

@@ -10,15 +10,20 @@ async function testEmail() {
     const toEmail = 'delivered@resend.dev';
 
     try {
-        const data = await resend.emails.send({
+        const { data, error } = await resend.emails.send({
             from: fromEmail.includes('resend') ? fromEmail : 'onboarding@resend.dev',
             to: toEmail,
             subject: 'Test Email from Script9',
             html: '<p>Si ves esto, <strong>Script9 Email System</strong> está funcionando 🚀</p>'
         });
 
+        if (error) {
+            console.error('❌ Error sending test email:', error);
+            return;
+        }
+
         console.log('✅ Test Email Sent Successfully!');
-        console.log('ID:', data.id);
+        console.log('ID:', data?.id);
     } catch (error) {
         console.error('❌ Error sending test email:', error);
     }

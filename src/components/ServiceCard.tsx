@@ -44,26 +44,26 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
 
     return (
         <Link href={`/catalogo/${service.id}`} className="group block h-full">
-            <article className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+            <article className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 h-full flex flex-col">
                 {/* Image Section */}
-                <div className="relative h-48 overflow-hidden bg-gray-100">
+                <div className="relative h-48 overflow-hidden bg-slate-800">
                     <Image
                         src={mainImage}
                         alt={service.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                         onError={() => setImageError(true)}
                     />
                     <div className="absolute top-3 left-3">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/95 backdrop-blur-sm text-xs font-semibold text-[#003D82] shadow-sm">
-                            <ServiceIcon className="w-3 h-3" />
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-950/60 backdrop-blur-md text-xs font-semibold text-white border border-white/10 shadow-sm">
+                            <ServiceIcon className="w-3 h-3 text-emerald-400" />
                             {config.label}
                         </span>
                     </div>
                     {/* is_script9_select logic */}
                     {(service as any).is_script9_select && (
                         <div className="absolute top-3 right-3">
-                            <span className="px-3 py-1 rounded-full bg-[#10B981] text-white text-xs font-bold shadow-sm">
+                            <span className="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-900/20">
                                 SELECT
                             </span>
                         </div>
@@ -73,16 +73,16 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
                 {/* Content Section */}
                 <div className="p-5 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-lg font-bold text-[#333333] group-hover:text-[#003D82] transition-colors line-clamp-1">
+                        <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors line-clamp-1">
                             {service.title}
                         </h3>
-                        <div className="flex items-center gap-1 text-sm font-medium text-[#333333]">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <div className="flex items-center gap-1 text-sm font-medium text-slate-300">
+                            <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
                             {displayRating.toFixed(1)}
                         </div>
                     </div>
 
-                    <p className="text-sm text-[#666666] line-clamp-2 mb-4 flex-1">
+                    <p className="text-sm text-slate-400 line-clamp-2 mb-4 flex-1">
                         {service.description}
                     </p>
 
@@ -90,28 +90,34 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
                     {technologies.length > 0 && (
                         <div className="flex flex-wrap gap-2 mb-4">
                             {technologies.slice(0, 3).map((tech: string, i: number) => (
-                                <span key={i} className="inline-flex items-center gap-1 text-xs text-gray-500 bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
-                                    <CheckCircle2 className="w-3 h-3 text-[#003D82]" />
+                                <span key={i} className="inline-flex items-center gap-1 text-xs text-slate-300 bg-slate-800 px-2 py-1 rounded-md border border-slate-700">
+                                    <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                                     {tech}
                                 </span>
                             ))}
                             {technologies.length > 3 && (
-                                <span className="text-xs text-gray-400 self-center">+{technologies.length - 3}</span>
+                                <span className="text-xs text-slate-500 self-center">+{technologies.length - 3}</span>
                             )}
                         </div>
                     )}
 
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-800 mt-auto">
                         <div className="flex flex-col">
-                            <span className="text-xs text-[#86868b] uppercase tracking-wide">
+                            <span className="text-xs text-slate-500 uppercase tracking-wide">
                                 {service.unit === 'project' ? 'Precio fijo' : 'Inversión'}
                             </span>
-                            <span className="text-xl font-bold text-[#003D82]">
-                                €{service.price}
-                                {service.unit && service.unit !== 'project' && <span className="text-sm font-normal text-gray-500">/{service.unit}</span>}
+                            <span className="text-xl font-bold text-white">
+                                {service.price_display_text ? (
+                                    <span>{service.price_display_text}</span>
+                                ) : (
+                                    <>
+                                        €{service.price}
+                                        {service.unit && service.unit !== 'project' && <span className="text-sm font-normal text-slate-500">/{service.unit}</span>}
+                                    </>
+                                )}
                             </span>
                         </div>
-                        <button className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center text-[#333333] group-hover:bg-[#10B981] group-hover:text-white transition-colors">
+                        <button className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all">
                             <ArrowRight className="w-5 h-5" />
                         </button>
                     </div>

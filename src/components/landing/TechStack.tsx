@@ -67,10 +67,10 @@ export function TechStack() {
     const doubledrTechnologies = [...technologies, ...technologies];
 
     return (
-        <section className="py-10 bg-[#002E5C] border-y border-white/5 overflow-hidden relative">
+        <section className="py-10 bg-slate-950 border-y border-slate-900 overflow-hidden relative">
             {/* Fade Gradients for smooth entrance/exit */}
-            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#002E5C] to-transparent z-10" />
-            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#002E5C] to-transparent z-10" />
+            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-slate-950 to-transparent z-10" />
+            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-slate-950 to-transparent z-10" />
 
             <div className="max-w-7xl mx-auto px-4 mb-8">
                 <p className="text-center text-sm font-medium text-blue-200/60 uppercase tracking-widest">

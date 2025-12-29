@@ -129,22 +129,22 @@ function CheckoutContent() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <Loader2 className="w-12 h-12 text-[#10B981] animate-spin" />
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+                <Loader2 className="w-12 h-12 text-emerald-500 animate-spin" />
             </div>
         );
     }
 
     if (error || !property) {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
                 <div className="text-center">
                     <AlertCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
-                    <h2 className="text-2xl font-semibold text-[#1d1d1f] mb-2">Error</h2>
-                    <p className="text-[#86868b] mb-6">{error}</p>
+                    <h2 className="text-2xl font-semibold text-white mb-2">Error</h2>
+                    <p className="text-slate-400 mb-6">{error}</p>
                     <button
                         onClick={() => router.push('/catalogo')}
-                        className="px-6 py-3 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669] transition-colors hero-text-white"
+                        className="px-6 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-900/20"
                     >
                         Volver al catálogo
                     </button>
@@ -154,7 +154,7 @@ function CheckoutContent() {
     }
 
     return (
-        <div className="min-h-screen bg-[#f5f5f7] py-20 pb-32 lg:pb-20">
+        <div className="min-h-screen bg-slate-950 py-20 pb-32 lg:pb-20">
             <div className="max-w-4xl mx-auto px-4 sm:px-5">
                 {/* Header */}
                 <motion.div
@@ -162,10 +162,10 @@ function CheckoutContent() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8 text-center"
                 >
-                    <h1 className="text-[32px] sm:text-[40px] font-semibold text-[#1d1d1f] mb-2">
+                    <h1 className="text-[32px] sm:text-[40px] font-semibold text-white mb-2">
                         Confirmar Pedido
                     </h1>
-                    <p className="text-[17px] text-[#86868b]">
+                    <p className="text-[17px] text-slate-400">
                         Estás a un paso de contratar este servicio
                     </p>
                 </motion.div>
@@ -177,7 +177,7 @@ function CheckoutContent() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+                            className="bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800"
                         >
                             <div className="relative h-64 w-full">
                                 <Image
@@ -188,18 +188,18 @@ function CheckoutContent() {
                                 />
                             </div>
                             <div className="p-6 sm:p-8">
-                                <h2 className="text-2xl font-bold text-[#1d1d1f] mb-2">{property.title}</h2>
-                                <div className="flex items-center gap-2 text-[#86868b] mb-6">
+                                <h2 className="text-2xl font-bold text-white mb-2">{property.title}</h2>
+                                <div className="flex items-center gap-2 text-slate-400 mb-6">
                                     <MapPin className="w-4 h-4" />
                                     <span>Servicio Digital Remoto</span>
                                 </div>
 
-                                <div className="p-4 bg-blue-50 rounded-xl border border-blue-100">
-                                    <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                                <div className="p-4 bg-slate-950/50 rounded-xl border border-slate-800">
+                                    <h3 className="font-semibold text-emerald-400 mb-2 flex items-center gap-2">
                                         <AlertCircle className="w-4 h-4" />
                                         Garantía Script9
                                     </h3>
-                                    <p className="text-sm text-blue-800 leading-relaxed">
+                                    <p className="text-sm text-slate-400 leading-relaxed">
                                         Tu pago está protegido. El experto solo recibe el dinero cuando el trabajo ha sido entregado y verificado.
                                     </p>
                                 </div>
@@ -213,24 +213,24 @@ function CheckoutContent() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-white rounded-2xl p-6 shadow-sm sticky top-24 border border-gray-100"
+                            className="bg-slate-900 rounded-2xl p-6 shadow-xl sticky top-24 border border-slate-800"
                         >
-                            <h3 className="text-lg font-semibold text-[#1d1d1f] mb-4">Resumen</h3>
+                            <h3 className="text-lg font-semibold text-white mb-4">Resumen</h3>
 
-                            <div className="space-y-3 py-4 border-t border-b border-gray-100">
+                            <div className="space-y-3 py-4 border-t border-b border-slate-800">
                                 <div className="flex justify-between text-[15px]">
-                                    <span className="text-[#86868b]">Precio del servicio</span>
-                                    <span className="text-[#1d1d1f] font-medium">€{totalPrice.toFixed(2)}</span>
+                                    <span className="text-slate-400">Precio del servicio</span>
+                                    <span className="text-white font-medium">€{totalPrice.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between text-[15px]">
-                                    <span className="text-[#86868b]">Plataforma y soporte</span>
-                                    <span className="text-green-600 font-medium text-xs bg-green-50 px-2 py-1 rounded-full">Incluido</span>
+                                    <span className="text-slate-400">Plataforma y soporte</span>
+                                    <span className="text-emerald-400 font-medium text-xs bg-emerald-950/30 border border-emerald-900/50 px-2 py-1 rounded-full">Incluido</span>
                                 </div>
                             </div>
 
                             <div className="flex justify-between items-baseline mt-4 mb-8">
-                                <span className="text-[17px] font-semibold text-[#1d1d1f]">Total</span>
-                                <span className="text-[32px] font-bold text-[#10B981]">
+                                <span className="text-[17px] font-semibold text-white">Total</span>
+                                <span className="text-[32px] font-bold text-emerald-400">
                                     €{totalPrice.toFixed(2)}
                                 </span>
                             </div>
@@ -238,7 +238,7 @@ function CheckoutContent() {
                             <button
                                 onClick={handleCheckout}
                                 disabled={processing}
-                                className="w-full px-6 py-4 bg-[#10B981] text-white text-[17px] font-semibold rounded-xl hover:bg-[#059669] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 hero-text-white"
+                                className="w-full px-6 py-4 bg-emerald-600 text-white text-[17px] font-semibold rounded-xl hover:bg-emerald-500 transition-all duration-300 shadow-lg shadow-emerald-900/20 hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 {processing ? (
                                     <>
@@ -253,7 +253,7 @@ function CheckoutContent() {
                                 )}
                             </button>
 
-                            <p className="text-[13px] text-[#86868b] text-center mt-4">
+                            <p className="text-[13px] text-slate-500 text-center mt-4">
                                 Pago seguro vía Stripe SSL
                             </p>
                         </motion.div>
@@ -267,8 +267,8 @@ function CheckoutContent() {
 export default function CheckoutPage() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <Loader2 className="w-12 h-12 text-[#10B981] animate-spin" />
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+                <Loader2 className="w-12 h-12 text-emerald-500 animate-spin" />
             </div>
         }>
             <CheckoutContent />

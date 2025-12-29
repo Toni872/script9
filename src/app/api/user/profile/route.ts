@@ -78,12 +78,12 @@ export async function GET(req: NextRequest) {
                     });
 
                     if (authData.user) {
-                        newUserId = authData.user.id;
+                        newUserId = authData.user.id as any;
                     } else if (authError && (authError.message?.includes('already registered') || authError.status === 422)) {
                         try {
                             const { data: listData } = await supabase.auth.admin.listUsers({ page: 1, perPage: 100 });
                             const existingUser = listData.users.find(u => u.email === session.user.email);
-                            if (existingUser) newUserId = existingUser.id;
+                            if (existingUser) newUserId = existingUser.id as any;
                         } catch (e) { /* ignore */ }
                     }
                 } catch (e) { console.error('Auth creation error:', e); }

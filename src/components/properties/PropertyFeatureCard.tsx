@@ -84,7 +84,7 @@ export const PropertyFeatureCard: FC<PropertyFeatureCardProps> = ({
                 <div className="flex items-center justify-between">
                     <div>
                         <span className="text-2xl font-bold text-brand-primary-600">
-                            {formatCurrency(price_per_hour)}
+                            {formatCurrency(price_per_hour || 0)}
                         </span>
                         <span className="text-brand-neutral-500 text-sm">/hora</span>
                     </div>

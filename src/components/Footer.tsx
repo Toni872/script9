@@ -8,11 +8,9 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative bg-[#001e40] text-gray-300 overflow-hidden font-sans">
+        <footer className="relative bg-slate-950 text-slate-300 overflow-hidden font-sans border-t border-slate-800">
             {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#003D82] via-[#10B981] to-[#003D82]"></div>
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#003D82] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#10B981] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-slate-900 via-emerald-900 to-slate-900"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 {/* Main Footer Content */}
@@ -23,7 +21,7 @@ export default function Footer() {
                             <div className="flex items-center space-x-2">
                                 <Logo className="scale-125 origin-left" />
                             </div>
-                            <p className="text-sm text-blue-100/70 leading-relaxed max-w-xs">
+                            <p className="text-sm text-zinc-400 leading-relaxed max-w-xs">
                                 Transformamos negocios digitales mediante IA, automatización y desarrollo de software a medida. Escala sin límites.
                             </p>
                             <div className="flex space-x-4">
@@ -31,7 +29,7 @@ export default function Footer() {
                                     <a
                                         key={i}
                                         href="#"
-                                        className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-[#10B981] hover:text-white transition-all duration-300 transform hover:scale-110"
+                                        className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-slate-950 hover:border-emerald-500 transition-all duration-300 transform hover:scale-110"
                                     >
                                         <Icon size={18} />
                                     </a>
@@ -42,7 +40,7 @@ export default function Footer() {
                         {/* Quick Links */}
                         <div>
                             <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
-                                <span className="w-8 h-1 bg-[#10B981] rounded-full"></span>
+                                <span className="w-8 h-1 bg-emerald-500 rounded-full"></span>
                                 Explorar
                             </h3>
                             <ul className="space-y-3">
@@ -55,7 +53,7 @@ export default function Footer() {
                                     <li key={item.label}>
                                         <Link
                                             href={item.href}
-                                            className="text-blue-100/70 hover:text-[#10B981] transition-colors flex items-center group"
+                                            className="text-zinc-400 hover:text-emerald-400 transition-colors flex items-center group"
                                         >
                                             <ArrowRight className="w-3 h-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                                             {item.label}
@@ -68,7 +66,7 @@ export default function Footer() {
                         {/* Legal / Support */}
                         <div>
                             <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
-                                <span className="w-8 h-1 bg-[#003D82] rounded-full"></span>
+                                <span className="w-8 h-1 bg-blue-500 rounded-full"></span>
                                 Soporte
                             </h3>
                             <ul className="space-y-3">
@@ -81,7 +79,7 @@ export default function Footer() {
                                     <li key={item.label}>
                                         <Link
                                             href={item.href}
-                                            className="text-blue-100/70 hover:text-[#10B981] transition-colors"
+                                            className="text-zinc-400 hover:text-emerald-400 transition-colors"
                                         >
                                             {item.label}
                                         </Link>
@@ -95,19 +93,19 @@ export default function Footer() {
                             <h3 className="text-white font-bold text-lg mb-6">Contáctanos</h3>
                             <ul className="space-y-4">
                                 <li className="flex items-start space-x-3">
-                                    <MapPin className="w-5 h-5 text-[#10B981] mt-1 shrink-0" />
-                                    <span className="text-blue-100/70 text-sm">
+                                    <MapPin className="w-5 h-5 text-emerald-500 mt-1 shrink-0" />
+                                    <span className="text-zinc-400 text-sm">
                                         Calle Tecnología 123, <br />
                                         Distrito Digital, Madrid
                                     </span>
                                 </li>
                                 <li className="flex items-center space-x-3">
-                                    <Phone className="w-5 h-5 text-[#10B981] shrink-0" />
-                                    <span className="text-blue-100/70 text-sm">+34 900 123 456</span>
+                                    <Phone className="w-5 h-5 text-emerald-500 shrink-0" />
+                                    <span className="text-zinc-400 text-sm">+34 900 123 456</span>
                                 </li>
                                 <li className="flex items-center space-x-3">
-                                    <Mail className="w-5 h-5 text-[#10B981] shrink-0" />
-                                    <span className="text-blue-100/70 text-sm">hola@script9.com</span>
+                                    <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
+                                    <span className="text-zinc-400 text-sm">hola@script9.com</span>
                                 </li>
                             </ul>
                         </div>
@@ -115,10 +113,10 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-white/10 py-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-sm text-blue-100/50">
+                <div className="border-t border-slate-800 py-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
                     <p>&copy; {currentYear} Script9. Todos los derechos reservados.</p>
                     <p className="mt-2 md:mt-0 flex items-center">
-                        Hecho con <Heart className="w-4 h-4 mx-1 text-[#10B981] fill-current animate-pulse" /> para el futuro digital
+                        Hecho con <Heart className="w-4 h-4 mx-1 text-emerald-500 fill-current animate-pulse" /> para el futuro digital
                     </p>
                 </div>
             </div>

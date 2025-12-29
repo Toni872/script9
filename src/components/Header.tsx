@@ -46,12 +46,12 @@ export default function Header() {
                     fixed top-0 left-0 right-0 z-50
                     transition-all duration-300 ease-in-out
                     ${scrolled
-                        ? 'bg-[#003D82]/95 backdrop-blur-md shadow-md border-b border-[#002E5C]'
-                        : 'bg-[#003D82]'
+                        ? 'bg-slate-950/80 backdrop-blur-md shadow-lg border-b border-slate-800/50'
+                        : 'bg-transparent border-b border-white/5'
                     }
                 `}
             >
-                <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
                     {/* Logo - Script9 Deep Tech */}
                     <Link
                         href="/"
@@ -64,7 +64,9 @@ export default function Header() {
                     <div className="hidden md:flex items-center space-x-8">
                         <NavLink href="/">Inicio</NavLink>
                         <NavLink href="/catalogo">Catálogo</NavLink>
+                        <NavLink href="/sobre-nosotros">Sobre Nosotros</NavLink>
                         <NavLink href="/como-funciona">Cómo Funciona</NavLink>
+                        <NavLink href="/contacto">Contacto</NavLink>
                         {(isHost || isAdmin) && (
                             <NavLink href="/host/properties">Mis Servicios</NavLink>
                         )}
@@ -75,7 +77,7 @@ export default function Header() {
                         {/* Search Button */}
                         <button
                             onClick={() => setSearchOpen(true)}
-                            className="p-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                            className="p-2 text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10 rounded-full transition-all"
                             aria-label="Buscar"
                         >
                             <Search className="w-5 h-5" />
@@ -83,7 +85,7 @@ export default function Header() {
 
                         {/* Mobile Menu Toggle */}
                         <button
-                            className="md:hidden p-2 text-blue-100 hover:text-white"
+                            className="md:hidden p-2 text-slate-300 hover:text-white"
                             onClick={() => setMobileMenuOpen(true)}
                         >
                             <Menu className="w-6 h-6" />
@@ -95,15 +97,15 @@ export default function Header() {
                                 <div className="relative">
                                     <button
                                         onClick={() => setUserMenuOpen(!userMenuOpen)}
-                                        className="flex items-center gap-3 p-1 rounded-full hover:bg-white/10 transition-all border border-transparent hover:border-white/20"
+                                        className="flex items-center gap-3 p-1 rounded-full hover:bg-white/5 transition-all border border-transparent hover:border-white/10"
                                     >
                                         <Avatar
                                             src={session.user?.image || undefined}
                                             fallback={session.user?.name?.[0] || 'U'}
-                                            className="h-8 w-8 border-2 border-[#10B981]"
+                                            className="h-8 w-8 border-2 border-emerald-500/50"
                                         />
                                         <div className="text-left hidden lg:block pr-2">
-                                            <p className="text-sm font-medium text-white leading-none">{session.user?.name?.split(' ')[0]}</p>
+                                            <p className="text-sm font-medium text-slate-200 leading-none">{session.user?.name?.split(' ')[0]}</p>
                                         </div>
                                     </button>
 
@@ -111,24 +113,26 @@ export default function Header() {
                                     {userMenuOpen && (
                                         <>
                                             <div className="fixed inset-0 z-10" onClick={() => setUserMenuOpen(false)} />
-                                            <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-1 z-20 overflow-hidden animate-in fade-in slide-in-from-top-2">
-                                                <div className="px-4 py-3 border-b border-gray-50">
-                                                    <p className="text-sm font-semibold text-gray-900">{session.user?.name}</p>
-                                                    <p className="text-xs text-gray-500 truncate">{session.user?.email}</p>
+                                            <div className="absolute right-0 mt-3 w-60 bg-slate-900 rounded-xl shadow-2xl border border-slate-800 py-2 z-20 overflow-hidden animate-in fade-in slide-in-from-top-2 ring-1 ring-white/5">
+                                                <div className="px-4 py-3 border-b border-slate-800/50">
+                                                    <p className="text-sm font-semibold text-white">{session.user?.name}</p>
+                                                    <p className="text-xs text-slate-400 truncate">{session.user?.email}</p>
                                                 </div>
-                                                <MenuLink href="/dashboard" icon={BarChart3}>Panel de Control</MenuLink>
-                                                <MenuLink href="/perfil" icon={User}>Mi Perfil</MenuLink>
-                                                <MenuLink href="/mensajes" icon={MessageCircle}>Mensajes</MenuLink>
-                                                {(isHost || isAdmin) && (
-                                                    <MenuLink href="/host/properties" icon={Grid3x3}>Panel Vendedor</MenuLink>
-                                                )}
-                                                {isAdmin && (
-                                                    <MenuLink href="/admin" icon={Shield}>Panel Admin</MenuLink>
-                                                )}
-                                                <div className="border-t border-gray-50 mt-1">
+                                                <div className="py-1">
+                                                    <MenuLink href="/dashboard" icon={BarChart3}>Panel de Control</MenuLink>
+                                                    <MenuLink href="/perfil" icon={User}>Mi Perfil</MenuLink>
+                                                    <MenuLink href="/mensajes" icon={MessageCircle}>Mensajes</MenuLink>
+                                                    {(isHost || isAdmin) && (
+                                                        <MenuLink href="/host/properties" icon={Grid3x3}>Panel Vendedor</MenuLink>
+                                                    )}
+                                                    {isAdmin && (
+                                                        <MenuLink href="/admin" icon={Shield}>Panel Admin</MenuLink>
+                                                    )}
+                                                </div>
+                                                <div className="border-t border-slate-800/50 mt-1 pt-1">
                                                     <button
                                                         onClick={() => signOut({ callbackUrl: '/' })}
-                                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors bg-white hover:bg-gray-50"
+                                                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
                                                     >
                                                         <LogOut className="w-4 h-4" />
                                                         Cerrar Sesión
@@ -140,7 +144,7 @@ export default function Header() {
                                 </div>
                             ) : (
                                 <>
-                                    <Link href="/login" className="text-sm font-medium text-blue-100 hover:text-white transition-colors border border-blue-400/30 px-4 py-1.5 rounded-full hover:bg-white/10">
+                                    <Link href="/login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors border border-slate-700 hover:border-slate-500 px-5 py-2 rounded-full hover:bg-white/5">
                                         Acceso Clientes
                                     </Link>
                                 </>
@@ -150,8 +154,11 @@ export default function Header() {
                 </nav>
             </header>
 
-            {/* SPACER for Fixed Header */}
-            <div className="h-16" />
+            {/* SPACER for Fixed Header handled by padding usually, but here we might not need it if hero covers it. 
+                Keeping it small if needed, o removing if layout handles it. 
+                For overlap hero styling, we often want header OVER hero. 
+            */}
+            {/* <div className="h-20" /> */}
 
             {/* SEARCH OVERLAY */}
             <AnimatePresence>
@@ -160,44 +167,44 @@ export default function Header() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-[#001F3F]/80 backdrop-blur-sm flex items-start justify-center pt-24 px-4"
+                        className="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-md flex items-start justify-center pt-32 px-4"
                         onClick={() => setSearchOpen(false)}
                     >
                         <motion.div
                             initial={{ scale: 0.95, y: -20 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.95, y: -20 }}
-                            className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden"
+                            className="w-full max-w-3xl bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-800 ring-1 ring-white/10"
                             onClick={e => e.stopPropagation()}
                         >
-                            <form onSubmit={handleSearch} className="relative border-b border-gray-100">
-                                <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                            <form onSubmit={handleSearch} className="relative border-b border-slate-800">
+                                <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-slate-500" />
                                 <input
                                     type="text"
                                     placeholder="¿Qué quieres automatizar hoy?"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     autoFocus
-                                    className="w-full pl-16 pr-12 py-5 text-lg text-gray-900 placeholder:text-gray-400 border-none outline-none focus:ring-0 bg-transparent"
+                                    className="w-full pl-16 pr-12 py-6 text-xl text-white placeholder:text-slate-600 border-none outline-none focus:ring-0 bg-transparent font-light"
                                 />
                                 <button
                                     onClick={() => setSearchOpen(false)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-white transition-colors"
                                 >
-                                    <X className="w-5 h-5" />
+                                    <X className="w-6 h-6" />
                                 </button>
                             </form>
-                            <div className="p-4 bg-gray-50">
-                                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Sugerencias</p>
+                            <div className="p-6 bg-slate-950/50">
+                                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Sugerencias Populares</p>
                                 <div className="flex flex-wrap gap-2">
-                                    {['Automatización', 'Chatbots', 'Scraping', 'CRM', 'Python'].map((term) => (
+                                    {['Agentes IA', 'Chatbots WhatsApp', 'Scraping Inmobiliario', 'CRM Automático', 'Python Scripts', 'Consultoría'].map((term) => (
                                         <button
                                             key={term}
                                             onClick={() => {
                                                 setSearchQuery(term);
-                                                // Trigger search logic
+                                                // Could trigger search here or just fill input
                                             }}
-                                            className="px-3 py-1.5 bg-white border border-gray-200 rounded-md text-sm text-gray-600 hover:border-[#003D82] hover:text-[#003D82] transition-colors"
+                                            className="px-4 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 hover:bg-emerald-500/5 transition-all"
                                         >
                                             {term}
                                         </button>
@@ -217,75 +224,82 @@ export default function Header() {
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-[200] bg-white md:hidden flex flex-col"
+                        className="fixed inset-0 z-[200] bg-slate-950 border-l border-slate-800 md:hidden flex flex-col"
                     >
-                        <div className="flex items-center justify-between p-4 border-b border-gray-100">
+                        <div className="flex items-center justify-between p-6 border-b border-slate-800">
                             <div className="flex items-center gap-2">
-                                <div className="flex items-center gap-2">
-                                    <Logo variant="dark" />
-                                </div>
+                                <Logo variant="light" />
                             </div>
-                            <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-gray-500">
+                            <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-white">
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto p-4 space-y-6">
-                            <nav className="flex flex-col space-y-2">
+                        <div className="flex-1 overflow-y-auto p-6 space-y-8">
+                            <nav className="flex flex-col space-y-1">
                                 <MobileLink href="/" onClick={() => setMobileMenuOpen(false)}>Inicio</MobileLink>
                                 <MobileLink href="/catalogo" onClick={() => setMobileMenuOpen(false)}>Catálogo</MobileLink>
+                                <MobileLink href="/sobre-nosotros" onClick={() => setMobileMenuOpen(false)}>Sobre Nosotros</MobileLink>
                                 <MobileLink href="/como-funciona" onClick={() => setMobileMenuOpen(false)}>Cómo Funciona</MobileLink>
+                                <MobileLink href="/contacto" onClick={() => setMobileMenuOpen(false)}>Contacto</MobileLink>
                             </nav>
 
-                            <div className="border-t border-gray-100 pt-6">
+                            <div className="border-t border-slate-800 pt-8">
                                 {session ? (
                                     <div className="space-y-4">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <Avatar src={session.user?.image || undefined} className="h-10 w-10 bg-gray-100" />
+                                        <div className="flex items-center gap-4 mb-6 bg-slate-900 p-4 rounded-xl border border-slate-800">
+                                            <Avatar src={session.user?.image || undefined} className="h-12 w-12 border-2 border-emerald-500/30" />
                                             <div>
-                                                <p className="font-semibold text-gray-900">{session.user?.name}</p>
-                                                <p className="text-xs text-gray-500">{session.user?.email}</p>
+                                                <p className="font-semibold text-white text-lg">{session.user?.name}</p>
+                                                <p className="text-sm text-slate-400">{session.user?.email}</p>
                                             </div>
                                         </div>
-                                        <Link
-                                            href="/dashboard"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="block w-full py-2.5 px-4 bg-blue-50 text-[#003D82] rounded-lg font-medium mb-2"
-                                        >
-                                            Panel de Control
-                                        </Link>
+
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <Link
+                                                href="/dashboard"
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="flex flex-col items-center justify-center py-4 px-2 bg-slate-900 border border-slate-800 rounded-xl text-emerald-400 hover:bg-slate-800 transition-colors"
+                                            >
+                                                <BarChart3 className="w-6 h-6 mb-2" />
+                                                <span className="text-sm font-medium">Dashboard</span>
+                                            </Link>
+                                            <Link
+                                                href="/mensajes"
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="flex flex-col items-center justify-center py-4 px-2 bg-slate-900 border border-slate-800 rounded-xl text-blue-400 hover:bg-slate-800 transition-colors"
+                                            >
+                                                <MessageCircle className="w-6 h-6 mb-2" />
+                                                <span className="text-sm font-medium">Mensajes</span>
+                                            </Link>
+                                        </div>
+
                                         {isAdmin && (
                                             <Link
                                                 href="/admin"
                                                 onClick={() => setMobileMenuOpen(false)}
-                                                className="block w-full py-2.5 px-4 bg-purple-50 text-purple-700 rounded-lg font-medium mb-2"
+                                                className="block w-full py-3 px-4 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-xl font-medium text-center mt-2"
                                             >
-                                                Panel Admin
+                                                Panel de Administrador
                                             </Link>
                                         )}
-                                        <Link
-                                            href="/perfil"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="block w-full py-2.5 px-4 bg-gray-50 rounded-lg text-gray-700 font-medium"
-                                        >
-                                            Mi Perfil
-                                        </Link>
+
                                         <button
                                             onClick={() => {
                                                 setMobileMenuOpen(false);
                                                 signOut({ callbackUrl: '/' });
                                             }}
-                                            className="w-full py-2.5 px-4 bg-emerald-50 text-emerald-600 rounded-lg font-medium text-left"
+                                            className="w-full py-3 px-4 bg-red-500/5 text-red-400 border border-red-500/10 rounded-xl font-medium mt-4 hover:bg-red-500/10 transition-colors"
                                         >
                                             Cerrar Sesión
                                         </button>
                                     </div>
                                 ) : (
-                                    <div className="grid gap-3">
+                                    <div className="grid gap-4">
                                         <Link
                                             href="/login"
                                             onClick={() => setMobileMenuOpen(false)}
-                                            className="flex justify-center py-3 px-4 border border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 bg-gray-50"
+                                            className="flex justify-center py-4 px-4 border border-slate-700 rounded-xl font-semibold text-white hover:bg-slate-800 bg-slate-900 transition-all"
                                         >
                                             Acceso Clientes
                                         </Link>
@@ -304,10 +318,10 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     return (
         <Link
             href={href}
-            className="text-sm font-medium text-blue-100 hover:text-white transition-colors relative group py-2"
+            className="text-[15px] font-medium text-slate-400 hover:text-white transition-colors relative group py-2"
         >
             {children}
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#10B981] transition-all duration-300 group-hover:w-full" />
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
         </Link>
     );
 }
@@ -316,9 +330,9 @@ function MenuLink({ href, icon: Icon, children }: { href: string; icon: any; chi
     return (
         <Link
             href={href}
-            className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#003D82] transition-colors"
+            className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors group"
         >
-            <Icon className="w-4 h-4 text-gray-400 group-hover:text-[#003D82]" />
+            <Icon className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition-colors" />
             {children}
         </Link>
     );
@@ -329,10 +343,10 @@ function MobileLink({ href, children, onClick }: { href: string; children: React
         <Link
             href={href}
             onClick={onClick}
-            className="flex items-center justify-between py-3 px-2 text-lg font-medium text-gray-700 border-b border-gray-50 hover:text-[#003D82]"
+            className="flex items-center justify-between py-4 px-2 text-xl font-light text-slate-300 border-b border-slate-800/50 hover:text-emerald-400 hover:pl-4 transition-all"
         >
             {children}
-            <ChevronRight className="w-5 h-5 text-gray-300" />
+            <ChevronRight className="w-5 h-5 text-slate-600" />
         </Link>
     );
 }

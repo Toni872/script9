@@ -25,19 +25,22 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
             markedCount,
             message: `${markedCount} mensajes marcados como leídos`
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Error en POST /api/conversations/[id]/read:', error);
+        
+        // Type assertion for custom error handling
+        const err = error as { name?: string; message: string };
 
-        if (error.name === 'NotFoundError') {
-            return NextResponse.json({ error: error.message }, { status: 404 });
+        if (err.name === 'NotFoundError') {
+            return NextResponse.json({ error: err.message }, { status: 404 });
         }
 
-        if (error.name === 'ForbiddenError') {
-            return NextResponse.json({ error: error.message }, { status: 403 });
+        if (err.name === 'ForbiddenError') {
+            return NextResponse.json({ error: err.message }, { status: 403 });
         }
 
-        if (error.name === 'DatabaseError') {
-            return NextResponse.json({ error: error.message }, { status: 500 });
+        if (err.name === 'DatabaseError') {
+            return NextResponse.json({ error: err.message }, { status: 500 });
         }
 
         return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });

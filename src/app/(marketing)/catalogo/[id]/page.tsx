@@ -14,16 +14,16 @@ async function getProperty(id: string): Promise<Service | null> {
         const supabase = createServerSupabaseClient();
         const { data, error } = await supabase
             .from('properties')
-            .select`
-          *,
-          host:profiles!properties_host_id_fkey(
-            id,
-            full_name,
-            avatar_url,
-            email
-          ),
-          reviews:reviews(count)
-        `
+            .select(`
+              *,
+              host:profiles!properties_host_id_fkey(
+                id,
+                full_name,
+                avatar_url,
+                email
+              ),
+              reviews:reviews(count)
+            `)
             .eq('id', id)
             .single();
 

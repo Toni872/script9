@@ -41,45 +41,45 @@ export default function SoportePage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC] py-12">
+        <div className="min-h-screen bg-slate-950 py-12">
             <div className="container-script9 max-w-4xl mx-auto px-4">
                 <div className="text-center mb-12">
-                    <h1 className="text-3xl md:text-4xl font-bold text-[#003D82] mb-4">Centro de Soporte</h1>
-                    <p className="text-gray-600 text-lg">¿Cómo podemos ayudarte hoy?</p>
+                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Centro de Soporte</h1>
+                    <p className="text-slate-400 text-lg">¿Cómo podemos ayudarte hoy?</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Contact Info */}
                     <div className="space-y-6">
-                        <Card className="border-gray-200 shadow-sm overflow-hidden">
-                            <CardHeader className="bg-gray-50/50 border-b border-gray-100 pb-4">
-                                <CardTitle className="flex items-center gap-2 text-lg">
-                                    <MessageSquare className="w-5 h-5 text-[#003D82]" /> Asistencia Inmediata
+                        <Card className="border-slate-800 bg-slate-900 shadow-sm overflow-hidden">
+                            <CardHeader className="bg-slate-900 border-b border-slate-800 pb-4">
+                                <CardTitle className="flex items-center gap-2 text-lg text-white">
+                                    <MessageSquare className="w-5 h-5 text-emerald-400" /> Asistencia Inmediata
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="p-0">
-                                <div className="divide-y divide-gray-100">
+                                <div className="divide-y divide-slate-800">
                                     {/* AI Agent Option */}
-                                    <div className="p-4 hover:bg-blue-50/50 transition-colors group cursor-pointer" onClick={() => setIsChatOpen(true)}>
+                                    <div className="p-4 hover:bg-slate-800/50 transition-colors group cursor-pointer" onClick={() => setIsChatOpen(true)}>
                                         <div className="flex items-start gap-4">
-                                            <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                                                <Bot className="w-6 h-6 text-indigo-600" />
+                                            <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                                                <Bot className="w-6 h-6 text-emerald-400" />
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center justify-between mb-1">
-                                                    <h3 className="font-semibold text-gray-900">S9-Bot (IA)</h3>
-                                                    <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full flex items-center gap-1">
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                                    <h3 className="font-semibold text-white">S9-Bot (IA)</h3>
+                                                    <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                                                         Online 24/7
                                                     </span>
                                                 </div>
-                                                <p className="text-sm text-gray-600 mb-3">
+                                                <p className="text-sm text-slate-400 mb-3">
                                                     Respuestas instantáneas sobre documentación, precios y capacidades técnicas.
                                                 </p>
                                                 <Button
                                                     variant="outline"
                                                     size="sm"
-                                                    className="w-full border-indigo-200 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800"
+                                                    className="w-full border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white"
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         setIsChatOpen(true);
@@ -92,22 +92,22 @@ export default function SoportePage() {
                                     </div>
 
                                     {/* Human Agent Option */}
-                                    <div className="p-4 hover:bg-blue-50/50 transition-colors group cursor-pointer">
+                                    <div className="p-4 hover:bg-slate-800/50 transition-colors group cursor-pointer">
                                         <div className="flex items-start gap-4">
-                                            <div className="w-10 h-10 rounded-full bg-[#003D82]/10 flex items-center justify-center flex-shrink-0">
-                                                <Headphones className="w-6 h-6 text-[#003D82]" />
+                                            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
+                                                <Headphones className="w-6 h-6 text-emerald-400" />
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center justify-between mb-1">
-                                                    <h3 className="font-semibold text-gray-900">Ingeniero de Automatización</h3>
-                                                    <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
+                                                    <h3 className="font-semibold text-white">Ingeniero de Automatización</h3>
+                                                    <span className="text-xs font-medium text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">
                                                         09:00 - 18:00
                                                     </span>
                                                 </div>
-                                                <p className="text-sm text-gray-600 mb-3">
+                                                <p className="text-sm text-slate-400 mb-3">
                                                     Validación técnica detallada y consultoría para proyectos a medida.
                                                 </p>
-                                                <Button size="sm" className="w-full bg-[#003D82] text-white hover:bg-[#002E5C]">
+                                                <Button size="sm" className="w-full bg-slate-800 text-white hover:bg-slate-700 border border-slate-700">
                                                     Hablar con Experto
                                                 </Button>
                                             </div>
@@ -117,36 +117,36 @@ export default function SoportePage() {
                             </CardContent>
                         </Card>
 
-                        <Card className="border-gray-200 shadow-sm">
+                        <Card className="border-slate-800 bg-slate-900 shadow-sm">
                             <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Mail className="w-5 h-5 text-[#003D82]" /> Email
+                                <CardTitle className="flex items-center gap-2 text-white">
+                                    <Mail className="w-5 h-5 text-emerald-400" /> Email
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-gray-600 mb-4">Para consultas generales o documentos.</p>
-                                <a href="mailto:soporte@script9.com" className="text-blue-600 font-medium hover:underline">soporte@script9.com</a>
+                                <p className="text-slate-400 mb-4">Para consultas generales o documentos.</p>
+                                <a href="mailto:soporte@script9.com" className="text-emerald-400 font-medium hover:underline">soporte@script9.com</a>
                             </CardContent>
                         </Card>
                     </div>
 
                     {/* Contact Form */}
-                    <Card className="border-gray-200 shadow-sm">
+                    <Card className="border-slate-800 bg-slate-900 shadow-sm">
                         <CardHeader>
-                            <CardTitle>Envíanos un mensaje</CardTitle>
-                            <CardDescription>Te responderemos por correo electrónico.</CardDescription>
+                            <CardTitle className="text-white">Envíanos un mensaje</CardTitle>
+                            <CardDescription className="text-slate-400">Te responderemos por correo electrónico.</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium">Asunto</label>
-                                    <Input placeholder="Ej: Problema con mi pedido..." required />
+                                    <label className="text-sm font-medium text-slate-300">Asunto</label>
+                                    <Input placeholder="Ej: Problema con mi pedido..." required className="bg-slate-950 border-slate-800 text-white placeholder:text-slate-600" />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium">Mensaje</label>
-                                    <Textarea placeholder="Cuéntanos más detalles..." rows={5} required />
+                                    <label className="text-sm font-medium text-slate-300">Mensaje</label>
+                                    <Textarea placeholder="Cuéntanos más detalles..." rows={5} required className="bg-slate-950 border-slate-800 text-white placeholder:text-slate-600" />
                                 </div>
-                                <Button type="submit" className="w-full bg-[#10B981] text-white hover:bg-[#059669]" disabled={sending}>
+                                <Button type="submit" className="w-full bg-emerald-600 text-white hover:bg-emerald-500" disabled={sending}>
                                     {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Enviar Mensaje'}
                                 </Button>
                             </form>

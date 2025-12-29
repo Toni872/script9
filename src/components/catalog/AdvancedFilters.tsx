@@ -47,8 +47,8 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
 
     const sortOptions = [
         { value: 'relevance', label: 'Más Relevantes' },
-        { value: 'price_asc', label: 'Precio: Menor a Mayor' },
-        { value: 'price_desc', label: 'Precio: Mayor a Menor' },
+        { value: 'price_asc', label: 'Inversión: Menor a Mayor' },
+        { value: 'price_desc', label: 'Inversión: Mayor a Menor' },
         { value: 'rating_desc', label: 'Mejor Valorados' },
         { value: 'newest', label: 'Más Recientes' },
     ];
@@ -99,14 +99,14 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
     return (
         <div className="space-y-8">
             {/* Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-500">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+                <span className="text-sm font-medium text-slate-500">
                     Opciones de búsqueda
                 </span>
                 {hasActiveFilters && (
                     <button
                         onClick={handleClear}
-                        className="text-xs font-semibold text-[#10B981] hover:text-[#059669] uppercase tracking-wide transition-colors"
+                        className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 uppercase tracking-wide transition-colors"
                     >
                         Limpiar todo
                     </button>
@@ -115,15 +115,15 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
 
             {/* Tipo de Servicio - Pills */}
             <div className="space-y-4">
-                <h4 className="text-sm font-bold text-[#333333] uppercase tracking-wide">Categoría</h4>
+                <h4 className="text-sm font-bold text-white uppercase tracking-wide">Categoría</h4>
                 <div className="flex flex-wrap gap-2">
                     {propertyTypeOptions.map(option => (
                         <button
                             key={option.value}
                             onClick={() => handlePropertyTypeToggle(option.value)}
                             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${localFilters.propertyTypes?.includes(option.value)
-                                ? 'bg-[#10B981]/10 text-[#10B981] border-[#10B981]'
-                                : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
+                                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/50'
+                                : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
                                 }`}
                         >
                             {option.label}
@@ -132,30 +132,30 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
                 </div>
             </div>
 
-            {/* Rango de Precio */}
+            {/* Rango de Presupuesto */}
             <div className="space-y-4">
-                <h4 className="text-sm font-bold text-[#333333] uppercase tracking-wide">Rango de Precio (€)</h4>
+                <h4 className="text-sm font-bold text-white uppercase tracking-wide">Rango de Presupuesto (€)</h4>
                 <div className="grid grid-cols-2 gap-4">
                     <div className="relative">
-                        <span className="absolute left-3 top-2.5 text-gray-400 text-sm">€</span>
+                        <span className="absolute left-3 top-2.5 text-slate-500 text-sm">€</span>
                         <input
                             type="number"
                             min="0"
                             placeholder="Min"
                             value={localFilters.minPrice || ''}
                             onChange={(e) => handlePriceChange(e.target.value ? parseInt(e.target.value) : undefined, localFilters.maxPrice)}
-                            className="w-full pl-7 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003D82]/10 focus:border-[#003D82] transition-all"
+                            className="w-full pl-7 pr-3 py-2 text-sm bg-slate-900 border border-slate-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all placeholder:text-slate-600"
                         />
                     </div>
                     <div className="relative">
-                        <span className="absolute left-3 top-2.5 text-gray-400 text-sm">€</span>
+                        <span className="absolute left-3 top-2.5 text-slate-500 text-sm">€</span>
                         <input
                             type="number"
                             min="0"
                             placeholder="Max"
                             value={localFilters.maxPrice || ''}
                             onChange={(e) => handlePriceChange(localFilters.minPrice, e.target.value ? parseInt(e.target.value) : undefined)}
-                            className="w-full pl-7 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003D82]/10 focus:border-[#003D82] transition-all"
+                            className="w-full pl-7 pr-3 py-2 text-sm bg-slate-900 border border-slate-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all placeholder:text-slate-600"
                         />
                     </div>
                 </div>
@@ -163,7 +163,7 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
 
             {/* Tecnologías - Checkboxes */}
             <div className="space-y-4">
-                <h4 className="text-sm font-bold text-[#333333] uppercase tracking-wide">Tecnologías</h4>
+                <h4 className="text-sm font-bold text-white uppercase tracking-wide">Tecnologías</h4>
                 <div className="space-y-2">
                     {amenityOptions.map(option => {
                         const isChecked = localFilters.amenities?.includes(option.value) || false;
@@ -172,8 +172,8 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
                                 key={option.value}
                                 className="flex items-center group cursor-pointer"
                             >
-                                <div className={`w-5 h-5 rounded border flex items-center justify-center mr-3 transition-colors ${isChecked ? 'bg-[#003D82] border-[#003D82]' : 'border-gray-300 group-hover:border-[#003D82]'}`}>
-                                    {isChecked && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
+                                <div className={`w-5 h-5 rounded border flex items-center justify-center mr-3 transition-colors ${isChecked ? 'bg-emerald-500 border-emerald-500' : 'bg-slate-900 border-slate-700 group-hover:border-slate-500'}`}>
+                                    {isChecked && <Check className="w-3.5 h-3.5 text-slate-950" strokeWidth={3} />}
                                 </div>
                                 <input
                                     type="checkbox"
@@ -181,7 +181,7 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
                                     checked={isChecked}
                                     onChange={() => handleAmenityToggle(option.value)}
                                 />
-                                <span className={`text-sm ${isChecked ? 'text-[#003D82] font-medium' : 'text-gray-600'}`}>
+                                <span className={`text-sm ${isChecked ? 'text-emerald-400 font-medium' : 'text-slate-400'}`}>
                                     {option.label}
                                 </span>
                             </label>
@@ -191,15 +191,15 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
             </div>
 
             {/* Ordenar Por */}
-            <div className="space-y-4 pt-6 border-t border-gray-100">
-                <h4 className="text-sm font-bold text-[#333333] uppercase tracking-wide">Ordenar</h4>
+            <div className="space-y-4 pt-6 border-t border-slate-800">
+                <h4 className="text-sm font-bold text-white uppercase tracking-wide">Ordenar</h4>
                 <select
                     value={localFilters.sortBy || 'relevance'}
                     onChange={(e) => handleSortChange(e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003D82]/10 focus:border-[#003D82] bg-white cursor-pointer"
+                    className="w-full px-3 py-2 text-sm bg-slate-900 border border-slate-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 cursor-pointer"
                 >
                     {sortOptions.map(option => (
-                        <option key={option.value} value={option.value}>
+                        <option key={option.value} value={option.value} className="bg-slate-900 text-white">
                             {option.label}
                         </option>
                     ))}

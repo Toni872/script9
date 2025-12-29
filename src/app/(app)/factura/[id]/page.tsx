@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Loader2, Download, ArrowLeft, Printer } from 'lucide-react';
+import { Loader2, Download, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 interface InvoiceData {
@@ -28,7 +27,7 @@ export default function InvoicePage({ params }: { params: { id: string } }) {
     useEffect(() => {
         async function fetchInvoice() {
             setLoading(true);
-            const { data, error } = await supabase
+            const { data } = await supabase
                 .from('bookings')
                 .select(`
                     id,

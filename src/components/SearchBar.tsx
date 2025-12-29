@@ -55,26 +55,26 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                     <motion.div
                         whileHover={{ scale: 1.005 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                        className="flex items-center gap-0 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl"
+                        className="flex items-center gap-0 bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-700/50 shadow-2xl"
                     >
                         {/* Búsqueda */}
                         <div className="flex-1 w-full">
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5">
-                                    <Search className="h-4 w-4 text-white/70 group-focus-within:text-white transition-colors duration-200" />
+                                    <Search className="h-4 w-4 text-slate-400 group-focus-within:text-emerald-400 transition-colors duration-200" />
                                 </div>
                                 <input
                                     type="text"
                                     placeholder={placeholder || "¿Qué servicio necesitas?"}
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 text-[16px] text-white placeholder:text-white/60 border-0 rounded-2xl focus:outline-none bg-transparent transition-all duration-200"
+                                    className="w-full pl-12 pr-4 py-4 text-[16px] text-white placeholder:text-slate-500 border-0 rounded-2xl focus:outline-none bg-transparent transition-all duration-200"
                                 />
                             </div>
                         </div>
 
                         {/* Divider */}
-                        <div className="w-px h-8 bg-white/20"></div>
+                        <div className="w-px h-8 bg-slate-700"></div>
 
                         {/* Botón de Búsqueda */}
                         <div className="flex items-center">
@@ -104,14 +104,14 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                 <motion.div
                     whileHover={{ scale: 1.003 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                    className={`flex items-center bg-white/10 backdrop-blur-xl rounded-2xl border transition-all duration-300 shadow-2xl p-2 ${isFocused ? 'border-[#10B981]/50 bg-white/15' : 'border-white/20'
+                    className={`flex items-center bg-slate-900/80 backdrop-blur-xl rounded-2xl border transition-all duration-300 shadow-2xl p-2 ${isFocused ? 'border-emerald-500/50 bg-slate-900' : 'border-slate-700/50'
                         }`}
                 >
                     {/* Input de búsqueda */}
                     <div className="flex-1">
                         <div className="relative group">
                             <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5">
-                                <Search className="h-5 w-5 text-white/70 group-focus-within:text-white transition-colors duration-200" />
+                                <Search className="h-5 w-5 text-slate-400 group-focus-within:text-emerald-400 transition-colors duration-200" />
                             </div>
                             <Input
                                 placeholder={placeholder || "¿Qué servicio de automatización necesitas?"}
@@ -119,7 +119,7 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                                 onChange={(e) => setQuery(e.target.value)}
                                 onFocus={() => setIsFocused(true)}
                                 onBlur={() => setIsFocused(false)}
-                                className="pl-12 h-14 text-[17px] border-0 rounded-xl bg-transparent text-white placeholder:text-white/60 focus-visible:ring-0 focus:outline-none transition-all duration-200"
+                                className="pl-12 h-14 text-[17px] border-0 rounded-xl bg-transparent text-white placeholder:text-slate-500 focus-visible:ring-0 focus:outline-none transition-all duration-200"
                             />
                         </div>
                     </div>
@@ -155,9 +155,9 @@ export default function SearchBar({ onSearch, initialParams, variant = 'default'
                                     useCurrentLocation: false,
                                 });
                             }}
-                            className="group flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-white/80 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-white/20 hover:text-white transition-all duration-200"
+                            className="group flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 rounded-full hover:bg-slate-700 hover:border-emerald-500/30 hover:text-emerald-400 transition-all duration-200"
                         >
-                            <suggestion.icon className="h-3.5 w-3.5 text-[#10B981] group-hover:scale-110 transition-transform" />
+                            <suggestion.icon className="h-3.5 w-3.5 text-emerald-500 group-hover:scale-110 transition-transform" />
                             {suggestion.label}
                         </button>
                     ))}

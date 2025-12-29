@@ -44,7 +44,7 @@ export function ProblemSolution() {
     ];
 
     return (
-        <section className="py-24 bg-[#F8FAFC] relative overflow-hidden" ref={containerRef}>
+        <section className="py-24 bg-slate-950 border-y border-slate-800 relative overflow-hidden" ref={containerRef}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <motion.div
@@ -53,13 +53,13 @@ export function ProblemSolution() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-[#333333] mb-6 tracking-tight">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
                             La Evolución de tu Negocio
                         </h2>
-                        <p className="text-xl text-[#666666] max-w-3xl mx-auto leading-relaxed font-light">
+                        <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light">
                             La gestión tradicional tiene un límite. La automatización inteligente no.
                             <br className="hidden md:block" />
-                            <span className="text-[#003D82] font-semibold">¿De qué lado quieres estar?</span>
+                            <span className="text-white font-semibold">¿De qué lado quieres estar?</span>
                         </p>
                     </motion.div>
                 </div>
@@ -73,24 +73,24 @@ export function ProblemSolution() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="group relative bg-white rounded-[2rem] p-8 md:p-10 shadow-lg border border-gray-100 hover:border-gray-200 transition-colors overflow-hidden flex flex-col h-full"
+                        className="group relative bg-slate-900/50 rounded-[2rem] p-8 md:p-10 shadow-lg border border-slate-800 hover:border-slate-700 transition-colors overflow-hidden flex flex-col h-full grayscale hover:grayscale-0"
                     >
                         <div className="flex items-center gap-4 mb-8 opacity-70">
-                            <div className="uppercase tracking-widest text-xs font-bold text-gray-500 border border-gray-200 px-3 py-1 rounded-full">
+                            <div className="uppercase tracking-widest text-xs font-bold text-slate-500 border border-slate-700 px-3 py-1 rounded-full">
                                 El modelo tradicional
                             </div>
-                            <div className="h-px bg-gray-100 flex-1" />
+                            <div className="h-px bg-slate-800 flex-1" />
                         </div>
 
                         <div className="space-y-8 flex-1">
                             {problems.map((item, i) => (
                                 <div key={i} className="flex gap-5 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-                                    <div className="mt-1 flex-shrink-0 w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100">
+                                    <div className="mt-1 flex-shrink-0 w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 border border-slate-700">
                                         <item.icon className="w-5 h-5 stroke-[1.5]" />
                                     </div>
                                     <div>
-                                        <h3 className="text-lg font-bold text-gray-700 mb-2">{item.title}</h3>
-                                        <p className="text-gray-500 leading-relaxed text-sm font-light">{item.desc}</p>
+                                        <h3 className="text-lg font-bold text-slate-300 mb-2">{item.title}</h3>
+                                        <p className="text-slate-500 leading-relaxed text-sm font-light">{item.desc}</p>
                                     </div>
                                 </div>
                             ))}
@@ -99,8 +99,8 @@ export function ProblemSolution() {
 
                     {/* VS BADGE */}
                     <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                        <div className="bg-white p-2 rounded-full shadow-xl">
-                            <div className="w-14 h-14 bg-[#003D82] rounded-full flex items-center justify-center text-white font-bold text-lg border-[3px] border-white">
+                        <div className="bg-slate-900 p-2 rounded-full shadow-xl border border-slate-800">
+                            <div className="w-14 h-14 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg border-[3px] border-slate-900">
                                 VS
                             </div>
                         </div>
@@ -112,17 +112,16 @@ export function ProblemSolution() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="group relative bg-[#003D82] rounded-[2rem] p-8 md:p-10 shadow-2xl text-white overflow-hidden transform hover:scale-[1.01] transition-transform duration-500 flex flex-col h-full"
+                        className="group relative bg-slate-900 rounded-[2rem] p-8 md:p-10 shadow-2xl text-white overflow-hidden transform hover:scale-[1.01] transition-transform duration-500 flex flex-col h-full border border-emerald-500/20 hover:border-emerald-500/50"
                     >
-                        {/* Minimal Noise, No heavy colors */}
-                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
+
 
                         <div className="relative z-10 flex flex-col h-full">
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="uppercase tracking-widest text-xs font-bold text-white border border-white/20 px-3 py-1 rounded-full bg-white/5 backdrop-blur-md">
+                                <div className="uppercase tracking-widest text-xs font-bold text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full bg-emerald-500/10 backdrop-blur-md">
                                     El Método Script9
                                 </div>
-                                <div className="h-px bg-white/10 flex-1" />
+                                <div className="h-px bg-emerald-500/20 flex-1" />
                             </div>
 
                             <div className="space-y-8 flex-1">
@@ -134,12 +133,12 @@ export function ProblemSolution() {
                                         transition={{ delay: 0.4 + (i * 0.1) }}
                                         className="flex gap-5"
                                     >
-                                        <div className="mt-1 flex-shrink-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/10">
+                                        <div className="mt-1 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
                                             <item.icon className="w-5 h-5 stroke-[1.5]" />
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-bold text-white mb-2 tracking-wide">{item.title}</h3>
-                                            <p className="text-blue-100/70 leading-relaxed text-sm antialiased font-light">{item.desc}</p>
+                                            <p className="text-zinc-400 leading-relaxed text-sm antialiased font-light">{item.desc}</p>
                                         </div>
                                     </motion.div>
                                 ))}

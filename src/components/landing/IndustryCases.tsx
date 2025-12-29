@@ -36,24 +36,24 @@ export function IndustryCases() {
     ];
 
     return (
-        <section className="py-24 bg-[#002E5C] relative overflow-hidden">
+        <section className="py-24 bg-slate-950 border-y border-slate-800 relative overflow-hidden">
             {/* Subtle Noise Texture */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none" />
 
-            {/* Ambient Light (Brand Blue, not multi-color) */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#003D82] rounded-full blur-[120px] opacity-40 pointer-events-none" />
+
+            {/* Ambient Light (Neutral / Emerald) */}
+
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/5 pb-8">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-slate-800 pb-8">
                     <div className="max-w-2xl">
                         <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
                             Resultados Reales
                         </h2>
-                        <p className="text-xl text-blue-100/80 font-light">
+                        <p className="text-xl text-slate-400 font-light">
                             Soluciones probadas en entornos de alta exigencia.
                         </p>
                     </div>
-                    <button className="hidden md:flex items-center gap-2 text-white font-medium hover:text-[#10B981] transition-colors mt-4 md:mt-0 group">
+                    <button className="hidden md:flex items-center gap-2 text-white font-medium hover:text-emerald-400 transition-colors mt-4 md:mt-0 group">
                         Ver casos detallados <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                 </div>
@@ -63,28 +63,28 @@ export function IndustryCases() {
                         <motion.div
                             key={i}
                             whileHover={{ y: -4 }}
-                            className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-xl hover:border-[#10B981]/30 hover:bg-white/[0.07] transition-all duration-300 group"
+                            className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:border-emerald-500/30 hover:bg-slate-800 transition-all duration-300 group shadow-xl"
                         >
                             <div className="flex justify-between items-start mb-6">
                                 {/* Icon: Pure White, Simple */}
-                                <div className="p-0 text-white group-hover:text-[#10B981] transition-colors">
+                                <div className="p-0 text-white group-hover:text-emerald-400 transition-colors">
                                     <ind.icon className="w-8 h-8 stroke-[1.5]" />
                                 </div>
 
                                 {/* Stat Badge: Red Accent, Professional */}
-                                <span className="text-[#10B981] font-bold text-sm bg-[#10B981]/10 px-3 py-1 rounded-full border border-[#10B981]/20">
+                                <span className="text-emerald-400 font-bold text-sm bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                                     {ind.stat}
                                 </span>
                             </div>
 
                             <h3 className="text-lg font-bold text-white mb-3">{ind.title}</h3>
-                            <p className="text-blue-100/60 text-sm mb-8 leading-relaxed font-light min-h-[60px]">
+                            <p className="text-slate-400 text-sm mb-8 leading-relaxed font-light min-h-[60px]">
                                 {ind.description}
                             </p>
 
-                            <div className="flex flex-wrap gap-2 mt-auto border-t border-white/5 pt-4">
+                            <div className="flex flex-wrap gap-2 mt-auto border-t border-slate-800 pt-4">
                                 {ind.tags.map(tag => (
-                                    <span key={tag} className="text-[11px] uppercase tracking-wide font-medium text-blue-200/60">
+                                    <span key={tag} className="text-[11px] uppercase tracking-wide font-medium text-slate-500">
                                         #{tag}
                                     </span>
                                 ))}

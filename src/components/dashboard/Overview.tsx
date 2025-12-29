@@ -41,53 +41,55 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
             <div className="space-y-6">
                 <div className="grid gap-4 md:grid-cols-3">
                     {/* Upsell Card 1: ROI Potential */}
-                    <Card className="border-blue-100 bg-blue-50 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-3 opacity-10">
-                            <TrendingUp className="w-24 h-24 text-blue-600" />
+                    <Card className="border-slate-800 bg-slate-900/50 relative overflow-hidden group hover:border-emerald-500/30 transition-all">
+                        <div className="absolute top-0 right-0 p-3 opacity-5">
+                            <TrendingUp className="w-24 h-24 text-emerald-500" />
                         </div>
                         <CardHeader className="pb-2">
-                            <CardTitle className="text-sm font-medium text-blue-600">Ahorro Potencial</CardTitle>
+                            <CardTitle className="text-sm font-medium text-emerald-400">Ahorro Potencial</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-[#003D82]">€1,200/mes</div>
-                            <p className="text-xs text-blue-600 mt-1">Automatizando tus tareas actuales</p>
+                            <div className="text-2xl font-bold text-white">€1,200/mes</div>
+                            <p className="text-xs text-slate-400 mt-1">Automatizando tus tareas actuales</p>
                         </CardContent>
                     </Card>
 
                     {/* Upsell Card 2: Efficiency */}
-                    <Card className="border-gray-200">
+                    <Card className="border-slate-800 bg-slate-900/50 hover:border-slate-700 transition-all">
                         <CardHeader className="pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-500">Horas Recuperables</CardTitle>
+                            <CardTitle className="text-sm font-medium text-slate-400">Horas Recuperables</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-gray-700">~20h/semana</div>
-                            <p className="text-xs text-gray-500 mt-1">Tiempo libre para ventas</p>
+                            <div className="text-2xl font-bold text-slate-200">~20h/semana</div>
+                            <p className="text-xs text-slate-500 mt-1">Tiempo libre para ventas</p>
                         </CardContent>
                     </Card>
 
                     {/* Upsell Card 3: Unlock Pro */}
-                    <Card className="border-dashed border-2 border-gray-300 bg-gray-50 flex flex-col justify-center items-center text-center p-6">
-                        <Lock className="w-8 h-8 text-gray-400 mb-2" />
-                        <h3 className="font-bold text-gray-600">Desbloquear Analytics</h3>
-                        <p className="text-xs text-gray-400 mb-4">Ver métricas reales de negocio</p>
+                    <Card className="border-dashed border-2 border-slate-800 bg-slate-950 flex flex-col justify-center items-center text-center p-6 hover:border-slate-700 transition-all">
+                        <Lock className="w-8 h-8 text-slate-600 mb-2" />
+                        <h3 className="font-bold text-slate-300">Desbloquear Analytics</h3>
+                        <p className="text-xs text-slate-500 mb-4">Ver métricas reales de negocio</p>
                         <Link href="/soporte">
-                            <Button size="sm" variant="outline">Consultar Plan Pro</Button>
+                            <Button size="sm" variant="outline" className="border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800">
+                                Consultar Plan Pro
+                            </Button>
                         </Link>
                     </Card>
                 </div>
 
                 {/* Free Tier "Next Steps" */}
-                <Card className="border-[#003D82] border-l-4 shadow-sm bg-white">
+                <Card className="border-slate-800 border-l-4 border-l-emerald-500 shadow-lg bg-slate-900">
                     <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-4">
                         <div>
-                            <h3 className="text-lg font-bold text-[#333333] mb-1 flex items-center gap-2">
-                                <Rocket className="w-5 h-5 text-[#10B981]" />
+                            <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                                <Rocket className="w-5 h-5 text-emerald-500" />
                                 Impulsa tu negocio hoy
                             </h3>
-                            <p className="text-gray-600 text-sm">Empieza tu primer proyecto de automatización desde 150€. Sin compromisos.</p>
+                            <p className="text-slate-400 text-sm">Empieza tu primer proyecto de automatización desde 150€. Sin compromisos.</p>
                         </div>
                         <Link href="/nuevo-proyecto">
-                            <Button className="mt-4 bg-[#10B981] text-white hover:bg-[#059669] shadow-lg shadow-green-900/20 whitespace-nowrap">
+                            <Button className="mt-4 bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20 whitespace-nowrap">
                                 <Zap className="w-4 h-4 mr-2" /> Empezar Ahora
                             </Button>
                         </Link>
@@ -128,18 +130,18 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
             {cards.map((card, index) => (
-                <Card key={index} className="border-gray-200 shadow-sm hover:shadow-md transition-all">
+                <Card key={index} className="border-slate-800 bg-slate-900 shadow-sm hover:border-slate-700 transition-all">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-gray-500">
+                        <CardTitle className="text-sm font-medium text-slate-400">
                             {card.title}
                         </CardTitle>
-                        <div className={`p-2 rounded-full ${card.bg}`}>
+                        <div className={`p-2 rounded-full bg-slate-950 border border-slate-800`}>
                             <card.icon className={`h-4 w-4 ${card.color}`} />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-[#333333]">{card.value}</div>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <div className="text-2xl font-bold text-white">{card.value}</div>
+                        <p className="text-xs text-slate-500 mt-1">
                             {card.description}
                         </p>
                     </CardContent>
