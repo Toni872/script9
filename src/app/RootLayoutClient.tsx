@@ -6,12 +6,16 @@ import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import AuthRoleSync from "@/components/AuthRoleSync";
 
 import Header from "@/components/Header";
+import { usePathname } from "next/navigation";
 
 export default function RootLayoutClient({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const pathname = usePathname();
+    const isDashboard = pathname?.startsWith("/dashboard") || pathname?.startsWith("/admin");
+
     return (
         <SessionProvider>
             <ReactQueryProvider>
@@ -19,7 +23,7 @@ export default function RootLayoutClient({
                     <Suspense fallback={null}>
                         <AuthRoleSync />
                     </Suspense>
-                    <Header />
+                    {!isDashboard && <Header />}
                     {children}
                 </div>
             </ReactQueryProvider>

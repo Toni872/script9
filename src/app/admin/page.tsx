@@ -57,25 +57,28 @@ export default function AdminDashboard() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#8B5CF6]" />
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#f5f5f7] pb-20">
+        <div className="min-h-screen bg-slate-950 pb-20 relative overflow-hidden">
+            {/* Background Grid */}
+            <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
             {/* Header */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-slate-900/50 backdrop-blur-md border-b border-slate-800 sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <h1 className="text-4xl font-bold tracking-tight text-[#1d1d1f]">
+                        <h1 className="text-4xl font-bold tracking-tight text-white">
                             Panel de Administración
                         </h1>
-                        <p className="mt-2 text-lg text-[#86868b]">
+                        <p className="mt-2 text-lg text-slate-400">
                             Gestiona usuarios, propiedades y reservas de Script9
                         </p>
                     </motion.div>
@@ -83,31 +86,31 @@ export default function AdminDashboard() {
             </div>
 
             {/* Stats Grid */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Total Users */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.1 }}
-                        className="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+                        className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/10 transition-all group"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-[#86868b]">Usuarios Totales</p>
-                                <p className="text-3xl font-bold text-[#1d1d1f] mt-2">
+                                <p className="text-sm font-medium text-slate-400">Usuarios Totales</p>
+                                <p className="text-3xl font-bold text-white mt-2">
                                     {stats?.totalUsers?.toLocaleString() || '0'}
                                 </p>
                                 <div className="flex items-center mt-2">
-                                    <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
-                                    <span className="text-sm text-green-500 font-medium">
+                                    <TrendingUp className="w-4 h-4 text-emerald-500 mr-1" />
+                                    <span className="text-sm text-emerald-500 font-medium">
                                         +{stats?.userGrowth || 0}%
                                     </span>
-                                    <span className="text-sm text-[#86868b] ml-1">este mes</span>
+                                    <span className="text-sm text-slate-500 ml-1">este mes</span>
                                 </div>
                             </div>
-                            <div className="h-14 w-14 rounded-full bg-blue-50 flex items-center justify-center">
-                                <Users className="w-7 h-7 text-blue-500" />
+                            <div className="h-14 w-14 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:border-blue-500/50 transition-colors">
+                                <Users className="w-7 h-7 text-blue-400" />
                             </div>
                         </div>
                     </motion.div>
@@ -117,12 +120,12 @@ export default function AdminDashboard() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+                        className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/10 transition-all group"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-[#86868b]">Propiedades</p>
-                                <p className="text-3xl font-bold text-[#1d1d1f] mt-2">
+                                <p className="text-sm font-medium text-slate-400">Propiedades</p>
+                                <p className="text-3xl font-bold text-white mt-2">
                                     {stats?.totalProperties?.toLocaleString() || '0'}
                                 </p>
                                 <div className="flex items-center mt-2">
@@ -130,11 +133,11 @@ export default function AdminDashboard() {
                                     <span className="text-sm text-orange-500 font-medium">
                                         {stats?.pendingApprovals || 0}
                                     </span>
-                                    <span className="text-sm text-[#86868b] ml-1">pendientes</span>
+                                    <span className="text-sm text-slate-500 ml-1">pendientes</span>
                                 </div>
                             </div>
-                            <div className="h-14 w-14 rounded-full bg-purple-50 flex items-center justify-center">
-                                <Home className="w-7 h-7 text-[#8B5CF6]" />
+                            <div className="h-14 w-14 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 group-hover:border-purple-500/50 transition-colors">
+                                <Home className="w-7 h-7 text-purple-400" />
                             </div>
                         </div>
                     </motion.div>
@@ -144,24 +147,24 @@ export default function AdminDashboard() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.3 }}
-                        className="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+                        className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/10 transition-all group"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-[#86868b]">Reservas Totales</p>
-                                <p className="text-3xl font-bold text-[#1d1d1f] mt-2">
+                                <p className="text-sm font-medium text-slate-400">Reservas Totales</p>
+                                <p className="text-3xl font-bold text-white mt-2">
                                     {stats?.totalBookings?.toLocaleString() || '0'}
                                 </p>
                                 <div className="flex items-center mt-2">
-                                    <Activity className="w-4 h-4 text-green-500 mr-1" />
-                                    <span className="text-sm text-green-500 font-medium">
+                                    <Activity className="w-4 h-4 text-emerald-500 mr-1" />
+                                    <span className="text-sm text-emerald-500 font-medium">
                                         {stats?.activeBookings || 0}
                                     </span>
-                                    <span className="text-sm text-[#86868b] ml-1">activas</span>
+                                    <span className="text-sm text-slate-500 ml-1">activas</span>
                                 </div>
                             </div>
-                            <div className="h-14 w-14 rounded-full bg-green-50 flex items-center justify-center">
-                                <Calendar className="w-7 h-7 text-green-500" />
+                            <div className="h-14 w-14 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover:border-emerald-500/50 transition-colors">
+                                <Calendar className="w-7 h-7 text-emerald-400" />
                             </div>
                         </div>
                     </motion.div>
@@ -171,24 +174,24 @@ export default function AdminDashboard() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.4 }}
-                        className="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+                        className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/10 transition-all group"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-[#86868b]">Ingresos Totales</p>
-                                <p className="text-3xl font-bold text-[#1d1d1f] mt-2">
+                                <p className="text-sm font-medium text-slate-400">Ingresos Totales</p>
+                                <p className="text-3xl font-bold text-white mt-2">
                                     €{stats?.totalRevenue?.toLocaleString() || '0'}
                                 </p>
                                 <div className="flex items-center mt-2">
-                                    <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
-                                    <span className="text-sm text-green-500 font-medium">
+                                    <TrendingUp className="w-4 h-4 text-emerald-500 mr-1" />
+                                    <span className="text-sm text-emerald-500 font-medium">
                                         +{stats?.revenueGrowth || 0}%
                                     </span>
-                                    <span className="text-sm text-[#86868b] ml-1">este mes</span>
+                                    <span className="text-sm text-slate-500 ml-1">este mes</span>
                                 </div>
                             </div>
-                            <div className="h-14 w-14 rounded-full bg-emerald-50 flex items-center justify-center">
-                                <DollarSign className="w-7 h-7 text-emerald-500" />
+                            <div className="h-14 w-14 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover:border-emerald-500/50 transition-colors">
+                                <DollarSign className="w-7 h-7 text-emerald-400" />
                             </div>
                         </div>
                     </motion.div>
@@ -203,39 +206,39 @@ export default function AdminDashboard() {
                 >
                     <button
                         onClick={() => router.push('/admin/usuarios')}
-                        className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-[#8B5CF6] hover:shadow-lg transition-all text-left group"
+                        className="bg-slate-900/50 rounded-xl p-6 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900 transition-all text-left group"
                     >
-                        <Users className="w-8 h-8 text-[#8B5CF6] mb-4" />
-                        <h3 className="text-lg font-semibold text-[#1d1d1f] group-hover:text-[#8B5CF6] transition-colors">
+                        <Users className="w-8 h-8 text-blue-500 mb-4 group-hover:text-blue-400 transition-colors" />
+                        <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
                             Gestionar Usuarios
                         </h3>
-                        <p className="text-sm text-[#86868b] mt-2">
+                        <p className="text-sm text-slate-400 mt-2 group-hover:text-slate-300">
                             Ver, editar y gestionar todos los usuarios de la plataforma
                         </p>
                     </button>
 
                     <button
                         onClick={() => router.push('/admin/propiedades')}
-                        className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-[#8B5CF6] hover:shadow-lg transition-all text-left group"
+                        className="bg-slate-900/50 rounded-xl p-6 border border-slate-800 hover:border-purple-500/50 hover:bg-slate-900 transition-all text-left group"
                     >
-                        <Home className="w-8 h-8 text-[#8B5CF6] mb-4" />
-                        <h3 className="text-lg font-semibold text-[#1d1d1f] group-hover:text-[#8B5CF6] transition-colors">
+                        <Home className="w-8 h-8 text-purple-500 mb-4 group-hover:text-purple-400 transition-colors" />
+                        <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
                             Gestionar Propiedades
                         </h3>
-                        <p className="text-sm text-[#86868b] mt-2">
+                        <p className="text-sm text-slate-400 mt-2 group-hover:text-slate-300">
                             Aprobar, rechazar y editar propiedades publicadas
                         </p>
                     </button>
 
                     <button
                         onClick={() => router.push('/admin/reservas')}
-                        className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-[#8B5CF6] hover:shadow-lg transition-all text-left group"
+                        className="bg-slate-900/50 rounded-xl p-6 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all text-left group"
                     >
-                        <Calendar className="w-8 h-8 text-[#8B5CF6] mb-4" />
-                        <h3 className="text-lg font-semibold text-[#1d1d1f] group-hover:text-[#8B5CF6] transition-colors">
+                        <Calendar className="w-8 h-8 text-emerald-500 mb-4 group-hover:text-emerald-400 transition-colors" />
+                        <h3 className="text-lg font-semibold text-white group-hover:text-emerald-400 transition-colors">
                             Gestionar Reservas
                         </h3>
-                        <p className="text-sm text-[#86868b] mt-2">
+                        <p className="text-sm text-slate-400 mt-2 group-hover:text-slate-300">
                             Ver todas las reservas y resolver problemas
                         </p>
                     </button>
@@ -246,37 +249,37 @@ export default function AdminDashboard() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
-                    className="mt-8 bg-white rounded-2xl p-6 border border-gray-200"
+                    className="mt-8 bg-slate-900/50 rounded-2xl p-6 border border-slate-800"
                 >
-                    <h2 className="text-xl font-semibold text-[#1d1d1f] mb-4">
+                    <h2 className="text-xl font-semibold text-white mb-4">
                         Actividad Reciente
                     </h2>
                     <div className="space-y-4">
-                        <div className="flex items-center p-4 bg-[#f5f5f7] rounded-xl">
-                            <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                        <div className="flex items-center p-4 bg-slate-950/50 rounded-xl border border-slate-800">
+                            <CheckCircle className="w-5 h-5 text-emerald-500 mr-3" />
                             <div>
-                                <p className="text-sm font-medium text-[#1d1d1f]">
+                                <p className="text-sm font-medium text-white">
                                     Nueva reserva confirmada
                                 </p>
-                                <p className="text-xs text-[#86868b]">Hace 5 minutos</p>
+                                <p className="text-xs text-slate-500">Hace 5 minutos</p>
                             </div>
                         </div>
-                        <div className="flex items-center p-4 bg-[#f5f5f7] rounded-xl">
+                        <div className="flex items-center p-4 bg-slate-950/50 rounded-xl border border-slate-800">
                             <AlertCircle className="w-5 h-5 text-orange-500 mr-3" />
                             <div>
-                                <p className="text-sm font-medium text-[#1d1d1f]">
+                                <p className="text-sm font-medium text-white">
                                     Propiedad pendiente de aprobación
                                 </p>
-                                <p className="text-xs text-[#86868b]">Hace 15 minutos</p>
+                                <p className="text-xs text-slate-500">Hace 15 minutos</p>
                             </div>
                         </div>
-                        <div className="flex items-center p-4 bg-[#f5f5f7] rounded-xl">
-                            <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                        <div className="flex items-center p-4 bg-slate-950/50 rounded-xl border border-slate-800">
+                            <CheckCircle className="w-5 h-5 text-emerald-500 mr-3" />
                             <div>
-                                <p className="text-sm font-medium text-[#1d1d1f]">
+                                <p className="text-sm font-medium text-white">
                                     Nuevo usuario registrado
                                 </p>
-                                <p className="text-xs text-[#86868b]">Hace 1 hora</p>
+                                <p className="text-xs text-slate-500">Hace 1 hora</p>
                             </div>
                         </div>
                     </div>

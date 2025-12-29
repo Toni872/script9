@@ -85,29 +85,32 @@ export default function AdminUsuarios() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#8B5CF6]" />
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#f5f5f7] pb-20">
+        <div className="min-h-screen bg-slate-950 pb-20 relative overflow-hidden">
+            {/* Background Grid */}
+            <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
             {/* Header */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-slate-900/50 backdrop-blur-md border-b border-slate-800 sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="flex items-center justify-between">
                         <div>
                             <button
                                 onClick={() => router.push('/admin')}
-                                className="text-sm text-[#8B5CF6] hover:underline mb-2"
+                                className="text-sm text-emerald-500 hover:text-emerald-400 hover:underline mb-2 transition-colors"
                             >
                                 ← Volver al Dashboard
                             </button>
-                            <h1 className="text-4xl font-bold tracking-tight text-[#1d1d1f]">
+                            <h1 className="text-4xl font-bold tracking-tight text-white">
                                 Gestión de Usuarios
                             </h1>
-                            <p className="mt-2 text-lg text-[#86868b]">
+                            <p className="mt-2 text-lg text-slate-400">
                                 {filteredUsers.length} usuarios en total
                             </p>
                         </div>
@@ -116,111 +119,114 @@ export default function AdminUsuarios() {
             </div>
 
             {/* Filters */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-0">
                 <div className="flex flex-col md:flex-row gap-4">
                     {/* Search */}
                     <div className="flex-1 relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#86868b]" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                         <input
                             type="text"
                             placeholder="Buscar por nombre o email..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
+                            className="w-full pl-12 pr-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
                         />
                     </div>
 
                     {/* Role Filter */}
-                    <select
-                        value={roleFilter}
-                        onChange={(e) => setRoleFilter(e.target.value)}
-                        className="px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
-                        aria-label="Filtrar por rol"
-                    >
-                        <option value="all">Todos los roles</option>
-                        <option value="guest">Usuarios</option>
-                        <option value="host">Anfitriones</option>
-                        <option value="admin">Administradores</option>
-                    </select>
+                    <div className="relative">
+                        <select
+                            value={roleFilter}
+                            onChange={(e) => setRoleFilter(e.target.value)}
+                            className="px-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all appearance-none pr-10"
+                            aria-label="Filtrar por rol"
+                        >
+                            <option value="all">Todos los roles</option>
+                            <option value="guest">Usuarios</option>
+                            <option value="host">Anfitriones</option>
+                            <option value="admin">Administradores</option>
+                        </select>
+                        <Filter className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+                    </div>
                 </div>
             </div>
 
             {/* Users Table */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-0">
+                <div className="bg-slate-900/50 rounded-2xl border border-slate-800 overflow-hidden backdrop-blur-sm">
                     <div className="overflow-x-auto">
                         <table className="w-full">
-                            <thead className="bg-[#f5f5f7] border-b border-gray-200">
+                            <thead className="bg-slate-950/50 border-b border-slate-800">
                                 <tr>
-                                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                         Usuario
                                     </th>
-                                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                         Email
                                     </th>
-                                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                         Rol
                                     </th>
-                                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                         Estado
                                     </th>
-                                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                         Registro
                                     </th>
-                                    <th className="px-6 py-4 text-right text-xs font-semibold text-[#86868b] uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                         Acciones
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className="divide-y divide-slate-800">
                                 {filteredUsers.map((user, index) => (
                                     <motion.tr
                                         key={user.id}
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.05 }}
-                                        className="hover:bg-[#f5f5f7] transition-colors"
+                                        className="hover:bg-slate-800/50 transition-colors"
                                     >
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
-                                                <div className="h-10 w-10 rounded-full bg-[#8B5CF6]/10 flex items-center justify-center">
-                                                    <User className="w-5 h-5 text-[#8B5CF6]" />
+                                                <div className="h-10 w-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
+                                                    <User className="w-5 h-5 text-slate-400" />
                                                 </div>
                                                 <div className="ml-4">
-                                                    <div className="text-sm font-medium text-[#1d1d1f]">
+                                                    <div className="text-sm font-medium text-white">
                                                         {user.name}
                                                     </div>
                                                     {user.phone && (
-                                                        <div className="text-sm text-[#86868b]">{user.phone}</div>
+                                                        <div className="text-sm text-slate-500">{user.phone}</div>
                                                     )}
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm text-[#1d1d1f]">{user.email}</div>
+                                            <div className="text-sm text-slate-300">{user.email}</div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {getRoleBadge(user.role)}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {user.email_verified ? (
-                                                <span className="flex items-center text-sm text-green-600">
+                                                <span className="flex items-center text-sm text-emerald-400">
                                                     <CheckCircle className="w-4 h-4 mr-1" />
                                                     Verificado
                                                 </span>
                                             ) : (
-                                                <span className="flex items-center text-sm text-orange-600">
+                                                <span className="flex items-center text-sm text-amber-500">
                                                     <Mail className="w-4 h-4 mr-1" />
                                                     Pendiente
                                                 </span>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#86868b]">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
                                             {new Date(user.created_at).toLocaleDateString('es-ES')}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <button
-                                                className="text-[#8B5CF6] hover:text-[#7c3aed] transition-colors"
+                                                className="text-slate-400 hover:text-white transition-colors p-2 hover:bg-slate-800 rounded-lg"
                                                 aria-label="Más opciones"
                                             >
                                                 <MoreVertical className="w-5 h-5" />
@@ -233,8 +239,8 @@ export default function AdminUsuarios() {
 
                         {filteredUsers.length === 0 && (
                             <div className="text-center py-12">
-                                <User className="w-12 h-12 text-[#86868b] mx-auto mb-4" />
-                                <p className="text-[#86868b]">No se encontraron usuarios</p>
+                                <User className="w-12 h-12 text-slate-600 mx-auto mb-4" />
+                                <p className="text-slate-500">No se encontraron usuarios</p>
                             </div>
                         )}
                     </div>

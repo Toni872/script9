@@ -53,19 +53,25 @@ export function OrderList() {
 
     const getStatusBadge = (status: string) => {
         const styles = {
-            confirmed: 'bg-green-100 text-green-700',
-            pending: 'bg-blue-100 text-blue-700',
-            cancelled: 'bg-emerald-100 text-emerald-700'
+            confirmed: 'bg-emerald-950/30 text-emerald-400 border border-emerald-900/50',
+            pending: 'bg-yellow-950/30 text-yellow-400 border border-yellow-900/50',
+            cancelled: 'bg-red-950/30 text-red-400 border border-red-900/50',
+            completed: 'bg-blue-950/30 text-blue-400 border border-blue-900/50'
         };
         // @ts-ignore
-        return <Badge className={styles[status] || styles.pending}>{status === 'confirmed' ? 'Activo' : status}</Badge>;
+        return <Badge className={`${styles[status] || styles.pending} backdrop-blur-sm`}>{
+            status === 'confirmed' ? 'En Progreso' :
+                status === 'completed' ? 'Completado' :
+                    status === 'pending' ? 'Pendiente' :
+                        status === 'cancelled' ? 'Cancelado' : status
+        }</Badge>;
     };
 
     if (loading) {
         return (
             <div className="grid grid-cols-1 gap-4">
                 {[1, 2].map(i => (
-                    <Card key={i} className="animate-pulse h-48 bg-slate-900 border-slate-800" />
+                    <Card key={i} className="h-48 bg-slate-900/50 border-slate-800" />
                 ))}
             </div>
         );
@@ -73,7 +79,7 @@ export function OrderList() {
 
     if (orders.length === 0) {
         return (
-            <Card className="border-slate-800 shadow-sm bg-slate-900">
+            <Card className="border-slate-800 shadow-sm bg-slate-900/50 backdrop-blur-sm">
                 <CardContent className="p-12 text-center">
                     <Sparkles className="h-16 w-16 text-slate-700 mx-auto mb-4" />
                     <h3 className="text-xl font-bold text-white mb-2">
@@ -83,7 +89,7 @@ export function OrderList() {
                         Automatiza tu negocio hoy mismo con nuestros servicios.
                     </p>
                     <Link href="/catalogo">
-                        <Button className="bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20">
+                        <Button className="bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20 rounded-xl px-8 py-6 text-lg">
                             Explorar Catálogo
                         </Button>
                     </Link>
@@ -97,7 +103,7 @@ export function OrderList() {
             <h2 className="text-2xl font-bold text-white">Mis Proyectos Activos</h2>
             <div className="space-y-4">
                 {orders.map((order) => (
-                    <Card key={order.id} className="border-slate-800 shadow-sm hover:shadow-lg transition-all bg-slate-900 group">
+                    <Card key={order.id} className="border-slate-800 shadow-sm hover:shadow-lg hover:border-emerald-500/20 transition-all bg-slate-900/50 backdrop-blur-sm group">
                         <CardContent className="p-6">
                             <div className="flex flex-col md:flex-row gap-6">
                                 {/* Image / Icon */}
@@ -151,7 +157,7 @@ export function OrderList() {
                                             </div>
                                             <div className="w-full bg-slate-800 rounded-full h-2 mb-2">
                                                 <div
-                                                    className="bg-emerald-500 h-2 rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                                                    className="bg-emerald-500 h-2 rounded-full transition-all duration-1000"
                                                     style={{ width: '82%' }}
                                                 ></div>
                                             </div>

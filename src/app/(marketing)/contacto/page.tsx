@@ -8,10 +8,13 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import BookingCalendar from '@/components/BookingCalendar';
+import { DeepTechHero } from '@/components/ui/DeepTechHero';
 
 export default function Contacto() {
     const searchParams = useSearchParams();
-    const [activeTab, setActiveTab] = useState<'message' | 'calendar'>('message');
+    const [activeTab, setActiveTab] = useState<'message' | 'calendar'>(
+        searchParams.get('tab') === 'calendar' ? 'calendar' : 'message'
+    );
     const [formData, setFormData] = useState({
         nombre: '',
         email: '',
@@ -62,32 +65,16 @@ export default function Contacto() {
     return (
         <div className="min-h-screen bg-slate-950">
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden bg-slate-950">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950" />
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-                </div>
-
-                <div className="relative z-10 max-w-7xl mx-auto px-5 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="mb-16"
-                    >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-md rounded-full mb-6 border border-emerald-500/20">
-                            <Sparkles className="h-4 w-4 text-emerald-400" />
-                            <span className="text-sm font-semibold text-emerald-100">Soporte Premium 24/7</span>
-                        </div>
-                        <h1 className="text-[56px] md:text-[72px] font-bold mb-6 text-white tracking-tight">
-                            Hablemos de <span className="text-emerald-400">Futuro</span>
-                        </h1>
-                        <p className="text-xl text-slate-400 max-w-2xl mx-auto font-light">
-                            Cuéntanos qué desafío enfrenta tu negocio y diseñaremos la solución automatizada perfecta para ti.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+            <DeepTechHero
+                badge={
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-md rounded-full border border-emerald-500/20">
+                        <Sparkles className="h-4 w-4 text-emerald-400" />
+                        <span className="text-sm font-semibold text-emerald-100">Soporte Premium 24/7</span>
+                    </div>
+                }
+                title={<>Hablemos de <span className="text-emerald-400">Futuro</span></>}
+                subtitle="Cuéntanos qué desafío enfrenta tu negocio y diseñaremos la solución automatizada perfecta para ti."
+            />
 
             <section className="-mt-10 pb-20 px-5 relative z-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -276,7 +263,7 @@ export default function Contacto() {
 
                                         <div>
                                             <label className="block text-white font-semibold mb-2" htmlFor="email">
-                                                Email Corporativo *
+                                                Email *
                                             </label>
                                             <Input
                                                 type="email"
@@ -284,7 +271,7 @@ export default function Contacto() {
                                                 name="email"
                                                 value={formData.email}
                                                 onChange={handleChange}
-                                                placeholder="tu@empresa.com"
+                                                placeholder="tu@email.com"
                                                 required
                                                 className="h-12 bg-slate-950 border-slate-800 text-white focus:bg-slate-900 focus:border-emerald-500 transition-all placeholder:text-slate-600"
                                             />

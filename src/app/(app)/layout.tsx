@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { AppSidebar } from '@/components/dashboard/AppSidebar';
 import { AppHeader } from '@/components/dashboard/AppHeader';
+import Header from '@/components/Header';
 
 export default function AppLayout({
     children,
@@ -37,17 +38,24 @@ export default function AppLayout({
     }, [supabase]);
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC]">
-            <AppHeader userName={userName} />
+        <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+            {/* Background Grid */}
+            <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
 
-            <div className="container-script9 py-8">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    <div className="lg:col-span-1">
-                        <AppSidebar subscriptionTier={userTier} />
+            <Header />
+
+            <div className="pt-20 relative z-10">
+                <AppHeader userName={userName} />
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                        <div className="lg:col-span-1">
+                            <AppSidebar subscriptionTier={userTier} />
+                        </div>
+                        <main className="lg:col-span-3">
+                            {children}
+                        </main>
                     </div>
-                    <main className="lg:col-span-3">
-                        {children}
-                    </main>
                 </div>
             </div>
         </div>

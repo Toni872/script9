@@ -25,24 +25,24 @@ export function WizardClient() {
     };
 
     return (
-        <Card className="h-full min-h-[calc(100vh-8rem)] bg-white border-gray-200 shadow-sm flex flex-col">
+        <Card className="h-full min-h-[calc(100vh-8rem)] bg-slate-900/50 border-slate-800 shadow-sm flex flex-col backdrop-blur-sm">
             {/* Header Wizard */}
-            <div className="border-b border-gray-100 py-6 px-8">
+            <div className="border-b border-slate-800 py-6 px-8">
                 <div className="max-w-3xl mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <Link href="/dashboard" className="text-gray-400 hover:text-gray-600 transition-colors">
+                        <Link href="/dashboard" className="text-slate-400 hover:text-white transition-colors">
                             <ArrowLeft className="w-5 h-5" />
                         </Link>
-                        <span className="font-semibold text-gray-700">Nuevo Proyecto</span>
+                        <span className="font-semibold text-white">Nuevo Proyecto</span>
                     </div>
-                    <div className="text-sm font-medium text-[#003D82]">
+                    <div className="text-sm font-medium text-emerald-400">
                         Paso {step} de {totalSteps}
                     </div>
                 </div>
                 {/* Progress Bar */}
-                <div className="max-w-3xl mx-auto mt-4 h-1 bg-gray-100 rounded-full overflow-hidden">
+                <div className="max-w-3xl mx-auto mt-4 h-1 bg-slate-800 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-[#003D82] transition-all duration-500 ease-out"
+                        className="h-full bg-emerald-500 transition-all duration-500 ease-out"
                         style={{ width: `${(step / totalSteps) * 100}%` }}
                     />
                 </div>
@@ -61,8 +61,8 @@ export function WizardClient() {
                                 className="space-y-6"
                             >
                                 <div className="text-center mb-8">
-                                    <h1 className="text-3xl font-bold text-[#333333] mb-2">¿Cuál es tu objetivo principal?</h1>
-                                    <p className="text-gray-500">Selecciona la meta más importante para tu negocio ahora mismo.</p>
+                                    <h1 className="text-3xl font-bold text-white mb-2">¿Cuál es tu objetivo principal?</h1>
+                                    <p className="text-slate-400">Selecciona la meta más importante para tu negocio ahora mismo.</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -103,8 +103,8 @@ export function WizardClient() {
                                 className="space-y-6"
                             >
                                 <div className="text-center mb-8">
-                                    <h1 className="text-3xl font-bold text-[#333333] mb-2">¿Dónde opera tu negocio?</h1>
-                                    <p className="text-gray-500">¿En qué plataforma necesitas la integración?</p>
+                                    <h1 className="text-3xl font-bold text-white mb-2">¿Dónde opera tu negocio?</h1>
+                                    <p className="text-slate-400">¿En qué plataforma necesitas la integración?</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -128,7 +128,7 @@ export function WizardClient() {
                                     />
                                 </div>
                                 <div className="flex justify-center mt-8">
-                                    <Button variant="ghost" onClick={handleBack}>Volver atrás</Button>
+                                    <Button variant="ghost" onClick={handleBack} className="text-slate-400 hover:text-white hover:bg-slate-800">Volver atrás</Button>
                                 </div>
                             </motion.div>
                         )}
@@ -140,39 +140,45 @@ export function WizardClient() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 className="text-center space-y-8"
                             >
-                                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <Sparkles className="w-10 h-10 text-green-600 animate-pulse" />
+                                <div className="w-20 h-20 bg-emerald-900/20 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <Sparkles className="w-10 h-10 text-emerald-500" />
                                 </div>
 
                                 <div>
-                                    <h1 className="text-3xl font-bold text-[#333333] mb-4">¡Tenemos una recomendación!</h1>
-                                    <p className="text-xl text-gray-600 max-w-lg mx-auto">
-                                        Basado en tus objetivos de <strong>{getGoalLabel(selection.goal)}</strong> en <strong>{getPlatformLabel(selection.platform)}</strong>, te sugerimos:
+                                    <h1 className="text-3xl font-bold text-white mb-4">¡Análisis completado!</h1>
+                                    <p className="text-xl text-slate-400 max-w-lg mx-auto">
+                                        Hemos identificado una oportunidad clara para mejorar tu <strong className="text-emerald-400">{getGoalLabel(selection.goal)}</strong> en <strong className="text-emerald-400">{getPlatformLabel(selection.platform)}</strong>.
                                     </p>
                                 </div>
 
-                                <Card className="max-w-md mx-auto border-2 border-[#003D82] shadow-xl overflow-hidden relative">
-                                    <div className="absolute top-0 right-0 bg-[#003D82] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-                                        RECOMENDADO
+                                <Card className="max-w-md mx-auto border-2 border-emerald-500/50 shadow-xl shadow-emerald-900/20 overflow-hidden relative bg-slate-900">
+                                    <div className="absolute top-0 right-0 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                                        SIGUIENTE PASO
                                     </div>
                                     <CardContent className="p-8">
-                                        <h3 className="text-2xl font-bold text-[#333333] mb-2">Pack Automatización Pro</h3>
-                                        <div className="flex justify-center items-baseline gap-1 my-4">
-                                            <span className="text-4xl font-bold text-[#003D82]">€499</span>
-                                            <span className="text-gray-500">/proyecto</span>
-                                        </div>
-                                        <ul className="text-left space-y-3 mb-8 text-gray-600">
-                                            <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Auditoría inicial incluida</li>
-                                            <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Desarrollo a medida</li>
-                                            <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Soporte prioritario</li>
+                                        <h3 className="text-2xl font-bold text-white mb-4">Sesión de Validación Técnica</h3>
+
+                                        <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+                                            Debido a la naturaleza personalizada de nuestras soluciones "Deep Tech", el siguiente paso es validar la viabilidad técnica de tu idea con un ingeniero senior.
+                                        </p>
+
+                                        <ul className="text-left space-y-3 mb-8 text-slate-300 bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                                            <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" /> <span className="text-sm">Análisis de viabilidad gratuito</span></li>
+                                            <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" /> <span className="text-sm">Estimación de tiempos y costes</span></li>
+                                            <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" /> <span className="text-sm">Sin compromiso de contratación</span></li>
                                         </ul>
+
                                         <div className="space-y-3">
-                                            <Button className="w-full bg-[#003D82] hover:bg-[#002E5C] h-12 text-lg" onClick={() => router.push('/catalogo')}>
-                                                Ver Detalles y Contratar
+                                            <Button
+                                                className="w-full bg-emerald-600 hover:bg-emerald-500 h-12 text-lg text-white shadow-lg shadow-emerald-900/20 group"
+                                                onClick={() => router.push('/contacto?tab=calendar')}
+                                            >
+                                                <Zap className="w-5 h-5 mr-2 group-hover:text-yellow-300 transition-colors" />
+                                                Agendar con un Experto
                                             </Button>
-                                            <Button variant="outline" className="w-full" onClick={() => router.push('/soporte')}>
-                                                Prefiero hablar con un experto
-                                            </Button>
+                                            <p className="text-xs text-slate-500 mt-2">
+                                                Reserva directa en el calendario de nuestros ingenieros.
+                                            </p>
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -188,15 +194,15 @@ export function WizardClient() {
 function OptionCard({ icon: Icon, title, desc, onClick }: { icon: any, title: string, desc: string, onClick: () => void }) {
     return (
         <Card
-            className="cursor-pointer hover:border-[#003D82] hover:shadow-md transition-all group"
+            className="cursor-pointer bg-slate-950 border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all group"
             onClick={onClick}
         >
             <CardContent className="p-6 flex flex-col items-center text-center h-full justify-center">
-                <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#003D82] transition-colors">
-                    <Icon className="w-6 h-6 text-[#003D82] group-hover:text-white transition-colors" />
+                <div className="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors border border-slate-800 group-hover:border-emerald-500/30">
+                    <Icon className="w-6 h-6 text-slate-400 group-hover:text-emerald-400 transition-colors" />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2">{title}</h3>
-                <p className="text-sm text-gray-500">{desc}</p>
+                <h3 className="font-bold text-white mb-2">{title}</h3>
+                <p className="text-sm text-slate-500 group-hover:text-slate-400 transition-colors">{desc}</p>
             </CardContent>
         </Card>
     );

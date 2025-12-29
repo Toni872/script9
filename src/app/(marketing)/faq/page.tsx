@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Search, Zap, Code, CreditCard, Shield, HelpCircle, Bot, Settings } from 'lucide-react';
 import Image from 'next/image';
+import { DeepTechHero } from '@/components/ui/DeepTechHero';
 
 interface FAQItem {
     question: string;
@@ -136,153 +137,138 @@ export default function FAQ() {
     });
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="min-h-screen bg-slate-950">
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=3840&h=2160&fit=crop&q=90"
-                        alt="FAQ Script9 - Preguntas sobre Automatización"
-                        fill
-                        className="object-cover opacity-10"
-                    />
+            <DeepTechHero
+                title={<>Preguntas <span className="text-emerald-400">Frecuentes</span></>}
+                subtitle="Todo lo que necesitas saber sobre nuestros servicios de automatización e IA"
+            >
+                {/* Search Bar */}
+                <div className="max-w-2xl mx-auto">
+                    <div className="relative group">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 group-focus-within:text-emerald-400 transition-colors" />
+                        <input
+                            type="text"
+                            placeholder="Busca tu pregunta..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full pl-12 pr-4 py-4 text-lg border border-slate-800 bg-slate-900/50 backdrop-blur-sm rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all text-white placeholder:text-slate-600 shadow-xl shadow-black/20"
+                        />
+                    </div>
                 </div>
+            </DeepTechHero>
 
-                <div className="relative z-10 max-w-7xl mx-auto px-5">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-12"
-                    >
-                        <h1 className="text-[56px] md:text-[72px] font-bold mb-6 text-gray-900">
-                            Preguntas Frecuentes
-                        </h1>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                            Todo lo que necesitas saber sobre nuestros servicios de automatización e IA
-                        </p>
+            {/* Main Content */}
+            <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
 
-                        {/* Search Bar */}
-                        <div className="max-w-2xl mx-auto">
-                            <div className="relative">
-                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                                <input
-                                    type="text"
-                                    placeholder="Busca tu pregunta..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent transition-all bg-white shadow-lg"
-                                />
-                            </div>
+                {/* Categories */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex flex-wrap justify-center gap-4 mb-12"
+                >
+                    {categories.map((category) => {
+                        const Icon = category.icon;
+                        return (
+                            <button
+                                key={category.id}
+                                onClick={() => setSelectedCategory(category.id)}
+                                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 border ${selectedCategory === category.id
+                                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                                    : 'bg-slate-900/40 text-slate-400 border-slate-800 hover:bg-slate-800 hover:text-white'
+                                    }`}
+                            >
+                                <Icon className="h-5 w-5" />
+                                {category.name}
+                            </button>
+                        );
+                    })}
+                </motion.div>
+
+                {/* FAQ List */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="max-w-4xl mx-auto"
+                >
+                    {filteredFAQs.length === 0 ? (
+                        <div className="text-center py-12">
+                            <HelpCircle className="h-16 w-16 text-slate-700 mx-auto mb-4" />
+                            <p className="text-slate-500 text-lg">
+                                No se encontraron preguntas que coincidan con tu búsqueda
+                            </p>
                         </div>
-                    </motion.div>
-
-                    {/* Categories */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="flex flex-wrap justify-center gap-4 mb-12"
-                    >
-                        {categories.map((category) => {
-                            const Icon = category.icon;
-                            return (
-                                <button
-                                    key={category.id}
-                                    onClick={() => setSelectedCategory(category.id)}
-                                    className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${selectedCategory === category.id
-                                        ? 'bg-[#10B981] text-white shadow-lg'
-                                        : 'bg-white text-gray-700 hover:bg-gray-50 shadow'
-                                        }`}
+                    ) : (
+                        <div className="space-y-4">
+                            {filteredFAQs.map((faq, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                                    className="bg-slate-900/40 border border-slate-800 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-slate-700 transition-colors"
                                 >
-                                    <Icon className="h-5 w-5" />
-                                    {category.name}
-                                </button>
-                            );
-                        })}
-                    </motion.div>
-
-                    {/* FAQ List */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        className="max-w-4xl mx-auto"
-                    >
-                        {filteredFAQs.length === 0 ? (
-                            <div className="text-center py-12">
-                                <HelpCircle className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                                <p className="text-gray-600 text-lg">
-                                    No se encontraron preguntas que coincidan con tu búsqueda
-                                </p>
-                            </div>
-                        ) : (
-                            <div className="space-y-4">
-                                {filteredFAQs.map((faq, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                                        className="bg-white rounded-2xl shadow-lg overflow-hidden"
+                                    <button
+                                        onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                                        className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-800/30 transition-colors"
                                     >
-                                        <button
-                                            onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                                            className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                                        >
-                                            <span className="font-semibold text-gray-900 text-lg pr-8">
-                                                {faq.question}
-                                            </span>
-                                            <ChevronDown
-                                                className={`h-6 w-6 text-[#10B981] flex-shrink-0 transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : ''
-                                                    }`}
-                                            />
-                                        </button>
+                                        <span className="font-semibold text-white text-lg pr-8">
+                                            {faq.question}
+                                        </span>
+                                        <ChevronDown
+                                            className={`h-6 w-6 text-emerald-400 flex-shrink-0 transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : ''
+                                                }`}
+                                        />
+                                    </button>
 
-                                        <AnimatePresence>
-                                            {openFAQ === index && (
-                                                <motion.div
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: 'auto', opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    transition={{ duration: 0.3 }}
-                                                >
-                                                    <div className="px-6 pb-5 text-gray-600 leading-relaxed">
-                                                        {faq.answer}
-                                                    </div>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        )}
-                    </motion.div>
+                                    <AnimatePresence>
+                                        {openFAQ === index && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3 }}
+                                            >
+                                                <div className="px-6 pb-5 text-slate-400 leading-relaxed border-t border-slate-800/50 pt-4 mt-1">
+                                                    {faq.answer}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
+                            ))}
+                        </div>
+                    )}
+                </motion.div>
 
-                    {/* CTA Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                        className="mt-16 text-center"
-                    >
-                        <div className="bg-gradient-to-br from-[#10B981] to-[#059669] rounded-3xl p-12 shadow-2xl">
+                {/* CTA Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    className="mt-16 text-center"
+                >
+                    <div className="bg-gradient-to-br from-emerald-900/40 to-slate-900/40 border border-emerald-500/20 rounded-3xl p-12 shadow-2xl relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-emerald-500/5 group-hover:bg-emerald-500/10 transition-colors duration-500" />
+                        <div className="relative z-10">
                             <h2 className="text-3xl font-bold text-white mb-4">
                                 ¿No encontraste lo que buscabas?
                             </h2>
-                            <p className="text-white/90 text-lg mb-8">
+                            <p className="text-slate-300 text-lg mb-8">
                                 Nuestro equipo está aquí para resolver todas tus dudas sobre automatización
                             </p>
                             <a
                                 href="/contacto"
-                                className="inline-block px-8 py-4 bg-white text-[#10B981] font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
+                                className="inline-block px-8 py-4 bg-emerald-500 text-white font-semibold rounded-xl hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20"
                             >
                                 Contáctanos
                             </a>
                         </div>
-                    </motion.div>
-                </div>
-            </section>
+                    </div>
+                </motion.div>
+            </div>
         </div>
     );
 }

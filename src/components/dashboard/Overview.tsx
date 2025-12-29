@@ -41,7 +41,7 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
             <div className="space-y-6">
                 <div className="grid gap-4 md:grid-cols-3">
                     {/* Upsell Card 1: ROI Potential */}
-                    <Card className="border-slate-800 bg-slate-900/50 relative overflow-hidden group hover:border-emerald-500/30 transition-all">
+                    <Card className="border-slate-800 bg-slate-900/50 relative overflow-hidden group hover:border-slate-700 transition-all backdrop-blur-sm">
                         <div className="absolute top-0 right-0 p-3 opacity-5">
                             <TrendingUp className="w-24 h-24 text-emerald-500" />
                         </div>
@@ -55,7 +55,7 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
                     </Card>
 
                     {/* Upsell Card 2: Efficiency */}
-                    <Card className="border-slate-800 bg-slate-900/50 hover:border-slate-700 transition-all">
+                    <Card className="border-slate-800 bg-slate-900/50 hover:border-slate-700 transition-all backdrop-blur-sm">
                         <CardHeader className="pb-2">
                             <CardTitle className="text-sm font-medium text-slate-400">Horas Recuperables</CardTitle>
                         </CardHeader>
@@ -66,7 +66,7 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
                     </Card>
 
                     {/* Upsell Card 3: Unlock Pro */}
-                    <Card className="border-dashed border-2 border-slate-800 bg-slate-950 flex flex-col justify-center items-center text-center p-6 hover:border-slate-700 transition-all">
+                    <Card className="border-dashed border-2 border-slate-800 bg-slate-950/50 flex flex-col justify-center items-center text-center p-6 hover:border-slate-700 transition-all backdrop-blur-sm">
                         <Lock className="w-8 h-8 text-slate-600 mb-2" />
                         <h3 className="font-bold text-slate-300">Desbloquear Analytics</h3>
                         <p className="text-xs text-slate-500 mb-4">Ver métricas reales de negocio</p>
@@ -79,7 +79,7 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
                 </div>
 
                 {/* Free Tier "Next Steps" */}
-                <Card className="border-slate-800 border-l-4 border-l-emerald-500 shadow-lg bg-slate-900">
+                <Card className="border-slate-800 border-l-4 border-l-emerald-500 shadow-lg bg-slate-900/50 backdrop-blur-sm">
                     <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-4">
                         <div>
                             <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
@@ -106,36 +106,36 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
             value: `€${stats.totalSpent.toFixed(2)}`,
             description: "+0% desde el mes pasado",
             icon: DollarSign,
-            color: "text-green-600",
-            bg: "bg-green-100"
+            color: "text-emerald-400",
+            bg: "bg-emerald-900/20 border-emerald-500/20"
         },
         {
             title: "Servicios Activos",
             value: stats.activeProjects.toString(),
             description: "Automatizaciones funcionando",
             icon: Zap,
-            color: "text-blue-600",
-            bg: "bg-blue-100"
+            color: "text-blue-400",
+            bg: "bg-blue-900/20 border-blue-500/20"
         },
         {
             title: "Proyectos Totales",
             value: stats.activeProjects.toString(),
             description: "En tu historial",
             icon: Package,
-            color: "text-purple-600",
-            bg: "bg-purple-100"
+            color: "text-purple-400",
+            bg: "bg-purple-900/20 border-purple-500/20"
         }
     ];
 
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
             {cards.map((card, index) => (
-                <Card key={index} className="border-slate-800 bg-slate-900 shadow-sm hover:border-slate-700 transition-all">
+                <Card key={index} className="border-slate-800 bg-slate-900/50 shadow-sm hover:border-slate-700 transition-all backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-slate-400">
                             {card.title}
                         </CardTitle>
-                        <div className={`p-2 rounded-full bg-slate-950 border border-slate-800`}>
+                        <div className={`p-2 rounded-full border ${card.bg}`}>
                             <card.icon className={`h-4 w-4 ${card.color}`} />
                         </div>
                     </CardHeader>

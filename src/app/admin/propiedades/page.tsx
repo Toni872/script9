@@ -170,30 +170,33 @@ export default function AdminPropiedades() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <Loader2 className="w-12 h-12 animate-spin text-[#8B5CF6]" />
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+                <Loader2 className="w-12 h-12 animate-spin text-emerald-500" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#f5f5f7] pb-20">
+        <div className="min-h-screen bg-slate-950 pb-20 relative overflow-hidden">
+            {/* Background Grid */}
+            <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
             {/* Header */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-slate-900/50 backdrop-blur-md border-b border-slate-800 sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="flex items-center justify-between mb-6">
                         <div>
-                            <h1 className="text-[40px] font-semibold text-[#1d1d1f] mb-2">
+                            <h1 className="text-[40px] font-semibold text-white mb-2">
                                 Gestión de Propiedades
                             </h1>
-                            <p className="text-[17px] text-[#86868b]">
+                            <p className="text-[17px] text-slate-400">
                                 Administra todas las propiedades de la plataforma
                             </p>
                         </div>
 
                         <button
                             onClick={() => router.push('/admin')}
-                            className="px-6 py-3 bg-white border border-gray-300 rounded-xl font-medium text-[#1d1d1f] hover:bg-gray-50 transition-colors"
+                            className="px-6 py-3 bg-slate-800/50 border border-slate-700 rounded-xl font-medium text-white hover:bg-slate-800 transition-colors"
                         >
                             Volver al Dashboard
                         </button>
@@ -201,25 +204,25 @@ export default function AdminPropiedades() {
 
                     {/* Stats */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div className="bg-[#f5f5f7] rounded-xl p-4">
-                            <p className="text-sm text-[#86868b] mb-1">Total Propiedades</p>
-                            <p className="text-2xl font-bold text-[#1d1d1f]">{properties.length}</p>
+                        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+                            <p className="text-sm text-slate-400 mb-1">Total Propiedades</p>
+                            <p className="text-2xl font-bold text-white">{properties.length}</p>
                         </div>
-                        <div className="bg-green-50 rounded-xl p-4">
-                            <p className="text-sm text-green-700 mb-1">Activas</p>
-                            <p className="text-2xl font-bold text-green-700">
+                        <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-xl p-4">
+                            <p className="text-sm text-emerald-400 mb-1">Activas</p>
+                            <p className="text-2xl font-bold text-emerald-400">
                                 {properties.filter((p) => p.status === 'active').length}
                             </p>
                         </div>
-                        <div className="bg-yellow-50 rounded-xl p-4">
-                            <p className="text-sm text-yellow-700 mb-1">Pendientes</p>
-                            <p className="text-2xl font-bold text-yellow-700">
+                        <div className="bg-yellow-950/30 border border-yellow-900/50 rounded-xl p-4">
+                            <p className="text-sm text-yellow-400 mb-1">Pendientes</p>
+                            <p className="text-2xl font-bold text-yellow-400">
                                 {properties.filter((p) => p.status === 'pending').length}
                             </p>
                         </div>
-                        <div className="bg-gray-100 rounded-xl p-4">
-                            <p className="text-sm text-gray-700 mb-1">Inactivas</p>
-                            <p className="text-2xl font-bold text-gray-700">
+                        <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+                            <p className="text-sm text-slate-400 mb-1">Inactivas</p>
+                            <p className="text-2xl font-bold text-slate-300">
                                 {properties.filter((p) => p.status === 'inactive').length}
                             </p>
                         </div>
@@ -228,61 +231,67 @@ export default function AdminPropiedades() {
             </div>
 
             {/* Filters */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-0">
                 <div className="flex flex-col md:flex-row gap-4">
                     {/* Search */}
                     <div className="flex-1 relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#86868b]" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
                         <input
                             type="text"
                             placeholder="Buscar por título, ciudad o anfitrión..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-4 h-12 border-0 bg-white text-[15px] text-[#1d1d1f] placeholder:text-[#86868b] rounded-xl shadow-sm focus:shadow-md transition-all"
+                            className="w-full pl-12 pr-4 h-12 border border-slate-800 bg-slate-900/50 text-[15px] text-white placeholder:text-slate-600 rounded-xl shadow-sm focus:shadow-md focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
                         />
                     </div>
 
                     {/* Filters */}
-                    <select
-                        value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value)}
-                        className="px-4 h-12 bg-white border-0 rounded-xl shadow-sm text-[15px] text-[#1d1d1f] focus:shadow-md transition-all"
-                        aria-label="Filtrar por estado"
-                    >
-                        <option value="all">Todos los estados</option>
-                        <option value="active">Activas</option>
-                        <option value="pending">Pendientes</option>
-                        <option value="inactive">Inactivas</option>
-                    </select>
+                    <div className="relative">
+                        <select
+                            value={statusFilter}
+                            onChange={(e) => setStatusFilter(e.target.value)}
+                            className="px-4 h-12 bg-slate-900/50 border border-slate-800 rounded-xl shadow-sm text-[15px] text-white focus:shadow-md focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none appearance-none pr-10"
+                            aria-label="Filtrar por estado"
+                        >
+                            <option value="all">Todos los estados</option>
+                            <option value="active">Activas</option>
+                            <option value="pending">Pendientes</option>
+                            <option value="inactive">Inactivas</option>
+                        </select>
+                        <Filter className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+                    </div>
 
-                    <select
-                        value={typeFilter}
-                        onChange={(e) => setTypeFilter(e.target.value)}
-                        className="px-4 h-12 bg-white border-0 rounded-xl shadow-sm text-[15px] text-[#1d1d1f] focus:shadow-md transition-all"
-                        aria-label="Filtrar por tipo"
-                    >
-                        <option value="all">Todos los tipos</option>
-                        <option value="villa">Villa</option>
-                        <option value="finca">Finca</option>
-                        <option value="loft">Loft</option>
-                        <option value="chalet">Chalet</option>
-                        <option value="atico">Ático</option>
-                        <option value="cortijo">Cortijo</option>
-                        <option value="casa">Casa</option>
-                        <option value="apartamento">Apartamento</option>
-                    </select>
+                    <div className="relative">
+                        <select
+                            value={typeFilter}
+                            onChange={(e) => setTypeFilter(e.target.value)}
+                            className="px-4 h-12 bg-slate-900/50 border border-slate-800 rounded-xl shadow-sm text-[15px] text-white focus:shadow-md focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none appearance-none pr-10"
+                            aria-label="Filtrar por tipo"
+                        >
+                            <option value="all">Todos los tipos</option>
+                            <option value="villa">Villa</option>
+                            <option value="finca">Finca</option>
+                            <option value="loft">Loft</option>
+                            <option value="chalet">Chalet</option>
+                            <option value="atico">Ático</option>
+                            <option value="cortijo">Cortijo</option>
+                            <option value="casa">Casa</option>
+                            <option value="apartamento">Apartamento</option>
+                        </select>
+                        <Filter className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+                    </div>
                 </div>
             </div>
 
             {/* Properties Grid */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-0">
                 {filteredProperties.length === 0 ? (
-                    <div className="bg-white rounded-2xl p-12 text-center">
-                        <Home className="w-16 h-16 text-[#86868b] mx-auto mb-4" />
-                        <h3 className="text-xl font-semibold text-[#1d1d1f] mb-2">
+                    <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-12 text-center">
+                        <Home className="w-16 h-16 text-slate-700 mx-auto mb-4" />
+                        <h3 className="text-xl font-semibold text-white mb-2">
                             No se encontraron propiedades
                         </h3>
-                        <p className="text-[#86868b]">
+                        <p className="text-slate-500">
                             Ajusta los filtros para ver más resultados
                         </p>
                     </div>
@@ -294,10 +303,10 @@ export default function AdminPropiedades() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.05 }}
-                                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all"
+                                className="bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:border-emerald-500/30 transition-all group"
                             >
                                 {/* Image */}
-                                <div className="relative w-full h-48">
+                                <div className="relative w-full h-48 bg-slate-950">
                                     <Image
                                         src={
                                             property.images?.[0] ||
@@ -305,13 +314,13 @@ export default function AdminPropiedades() {
                                         }
                                         alt={property.title}
                                         fill
-                                        className="object-cover"
+                                        className="object-cover opacity-90 group-hover:opacity-100 transition-opacity"
                                     />
                                     <div className="absolute top-3 right-3">
                                         {getStatusBadge(property.status)}
                                     </div>
                                     <div className="absolute top-3 left-3">
-                                        <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-[#1d1d1f]">
+                                        <span className="bg-slate-900/90 backdrop-blur-sm border border-slate-700 px-3 py-1 rounded-full text-xs font-medium text-white">
                                             {getTypeLabel(property.property_type)}
                                         </span>
                                     </div>
@@ -319,28 +328,28 @@ export default function AdminPropiedades() {
 
                                 {/* Content */}
                                 <div className="p-5">
-                                    <h3 className="text-lg font-semibold text-[#1d1d1f] mb-2 line-clamp-1">
+                                    <h3 className="text-lg font-semibold text-white mb-2 line-clamp-1 group-hover:text-emerald-400 transition-colors">
                                         {property.title}
                                     </h3>
 
                                     <div className="space-y-2 mb-4">
-                                        <div className="flex items-center gap-2 text-sm text-[#86868b]">
+                                        <div className="flex items-center gap-2 text-sm text-slate-400">
                                             <MapPin className="w-4 h-4" />
                                             {property.city}, {property.region}
                                         </div>
-                                        <div className="flex items-center gap-2 text-sm text-[#86868b]">
+                                        <div className="flex items-center gap-2 text-sm text-slate-400">
                                             <Users className="w-4 h-4" />
                                             Hasta {property.max_guests} personas
                                         </div>
-                                        <div className="flex items-center gap-2 text-sm font-semibold text-[#8B5CF6]">
+                                        <div className="flex items-center gap-2 text-sm font-semibold text-emerald-400">
                                             <DollarSign className="w-4 h-4" />
                                             €{property.price_per_hour}/hora
                                         </div>
                                     </div>
 
-                                    <div className="border-t border-gray-200 pt-3 mb-4">
-                                        <p className="text-xs text-[#86868b]">Anfitrión</p>
-                                        <p className="text-sm font-medium text-[#1d1d1f]">
+                                    <div className="border-t border-slate-800 pt-3 mb-4">
+                                        <p className="text-xs text-slate-500">Anfitrión</p>
+                                        <p className="text-sm font-medium text-slate-300">
                                             {property.host?.name}
                                         </p>
                                     </div>
@@ -349,23 +358,23 @@ export default function AdminPropiedades() {
                                     <div className="flex items-center gap-2">
                                         <button
                                             onClick={() => setSelectedProperty(property)}
-                                            className="flex-1 px-4 py-2 bg-[#f5f5f7] text-[#1d1d1f] rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                                            className="flex-1 px-4 py-2 bg-slate-800 text-white rounded-xl text-sm font-medium hover:bg-slate-700 transition-colors flex items-center justify-center gap-2 border border-slate-700"
                                         >
                                             <Eye className="w-4 h-4" />
                                             Ver
                                         </button>
                                         <button
                                             onClick={() => handleToggleStatus(property.id, property.status)}
-                                            className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-colors ${property.status === 'active'
-                                                ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                                : 'bg-green-100 text-green-700 hover:bg-green-200'
+                                            className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-colors border ${property.status === 'active'
+                                                ? 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                                                : 'bg-emerald-900/20 text-emerald-400 border-emerald-900/30 hover:bg-emerald-900/30'
                                                 }`}
                                         >
                                             {property.status === 'active' ? 'Desactivar' : 'Activar'}
                                         </button>
                                         <button
                                             onClick={() => handleDeleteProperty(property.id)}
-                                            className="p-2 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 transition-colors"
+                                            className="p-2 bg-red-900/20 text-red-500 border border-red-900/30 rounded-xl hover:bg-red-900/40 transition-colors"
                                             title="Eliminar"
                                             aria-label="Eliminar propiedad"
                                         >
@@ -382,17 +391,17 @@ export default function AdminPropiedades() {
             {/* Property Details Modal */}
             {selectedProperty && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
                     onClick={() => setSelectedProperty(null)}
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+                        className="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Image */}
-                        <div className="relative w-full h-64">
+                        <div className="relative w-full h-64 bg-slate-950">
                             <Image
                                 src={
                                     selectedProperty.images?.[0] ||
@@ -407,10 +416,10 @@ export default function AdminPropiedades() {
                         <div className="p-6">
                             <div className="flex items-start justify-between mb-4">
                                 <div>
-                                    <h3 className="text-2xl font-bold text-[#1d1d1f] mb-2">
+                                    <h3 className="text-2xl font-bold text-white mb-2">
                                         {selectedProperty.title}
                                     </h3>
-                                    <p className="text-[#86868b]">
+                                    <p className="text-slate-400">
                                         {selectedProperty.city}, {selectedProperty.region}
                                     </p>
                                 </div>
@@ -419,36 +428,42 @@ export default function AdminPropiedades() {
 
                             <div className="space-y-4 mb-6">
                                 <div>
-                                    <p className="text-sm text-[#86868b] mb-1">Tipo</p>
-                                    <p className="font-medium">{getTypeLabel(selectedProperty.property_type)}</p>
+                                    <p className="text-sm text-slate-500 mb-1">Tipo</p>
+                                    <p className="font-medium text-slate-200">{getTypeLabel(selectedProperty.property_type)}</p>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-[#86868b] mb-1">Descripción</p>
-                                    <p className="text-[#1d1d1f]">{selectedProperty.description}</p>
+                                    <p className="text-sm text-slate-500 mb-1">Descripción</p>
+                                    <p className="text-slate-300">{selectedProperty.description}</p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <p className="text-sm text-[#86868b] mb-1">Capacidad</p>
-                                        <p className="font-medium">{selectedProperty.max_guests} personas</p>
+                                        <p className="text-sm text-slate-500 mb-1">Capacidad</p>
+                                        <p className="font-medium text-slate-200">{selectedProperty.max_guests} personas</p>
                                     </div>
                                     <div>
-                                        <p className="text-sm text-[#86868b] mb-1">Precio por hora</p>
-                                        <p className="font-medium text-[#8B5CF6]">
+                                        <p className="text-sm text-slate-500 mb-1">Precio por hora</p>
+                                        <p className="font-medium text-emerald-400">
                                             €{selectedProperty.price_per_hour}
                                         </p>
                                     </div>
                                 </div>
-                                <div>
-                                    <p className="text-sm text-[#86868b] mb-1">Anfitrión</p>
-                                    <p className="font-medium">{selectedProperty.host?.name}</p>
-                                    <p className="text-sm text-[#86868b]">{selectedProperty.host?.email}</p>
+                                <div className="p-4 bg-slate-950/50 rounded-xl border border-slate-800">
+                                    <p className="text-sm text-slate-500 mb-2">Anfitrión</p>
+                                    <div className="flex items-center gap-3">
+                                        <div className="h-10 w-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
+                                            <span className="font-bold text-slate-400">{selectedProperty.host?.name.charAt(0)}</span>
+                                        </div>
+                                        <div>
+                                            <p className="font-medium text-white">{selectedProperty.host?.name}</p>
+                                            <p className="text-sm text-slate-500">{selectedProperty.host?.email}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <button
                                 onClick={() => setSelectedProperty(null)}
-                                className="w-full px-6 py-3 bg-[#8B5CF6] text-white rounded-xl font-semibold hover:bg-[#7c3aed] transition-colors"
-                                style={{ color: 'white' }} /* Forzar color blanco */
+                                className="w-full px-6 py-3 bg-slate-800 text-white rounded-xl font-semibold hover:bg-slate-700 transition-colors border border-slate-700"
                             >
                                 Cerrar
                             </button>

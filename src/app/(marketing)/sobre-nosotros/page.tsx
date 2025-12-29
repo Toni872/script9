@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Linkedin, Twitter, Github, Code2, BrainCircuit } from 'lucide-react';
 import Image from 'next/image';
+import { DeepTechHero } from '@/components/ui/DeepTechHero';
 
 export default function AboutPage() {
     const team = [
@@ -23,31 +24,10 @@ export default function AboutPage() {
     return (
         <div className="min-h-screen bg-slate-950 text-white font-sans">
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden bg-slate-950">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950" />
-                </div>
-
-                <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
-                    >
-                        Quiénes <span className="text-emerald-400">Somos</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed"
-                    >
-                        Somos un equipo de ingenieros y estrategas dedicados a una misión:
-                        democratizar la automatización inteligente para empresas que quieren liderar, no solo competir.
-                    </motion.p>
-                </div>
-            </section>
+            <DeepTechHero
+                title={<>Quiénes <span className="text-emerald-400">Somos</span></>}
+                subtitle="Somos un equipo de ingenieros y estrategas dedicados a una misión: democratizar la automatización inteligente para empresas que quieren liderar, no solo competir."
+            />
 
             {/* History Section */}
             <section className="py-24 bg-slate-900/50 border-y border-slate-900">

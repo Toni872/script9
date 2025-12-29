@@ -220,8 +220,8 @@ export default function PerfilUsuario() {
 
     if (status === 'loading') {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#10B981]" />
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500" />
             </div>
         );
     }
@@ -235,10 +235,10 @@ export default function PerfilUsuario() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8"
                 >
-                    <h1 className="text-4xl font-bold tracking-tight text-[#1d1d1f]">
+                    <h1 className="text-4xl font-bold tracking-tight text-white">
                         Mi Perfil
                     </h1>
-                    <p className="mt-2 text-lg text-[#86868b]">
+                    <p className="mt-2 text-lg text-slate-400">
                         Gestiona tu información personal y configuración de cuenta
                     </p>
                 </motion.div>
@@ -248,9 +248,9 @@ export default function PerfilUsuario() {
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="mb-6 bg-green-50 border border-green-200 rounded-xl p-4"
+                        className="mb-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4"
                     >
-                        <p className="text-green-700 font-medium">{successMessage}</p>
+                        <p className="text-emerald-400 font-medium">{successMessage}</p>
                     </motion.div>
                 )}
 
@@ -258,9 +258,9 @@ export default function PerfilUsuario() {
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="mb-6 bg-emerald-50 border border-emerald-200 rounded-xl p-4"
+                        className="mb-6 bg-red-500/10 border border-red-500/20 rounded-xl p-4"
                     >
-                        <p className="text-emerald-700 font-medium">{errorMessage}</p>
+                        <p className="text-red-400 font-medium">{errorMessage}</p>
                     </motion.div>
                 )}
 
@@ -269,16 +269,16 @@ export default function PerfilUsuario() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-white rounded-2xl p-8 border border-gray-200 mb-6"
+                    className="bg-slate-900/50 rounded-2xl p-8 border border-slate-800 mb-6 backdrop-blur-sm"
                 >
-                    <h2 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+                    <h2 className="text-xl font-semibold text-white mb-6">
                         Foto de Perfil
                     </h2>
 
                     <div className="flex items-center gap-6">
                         {/* Avatar Preview */}
                         <div className="relative">
-                            <div className="h-24 w-24 rounded-full overflow-hidden bg-[#10B981]/10 flex items-center justify-center">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
                                 {avatarUrl ? (
                                     <Image
                                         src={avatarUrl}
@@ -287,14 +287,14 @@ export default function PerfilUsuario() {
                                         className="object-cover"
                                     />
                                 ) : (
-                                    <User className="w-12 h-12 text-[#10B981]" />
+                                    <User className="w-12 h-12 text-emerald-500" />
                                 )}
                             </div>
 
                             {/* Upload Button */}
                             <label
                                 htmlFor="avatar-upload"
-                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-[#10B981] flex items-center justify-center cursor-pointer hover:bg-[#059669] transition-colors shadow-lg"
+                                className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-emerald-500 flex items-center justify-center cursor-pointer hover:bg-emerald-600 transition-colors shadow-lg"
                                 aria-label="Subir foto de perfil"
                             >
                                 <Camera className="w-4 h-4 text-white" />
@@ -311,10 +311,10 @@ export default function PerfilUsuario() {
                         </div>
 
                         <div>
-                            <p className="text-sm text-[#1d1d1f] font-medium mb-1">
+                            <p className="text-sm text-slate-200 font-medium mb-1">
                                 {uploadingImage ? 'Subiendo imagen...' : 'Sube tu foto de perfil'}
                             </p>
-                            <p className="text-xs text-[#86868b]">
+                            <p className="text-xs text-slate-500">
                                 JPG, PNG o GIF. Máximo 5MB.
                             </p>
                         </div>
@@ -326,25 +326,25 @@ export default function PerfilUsuario() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-white rounded-2xl p-8 border border-gray-200 mb-6"
+                    className="bg-slate-900/50 rounded-2xl p-8 border border-slate-800 mb-6 backdrop-blur-sm"
                 >
-                    <h2 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+                    <h2 className="text-xl font-semibold text-white mb-6">
                         Información Personal
                     </h2>
 
                     <form onSubmit={handleUpdateProfile} className="space-y-6">
                         {/* Full Name */}
                         <div>
-                            <label className="block text-sm font-medium text-[#1d1d1f] mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Nombre Completo
                             </label>
                             <div className="relative">
-                                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#86868b]" />
+                                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type="text"
                                     value={fullName}
                                     onChange={(e) => setFullName(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
+                                    className="w-full pl-12 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 text-white placeholder:text-slate-600"
                                     aria-label="Nombre completo"
                                     required
                                 />
@@ -353,37 +353,37 @@ export default function PerfilUsuario() {
 
                         {/* Email (Read Only) */}
                         <div>
-                            <label className="block text-sm font-medium text-[#1d1d1f] mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Email
                             </label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#86868b]" />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type="email"
                                     value={email}
-                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl bg-[#f5f5f7] text-[#86868b] cursor-not-allowed"
+                                    className="w-full pl-12 pr-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-500 cursor-not-allowed"
                                     aria-label="Email (no editable)"
                                     disabled
                                 />
                             </div>
-                            <p className="text-xs text-[#86868b] mt-2">
+                            <p className="text-xs text-slate-500 mt-2">
                                 El email no se puede cambiar
                             </p>
                         </div>
 
                         {/* Phone */}
                         <div>
-                            <label className="block text-sm font-medium text-[#1d1d1f] mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Teléfono
                             </label>
                             <div className="relative">
-                                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#86868b]" />
+                                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                     placeholder="+34 600 000 000"
-                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
+                                    className="w-full pl-12 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 text-white placeholder:text-slate-600"
                                 />
                             </div>
                         </div>
@@ -392,7 +392,7 @@ export default function PerfilUsuario() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[#10B981] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#059669] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full bg-emerald-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/20"
                         >
                             <Save className="w-5 h-5" />
                             {loading ? 'Guardando...' : 'Guardar Cambios'}
@@ -405,32 +405,32 @@ export default function PerfilUsuario() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 }}
-                    className="bg-white rounded-2xl p-8 border border-gray-200"
+                    className="bg-slate-900/50 rounded-2xl p-8 border border-slate-800 backdrop-blur-sm"
                 >
-                    <h2 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+                    <h2 className="text-xl font-semibold text-white mb-6">
                         Cambiar Contraseña
                     </h2>
 
                     <form onSubmit={handleChangePassword} className="space-y-6">
                         {/* Current Password */}
                         <div>
-                            <label className="block text-sm font-medium text-[#1d1d1f] mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Contraseña Actual
                             </label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#86868b]" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type={showCurrentPassword ? 'text' : 'password'}
                                     value={currentPassword}
                                     onChange={(e) => setCurrentPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
+                                    className="w-full pl-12 pr-12 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 text-white placeholder:text-slate-600"
                                     aria-label="Contraseña actual"
                                     required
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#86868b] hover:text-[#1d1d1f]"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
                                     aria-label={showCurrentPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                                 >
                                     {showCurrentPassword ? (
@@ -444,23 +444,23 @@ export default function PerfilUsuario() {
 
                         {/* New Password */}
                         <div>
-                            <label className="block text-sm font-medium text-[#1d1d1f] mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Nueva Contraseña
                             </label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#86868b]" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type={showNewPassword ? 'text' : 'password'}
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
+                                    className="w-full pl-12 pr-12 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 text-white placeholder:text-slate-600"
                                     aria-label="Nueva contraseña"
                                     required
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowNewPassword(!showNewPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#86868b] hover:text-[#1d1d1f]"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
                                     aria-label={showNewPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                                 >
                                     {showNewPassword ? (
@@ -474,23 +474,23 @@ export default function PerfilUsuario() {
 
                         {/* Confirm Password */}
                         <div>
-                            <label className="block text-sm font-medium text-[#1d1d1f] mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Confirmar Nueva Contraseña
                             </label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#86868b]" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type={showConfirmPassword ? 'text' : 'password'}
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
+                                    className="w-full pl-12 pr-12 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 text-white placeholder:text-slate-600"
                                     aria-label="Confirmar nueva contraseña"
                                     required
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#86868b] hover:text-[#1d1d1f]"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
                                     aria-label={showConfirmPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                                 >
                                     {showConfirmPassword ? (
@@ -506,7 +506,7 @@ export default function PerfilUsuario() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[#10B981] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#059669] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full bg-slate-800 text-white font-semibold py-3 px-6 rounded-xl hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-slate-700"
                         >
                             <Lock className="w-5 h-5" />
                             {loading ? 'Cambiando...' : 'Cambiar Contraseña'}

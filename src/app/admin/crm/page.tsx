@@ -81,96 +81,105 @@ export default function AdminCRMPage() {
         getCoreRowModel: getCoreRowModel(),
     });
 
-    if (loading) return <div className="p-8">Cargando CRM...</div>;
+    if (loading) return (
+        <div className="flex h-screen items-center justify-center bg-slate-950">
+            <div className="text-emerald-500">Cargando CRM...</div>
+        </div>
+    );
 
     return (
-        <div className="container mx-auto py-10 space-y-8">
-            <div className="flex justify-between items-center">
-                <div>
-                    <h1 className="text-3xl font-bold tracking-tight">CRM & Agente IA</h1>
-                    <p className="text-zinc-500">Gestión de leads capturados por el asistente comercial.</p>
+        <div className="min-h-screen bg-slate-950 text-slate-200 relative overflow-hidden">
+            {/* Background Grid */}
+            <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
+            <div className="container mx-auto py-10 space-y-8 relative z-10 px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center border-b border-slate-800 pb-6">
+                    <div>
+                        <h1 className="text-3xl font-bold tracking-tight text-white">CRM & Agente IA</h1>
+                        <p className="text-slate-400 mt-2">Gestión de leads capturados por el asistente comercial.</p>
+                    </div>
                 </div>
-            </div>
 
-            {/* Stats Cards */}
-            <div className="grid gap-4 md:grid-cols-3">
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Total Leads</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">{leads.length}</div>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Conversión Hoy</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">
-                            {leads.filter(l => new Date(l.created_at).toDateString() === new Date().toDateString()).length}
-                        </div>
-                        <p className="text-xs text-zinc-500 text-muted-foreground">Leads capturados últimas 24h</p>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Presupuestos</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">-</div>
-                        <p className="text-xs text-zinc-500 text-muted-foreground">Generados automáticamente</p>
-                    </CardContent>
-                </Card>
-            </div>
+                {/* Stats Cards */}
+                <div className="grid gap-4 md:grid-cols-3">
+                    <Card className="bg-slate-900/50 border-slate-800 backdrop-blur-sm">
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium text-slate-400">Total Leads</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold text-white">{leads.length}</div>
+                        </CardContent>
+                    </Card>
+                    <Card className="bg-slate-900/50 border-slate-800 backdrop-blur-sm">
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium text-emerald-400">Conversión Hoy</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold text-emerald-500">
+                                {leads.filter(l => new Date(l.created_at).toDateString() === new Date().toDateString()).length}
+                            </div>
+                            <p className="text-xs text-slate-500 mt-1">Leads capturados últimas 24h</p>
+                        </CardContent>
+                    </Card>
+                    <Card className="bg-slate-900/50 border-slate-800 backdrop-blur-sm">
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium text-purple-400">Presupuestos</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold text-purple-500">-</div>
+                            <p className="text-xs text-slate-500 mt-1">Generados automáticamente</p>
+                        </CardContent>
+                    </Card>
+                </div>
 
-            {/* Leads Table */}
-            <Card>
-                <CardHeader>
-                    <CardTitle>Ultimos Leads</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="rounded-md border">
-                        <table className="w-full text-sm">
-                            <thead className="border-b bg-zinc-50/50 dark:bg-zinc-900">
-                                {table.getHeaderGroups().map(headerGroup => (
-                                    <tr key={headerGroup.id}>
-                                        {headerGroup.headers.map(header => (
-                                            <th key={header.id} className="h-12 px-4 text-left align-middle font-medium text-zinc-500">
-                                                {header.isPlaceholder
-                                                    ? null
-                                                    : flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </thead>
-                            <tbody>
-                                {table.getRowModel().rows.length === 0 ? (
-                                    <tr>
-                                        <td colSpan={columns.length} className="h-24 text-center">
-                                            No hay leads todavía. ¡Habla con el agente!
-                                        </td>
-                                    </tr>
-                                ) : (
-                                    table.getRowModel().rows.map(row => (
-                                        <tr key={row.id} className="border-b transition-colors hover:bg-zinc-50/50 data-[state=selected]:bg-zinc-50">
-                                            {row.getVisibleCells().map(cell => (
-                                                <td key={cell.id} className="p-4 align-middle">
-                                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                                </td>
+                {/* Leads Table */}
+                <Card className="bg-slate-900/50 border-slate-800 backdrop-blur-sm overflow-hidden">
+                    <CardHeader className="border-b border-slate-800/50">
+                        <CardTitle className="text-white">Últimos Leads</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                        <div className="border-0">
+                            <table className="w-full text-sm">
+                                <thead className="bg-slate-950/50 border-b border-slate-800">
+                                    {table.getHeaderGroups().map(headerGroup => (
+                                        <tr key={headerGroup.id}>
+                                            {headerGroup.headers.map(header => (
+                                                <th key={header.id} className="h-12 px-6 text-left align-middle font-medium text-slate-400 uppercase tracking-wider text-xs">
+                                                    {header.isPlaceholder
+                                                        ? null
+                                                        : flexRender(
+                                                            header.column.columnDef.header,
+                                                            header.getContext()
+                                                        )}
+                                                </th>
                                             ))}
                                         </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                </CardContent>
-            </Card>
+                                    ))}
+                                </thead>
+                                <tbody className="divide-y divide-slate-800">
+                                    {table.getRowModel().rows.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={columns.length} className="h-32 text-center text-slate-500">
+                                                No hay leads todavía. ¡Habla con el agente!
+                                            </td>
+                                        </tr>
+                                    ) : (
+                                        table.getRowModel().rows.map(row => (
+                                            <tr key={row.id} className="transition-colors hover:bg-slate-800/50">
+                                                {row.getVisibleCells().map(cell => (
+                                                    <td key={cell.id} className="p-6 align-middle text-slate-300">
+                                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        ))
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
 }

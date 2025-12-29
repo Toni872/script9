@@ -14,6 +14,11 @@ interface Message {
     timestamp: Date;
 }
 
+interface AIChatWidgetProps {
+    isOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
+}
+
 // Floating launcher button component
 function FloatingLauncher({ onClick }: { onClick: () => void }) {
     return (
@@ -23,17 +28,27 @@ function FloatingLauncher({ onClick }: { onClick: () => void }) {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={onClick}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-indigo-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-indigo-700 transition-colors"
+            className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-600 rounded-full shadow-lg shadow-emerald-500/20 flex items-center justify-center text-white hover:bg-emerald-500 transition-colors border border-emerald-400/50"
         >
             <Bot className="w-8 h-8" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-slate-900 rounded-full animate-pulse"></span>
         </motion.button>
     );
 }
 
-export function AIChatWidget() {
+export function AIChatWidget({ isOpen: externalIsOpen, onOpenChange }: AIChatWidgetProps) {
     // Internal state for visibility to make it self-contained
-    const [isOpen, setIsOpen] = useState(false);
+    const [internalIsOpen, setInternalIsOpen] = useState(false);
+
+    // Derived state
+    const isVisible = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+    const setIsVisible = (value: boolean) => {
+        if (onOpenChange) {
+            onOpenChange(value);
+        } else {
+            setInternalIsOpen(value);
+        }
+    };
 
     // Initial greeting
     const [messages, setMessages] = useState<Message[]>([
@@ -50,10 +65,10 @@ export function AIChatWidget() {
 
     // Auto-scroll to bottom
     useEffect(() => {
-        if (isOpen && scrollRef.current) {
+        if (isVisible && scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
-    }, [messages, isOpen]);
+    }, [messages, isVisible]);
 
     const getSmartResponse = (input: string): string => {
         const lowerInput = input.toLowerCase();
@@ -118,53 +133,53 @@ export function AIChatWidget() {
     return (
         <>
             <AnimatePresence>
-                {!isOpen && (
-                    <FloatingLauncher onClick={() => setIsOpen(true)} />
+                {!isVisible && (
+                    <FloatingLauncher onClick={() => setIsVisible(true)} />
                 )}
             </AnimatePresence>
 
             <AnimatePresence>
-                {isOpen && (
+                {isVisible && (
                     <motion.div
                         initial={{ opacity: 0, y: 50, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 50, scale: 0.95 }}
                         className="fixed bottom-20 right-6 z-50 w-full max-w-sm shadow-2xl origin-bottom-right"
                     >
-                        <Card className="border-[#003D82] border-t-4 h-[500px] flex flex-col bg-white overflow-hidden shadow-2xl rounded-2xl">
-                            <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 py-3 px-4 flex flex-row items-center justify-between">
+                        <Card className="border-slate-800 border-t-4 h-[500px] flex flex-col bg-slate-900 overflow-hidden shadow-2xl rounded-2xl shadow-black/50">
+                            <CardHeader className="bg-slate-950 border-b border-slate-800 py-3 px-4 flex flex-row items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center relative shadow-sm">
-                                        <Bot className="w-5 h-5 text-indigo-600" />
-                                        <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+                                    <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center relative shadow-sm border border-emerald-500/20">
+                                        <Bot className="w-5 h-5 text-emerald-500" />
+                                        <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
                                     </div>
                                     <div>
-                                        <CardTitle className="text-base font-bold text-gray-800 flex items-center gap-2">
+                                        <CardTitle className="text-base font-bold text-white flex items-center gap-2">
                                             S9-Bot
                                         </CardTitle>
-                                        <p className="text-[10px] text-green-600 font-medium tracking-wide uppercase">Online 24/7</p>
+                                        <p className="text-[10px] text-emerald-500 font-medium tracking-wide uppercase">Online 24/7</p>
                                     </div>
                                 </div>
-                                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-gray-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-full transition-colors">
+                                <Button variant="ghost" size="icon" onClick={() => setIsVisible(false)} className="h-8 w-8 text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition-colors">
                                     <X className="w-4 h-4" />
                                 </Button>
                             </CardHeader>
 
-                            <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#F8FAFC]" ref={scrollRef}>
+                            <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-900/50 backdrop-blur-sm" ref={scrollRef}>
                                 {messages.map((msg) => (
                                     <div
                                         key={msg.id}
                                         className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                     >
                                         <div className={`flex items-start gap-2 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                                            <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${msg.role === 'user' ? 'bg-[#003D82] text-white shadow-md' : 'bg-indigo-100 text-indigo-600'
+                                            <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${msg.role === 'user' ? 'bg-emerald-600 text-white shadow-md' : 'bg-slate-800 text-emerald-400 border border-slate-700'
                                                 }`}>
                                                 {msg.role === 'user' ? <User className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
                                             </div>
                                             <div
                                                 className={`p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                                                    ? 'bg-[#003D82] text-white rounded-tr-none shadow-md'
-                                                    : 'bg-white border border-gray-200 text-gray-700 rounded-tl-none shadow-sm'
+                                                    ? 'bg-emerald-600 text-white rounded-tr-none shadow-md'
+                                                    : 'bg-slate-800 border border-slate-700 text-slate-200 rounded-tl-none shadow-sm'
                                                     }`}
                                             >
                                                 {msg.text}
@@ -175,14 +190,14 @@ export function AIChatWidget() {
                                 {isTyping && (
                                     <div className="flex justify-start">
                                         <div className="flex items-start gap-2 max-w-[80%]">
-                                            <div className="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-1">
-                                                <Bot className="w-3 h-3 text-indigo-600" />
+                                            <div className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 mt-1 border border-slate-700">
+                                                <Bot className="w-3 h-3 text-emerald-400" />
                                             </div>
-                                            <div className="bg-white border border-gray-200 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm">
+                                            <div className="bg-slate-800 border border-slate-700 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm">
                                                 <div className="flex gap-1">
-                                                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                                                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                                                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></span>
+                                                    <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                                    <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                                    <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,11 +205,11 @@ export function AIChatWidget() {
                                 )}
                             </CardContent>
 
-                            <CardFooter className="p-3 bg-white border-t border-gray-100">
-                                <div className="flex w-full gap-2 items-center bg-gray-50 p-1.5 rounded-full border border-gray-200 focus-within:border-indigo-300 focus-within:ring-2 focus-within:ring-indigo-100 transition-all">
+                            <CardFooter className="p-3 bg-slate-950 border-t border-slate-800">
+                                <div className="flex w-full gap-2 items-center bg-slate-900 p-1.5 rounded-full border border-slate-800 focus-within:border-emerald-500/50 focus-within:ring-2 focus-within:ring-emerald-500/20 transition-all">
                                     <Input
                                         placeholder="Escribe tu consulta..."
-                                        className="flex-1 bg-transparent border-none shadow-none focus-visible:ring-0 text-sm h-9 px-3"
+                                        className="flex-1 bg-transparent border-none shadow-none focus-visible:ring-0 text-white placeholder:text-slate-500 text-sm h-9 px-3"
                                         value={inputValue}
                                         onChange={(e) => setInputValue(e.target.value)}
                                         onKeyDown={handleKeyDown}
@@ -204,7 +219,7 @@ export function AIChatWidget() {
                                         onClick={handleSend}
                                         disabled={!inputValue.trim() || isTyping}
                                         size="icon"
-                                        className="bg-indigo-600 hover:bg-indigo-700 text-white w-8 h-8 rounded-full shadow-sm flex-shrink-0"
+                                        className="bg-emerald-600 hover:bg-emerald-500 text-white w-8 h-8 rounded-full shadow-sm flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         <Send className="w-4 h-4" />
                                     </Button>

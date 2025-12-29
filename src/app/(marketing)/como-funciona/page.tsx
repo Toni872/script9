@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Rocket, HelpCircle, ChevronDown, Zap, Code, Settings, Bot, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
+import { DeepTechHero } from '@/components/ui/DeepTechHero';
 
 export default function ComoFunciona() {
   const router = useRouter();
@@ -67,55 +68,20 @@ export default function ComoFunciona() {
   return (
     <div className="bg-slate-950 min-h-screen font-sans">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden bg-slate-950 text-white">
-        <div className="absolute inset-0 z-0">
-          {/* Deep Tech Background Layer */}
-          <div className="absolute inset-0 bg-slate-950" />
-
-          {/* Subtle Grid Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-
-          {/* Radial Gradient Glows */}
-          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-emerald-500/20 opacity-20 blur-[100px]" />
-          <div className="absolute right-0 top-0 -z-10 h-[300px] w-[300px] bg-indigo-500/10 opacity-20 blur-[100px]" />
-
-          {/* Noise Texture Overlay */}
-          <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] filter contrast-125 brightness-100" />
-
-          {/* Fade to bottom */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950" />
-        </div>
-
-        <div className="relative z-30 max-w-[980px] mx-auto px-5 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-md rounded-full border border-emerald-500/20 mb-6"
-          >
+      <DeepTechHero
+        badge={
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-md rounded-full border border-emerald-500/20">
             <Sparkles className="h-4 w-4 text-emerald-400" />
             <span className="text-sm font-semibold text-emerald-100">Transformación Digital Real</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[56px] md:text-[72px] font-bold leading-[1.05] mb-6 tracking-tight"
-          >
+          </div>
+        }
+        title={
+          <>
             Automatiza tu negocio<br />sin complicaciones
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-[19px] md:text-[21px] max-w-2xl mx-auto leading-[1.4] font-light text-slate-400"
-          >
-            Servicios de IA, workflows y scripts a medida para negocios digitales que quieren escalar.
-          </motion.p>
-        </div>
-      </section>
+          </>
+        }
+        subtitle="Servicios de IA, workflows y scripts a medida para negocios digitales que quieren escalar."
+      />
 
       {/* Servicios - Grid */}
       <section className="py-20 bg-slate-950 border-t border-slate-800">
@@ -199,7 +165,7 @@ export default function ComoFunciona() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-slate-950 p-8 rounded-2xl shadow-sm border border-slate-800 hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden"
+                className="group bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-800 hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden"
               >
 
                 <div className="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-[18px] mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 border border-slate-800">
