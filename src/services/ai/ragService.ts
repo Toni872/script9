@@ -2,15 +2,17 @@ import { createServerSupabaseClient } from '@/lib/supabase';
 import OpenAI from 'openai';
 
 // Initialize OpenAI (ensure OPENAI_API_KEY is in .env)
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// const openai = new OpenAI(...);
 
 export class RagService {
     /**
      * Generates embedding for a text string
      */
     private static async generateEmbedding(text: string): Promise<number[]> {
+        const openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
+
         const response = await openai.embeddings.create({
             model: 'text-embedding-3-small',
             input: text.replace(/\n/g, ' '),

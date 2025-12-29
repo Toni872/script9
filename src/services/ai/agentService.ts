@@ -3,9 +3,8 @@ import { RagService } from './ragService';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { CRMLead, CRMQuote } from '@/types/agent';
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// OpenAI initialized lazily to avoid build-time errors if API key is missing
+// const openai = new OpenAI(...);
 
 // SYSTEM PROMPT
 const SYSTEM_PROMPT = `
@@ -91,6 +90,12 @@ export class AgentService {
         ];
 
         console.log('Starting Agent Chat Loop...');
+
+        // Initialize client lazily
+        const openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
+
         let iterations = 0;
         while (iterations < 5) {
             const response = await openai.chat.completions.create({
