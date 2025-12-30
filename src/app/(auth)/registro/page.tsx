@@ -59,7 +59,7 @@ export default function Registro() {
             }
 
             router.push('/login?registered=true');
-        } catch (err: any) {
+        } catch (err) {
             setError('Error inesperado al registrarse');
             console.error(err);
             setLoading(false);

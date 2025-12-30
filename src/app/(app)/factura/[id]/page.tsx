@@ -40,8 +40,7 @@ export default function InvoicePage({ params }: { params: { id: string } }) {
                 .single();
 
             if (data) {
-                // @ts-ignore
-                setInvoice(data);
+                setInvoice(data as unknown as InvoiceData);
             }
             setLoading(false);
         }
@@ -72,7 +71,7 @@ export default function InvoicePage({ params }: { params: { id: string } }) {
                             document.title = `Factura-${invoice.id.slice(0, 8)}`; // Nombre del archivo al guardar
                             window.print();
                         }}
-                        className="bg-[#003D82] hover:bg-[#002d62] text-white shadow-lg transition-all"
+                        className="bg-slate-900 hover:bg-slate-800 text-white shadow-lg transition-all"
                     >
                         <Download className="mr-2 h-4 w-4" /> Descargar PDF
                     </Button>
@@ -82,8 +81,8 @@ export default function InvoicePage({ params }: { params: { id: string } }) {
             {/* Invoice Header */}
             <div className="border-b-2 border-gray-100 pb-8 mb-8 flex justify-between items-start">
                 <div>
-                    <h1 className="text-4xl font-bold text-[#003D82] mb-2">FACTURA</h1>
-                    <p className="text-gray-500">#{invoice.id.slice(0, 8).toUpperCase()}</p>
+                    <h1 className="text-4xl font-bold text-slate-900 mb-2">FACTURA</h1>
+                    <p className="text-slate-500">#{invoice.id.slice(0, 8).toUpperCase()}</p>
                 </div>
                 <div className="text-right">
                     <div className="text-2xl font-bold mb-1">Script9 Deep Tech</div>
@@ -141,7 +140,7 @@ export default function InvoicePage({ params }: { params: { id: string } }) {
                         <span>IVA (21%)</span>
                         <span>€{(invoice.total_price - (invoice.total_price / 1.21)).toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-xl font-bold text-[#003D82] pt-4 border-t border-gray-200">
+                    <div className="flex justify-between text-xl font-bold text-slate-900 pt-4 border-t border-gray-200">
                         <span>Total</span>
                         <span>€{invoice.total_price?.toFixed(2)}</span>
                     </div>

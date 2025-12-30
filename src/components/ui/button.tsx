@@ -10,21 +10,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[#003D82] text-white shadow-md hover:bg-[#002E5C] hover:shadow-lg active:scale-95",
+          "bg-slate-900 text-white shadow-md hover:bg-slate-800 hover:shadow-lg active:scale-95",
         destructive:
-          "bg-emerald-500 text-white shadow-sm hover:bg-emerald-600",
+          "bg-red-500 text-white shadow-sm hover:bg-red-600",
         outline:
-          "border-2 border-[#10B981] bg-transparent text-[#10B981] hover:bg-[#10B981] hover:text-white transition-colors active:scale-95",
+          "border-2 border-emerald-500 bg-transparent text-emerald-500 hover:bg-emerald-500 hover:text-white transition-colors active:scale-95",
         secondary:
-          "bg-white text-[#003D82] border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-[#003D82]/30",
+          "bg-white text-slate-900 border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-slate-300",
         ghost:
-          "text-[#003D82] hover:bg-[#003D82]/5",
+          "text-slate-900 hover:bg-slate-100",
         link:
-          "text-[#003D82] underline-offset-4 hover:underline",
+          "text-slate-900 underline-offset-4 hover:underline",
         premium:
-          "bg-gradient-to-r from-[#003D82] to-[#10B981] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 animate-gradient-x border-0",
+          "bg-gradient-to-r from-slate-900 to-emerald-500 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 animate-gradient-x border-0",
         cta:
-          "bg-[#10B981] text-white shadow-lg hover:bg-[#059669] hover:shadow-[#10B981]/30 hover:-translate-y-1 active:translate-y-0 active:scale-95 duration-200",
+          "bg-emerald-500 text-white shadow-lg hover:bg-emerald-600 hover:shadow-emerald-500/30 hover:-translate-y-1 active:translate-y-0 active:scale-95 duration-200",
       },
       size: {
         default: "h-10 px-6 py-2.5",

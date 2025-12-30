@@ -2,6 +2,11 @@
 import { CRMLead, CRMQuote } from '@/types/agent';
 import { createServerSupabaseClient } from '@/lib/supabase';
 
+interface Message {
+    role: string;
+    content: string;
+}
+
 // Mock Agent Service for Demo purposes (No OpenAI costs)
 export class AgentService {
     /**
@@ -9,7 +14,7 @@ export class AgentService {
      * To avoid costs for the demo.
      */
     static async chat(
-        history: any[], // Allow flexible message types
+        history: Message[], // Typed message history
     ): Promise<string | null> {
         // Extract latest user message
         const lastMessage = history[history.length - 1];

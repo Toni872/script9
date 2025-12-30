@@ -59,13 +59,13 @@ export class EmailService {
           <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background-color: #003D82; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+            .header { background-color: #0F172A; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
             .content { background-color: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
             .booking-details { background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
             .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
             .detail-label { font-weight: bold; color: #666; }
             .detail-value { color: #333; }
-            .total { font-size: 1.3em; color: #003D82; font-weight: bold; }
+            .total { font-size: 1.3em; color: #0F172A; font-weight: bold; }
             .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.9em; }
             .button { display: inline-block; background-color: #10B981; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
           </style>
@@ -243,7 +243,7 @@ export class EmailService {
           <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background-color: #003D82; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+            .header { background-color: #0F172A; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
             .content { background-color: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
             .booking-details { background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
             .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
@@ -251,7 +251,7 @@ export class EmailService {
             .detail-value { color: #333; }
             .earnings { font-size: 1.3em; color: #10B981; font-weight: bold; }
             .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.9em; }
-            .button { display: inline-block; background-color: #003D82; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+            .button { display: inline-block; background-color: #0F172A; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
           </style>
         </head>
         <body>
