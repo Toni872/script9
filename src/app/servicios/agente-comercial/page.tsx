@@ -3,6 +3,7 @@ import { Check, Bot, MessageSquare, Database, BarChart3, ArrowRight } from "luci
 import Link from "next/link";
 import Image from "next/image";
 import ROICalculator from "@/components/marketing/ROICalculator";
+// import AgentChatDemo from "@/components/agent/AgentChatDemo"; // REMOVED
 
 export default function AgenteComercialPage() {
     return (

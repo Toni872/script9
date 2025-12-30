@@ -121,7 +121,6 @@ export default function Header() {
                                                 <div className="py-1">
                                                     <MenuLink href="/dashboard" icon={BarChart3}>Panel de Control</MenuLink>
                                                     <MenuLink href="/perfil" icon={User}>Mi Perfil</MenuLink>
-                                                    <MenuLink href="/mensajes" icon={MessageCircle}>Mensajes</MenuLink>
                                                     {(isHost || isAdmin) && (
                                                         <MenuLink href="/host/properties" icon={Grid3x3}>Panel Vendedor</MenuLink>
                                                     )}
@@ -255,7 +254,7 @@ export default function Header() {
                                             </div>
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-3">
+                                        <div className="grid grid-cols-1 gap-3">
                                             <Link
                                                 href="/dashboard"
                                                 onClick={() => setMobileMenuOpen(false)}
@@ -263,14 +262,6 @@ export default function Header() {
                                             >
                                                 <BarChart3 className="w-6 h-6 mb-2" />
                                                 <span className="text-sm font-medium">Dashboard</span>
-                                            </Link>
-                                            <Link
-                                                href="/mensajes"
-                                                onClick={() => setMobileMenuOpen(false)}
-                                                className="flex flex-col items-center justify-center py-4 px-2 bg-slate-900 border border-slate-800 rounded-xl text-blue-400 hover:bg-slate-800 transition-colors"
-                                            >
-                                                <MessageCircle className="w-6 h-6 mb-2" />
-                                                <span className="text-sm font-medium">Mensajes</span>
                                             </Link>
                                         </div>
 
@@ -350,5 +341,3 @@ function MobileLink({ href, children, onClick }: { href: string; children: React
         </Link>
     );
 }
-
-
