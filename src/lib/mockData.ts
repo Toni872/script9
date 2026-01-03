@@ -1,20 +1,6 @@
 // Mock data para desarrollo del MVP - Script9 Servicios de Automatización
 
-export const mockServices: any[] = [
-  // CATALOGO VACIO POR AHORA (User Request)
-  /*
-  {
-    id: '1',
-    title: 'Automatización de Email Marketing (Demo)',
-    // ...
-  },
-  {
-    id: 'plan-moves-agent',
-    title: 'Agente Comercial IA (Omnicanal)',
-    // ...
-  }
-  */
-];
+export const mockServices: any[] = [];
 
 export const mockProperties = mockServices; // Alias for backward compatibility
 

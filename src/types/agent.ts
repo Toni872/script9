@@ -11,6 +11,7 @@ export interface CRMLead {
     created_at: string;
     updated_at: string;
     user_id?: string;
+    message?: string;
 }
 
 export interface CRMQuoteItem {

@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { Search, PenTool, Rocket } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export function ProcessSteps() {
+    const router = useRouter();
+
     const steps = [
         {
             id: "01",
@@ -122,10 +125,10 @@ export function ProcessSteps() {
                 >
                     <h3 className="text-2xl font-bold text-white mb-4">¿Listo para escalar tu negocio?</h3>
                     <p className="text-slate-400 mb-8 font-light">
-                        Agenda una consultoría gratuita de 15 minutos. Sin compromisos de venta, solo estrategia pura.
+                        Agenda una consultoría gratuita de 45 minutos. Sin compromisos de venta, solo estrategia pura.
                     </p>
                     <button
-                        onClick={() => window.open('https://calendly.com', '_blank')}
+                        onClick={() => router.push('/contacto')}
                         className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-4 px-8 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 mx-auto"
                     >
                         Agendar Llamada Ahora <Rocket className="w-5 h-5" />

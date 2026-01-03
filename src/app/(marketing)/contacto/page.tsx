@@ -109,23 +109,13 @@ export default function Contacto() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-white mb-1">Teléfono</h3>
-                                        <a href="tel:+34900000000" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                                            +34 900 000 000
+                                        <a href="tel:+34687723287" className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                            +34 687 723 287
                                         </a>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-4 group">
-                                    <div className="p-3 bg-emerald-500/10 rounded-xl group-hover:bg-emerald-500/20 transition-colors">
-                                        <MapPin className="h-6 w-6 text-emerald-400" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-white mb-1">Oficinas</h3>
-                                        <p className="text-slate-400">
-                                            Madrid Tech Hub, España
-                                        </p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
 

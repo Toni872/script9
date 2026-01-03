@@ -19,6 +19,7 @@ export interface Service {
     price: number;    // was price_per_hour
     unit: string;     // 'hour', 'project', 'month'
     price_display_text?: string; // Optional override e.g. "Desde 1000€"
+    custom_url?: string;         // Optional direct link (override catalog/id)
 
     // B2B Service Fields
     delivery_time?: string;      // e.g. "2 semanas"

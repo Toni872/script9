@@ -2,16 +2,15 @@
 
 import { motion, useTime, useTransform } from 'framer-motion';
 import {
-    Search,
-    TrendingUp,
-    Zap,
+    Workflow,
+    Link2,
+    Database,
     Globe,
-    BarChart3,
-    Target
+    Activity,
+    Server
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-// Specialized HUD Component (Exact same style as Agent page)
 const HolographicHUD = ({ title, value, icon: Icon, color, x, y, delay }: any) => {
     return (
         <motion.div
@@ -36,24 +35,19 @@ const HolographicHUD = ({ title, value, icon: Icon, color, x, y, delay }: any) =
                     <span className={`block w-1.5 h-1.5 rounded-full ${color.replace('text-', 'bg-')} animate-pulse`} />
                 </div>
             </div>
-
-            {/* Corner Accents */}
             <div className={`absolute -top-px -left-px w-2 h-2 border-t border-l ${color.replace('text-', 'border-')} opacity-50`} />
             <div className={`absolute -bottom-px -right-px w-2 h-2 border-b border-r ${color.replace('text-', 'border-')} opacity-50`} />
         </motion.div>
     );
 };
 
-export function HeroAdvancedVisual() {
+export function WorkflowHeroVisual() {
     const time = useTime();
 
-    // Exact same rotations as Agent Visual
-    const rotate1 = useTransform(time, [0, 20000], [0, 360], { clamp: false });
-    const rotate2 = useTransform(time, [0, 25000], [0, -360], { clamp: false });
-    const rotate3 = useTransform(time, [0, 30000], [0, 360], { clamp: false });
-
-    // Pulsing core effect (Fixed to loop properly)
-    // Removed faulty useTransform
+    // Smooth connected rotations
+    const rotate1 = useTransform(time, [0, 25000], [0, 360], { clamp: false });
+    const rotate2 = useTransform(time, [0, 30000], [0, -360], { clamp: false });
+    const rotate3 = useTransform(time, [0, 35000], [0, 360], { clamp: false });
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
@@ -63,9 +57,9 @@ export function HeroAdvancedVisual() {
     return (
         <div className="relative w-full h-[550px] flex items-center justify-center overflow-visible perspective-[1200px]">
 
-            {/* BACKGROUND FIELD */}
+            {/* AMBIENT GLOW - Purple/Indigo for Workflows (Integration) */}
             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[80px]" />
+                <div className="w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[80px]" />
             </div>
 
             {/* 3D CORE SYSTEM */}
@@ -74,108 +68,89 @@ export function HeroAdvancedVisual() {
                 style={{ transformStyle: "preserve-3d" }}
             >
 
-                {/* 1. CENTRAL S9 CORE */}
+                {/* 1. CENTRAL CONNECTED CORE */}
                 <motion.div
                     className="relative z-20 w-32 h-32 flex items-center justify-center"
                     animate={{ scale: [1, 1.02, 1] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 >
-                    <div className="absolute inset-0 bg-slate-900 rounded-full border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.2)] flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-slate-900 rounded-full border border-indigo-500/30 shadow-[0_0_30px_rgba(99,102,241,0.2)] flex items-center justify-center overflow-hidden">
 
-                        {/* S9 Branding Text */}
-                        <div className="relative z-10 flex items-center justify-center font-bold font-mono tracking-tighter" style={{ fontSize: '3.5rem' }}>
-                            <span className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">S</span>
-                            <span className="text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.8)]">9</span>
-                        </div>
+                        <Workflow className="w-16 h-16 text-indigo-400 relative z-10 drop-shadow-[0_0_10px_rgba(99,102,241,0.8)]" />
                     </div>
 
-                    {/* Spinning Energy Ring */}
+                    {/* Spinning Node Ring */}
                     <motion.div
-                        className="absolute -inset-2 rounded-full border border-emerald-400/30 border-t-transparent border-l-transparent"
+                        className="absolute -inset-2 rounded-full border border-indigo-400/30 border-dashed"
                         animate={{ rotate: 360 }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    />
-                    <motion.div
-                        className="absolute -inset-4 rounded-full border border-cyan-400/20 border-b-transparent border-r-transparent"
-                        animate={{ rotate: -360 }}
-                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                     />
                 </motion.div>
 
-                {/* 2. ORBITAL RINGS (Gyroscope - Exact logic from Agent Visual) */}
+                {/* 2. ORBITAL RINGS */}
 
-                {/* Large Outer Ring */}
                 <motion.div
-                    className="absolute w-[450px] h-[450px] border border-slate-700/30 rounded-full"
+                    className="absolute w-[450px] h-[450px] border border-slate-700/30 rounded-full border-t-indigo-500/50"
                     style={{ rotateX: 70, rotateZ: rotate1 }}
-                    transition={{ ease: "linear" }}
                 >
-                    <div className="absolute top-0 left-1/2 w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981]" />
-                    <div className="absolute bottom-0 left-1/2 w-2 h-2 bg-emerald-500/50 rounded-full" />
+                    <div className="absolute top-0 left-1/2 w-3 h-3 bg-indigo-500 rounded-full shadow-[0_0_10px_#6366f1]" />
                 </motion.div>
 
-                {/* Vertical Ring */}
                 <motion.div
-                    className="absolute w-[380px] h-[380px] border border-slate-700/30 rounded-full border-l-emerald-500/30"
+                    className="absolute w-[380px] h-[380px] border border-slate-700/30 rounded-full border-l-purple-500/30"
                     style={{ rotateY: 70, rotateZ: rotate2 }}
-                    transition={{ ease: "linear" }}
-                >
-                    <div className="absolute top-1/2 right-0 w-2 h-2 bg-cyan-500 rounded-full shadow-[0_0_10px_#06b6d4]" />
-                </motion.div>
+                />
 
-                {/* Tilted Ring */}
                 <motion.div
                     className="absolute w-[320px] h-[320px] border border-dashed border-slate-700/40 rounded-full"
                     style={{ rotateX: 45, rotateY: 45, rotateZ: rotate3 }}
-                    transition={{ ease: "linear" }}
                 />
 
-                {/* 3. FLOATING HOLOGRAPHIC HUDs (Web/SEO Data) */}
+                {/* 3. FLOATING METRICS (Workflow Specific) */}
 
-                {/* Left: Google Rank */}
+                {/* Integrations */}
                 <HolographicHUD
-                    icon={Target}
-                    title="Google Position"
-                    value="RANK #1"
-                    color="text-emerald-400"
+                    icon={Link2}
+                    title="Active Connections"
+                    value="12 APPS LINKED"
+                    color="text-indigo-400"
                     x={-220} y={-80}
                     delay={0}
                 />
 
-                {/* Right: Traffic Stats */}
+                {/* API Status */}
                 <HolographicHUD
-                    icon={TrendingUp}
-                    title="Monthly Traffic"
-                    value="+12.5K USERS"
-                    color="text-cyan-400"
+                    icon={Server}
+                    title="API Status"
+                    value="OPERATIONAL"
+                    color="text-emerald-400"
                     x={200} y={20}
                     delay={1.5}
                 />
 
-                {/* Bottom: Performance */}
+                {/* Data Flow */}
                 <HolographicHUD
-                    icon={Zap}
-                    title="Core Vitals"
-                    value="100/100 SPEED"
+                    icon={Activity}
+                    title="Data Sync"
+                    value="REAL-TIME"
                     color="text-purple-400"
                     x={-160} y={150}
                     delay={2.5}
                 />
 
-                {/* Connection Lines (SVG) */}
+                {/* Connection Lines */}
                 <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none opacity-40">
                     <motion.line
                         x1="150" y1="150" x2="-70" y2="70"
-                        stroke="#10b981" strokeWidth="1" strokeDasharray="5,5"
+                        stroke="#6366f1" strokeWidth="1" strokeDasharray="5,5"
                         initial={{ strokeDashoffset: 100 }}
                         animate={{ strokeDashoffset: 0 }}
                         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     />
                     <motion.line
                         x1="150" y1="150" x2="350" y2="170"
-                        stroke="#06b6d4" strokeWidth="1" strokeDasharray="2,2"
+                        stroke="#a855f7" strokeWidth="1" strokeDasharray="2,2"
                     />
-                    <motion.circle cx="150" cy="150" r="180" stroke="#334155" strokeWidth="1" opacity="0.2" fill="none" />
                 </svg>
 
             </motion.div>

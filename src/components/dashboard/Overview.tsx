@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowUpRight, DollarSign, Package, Zap, Lock, TrendingUp, Rocket } from 'lucide-react';
+import { ArrowUpRight, DollarSign, Package, Zap, Lock, TrendingUp, Rocket, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -38,114 +39,133 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
 
     if (subscriptionTier === 'free') {
         return (
-            <div className="space-y-6">
-                <div className="grid gap-4 md:grid-cols-3">
+            <div className="space-y-8">
+                {/* Stats Grid */}
+                <div className="grid gap-6 md:grid-cols-2">
                     {/* Upsell Card 1: ROI Potential */}
-                    <Card className="border-slate-800 bg-slate-900/50 relative overflow-hidden group hover:border-slate-700 transition-all backdrop-blur-sm">
-                        <div className="absolute top-0 right-0 p-3 opacity-5">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 p-6 backdrop-blur-md hover:border-emerald-500/30 transition-all duration-300"
+                    >
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <TrendingUp className="w-24 h-24 text-emerald-500" />
                         </div>
-                        <CardHeader className="pb-2">
-                            <CardTitle className="text-sm font-medium text-emerald-400">Ahorro Potencial</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold text-white">€1,200/mes</div>
-                            <p className="text-xs text-slate-400 mt-1">Automatizando tus tareas actuales</p>
-                        </CardContent>
-                    </Card>
+                        <div className="relative z-10">
+                            <h3 className="text-sm font-medium text-emerald-400 mb-1">Ahorro Estimado</h3>
+                            <div className="text-3xl font-bold text-white mb-2">€1,200<span className="text-sm text-slate-500 font-normal">/mes</span></div>
+                            <p className="text-xs text-slate-400">Automatizando tus flujos actuales</p>
+                        </div>
+                    </motion.div>
 
                     {/* Upsell Card 2: Efficiency */}
-                    <Card className="border-slate-800 bg-slate-900/50 hover:border-slate-700 transition-all backdrop-blur-sm">
-                        <CardHeader className="pb-2">
-                            <CardTitle className="text-sm font-medium text-slate-400">Horas Recuperables</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold text-slate-200">~20h/semana</div>
-                            <p className="text-xs text-slate-500 mt-1">Tiempo libre para ventas</p>
-                        </CardContent>
-                    </Card>
-
-                    {/* Upsell Card 3: Unlock Pro */}
-                    <Card className="border-dashed border-2 border-slate-800 bg-slate-950/50 flex flex-col justify-center items-center text-center p-6 hover:border-slate-700 transition-all backdrop-blur-sm">
-                        <Lock className="w-8 h-8 text-slate-600 mb-2" />
-                        <h3 className="font-bold text-slate-300">Desbloquear Analytics</h3>
-                        <p className="text-xs text-slate-500 mb-4">Ver métricas reales de negocio</p>
-                        <Link href="/soporte">
-                            <Button size="sm" variant="outline" className="border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800">
-                                Consultar Plan Pro
-                            </Button>
-                        </Link>
-                    </Card>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 p-6 backdrop-blur-md hover:border-blue-500/30 transition-all duration-300"
+                    >
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Zap className="w-24 h-24 text-blue-500" />
+                        </div>
+                        <div className="relative z-10">
+                            <h3 className="text-sm font-medium text-blue-400 mb-1">Tiempo Recuperable</h3>
+                            <div className="text-3xl font-bold text-white mb-2">~20h<span className="text-sm text-slate-500 font-normal">/semana</span></div>
+                            <p className="text-xs text-slate-400">Dedicable a ventas y estrategia</p>
+                        </div>
+                    </motion.div>
                 </div>
 
-                {/* Free Tier "Next Steps" */}
-                <Card className="border-slate-800 border-l-4 border-l-emerald-500 shadow-lg bg-slate-900/50 backdrop-blur-sm">
-                    <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                {/* Free Tier "Next Steps" Hero */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="relative overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800/50 p-8 shadow-2xl"
+                >
+                    <div className="absolute top-0 right-0 w-full h-full bg-[url('/grid.svg')] opacity-10"></div>
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
-                            <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
-                                <Rocket className="w-5 h-5 text-emerald-500" />
-                                Impulsa tu negocio hoy
-                            </h3>
-                            <p className="text-slate-400 text-sm">Empieza tu primer proyecto de automatización desde 150€. Sin compromisos.</p>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
+                                <Sparkles className="w-3 h-3" />
+                                <span>Recomendado para ti</span>
+                            </div>
+                            <h3 className="text-2xl font-bold text-white mb-2">Comienza tu transformación digital</h3>
+                            <p className="text-slate-400 max-w-xl">
+                                Selecciona un servicio de nuestro catálogo y empieza a automatizar tu negocio desde hoy mismo.
+                                Sin costes ocultos, sin suscripciones forzosas.
+                            </p>
                         </div>
-                        <Link href="/nuevo-proyecto">
-                            <Button className="mt-4 bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20 whitespace-nowrap">
-                                <Zap className="w-4 h-4 mr-2" /> Empezar Ahora
+                        <Link href="/catalogo">
+                            <Button size="lg" className="bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20 px-8">
+                                <Rocket className="w-4 h-4 mr-2" />
+                                Nuevo Proyecto
                             </Button>
                         </Link>
-                    </CardContent>
-                </Card>
+                    </div>
+                </motion.div>
             </div>
         );
     }
 
-    // Standard View for Paid Tiers
+    // Standard View for Paid Tiers / Active Users
     const cards = [
         {
             title: "Inversión Total",
             value: `€${stats.totalSpent.toFixed(2)}`,
-            description: "+0% desde el mes pasado",
+            description: "ROI estimado: +150%",
             icon: DollarSign,
             color: "text-emerald-400",
-            bg: "bg-emerald-900/20 border-emerald-500/20"
+            bg: "bg-emerald-500/10 border-emerald-500/20",
+            delay: 0.1
         },
         {
             title: "Servicios Activos",
             value: stats.activeProjects.toString(),
-            description: "Automatizaciones funcionando",
+            description: "Funcionando 24/7",
             icon: Zap,
-            color: "text-blue-400",
-            bg: "bg-blue-900/20 border-blue-500/20"
+            color: "text-amber-400",
+            bg: "bg-amber-500/10 border-amber-500/20",
+            delay: 0.2
         },
         {
             title: "Proyectos Totales",
-            value: stats.activeProjects.toString(),
+            value: stats.completedProjects > 0 ? stats.completedProjects.toString() : stats.activeProjects.toString(), // Fallback logic
             description: "En tu historial",
             icon: Package,
-            color: "text-purple-400",
-            bg: "bg-purple-900/20 border-purple-500/20"
+            color: "text-blue-400",
+            bg: "bg-blue-500/10 border-blue-500/20",
+            delay: 0.3
         }
     ];
 
     return (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-10">
             {cards.map((card, index) => (
-                <Card key={index} className="border-slate-800 bg-slate-900/50 shadow-sm hover:border-slate-700 transition-all backdrop-blur-sm">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-400">
-                            {card.title}
-                        </CardTitle>
-                        <div className={`p-2 rounded-full border ${card.bg}`}>
-                            <card.icon className={`h-4 w-4 ${card.color}`} />
+                <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: card.delay }}
+                    className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 p-6 backdrop-blur-md hover:border-slate-700 hover:shadow-lg transition-all duration-300 group"
+                >
+                    <div className="flex items-start justify-between mb-4">
+                        <div>
+                            <p className="text-sm font-medium text-slate-400 mb-1">{card.title}</p>
+                            <h3 className="text-3xl font-bold text-white tracking-tight">{card.value}</h3>
                         </div>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold text-white">{card.value}</div>
-                        <p className="text-xs text-slate-500 mt-1">
-                            {card.description}
-                        </p>
-                    </CardContent>
-                </Card>
+                        <div className={`p-3 rounded-xl border ${card.bg} group-hover:scale-110 transition-transform duration-300`}>
+                            <card.icon className={`h-5 w-5 ${card.color}`} />
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <TrendingUp className="w-3 h-3 text-emerald-500" />
+                        <p className="text-xs text-slate-500">{card.description}</p>
+                    </div>
+                </motion.div>
             ))}
         </div>
     );

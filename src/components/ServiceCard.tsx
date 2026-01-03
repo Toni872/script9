@@ -43,7 +43,7 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
     const technologies = service.features?.map(f => f.name) || (service as any).amenities || [];
 
     return (
-        <Link href={`/catalogo/${service.id}`} className="group block h-full">
+        <Link href={service.custom_url || `/catalogo/${service.id}`} className="group block h-full">
             <article className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 h-full flex flex-col">
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden bg-slate-800">
@@ -74,7 +74,7 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
                 <div className="p-5 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-2">
                         <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors line-clamp-1">
-                            {service.title}
+                            {service.title.replace(/\*\*/g, '')}
                         </h3>
                         <div className="flex items-center gap-1 text-sm font-medium text-slate-300">
                             <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
@@ -83,7 +83,7 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
                     </div>
 
                     <p className="text-sm text-slate-400 line-clamp-2 mb-4 flex-1">
-                        {service.description}
+                        {service.description.replace(/\*\*/g, '')}
                     </p>
 
                     {/* Tech Stack / Features */}

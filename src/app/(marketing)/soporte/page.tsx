@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Mail, MessageSquare, Phone, Send, Loader2, Bot, Headphones } from 'lucide-react';
-import { AIChatWidget } from '@/components/support/AIChatWidget';
+
 import { useRouter } from 'next/navigation';
 import { DeepTechHero } from '@/components/ui/DeepTechHero';
 
@@ -15,7 +15,7 @@ export default function SoportePage() {
     const [sent, setSent] = useState(false);
     const router = useRouter();
 
-    const [isChatOpen, setIsChatOpen] = useState(false);
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -47,7 +47,6 @@ export default function SoportePage() {
 
     return (
         <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-            {/* Hero Section */}
             <DeepTechHero
                 title="Centro de Soporte"
                 subtitle="¿Cómo podemos ayudarte hoy?"
@@ -61,45 +60,13 @@ export default function SoportePage() {
                         <Card className="border-slate-800 bg-slate-900/50 backdrop-blur-sm shadow-sm overflow-hidden">
                             <CardHeader className="bg-slate-900/50 border-b border-slate-800 pb-4">
                                 <CardTitle className="flex items-center gap-2 text-lg text-white">
-                                    <MessageSquare className="w-5 h-5 text-emerald-400" /> Asistencia Inmediata
+                                    <MessageSquare className="w-5 h-5 text-emerald-400" /> Asistencia Técnica
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="p-0">
                                 <div className="divide-y divide-slate-800">
-                                    {/* AI Agent Option */}
-                                    <div className="p-4 hover:bg-slate-800/50 transition-colors group cursor-pointer" onClick={() => setIsChatOpen(true)}>
-                                        <div className="flex items-start gap-4">
-                                            <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0 border border-emerald-500/20">
-                                                <Bot className="w-6 h-6 text-emerald-400" />
-                                            </div>
-                                            <div className="flex-1">
-                                                <div className="flex items-center justify-between mb-1">
-                                                    <h3 className="font-semibold text-white">S9-Bot (IA)</h3>
-                                                    <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1 border border-emerald-500/20">
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                                        Online 24/7
-                                                    </span>
-                                                </div>
-                                                <p className="text-sm text-slate-400 mb-3">
-                                                    Respuestas instantáneas sobre documentación, precios y capacidades técnicas.
-                                                </p>
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    className="w-full border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setIsChatOpen(true);
-                                                    }}
-                                                >
-                                                    Chat con IA
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     {/* Human Agent Option */}
-                                    <div className="p-4 hover:bg-slate-800/50 transition-colors group cursor-pointer" onClick={() => router.push('/contacto')}>
+                                    <div className="p-4 hover:bg-slate-800/50 transition-colors group cursor-pointer" onClick={() => window.open('https://wa.me/34687723287', '_blank')}>
                                         <div className="flex items-start gap-4">
                                             <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 border border-slate-700">
                                                 <Headphones className="w-6 h-6 text-emerald-400" />
@@ -114,8 +81,8 @@ export default function SoportePage() {
                                                 <p className="text-sm text-slate-400 mb-3">
                                                     Validación técnica detallada y consultoría para proyectos a medida.
                                                 </p>
-                                                <Button size="sm" className="w-full bg-slate-800 text-white hover:bg-slate-700 border border-slate-700">
-                                                    Hablar con Experto
+                                                <Button size="sm" className="w-full bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20 border border-transparent">
+                                                    Hablar por WhatsApp
                                                 </Button>
                                             </div>
                                         </div>
@@ -161,9 +128,6 @@ export default function SoportePage() {
                     </Card>
                 </div>
             </div>
-
-            {/* Global AI Chat Widget with controlled state */}
-            <AIChatWidget isOpen={isChatOpen} onOpenChange={setIsChatOpen} />
         </div>
     );
 }

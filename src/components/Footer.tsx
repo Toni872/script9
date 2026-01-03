@@ -46,7 +46,7 @@ export default function Footer() {
                             <ul className="space-y-3">
                                 {[
                                     { label: 'Inicio', href: '/' },
-                                    { label: 'Catálogo de Servicios', href: '/catalogo' },
+                                    { label: 'Soluciones', href: '/catalogo' },
                                     { label: 'Casos de Éxito', href: '/casos' },
                                     { label: 'Blog', href: '/blog' },
                                 ].map((item) => (
@@ -92,16 +92,10 @@ export default function Footer() {
                         <div>
                             <h3 className="text-white font-bold text-lg mb-6">Contáctanos</h3>
                             <ul className="space-y-4">
-                                <li className="flex items-start space-x-3">
-                                    <MapPin className="w-5 h-5 text-emerald-500 mt-1 shrink-0" />
-                                    <span className="text-zinc-400 text-sm">
-                                        Calle Tecnología 123, <br />
-                                        Distrito Digital, Madrid
-                                    </span>
-                                </li>
+
                                 <li className="flex items-center space-x-3">
                                     <Phone className="w-5 h-5 text-emerald-500 shrink-0" />
-                                    <span className="text-zinc-400 text-sm">+34 900 123 456</span>
+                                    <span className="text-zinc-400 text-sm">+34 687 723 287</span>
                                 </li>
                                 <li className="flex items-center space-x-3">
                                     <Mail className="w-5 h-5 text-emerald-500 shrink-0" />

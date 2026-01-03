@@ -91,8 +91,8 @@ export function DetailedContactForm() {
                             </div>
                             <div>
                                 <h4 className="text-white font-bold mb-2">WhatsApp Business</h4>
-                                <a href="https://wa.me/34600000000" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                                    +34 600 000 000
+                                <a href="https://wa.me/34687723287" className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                    +34 687 723 287
                                 </a>
                             </div>
                         </div>

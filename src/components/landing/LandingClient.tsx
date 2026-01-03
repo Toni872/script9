@@ -9,7 +9,6 @@ import { ProcessSteps } from "@/components/landing/ProcessSteps";
 import { ServicePillars } from "@/components/landing/ServicePillars";
 import { IndustryCases } from "@/components/landing/IndustryCases";
 import { DetailedContactForm } from "@/components/landing/DetailedContactForm";
-import { ProblemSolution } from "@/components/landing/ProblemSolution";
 import { HeroAdvancedVisual } from "@/components/landing/HeroAdvancedVisual";
 import { TechStack } from "@/components/landing/TechStack";
 
@@ -103,120 +102,18 @@ export default function LandingClient() {
             {/* TECH STACK MARQUEE */}
             <TechStack />
 
-            {/* FEATURED SERVICE: COMMERCIAL AGENT */}
-            <section className="py-20 bg-slate-900/30 text-white relative overflow-hidden border-y border-slate-800">
 
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="flex flex-col lg:flex-row items-center gap-12">
-                        <div className="flex-1 space-y-6">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider border border-emerald-500/20">
-                                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                Nuevo Lanzamiento
-                            </div>
-                            <h2 className="text-3xl lg:text-5xl font-bold tracking-tight">
-                                Agente Comercial <span className="text-emerald-400">Omnicanal</span>
-                            </h2>
-                            <p className="text-xl text-slate-400 leading-relaxed font-light">
-                                Imagina un vendedor que conoce todo tu inventario, responde al instante por WhatsApp y Email, y nunca duerme.
-                                Ya es una realidad.
-                            </p>
-                            <div className="flex flex-wrap gap-4 pt-4">
-                                <button
-                                    onClick={() => router.push('/servicios/agente-comercial')}
-                                    className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg transition-all flex items-center gap-2 group"
-                                >
-                                    Ver Demo en Vivo
-                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </button>
-                                <button
-                                    onClick={() => router.push('/servicios/agente-comercial')}
-                                    className="px-8 py-4 bg-transparent border border-slate-700 text-white hover:bg-slate-800 hover:border-slate-600 rounded-lg font-semibold transition-all"
-                                >
-                                    Calcular ROI
-                                </button>
-                            </div>
-                        </div>
 
-                        {/* Visual Rep for Agent */}
-                        <div className="flex-1 w-full relative">
-                            <div className="relative z-10 bg-zinc-950 border border-zinc-800 rounded-2xl p-6 shadow-2xl">
-                                <div className="flex items-center gap-4 mb-6 border-b border-white/5 pb-4">
-                                    <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                                        <Bot className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <div className="text-white font-bold">Agente de Ventas IA</div>
-                                        <div className="text-xs text-emerald-400 flex items-center gap-1">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            En línea ahora
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="space-y-4 font-mono text-sm">
-                                    <div className="bg-zinc-900 p-3 rounded-lg rounded-tl-none mr-12 text-zinc-300 border border-zinc-800">
-                                        Hola, estoy interesado en automatizar mis ventas. ¿Cómo funciona?
-                                    </div>
-                                    <div className="bg-emerald-900/20 border border-emerald-500/20 p-3 rounded-lg rounded-tr-none ml-12 text-emerald-100">
-                                        ¡Hola! Me integro en tu CRM y atiendo leads 24/7. Puedo agendar citas, cualificar prospectos y enviar presupuestos PDF. ¿Te gustaría ver un ejemplo?
-                                    </div>
-                                    <div className="bg-zinc-900 p-3 rounded-lg rounded-tl-none mr-12 text-zinc-300 border border-zinc-800">
-                                        Sí, por favor.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* PROBLEM VS SOLUTION (NEW) */}
-            <ProblemSolution />
 
             {/* SERVICE PILLARS (NEW) */}
             <ServicePillars />
 
-            {/* INDUSTRY CASES (NEW) */}
-            <IndustryCases />
+            {/* INDUSTRY CASES (REMOVED FOR SIMPLICITY) */}
+            {/* <IndustryCases /> */}
 
-            {/* CATEGORIES GRID (KEPT BUT SUBTLE) */}
-            <section className="py-24 bg-slate-950 border-t border-slate-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-end mb-12">
-                        <div>
-                            <h2 className="text-3xl font-bold text-white mb-2">Explora por Categoría</h2>
-                            <p className="text-lg text-slate-400">Soluciones específicas para cada necesidad.</p>
-                        </div>
-                        <button
-                            onClick={() => router.push('/catalogo')}
-                            className="hidden md:flex items-center gap-2 text-emerald-400 font-semibold hover:text-emerald-300 transition-colors"
-                        >
-                            Ver todo el catálogo <ArrowRight className="w-5 h-5" />
-                        </button>
-                    </div>
+            {/* CATEGORIES GRID (REMOVED FOR SIMPLICITY) */}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            { name: 'Automatizaciones', icon: Bot, count: '45+', color: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
-                            { name: 'Workflows AI', icon: Zap, count: '32+', color: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
-                            { name: 'Scripts Python', icon: Terminal, count: '28+', color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
-                            { name: 'Integraciones', icon: Code2, count: '50+', color: 'bg-orange-500/10 text-orange-400 border-orange-500/20' },
-                        ].map((cat, i) => (
-                            <button
-                                key={i}
-                                onClick={() => router.push(`/catalogo?category=${cat.name}`)}
-                                className="flex flex-col p-6 rounded-2xl bg-slate-900 hover:bg-slate-800 shadow-lg hover:shadow-2xl border border-slate-800 hover:border-slate-700 transition-all duration-300 text-left group"
-                            >
-                                <div className={`w-12 h-12 rounded-xl ${cat.color} border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                    <cat.icon className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-lg font-bold text-white mb-1">{cat.name}</h3>
-                                <p className="text-sm text-slate-500">{cat.count} soluciones</p>
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* NEW PROCESS SECTION (Replaces Pricing) */}
             <ProcessSteps />

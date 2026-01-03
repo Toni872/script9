@@ -77,7 +77,7 @@ export default function ComoFunciona() {
         }
         title={
           <>
-            Automatiza tu negocio<br />sin complicaciones
+            Automatiza tu <span className="text-emerald-500">negocio</span><br />sin complicaciones
           </>
         }
         subtitle="Servicios de IA, workflows y scripts a medida para negocios digitales que quieren escalar."
@@ -154,8 +154,8 @@ export default function ComoFunciona() {
           {/* Grid horizontal compacto */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Elige tu Solución', desc: 'Explora nuestro catálogo y selecciona el servicio que necesitas' },
-              { title: 'Pago Seguro', desc: 'Realiza el pago de forma segura a través de nuestra plataforma' },
+              { title: 'Agenda una Auditoría', desc: 'Analizamos tus procesos para identificar oportunidades de automatización' },
+              { title: 'Propuesta a Medida', desc: 'Diseñamos una solución específica para las necesidades de tu negocio' },
               { title: 'Implementación', desc: 'Un experto configura y despliega la solución en tu entorno' },
               { title: 'Soporte Continuo', desc: 'Te acompañamos para asegurar el éxito del proyecto' },
             ].map((step, index) => (
@@ -247,28 +247,17 @@ export default function ComoFunciona() {
               ¿Listo para automatizar?
             </h2>
             <p className="text-[19px] text-slate-400 mb-10 max-w-2xl mx-auto leading-[1.4]">
-              Únete a cientos de empresas que ya optimizan sus procesos con Script9
+              Transforma tu negocio hoy mismo. Agenda una auditoría gratuita con nuestros expertos.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 type="button"
-                onClick={() => router.push('/catalogo')}
+                onClick={() => router.push('/contacto')}
                 className="group relative px-10 py-4 bg-emerald-600 text-white rounded-xl transition-all duration-300 hover:bg-emerald-500 hover:shadow-lg hover:-translate-y-1 active:scale-[0.98] font-bold text-[17px] shadow-md hover:shadow-emerald-500/20"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Explorar Catálogo
-                  <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => router.push('/contacto')}
-                className="group relative px-10 py-4 bg-slate-900 text-white border-2 border-slate-700 hover:bg-slate-800 hover:border-slate-600 rounded-xl transition-all duration-300 active:scale-[0.98] font-bold text-[17px]"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Contactar Soporte
+                  Agendar Auditoría
                   <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
                 </span>
               </button>

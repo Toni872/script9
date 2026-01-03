@@ -71,15 +71,8 @@ function PagoExitosoContent() {
                 {/* Botones de acción */}
                 <div className="space-y-3">
                     <Link
-                        href="/test-stripe"
-                        className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
-                    >
-                        Hacer otro pago de prueba
-                    </Link>
-
-                    <Link
                         href="/"
-                        className="block w-full border border-gray-300 hover:border-gray-400 text-gray-700 font-medium py-3 px-4 rounded-lg transition-colors"
+                        className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
                     >
                         Volver al inicio
                     </Link>
@@ -87,7 +80,7 @@ function PagoExitosoContent() {
 
                 {/* Nota */}
                 <p className="mt-6 text-xs text-gray-500">
-                    🧪 Modo de prueba - Este es un pago simulado
+                    Gracias por confiar en Script9.
                 </p>
             </div>
         </div>

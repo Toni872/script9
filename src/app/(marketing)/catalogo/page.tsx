@@ -193,7 +193,7 @@ export default function Catalogo() {
                 {/* Content */}
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-                        Catálogo de Servicios
+                        Soluciones <span className="text-emerald-500">Tecnológicas</span>
                     </h1>
                     <p className="text-lg text-slate-300 max-w-2xl mx-auto mb-8">
                         {totalResults > 0
@@ -213,179 +213,133 @@ export default function Catalogo() {
 
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Filters Sidebar - Desktop */}
-                    <aside className="hidden lg:block lg:w-72 flex-shrink-0">
-                        <div className="sticky top-24">
-                            <div className="bg-slate-900 rounded-xl shadow-sm border border-slate-800 overflow-hidden">
-                                <div className="p-4 bg-slate-950/50 border-b border-slate-800">
-                                    <h3 className="font-semibold text-white flex items-center gap-2">
-                                        <SlidersHorizontal className="w-5 h-5 text-emerald-500" />
-                                        Filtros
-                                    </h3>
-                                </div>
-                                <div className="p-4">
-                                    <AdvancedFilters
-                                        filters={filters}
-                                        onFilterChange={handleFilterChange}
-                                        onClearFilters={handleClearFilters}
-                                    />
-                                </div>
-                            </div>
+
+                <div className="flex-1">
+                    {/* Results Header */}
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+
+
+                        {/* View Mode Toggle */}
+                        <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
+                            <button
+                                onClick={() => setViewMode('grid')}
+                                className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                            >
+                                <Grid3x3 className="w-5 h-5" />
+                            </button>
+                            <button
+                                onClick={() => setViewMode('compact')}
+                                className={`p-2 rounded-md transition-colors ${viewMode === 'compact' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                            >
+                                <LayoutGrid className="w-5 h-5" />
+                            </button>
                         </div>
-                    </aside>
-
-                    {/* Mobile Filters Toggle */}
-                    <div className="lg:hidden">
-                        <button
-                            type="button"
-                            onClick={() => setShowFilters(!showFilters)}
-                            className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 border border-slate-800 text-white hover:bg-slate-800 rounded-lg shadow-sm font-medium transition-colors"
-                        >
-                            <SlidersHorizontal className="h-5 w-5 text-emerald-500" />
-                            {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
-                        </button>
-
-                        {showFilters && (
-                            <div className="mt-4 bg-slate-900 rounded-xl shadow-sm border border-slate-800 p-4 animate-in slide-in-from-top-2">
-                                <AdvancedFilters
-                                    filters={filters}
-                                    onFilterChange={handleFilterChange}
-                                    onClearFilters={handleClearFilters}
-                                />
-                            </div>
-                        )}
                     </div>
 
-                    {/* Properties Grid */}
-                    <div className="flex-1">
-                        {/* Results Header */}
-                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-                            <p className="text-slate-400">
-                                Mostrando <span className="font-bold text-white">{properties.length}</span> resultados
-                            </p>
-
-                            {/* View Mode Toggle */}
-                            <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
-                                <button
-                                    onClick={() => setViewMode('grid')}
-                                    className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'}`}
-                                >
-                                    <Grid3x3 className="w-5 h-5" />
-                                </button>
-                                <button
-                                    onClick={() => setViewMode('compact')}
-                                    className={`p-2 rounded-md transition-colors ${viewMode === 'compact' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'}`}
-                                >
-                                    <LayoutGrid className="w-5 h-5" />
-                                </button>
-                            </div>
+                    {/* Content States */}
+                    {loading ? (
+                        <div className="flex flex-col items-center justify-center py-20 text-center">
+                            <Loader2 className="h-12 w-12 animate-spin text-emerald-500 mb-4" />
+                            <p className="text-slate-400 font-medium">Buscando las mejores soluciones...</p>
                         </div>
+                    ) : error ? (
+                        <div className="text-center py-20 bg-slate-900 rounded-xl border border-emerald-500/20 p-8">
+                            <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Zap className="h-8 w-8 text-emerald-500" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">Error al cargar</h3>
+                            <p className="text-slate-400 mb-6">{error}</p>
+                            <Button onClick={fetchProperties} className="bg-emerald-600 text-white hover:bg-emerald-500">Reintentar</Button>
+                        </div>
+                    ) : properties.length === 0 ? (
+                        <div className="text-center py-20 bg-slate-900 rounded-xl border border-slate-800 p-8">
+                            <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Bot className="h-8 w-8 text-slate-500" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">No se encontraron resultados</h3>
+                            <p className="text-slate-400 mb-6">Intenta ajustar tus filtros de búsqueda.</p>
+                            <Button onClick={handleClearFilters} variant="outline" className="border-slate-700 text-slate-300 hover:text-white hover:border-emerald-500">Limpiar Filtros</Button>
+                        </div>
+                    ) : (
+                        <>
+                            <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+                                {properties.map((service) => (
+                                    <ServiceCard
+                                        key={service.id}
+                                        service={service}
+                                        onFavoriteToggle={handleFavoriteToggle}
+                                    />
+                                ))}
 
-                        {/* Content States */}
-                        {loading ? (
-                            <div className="flex flex-col items-center justify-center py-20 text-center">
-                                <Loader2 className="h-12 w-12 animate-spin text-emerald-500 mb-4" />
-                                <p className="text-slate-400 font-medium">Buscando las mejores soluciones...</p>
-                            </div>
-                        ) : error ? (
-                            <div className="text-center py-20 bg-slate-900 rounded-xl border border-emerald-500/20 p-8">
-                                <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Zap className="h-8 w-8 text-emerald-500" />
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-2">Error al cargar</h3>
-                                <p className="text-slate-400 mb-6">{error}</p>
-                                <Button onClick={fetchProperties} className="bg-emerald-600 text-white hover:bg-emerald-500">Reintentar</Button>
-                            </div>
-                        ) : properties.length === 0 ? (
-                            <div className="text-center py-20 bg-slate-900 rounded-xl border border-slate-800 p-8">
-                                <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Bot className="h-8 w-8 text-slate-500" />
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-2">No se encontraron resultados</h3>
-                                <p className="text-slate-400 mb-6">Intenta ajustar tus filtros de búsqueda.</p>
-                                <Button onClick={handleClearFilters} variant="outline" className="border-slate-700 text-slate-300 hover:text-white hover:border-emerald-500">Limpiar Filtros</Button>
-                            </div>
-                        ) : (
-                            <>
-                                <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-                                    {properties.map((service) => (
-                                        <ServiceCard
-                                            key={service.id}
-                                            service={service}
-                                            onFavoriteToggle={handleFavoriteToggle}
-                                        />
-                                    ))}
-
-                                    {/* Custom Solution Card / Banner */}
-                                    <div className={`
+                                {/* Custom Solution Card / Banner */}
+                                <div className={`
                                         rounded-xl border-2 border-dashed border-slate-700 bg-slate-900/50 
                                         flex flex-col items-center justify-center text-center p-8 
                                         hover:border-emerald-500/40 transition-colors group cursor-pointer
                                         ${viewMode === 'grid' ? 'min-h-[400px]' : 'min-h-[200px]'}
                                     `}
-                                        onClick={() => window.location.href = '/contacto?subject=Solicitud%20Personalizada'}
-                                    >
-                                        <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                                            <Sparkles className="w-8 h-8 text-emerald-400" />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-white mb-2">
-                                            ¿No encuentras lo que buscas?
-                                        </h3>
-                                        <p className="text-slate-400 mb-6 max-w-xs">
-                                            Diseñamos soluciones de automatización 100% a medida para tu negocio.
-                                        </p>
-                                        <span className="px-6 py-2 bg-emerald-600 text-white rounded-lg font-semibold group-hover:bg-emerald-500 transition-colors">
-                                            Consultar Proyecto
-                                        </span>
+                                    onClick={() => window.location.href = '/contacto?subject=Solicitud%20Personalizada'}
+                                >
+                                    <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                                        <Sparkles className="w-8 h-8 text-emerald-400" />
                                     </div>
+                                    <h3 className="text-xl font-bold text-white mb-2">
+                                        ¿No encuentras lo que buscas?
+                                    </h3>
+                                    <p className="text-slate-400 mb-6 max-w-xs">
+                                        Diseñamos soluciones de automatización 100% a medida para tu negocio.
+                                    </p>
+                                    <span className="px-6 py-2 bg-emerald-600 text-white rounded-lg font-semibold group-hover:bg-emerald-500 transition-colors">
+                                        Consultar Proyecto
+                                    </span>
                                 </div>
+                            </div>
 
-                                {/* Pagination */}
-                                {totalPages > 1 && (
-                                    <div className="mt-12 flex justify-center gap-2">
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => setCurrentPage(1)}
-                                            disabled={currentPage === 1}
-                                            className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
-                                        >
-                                            Primera
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                                            disabled={currentPage === 1}
-                                            className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
-                                        >
-                                            Anterior
-                                        </Button>
-                                        <span className="flex items-center px-4 font-semibold text-emerald-400">
-                                            Página {currentPage} de {totalPages}
-                                        </span>
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                                            disabled={currentPage === totalPages}
-                                            className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
-                                        >
-                                            Siguiente
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => setCurrentPage(totalPages)}
-                                            disabled={currentPage === totalPages}
-                                            className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
-                                        >
-                                            Última
-                                        </Button>
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </div>
+                            {/* Pagination */}
+                            {totalPages > 1 && (
+                                <div className="mt-12 flex justify-center gap-2">
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => setCurrentPage(1)}
+                                        disabled={currentPage === 1}
+                                        className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
+                                    >
+                                        Primera
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                        disabled={currentPage === 1}
+                                        className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
+                                    >
+                                        Anterior
+                                    </Button>
+                                    <span className="flex items-center px-4 font-semibold text-emerald-400">
+                                        Página {currentPage} de {totalPages}
+                                    </span>
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                        disabled={currentPage === totalPages}
+                                        className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
+                                    >
+                                        Siguiente
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => setCurrentPage(totalPages)}
+                                        disabled={currentPage === totalPages}
+                                        className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white"
+                                    >
+                                        Última
+                                    </Button>
+                                </div>
+                            )}
+                        </>
+                    )}
                 </div>
             </div>
         </div>
+
     );
 }

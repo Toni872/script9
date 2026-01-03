@@ -382,7 +382,7 @@ export default function PerfilUsuario() {
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    placeholder="+34 600 000 000"
+                                    placeholder="+34 687 723 287"
                                     className="w-full pl-12 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 text-white placeholder:text-slate-600"
                                 />
                             </div>

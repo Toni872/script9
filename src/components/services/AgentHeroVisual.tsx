@@ -2,16 +2,19 @@
 
 import { motion, useTime, useTransform } from 'framer-motion';
 import {
-    Search,
-    TrendingUp,
+    Bot,
+    MessageSquare,
     Zap,
+    Activity,
+    Cpu,
+    Network,
+    Share2,
     Globe,
-    BarChart3,
-    Target
+    Fingerprint
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-// Specialized HUD Component (Exact same style as Agent page)
+// Specialized HUD Component (Heads-Up Display)
 const HolographicHUD = ({ title, value, icon: Icon, color, x, y, delay }: any) => {
     return (
         <motion.div
@@ -44,16 +47,16 @@ const HolographicHUD = ({ title, value, icon: Icon, color, x, y, delay }: any) =
     );
 };
 
-export function HeroAdvancedVisual() {
+export function AgentHeroVisual() {
     const time = useTime();
 
-    // Exact same rotations as Agent Visual
+    // Rotations for multiple orbital rings
     const rotate1 = useTransform(time, [0, 20000], [0, 360], { clamp: false });
     const rotate2 = useTransform(time, [0, 25000], [0, -360], { clamp: false });
     const rotate3 = useTransform(time, [0, 30000], [0, 360], { clamp: false });
 
-    // Pulsing core effect (Fixed to loop properly)
-    // Removed faulty useTransform
+    // Pulsing core effect (Fixed loop)
+    const glowOpacity = useTransform(time, [0, 2000], [0.3, 0.6], { clamp: false });
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
@@ -74,19 +77,16 @@ export function HeroAdvancedVisual() {
                 style={{ transformStyle: "preserve-3d" }}
             >
 
-                {/* 1. CENTRAL S9 CORE */}
+                {/* 1. CENTRAL NEURAL CORE */}
                 <motion.div
                     className="relative z-20 w-32 h-32 flex items-center justify-center"
                     animate={{ scale: [1, 1.02, 1] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 >
                     <div className="absolute inset-0 bg-slate-900 rounded-full border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.2)] flex items-center justify-center overflow-hidden">
+                        {/* Clean Background (No GIF) */}
 
-                        {/* S9 Branding Text */}
-                        <div className="relative z-10 flex items-center justify-center font-bold font-mono tracking-tighter" style={{ fontSize: '3.5rem' }}>
-                            <span className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">S</span>
-                            <span className="text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.8)]">9</span>
-                        </div>
+                        <Bot className="w-16 h-16 text-emerald-400 relative z-10 drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
                     </div>
 
                     {/* Spinning Energy Ring */}
@@ -102,7 +102,7 @@ export function HeroAdvancedVisual() {
                     />
                 </motion.div>
 
-                {/* 2. ORBITAL RINGS (Gyroscope - Exact logic from Agent Visual) */}
+                {/* 2. ORBITAL RINGS (Gyroscope) */}
 
                 {/* Large Outer Ring */}
                 <motion.div
@@ -130,33 +130,33 @@ export function HeroAdvancedVisual() {
                     transition={{ ease: "linear" }}
                 />
 
-                {/* 3. FLOATING HOLOGRAPHIC HUDs (Web/SEO Data) */}
+                {/* 3. FLOATING HOLOGRAPHIC HUDs */}
 
-                {/* Left: Google Rank */}
+                {/* Stats Panel Left */}
                 <HolographicHUD
-                    icon={Target}
-                    title="Google Position"
-                    value="RANK #1"
+                    icon={Cpu}
+                    title="Neural Load"
+                    value="42% OPTIMAL"
                     color="text-emerald-400"
                     x={-220} y={-80}
                     delay={0}
                 />
 
-                {/* Right: Traffic Stats */}
+                {/* Stats Panel Right - Active Chats */}
                 <HolographicHUD
-                    icon={TrendingUp}
-                    title="Monthly Traffic"
-                    value="+12.5K USERS"
+                    icon={MessageSquare}
+                    title="Active Threads"
+                    value="843 SESSIONS"
                     color="text-cyan-400"
                     x={200} y={20}
                     delay={1.5}
                 />
 
-                {/* Bottom: Performance */}
+                {/* Security Badge Bottom */}
                 <HolographicHUD
-                    icon={Zap}
-                    title="Core Vitals"
-                    value="100/100 SPEED"
+                    icon={Fingerprint}
+                    title="Security Level"
+                    value="ENCRYPTED"
                     color="text-purple-400"
                     x={-160} y={150}
                     delay={2.5}
