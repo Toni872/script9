@@ -35,7 +35,7 @@
     "@react-email/row": "^0.0.12",
     "@react-email/section": "^0.0.16",
     "@react-email/text": "^0.1.5",
-    "@react-google-maps/api": "^2.20.7",
+    "@react-google-maps/api": "^2.20.8",
     "@react-stately/calendar": "^3.9.0",
     "@stripe/react-stripe-js": "^5.2.0",
     "@stripe/stripe-js": "^8.0.0",
