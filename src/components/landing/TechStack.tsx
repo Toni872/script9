@@ -1,70 +1,93 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import {
+    SiAnthropic,
+    SiGooglecloud,
+    SiN8N,
+    SiMake,
+    SiOpenai,
+    SiPython,
+    SiReact,
+    SiStripe,
+    SiSupabase,
+    SiDocker,
+    SiGooglegemini,
+    SiPerplexity
+} from 'react-icons/si';
 
 export function TechStack() {
     interface Technology {
         name: string;
-        logo: string;
-        className?: string;
-        darkBg?: boolean;
+        icon: React.ElementType;
+        color: string;
     }
 
     const technologies: Technology[] = [
         {
             name: "Antigravity",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg", // Using Gemini logo for Antigravity
-            className: "invert brightness-0"
+            icon: SiGooglegemini,
+            color: "text-blue-400"
         },
         {
             name: "Claude",
-            logo: "https://cdn.simpleicons.org/anthropic/white",
+            icon: SiAnthropic,
+            color: "text-orange-200"
         },
         {
             name: "Perplexity",
-            logo: "https://cdn.simpleicons.org/perplexity/white",
+            icon: SiPerplexity,
+            color: "text-cyan-200"
         },
         {
             name: "Google Cloud",
-            logo: "https://cdn.simpleicons.org/googlecloud/white",
+            icon: SiGooglecloud,
+            color: "text-blue-500"
         },
         {
             name: "n8n",
-            logo: "https://cdn.simpleicons.org/n8n",
+            icon: SiN8N,
+            color: "text-pink-500"
         },
         {
             name: "Make",
-            logo: "https://cdn.simpleicons.org/make/white", // Force white for visibility on dark blue
+            icon: SiMake,
+            color: "text-purple-500"
         },
         {
             name: "OpenAI",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg",
-            className: "invert brightness-0" // Invert black to white for visibility
+            icon: SiOpenai,
+            color: "text-green-400"
         },
         {
             name: "Python",
-            logo: "https://cdn.simpleicons.org/python",
+            icon: SiPython,
+            color: "text-yellow-400"
         },
         {
             name: "React",
-            logo: "https://cdn.simpleicons.org/react",
+            icon: SiReact,
+            color: "text-cyan-400"
         },
         {
             name: "Stripe",
-            logo: "https://cdn.simpleicons.org/stripe/white",
+            icon: SiStripe,
+            color: "text-indigo-400"
         },
         {
             name: "Supabase",
-            logo: "https://cdn.simpleicons.org/supabase",
+            icon: SiSupabase,
+            color: "text-emerald-400"
         },
         {
             name: "Docker",
-            logo: "https://cdn.simpleicons.org/docker/2496ED", // Official Docker Blue
+            icon: SiDocker,
+            color: "text-blue-400"
         }
     ];
 
     // Duplicate for loop
-    const doubledrTechnologies = [...technologies, ...technologies];
+    const doubledTechnologies = [...technologies, ...technologies];
 
     return (
         <section className="py-10 bg-slate-950 border-y border-slate-900 overflow-hidden relative">
@@ -88,18 +111,13 @@ export function TechStack() {
                         ease: "linear"
                     }}
                 >
-                    {doubledrTechnologies.map((tech, i) => (
+                    {doubledTechnologies.map((tech, i) => (
                         <div
                             key={i}
                             className="flex flex-col items-center justify-center min-w-[100px] group"
                         >
-                            <div className="relative h-12 w-32 flex items-center justify-center transition-transform hover:scale-110 duration-300">
-                                {/* Using standard img tag to bypass Next.js strict remote patterns for external SVGs */}
-                                <img
-                                    src={tech.logo}
-                                    alt={tech.name}
-                                    className={`h-full w-full object-contain ${tech.className || ''}`}
-                                />
+                            <div className="relative h-12 w-12 flex items-center justify-center transition-transform hover:scale-110 duration-300">
+                                <tech.icon className={`h-10 w-10 ${tech.color} opacity-70 group-hover:opacity-100 transition-opacity`} />
                             </div>
                             <span className="text-xs text-blue-200/40 mt-3 font-medium tracking-wide group-hover:text-blue-200/80 transition-colors">
                                 {tech.name}
