@@ -35,7 +35,7 @@ export default function AgentServicePage() {
                         </h1>
 
                         <p className="text-xl text-slate-400 mb-8 leading-relaxed">
-                            Instalamos un **Cerebro Digital** en tu web y WhatsApp. Atiende clientes, resuelve dudas y agenda citas las 24 horas del día. Sin sueldos, sin bajas, sin esperas.
+                            Instalamos un Cerebro Digital en tu web y WhatsApp. Atiende clientes, resuelve dudas y agenda citas las 24 horas del día. Sin sueldos, sin bajas, sin esperas.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
@@ -79,7 +79,7 @@ export default function AgentServicePage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-3">1. Conexión</h3>
                             <p className="text-slate-400">
-                                Vinculamos el Agente a tu **Web**, **WhatsApp** e **Instagram**.
+                                Vinculamos el Agente a tu Web, WhatsApp e Instagram.
                                 <br />
                                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Entrada de Leads</span>
                             </p>
@@ -94,7 +94,7 @@ export default function AgentServicePage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-3">2. Inteligencia</h3>
                             <p className="text-slate-400">
-                                El IA usa tu info (PDFs, webs) para **responder dudas** y **filtrar curiosos**.
+                                El IA usa tu info (PDFs, webs) para responder dudas y filtrar curiosos.
                                 <br />
                                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Cualificación 24/7</span>
                             </p>
@@ -109,7 +109,7 @@ export default function AgentServicePage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-3">3. Conversión</h3>
                             <p className="text-slate-400">
-                                Si el cliente es válido, el Agente **cierra la cita** en tu calendario.
+                                Si el cliente es válido, el Agente cierra la cita en tu calendario.
                                 <br />
                                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Venta Automática</span>
                             </p>
