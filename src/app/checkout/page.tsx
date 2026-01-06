@@ -50,7 +50,7 @@ function CheckoutContent() {
 
     useEffect(() => {
         if (!propertyId) {
-            router.push('/catalogo');
+            router.push('/soluciones');
             return;
         }
 
@@ -143,7 +143,7 @@ function CheckoutContent() {
                     <h2 className="text-2xl font-semibold text-white mb-2">Error</h2>
                     <p className="text-slate-400 mb-6">{error}</p>
                     <button
-                        onClick={() => router.push('/catalogo')}
+                        onClick={() => router.push('/soluciones')}
                         className="px-6 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-900/20"
                     >
                         Volver al catálogo

@@ -116,7 +116,7 @@ export const WelcomeEmail = ({
                         style={button}
                         href={userType === 'host'
                             ? `${process.env.NEXT_PUBLIC_APP_URL}/host/properties/new`
-                            : `${process.env.NEXT_PUBLIC_APP_URL}/catalogo`
+                            : `${process.env.NEXT_PUBLIC_APP_URL}/soluciones`
                         }
                     >
                         {userType === 'host' ? 'Publicar mi Servicio' : 'Explorar Servicios'}

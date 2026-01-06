@@ -132,7 +132,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                         Propiedad no encontrada
                     </h2>
                     <button
-                        onClick={() => router.push('/catalogo')}
+                        onClick={() => router.push('/soluciones')}
                         className="px-6 py-3 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669] transition-colors hero-text-white"
                     >
                         Volver al catálogo

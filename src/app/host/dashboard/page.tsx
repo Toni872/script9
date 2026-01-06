@@ -327,7 +327,7 @@ export default function CreatorDashboard() {
                                                         size="sm"
                                                         className="border-gray-200 text-gray-700 hover:bg-gray-50"
                                                     >
-                                                        <Link href={`/catalogo/${service.id}`} className="flex items-center">
+                                                        <Link href={`/soluciones/${service.id}`} className="flex items-center">
                                                             <Eye className="h-4 w-4 mr-1" />
                                                             Ver
                                                         </Link>

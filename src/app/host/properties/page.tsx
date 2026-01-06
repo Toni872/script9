@@ -352,7 +352,7 @@ export default function HostPropertiesPage() {
 
                                         {/* Actions - Mejorados */}
                                         <div className="flex gap-2">
-                                            <Link href={`/catalogo/${property.id}`} className="flex-1">
+                                            <Link href={`/soluciones/${property.id}`} className="flex-1">
                                                 <button
                                                     type="button"
                                                     className="w-full px-4 py-2.5 bg-white border-2 border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white rounded-lg transition-all duration-300 font-medium text-[14px] flex items-center justify-center gap-2"

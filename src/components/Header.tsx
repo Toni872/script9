@@ -34,7 +34,7 @@ export default function Header() {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            router.push(`/catalogo?q=${encodeURIComponent(searchQuery.trim())}`);
+            router.push(`/soluciones?q=${encodeURIComponent(searchQuery.trim())}`);
             setSearchOpen(false);
             setSearchQuery('');
         }
@@ -64,7 +64,7 @@ export default function Header() {
                     {/* Desktop Nav */}
                     <div className="hidden md:flex items-center space-x-6">
                         <NavLink href="/">Inicio</NavLink>
-                        <NavLink href="/catalogo">Soluciones</NavLink>
+                        <NavLink href="/soluciones">Soluciones</NavLink>
 
                         {/* Services Dropdown */}
                         <div
@@ -265,7 +265,7 @@ export default function Header() {
                             <div className="flex-1 overflow-y-auto p-6 space-y-8">
                                 <nav className="flex flex-col space-y-1">
                                     <MobileLink href="/" onClick={() => setMobileMenuOpen(false)}>Inicio</MobileLink>
-                                    <MobileLink href="/catalogo" onClick={() => setMobileMenuOpen(false)}>Soluciones</MobileLink>
+                                    <MobileLink href="/soluciones" onClick={() => setMobileMenuOpen(false)}>Soluciones</MobileLink>
 
                                     <div className="py-2 border-b border-slate-800/50">
                                         <p className="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Servicios</p>

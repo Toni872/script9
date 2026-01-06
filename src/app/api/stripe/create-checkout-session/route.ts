@@ -165,7 +165,7 @@ export async function POST(request: NextRequest) {
             },
             customer_email: user.email, // Pre-fill email
             success_url: `${process.env.NEXTAUTH_URL}/reserva/confirmacion?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.NEXTAUTH_URL}/catalogo/${id}`,
+            cancel_url: `${process.env.NEXTAUTH_URL}/soluciones/${id}`,
             metadata: {
                 type: 'service_purchase',
                 serviceId: service.id,

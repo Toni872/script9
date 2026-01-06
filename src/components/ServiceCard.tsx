@@ -9,6 +9,7 @@ import { Service } from '@/types';
 interface ServiceCardProps {
     service: Service;
     onFavoriteToggle?: (serviceId: string) => void;
+    onDemoClick?: () => void;
 }
 
 const serviceTypeConfig: Record<string, { icon: typeof Zap; label: string }> = {
@@ -20,7 +21,7 @@ const serviceTypeConfig: Record<string, { icon: typeof Zap; label: string }> = {
     consultoria: { icon: MessageSquare, label: 'Consultoría' },
 };
 
-export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardProps) {
+export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: ServiceCardProps) {
     const [isFavorite, setIsFavorite] = useState(false); // TODO: Add favorite logic back when User model supports it
     const [imageError, setImageError] = useState(false);
 
@@ -43,7 +44,7 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
     const technologies = service.features?.map(f => f.name) || (service as any).amenities || [];
 
     return (
-        <Link href={service.custom_url || `/catalogo/${service.id}`} className="group block h-full">
+        <Link href={service.custom_url || `/soluciones/${service.id}`} className="group block h-full">
             <article className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 h-full flex flex-col">
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden bg-slate-800">
@@ -117,9 +118,23 @@ export default function ServiceCard({ service, onFavoriteToggle }: ServiceCardPr
                                 )}
                             </span>
                         </div>
-                        <button className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all">
-                            <ArrowRight className="w-5 h-5" />
-                        </button>
+                        <div className="flex gap-2">
+                            {onDemoClick && (
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        onDemoClick();
+                                    }}
+                                    className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold hover:bg-emerald-500 hover:text-white transition-all border border-emerald-500/20"
+                                >
+                                    Ver Demo
+                                </button>
+                            )}
+                            <button className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all">
+                                <ArrowRight className="w-5 h-5" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </article>

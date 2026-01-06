@@ -228,7 +228,7 @@ export default function ServiceQuickView({ service, isOpen, onClose }: ServiceQu
 
                                     {/* CTA Buttons */}
                                     <div className="space-y-3 pt-4">
-                                        <Link href={`/catalogo/${service.id}`} onClick={onClose}>
+                                        <Link href={`/soluciones/${service.id}`} onClick={onClose}>
                                             <Button className="w-full bg-gradient-script9 text-white hover:shadow-script9-glow border-0 font-semibold py-6 rounded-xl">
                                                 Ver Detalles Completos
                                             </Button>

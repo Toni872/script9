@@ -100,7 +100,7 @@ export function OrderList() {
                     <p className="text-slate-400 mb-8 max-w-md mx-auto">
                         Tu panel está esperando. Inicia tu primera automatización y transformaremos tu negocio juntos.
                     </p>
-                    <Link href="/catalogo">
+                    <Link href="/soluciones">
                         <Button size="lg" className="bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20 rounded-xl px-8 h-12 text-[15px]">
                             Explorar Catálogo <ArrowRight className="ml-2 w-4 h-4" />
                         </Button>

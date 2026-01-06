@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Static Routes
     const routes = [
         '',
-        '/catalogo',
+        '/soluciones',
         '/como-funciona',
         '/contacto',
         '/faq',
@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
         if (data) {
             services = data.map((service) => ({
-                url: `${baseUrl}/catalogo/${service.id}`,
+                url: `${baseUrl}/soluciones/${service.id}`,
                 lastModified: service.updated_at || new Date().toISOString(),
                 changeFrequency: 'weekly' as const,
                 priority: 0.9,

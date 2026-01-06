@@ -20,7 +20,7 @@ export default function LandingClient() {
     const handleSearch = (params: SearchParams) => {
         const searchParams = new URLSearchParams();
         if (params.query) searchParams.set("q", params.query);
-        router.push(`/catalogo?${searchParams.toString()}`);
+        router.push(`/soluciones?${searchParams.toString()}`);
     };
 
     return (
@@ -79,7 +79,7 @@ export default function LandingClient() {
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
                             <button
-                                onClick={() => router.push('/catalogo')}
+                                onClick={() => router.push('/soluciones')}
                                 className="px-8 py-4 bg-transparent border border-slate-700 text-white hover:bg-slate-800 rounded-lg font-semibold text-lg transition-all flex items-center justify-center"
                             >
                                 Ver Soluciones

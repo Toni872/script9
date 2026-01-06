@@ -240,7 +240,7 @@ export default function MisReservas() {
                             Explora nuestros espacios y haz tu primera reserva
                         </p>
                         <button
-                            onClick={() => router.push('/catalogo')}
+                            onClick={() => router.push('/soluciones')}
                             className="px-6 py-3 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669] transition-colors"
                             style={{ color: 'white' }} /* Forzar color blanco para botones premium */
                         >

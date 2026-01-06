@@ -140,7 +140,7 @@ export default function MapView({ services, onServiceSelect }: MapViewProps) {
                                         </div>
                                     </div>
                                     <a
-                                        href={`/catalogo/${service.id}`}
+                                        href={`/soluciones/${service.id}`}
                                         className="block w-full text-center py-2 bg-[#8B5CF6] text-white rounded-lg hover:bg-[#7c3aed] transition-colors text-sm font-medium"
                                     >
                                         Ver Detalles

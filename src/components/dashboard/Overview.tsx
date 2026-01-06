@@ -99,7 +99,7 @@ export function DashboardOverview({ subscriptionTier = 'free' }: OverviewProps) 
                                 Sin costes ocultos, sin suscripciones forzosas.
                             </p>
                         </div>
-                        <Link href="/catalogo">
+                        <Link href="/soluciones">
                             <Button size="lg" className="bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20 px-8">
                                 <Rocket className="w-4 h-4 mr-2" />
                                 Nuevo Proyecto

@@ -526,7 +526,7 @@ export class EmailService {
               </ul>
 
               <p style="text-align: center;">
-                <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'}/catalogo" class="button">Intentar Nuevamente</a>
+                <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'}/soluciones" class="button">Intentar Nuevamente</a>
               </p>
 
               <p style="color: #666; font-size: 0.9em; margin-top: 30px;">
