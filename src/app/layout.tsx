@@ -174,7 +174,7 @@ export default function RootLayout({
       </head>
       <body className={`${heading.variable} ${body.variable} font-body antialiased`}>
         <RootLayoutClient>{children}</RootLayoutClient>
-
+        <script src="/chat-widget.js" async defer></script>
       </body>
     </html>
   );
