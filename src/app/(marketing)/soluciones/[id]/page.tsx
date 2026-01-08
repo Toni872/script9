@@ -11,6 +11,7 @@ interface PropertyDetailProps {
 
 async function getProperty(id: string): Promise<Service | null> {
     try {
+        // 1. Try fetching from Supabase (for real deployment)
         const supabase = createServerSupabaseClient();
         const { data, error } = await supabase
             .from('properties')
@@ -27,43 +28,58 @@ async function getProperty(id: string): Promise<Service | null> {
             .eq('id', id)
             .single();
 
+        let serviceData = data;
+
+        // 2. If not found in DB, check Mock Data (for Development/Demo)
         if (error || !data) {
-            console.error('Error fetching property server-side:', error);
-            return null;
+            const { getMockServiceById } = await import('@/lib/mockData');
+            const mockService = getMockServiceById(id);
+
+            if (mockService) {
+                // Transform mock data to match Service interface roughly
+                serviceData = mockService;
+            } else {
+                console.error('Service not found in DB or Mock Data:', id);
+                return null;
+            }
         }
 
-        // Transform data to match Service type (similar to previous client-side logic)
+        const dataToTransform = serviceData;
+
+        // Transform data to match Service type
         const transformedProperty: Service = {
-            id: data.id,
-            title: data.title || data.name,
-            description: data.description,
-            category: data.category || data.property_type || 'General',
-            price: data.price || data.price_per_hour,
-            unit: data.unit || 'project',
-            location: data.address || data.location,
-            city: data.city,
-            region: data.region,
-            capacity: data.max_guests || data.capacity || 10,
-            max_guests: data.max_guests || data.capacity || 10,
-            image_urls: Array.isArray(data.image_urls) ? data.image_urls :
-                Array.isArray(data.images) ? data.images : [],
-            rating: data.average_rating || data.rating || 0,
-            review_count: data.review_count || (data.reviews as any)?.[0]?.count || 0,
-            features: data.features || [],
-            amenities: data.amenities || [],
-            provider_id: data.host_id,
-            host_id: data.host_id,
-            created_at: data.created_at || new Date().toISOString(),
-            updated_at: data.updated_at || new Date().toISOString(),
-            is_script9_select: data.is_script9_select || false,
-            property_type: data.property_type,
+            id: dataToTransform.id,
+            title: dataToTransform.title || dataToTransform.name,
+            description: dataToTransform.description,
+            category: dataToTransform.category || dataToTransform.property_type || 'General',
+            price: dataToTransform.price || dataToTransform.price_per_hour,
+            unit: dataToTransform.unit || 'project',
+            location: dataToTransform.address || dataToTransform.location,
+            city: dataToTransform.city,
+            region: dataToTransform.region,
+            capacity: dataToTransform.max_guests || dataToTransform.capacity || 10,
+            max_guests: dataToTransform.max_guests || dataToTransform.capacity || 10,
+            image_urls: dataToTransform.image_urls || [],
+            rating: dataToTransform.average_rating || dataToTransform.rating || 0,
+            review_count: dataToTransform.review_count || (dataToTransform.reviews as any)?.[0]?.count || 0,
+            features: dataToTransform.features || [],
+            amenities: dataToTransform.amenities || [],
+            provider_id: dataToTransform.host_id,
+            host_id: dataToTransform.host_id,
+            created_at: dataToTransform.created_at || new Date().toISOString(),
+            updated_at: dataToTransform.updated_at || new Date().toISOString(),
+            is_script9_select: dataToTransform.is_script9_select || false,
+            property_type: dataToTransform.property_type,
+            tech_stack: dataToTransform.tech_stack,
+            price_display_text: dataToTransform.price_display_text,
+            delivery_time: dataToTransform.delivery_time,
+            maintenance_support: dataToTransform.maintenance_support,
         };
 
         return transformedProperty;
     } catch (error) {
-        // Fallback for missing keys or connection issues
-        console.error('Critical error fetching property server-side:', error);
-        return null;
+        console.error('Error fetching property:', error);
+        return null; // Handle gracefully
     }
 }
 

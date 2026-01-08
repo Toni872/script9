@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { Avatar } from '@/components/ui/avatar';
-import { Search, User, LogOut, Grid3x3, X, MessageCircle, Menu, Home, BookOpen, ChevronRight, BarChart3, Shield, ChevronDown, Zap, Bot, Workflow, Code2 } from 'lucide-react';
+import { Search, User, LogOut, Grid3x3, X, MessageCircle, Menu, Home, BookOpen, ChevronRight, BarChart3, Shield, ChevronDown, Zap, Bot, Globe, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MessagesButton from '@/components/messaging/MessagesButton';
 import { Logo } from '@/components/ui/Logo';
@@ -88,7 +88,7 @@ export default function Header() {
                                         <div className="bg-slate-900 rounded-xl shadow-2xl border border-slate-800 overflow-hidden ring-1 ring-white/5 p-1">
                                             <DropdownLink href="/servicios/agente-comercial" icon={Bot} title="Agentes IA" desc="Ventas & Atención 24/7" color="emerald" />
                                             <DropdownLink href="/servicios/automatizaciones" icon={Zap} title="Automatizaciones" desc="Email, Datos & Reporting" color="amber" />
-                                            <DropdownLink href="/servicios/workflows" icon={Workflow} title="Workflows" desc="Integraciones End-to-End" color="indigo" />
+                                            <DropdownLink href="/servicios/integraciones" icon={Globe} title="Integraciones" desc="Integraciones End-to-End" color="purple" />
                                             <DropdownLink href="/servicios/scripts-a-medida" icon={Code2} title="Scripts a Medida" desc="Python & Node.js" color="blue" />
                                         </div>
                                     </motion.div>
@@ -271,7 +271,7 @@ export default function Header() {
                                         <p className="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Servicios</p>
                                         <MobileLink href="/servicios/agente-comercial" onClick={() => setMobileMenuOpen(false)} isSubItem>Agentes IA</MobileLink>
                                         <MobileLink href="/servicios/automatizaciones" onClick={() => setMobileMenuOpen(false)} isSubItem>Automatizaciones</MobileLink>
-                                        <MobileLink href="/servicios/workflows" onClick={() => setMobileMenuOpen(false)} isSubItem>Workflows</MobileLink>
+                                        <MobileLink href="/servicios/integraciones" onClick={() => setMobileMenuOpen(false)} isSubItem>Integraciones</MobileLink>
                                         <MobileLink href="/servicios/scripts-a-medida" onClick={() => setMobileMenuOpen(false)} isSubItem>Scripts a Medida</MobileLink>
                                     </div>
 

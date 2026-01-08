@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Heart, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Heart, ArrowRight } from 'lucide-react';
+import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { Logo } from '@/components/ui/Logo';
 
 export default function Footer() {
@@ -25,13 +26,19 @@ export default function Footer() {
                                 Transformamos negocios digitales mediante IA, automatización y desarrollo de software a medida. Escala sin límites.
                             </p>
                             <div className="flex space-x-4">
-                                {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                                {[
+                                    { Icon: FaGithub, href: 'https://github.com/Toni872', color: 'hover:bg-black hover:text-white hover:border-black' },
+                                    { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/antonio-lloret-sánchez-080166156', color: 'hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]' },
+                                    { Icon: FaInstagram, href: '#', color: 'hover:bg-pink-600 hover:text-white hover:border-pink-600' }
+                                ].map((item, i) => (
                                     <a
                                         key={i}
-                                        href="#"
-                                        className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-500 hover:text-slate-950 hover:border-emerald-500 transition-all duration-300 transform hover:scale-110"
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 ${item.color} transition-all duration-300 transform hover:scale-110`}
                                     >
-                                        <Icon size={18} />
+                                        <item.Icon size={20} />
                                     </a>
                                 ))}
                             </div>
@@ -98,8 +105,10 @@ export default function Footer() {
                                     <span className="text-zinc-400 text-sm">+34 687 723 287</span>
                                 </li>
                                 <li className="flex items-center space-x-3">
-                                    <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
-                                    <span className="text-zinc-400 text-sm">hola@script9.com</span>
+                                    <FaLinkedin className="w-5 h-5 text-emerald-500 shrink-0" />
+                                    <a href="https://www.linkedin.com/in/antonio-lloret-sánchez-080166156" target="_blank" rel="noopener noreferrer" className="text-zinc-400 text-sm hover:text-emerald-400 transition-colors">
+                                        Conectar en LinkedIn
+                                    </a>
                                 </li>
                             </ul>
                         </div>

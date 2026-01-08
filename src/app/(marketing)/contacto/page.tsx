@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2, Building2, Sparkles, TrendingUp, ShieldCheck, Clock } from 'lucide-react';
+import { FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -93,12 +94,12 @@ export default function Contacto() {
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4 group">
                                     <div className="p-3 bg-emerald-500/10 rounded-xl group-hover:bg-emerald-500/20 transition-colors">
-                                        <Mail className="h-6 w-6 text-emerald-400" />
+                                        <FaLinkedin className="h-6 w-6 text-emerald-400" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-white mb-1">Email</h3>
-                                        <a href="mailto:hola@script9.com" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                                            hola@script9.com
+                                        <h3 className="font-semibold text-white mb-1">LinkedIn</h3>
+                                        <a href="https://www.linkedin.com/in/antonio-lloret-sánchez-080166156" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                            Conectar ahora
                                         </a>
                                     </div>
                                 </div>

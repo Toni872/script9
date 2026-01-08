@@ -92,7 +92,7 @@ export default function CustomScriptsPage() {
               </div>
               <h3 className="text-xl font-bold text-white mb-3">2. Código</h3>
               <p className="text-slate-400">
-                Desarrollo ágil en **Python, Next.js o Node**. Entregables rápidos y funcionales desde la semana 1.
+                Desarrollo ágil en Python, Next.js o Node. Entregables rápidos y funcionales desde la semana 1.
                 <br />
                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Desarrollo</span>
               </p>
@@ -106,7 +106,7 @@ export default function CustomScriptsPage() {
               </div>
               <h3 className="text-xl font-bold text-white mb-3">3. Despliegue</h3>
               <p className="text-slate-400">
-                Te entregamos el **Ejecutable (.exe)**, instalamos en tu servidor o alojamos en la nube. Tú decides.
+                Te entregamos el Ejecutable (.exe), instalamos en tu servidor o alojamos en la nube. Tú decides.
                 <br />
                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Ejecución</span>
               </p>

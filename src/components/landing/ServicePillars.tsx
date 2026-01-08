@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Bot, Workflow, ChevronRight, Zap, Code2 } from 'lucide-react';
+import { Bot, Globe, ChevronRight, Zap, Code2 } from 'lucide-react';
 
 export function ServicePillars() {
     const pillars = [
@@ -35,17 +35,17 @@ export function ServicePillars() {
             }
         },
         {
-            icon: Workflow,
-            title: "Workflows",
-            description: "Conecta tus apps (Stripe, Slack, Notion). Crea super-flujos de trabajo integrados End-to-End.",
+            icon: Globe,
+            title: "Integraciones",
+            description: "Conecta tus apps (Stripe, Slack, Notion). Crea ecosistemas digitales conectados End-to-End.",
             delay: 0.2,
-            href: "/servicios/workflows",
+            href: "/servicios/integraciones",
             theme: {
-                icon: "text-indigo-400",
-                hoverIcon: "group-hover:text-indigo-300",
-                hoverBorder: "hover:border-indigo-500/50",
-                hoverTitle: "group-hover:text-indigo-400",
-                action: "text-indigo-500"
+                icon: "text-purple-400",
+                hoverIcon: "group-hover:text-purple-300",
+                hoverBorder: "hover:border-purple-500/50",
+                hoverTitle: "group-hover:text-purple-400",
+                action: "text-purple-500"
             }
         },
         {

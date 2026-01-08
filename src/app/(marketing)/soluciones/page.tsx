@@ -9,8 +9,8 @@ import ServiceCard from '@/components/ServiceCard';
 import { Service } from '@/types';
 import AdvancedFilters from '@/components/catalog/AdvancedFilters';
 import { Button } from '@/components/ui/button';
-import ChatDemoCard from '@/components/demo/ChatDemoCard';
-import { Loader2, Zap, SlidersHorizontal, Grid3x3, LayoutGrid, Sparkles, Code, Bot, Globe, X } from 'lucide-react';
+import { Loader2, Zap, SlidersHorizontal, Grid3x3, LayoutGrid, Sparkles, Code, Bot, Globe } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface AdvancedFilterOptions {
     location?: string;
@@ -30,7 +30,6 @@ export default function Catalogo() {
     const [error, setError] = useState<string | null>(null);
     const [showFilters, setShowFilters] = useState(false);
     const [viewMode, setViewMode] = useState<'grid' | 'compact'>('grid');
-    const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
     // State for filters
     const [filters, setFilters] = useState<AdvancedFilterOptions>({
@@ -93,26 +92,29 @@ export default function Catalogo() {
             params.set('page', currentPage.toString());
             params.set('limit', propertiesPerPage.toString());
 
-            // Mock fetch if API fails or for demo
-            const response = await fetch(`/api/properties/search?${params.toString()}`);
+            // Direct Mock Data call to ensure filtering works as intended
+            const { searchMockServices } = await import('@/lib/mockData');
 
-            if (!response.ok) {
-                throw new Error('Error al cargar los servicios');
-            }
+            const searchParams = {
+                query: search?.query,
+                location: filters?.location,
+                types: filters?.propertyTypes?.join(','),
+                amenities: filters?.amenities?.join(','),
+                price_min: filters?.minPrice,
+                price_max: filters?.maxPrice,
+                page: currentPage,
+            };
 
-            const data = await response.json();
+            // Simulate network delay for UX
+            await new Promise(resolve => setTimeout(resolve, 300));
 
-            // Update pagination info
-            if (data.pagination) {
-                setTotalResults(data.pagination.total || 0);
-                setTotalPages(data.pagination.totalPages || 1);
-            }
+            const { properties: result } = searchMockServices(searchParams);
 
-            // Transform API data to match Service interface
-            const transformedProperties: Service[] = data.properties?.map((prop: any) => ({
+            const transformedProperties: Service[] = result.map((prop: any) => ({
                 id: prop.id,
                 title: prop.title || prop.name,
                 description: prop.description,
+                category: prop.property_type || 'General',
                 price: prop.price || prop.price_per_hour,
                 unit: prop.unit || 'project',
                 location: prop.address || prop.location,
@@ -121,24 +123,30 @@ export default function Catalogo() {
                 capacity: prop.max_guests || prop.capacity,
                 max_guests: prop.max_guests || prop.capacity,
                 features: prop.features || prop.amenities?.map((a: string) => ({ id: a, name: a })) || [],
-                amenities: prop.amenities || [], // legacy
+                amenities: prop.amenities || [],
                 image_urls: prop.image_urls || [],
-                rating: prop.average_rating,
+                rating: prop.average_rating || prop.rating,
                 review_count: prop.review_count,
                 provider_id: prop.host_id,
                 host_id: prop.host_id,
                 created_at: new Date().toISOString(),
                 updated_at: new Date().toISOString(),
                 is_script9_select: prop.is_script9_select || false,
-                latitude: prop.latitude,
-                longitude: prop.longitude,
-            })) || [];
+                property_type: prop.property_type,
+                tech_stack: prop.tech_stack,
+                price_display_text: prop.price_display_text,
+                delivery_time: prop.delivery_time,
+                maintenance_support: prop.maintenance_support
+            }));
 
             setProperties(transformedProperties);
+            setTotalResults(transformedProperties.length);
+            setTotalPages(Math.ceil(transformedProperties.length / 9));
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error desconocido');
             console.error('Error fetching properties:', err);
         } finally {
+            // Remove artificial delay for faster feel, or keep small if desired
             setLoading(false);
         }
     };
@@ -246,7 +254,7 @@ export default function Catalogo() {
                                     <Bot className="w-5 h-5 flex-shrink-0" />
                                     <div className="flex flex-col text-left">
                                         <span className="font-medium">Agentes IA</span>
-                                        <span className="text-xs opacity-60 hidden group-hover:block transition-opacity">Vendedores 24/7</span>
+                                        <span className={`text-xs transition-colors ${filters.propertyTypes?.includes('ia_chatbot') ? 'text-emerald-100/70' : 'text-slate-500 group-hover:text-slate-400'}`}>Vendedores 24/7</span>
                                     </div>
                                 </button>
 
@@ -261,22 +269,22 @@ export default function Catalogo() {
                                     <Zap className="w-5 h-5 flex-shrink-0" />
                                     <div className="flex flex-col text-left">
                                         <span className="font-medium">Automatizaciones</span>
-                                        <span className="text-xs opacity-60 hidden group-hover:block transition-opacity">Piloto automático</span>
+                                        <span className={`text-xs transition-colors ${filters.propertyTypes?.includes('automatizacion') ? 'text-blue-100/70' : 'text-slate-500 group-hover:text-slate-400'}`}>Piloto automático</span>
                                     </div>
                                 </button>
 
-                                {/* Workflows */}
+                                {/* Integraciones (Antes Workflows) */}
                                 <button
-                                    onClick={() => handleFilterChange({ ...filters, propertyTypes: ['workflow'] })}
+                                    onClick={() => handleFilterChange({ ...filters, propertyTypes: ['integracion'] })}
                                     className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 group flex items-center gap-3
-                                        ${filters.propertyTypes?.includes('workflow')
+                                        ${filters.propertyTypes?.includes('integracion')
                                             ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/20'
                                             : 'text-slate-400 hover:bg-slate-900 hover:text-white hover:translate-x-1'}`}
                                 >
-                                    <Grid3x3 className="w-5 h-5 flex-shrink-0" />
+                                    <Globe className="w-5 h-5 flex-shrink-0" />
                                     <div className="flex flex-col text-left">
-                                        <span className="font-medium">Workflows</span>
-                                        <span className="text-xs opacity-60 hidden group-hover:block transition-opacity">Conecta apps</span>
+                                        <span className="font-medium">Integraciones</span>
+                                        <span className={`text-xs transition-colors ${filters.propertyTypes?.includes('integracion') ? 'text-purple-100/70' : 'text-slate-500 group-hover:text-slate-400'}`}>Conecta apps</span>
                                     </div>
                                 </button>
 
@@ -291,7 +299,7 @@ export default function Catalogo() {
                                     <Code className="w-5 h-5 flex-shrink-0" />
                                     <div className="flex flex-col text-left">
                                         <span className="font-medium">Scripts a Medida</span>
-                                        <span className="text-xs opacity-60 hidden group-hover:block transition-opacity">Código puro</span>
+                                        <span className={`text-xs transition-colors ${filters.propertyTypes?.includes('script') ? 'text-orange-100/70' : 'text-slate-500 group-hover:text-slate-400'}`}>Código puro</span>
                                     </div>
                                 </button>
                             </div>
@@ -355,23 +363,28 @@ export default function Catalogo() {
                             </div>
                         ) : (
                             <>
-                                <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'}`}>
-                                    {/* Static Demo Trigger Card */}
-                                    <ChatDemoCard isStatic onClick={() => setIsDemoModalOpen(true)} />
-
-                                    {properties.map((service) => (
-                                        <ServiceCard
-                                            key={service.id}
-                                            service={service}
-                                            onFavoriteToggle={handleFavoriteToggle}
-                                            onDemoClick={
-                                                (service.id === 'ia_chatbot' || (service as any).property_type === 'ia_chatbot')
-                                                    ? () => setIsDemoModalOpen(true)
-                                                    : undefined
-                                            }
-                                        />
-                                    ))}
-                                </div>
+                                <motion.div
+                                    layout
+                                    className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'}`}
+                                >
+                                    <AnimatePresence mode="popLayout">
+                                        {properties.map((service) => (
+                                            <motion.div
+                                                layout
+                                                key={service.id}
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                exit={{ opacity: 0, scale: 0.9 }}
+                                                transition={{ duration: 0.2 }}
+                                            >
+                                                <ServiceCard
+                                                    service={service}
+                                                    onFavoriteToggle={handleFavoriteToggle}
+                                                />
+                                            </motion.div>
+                                        ))}
+                                    </AnimatePresence>
+                                </motion.div>
 
                                 {/* Pagination */}
                                 {totalPages > 1 && (
@@ -418,57 +431,7 @@ export default function Catalogo() {
                     </div>
                 </div>
             </div>
-            {/* Demo Modal */}
-            {isDemoModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div
-                        className="relative w-full max-w-4xl bg-slate-900 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden animate-in zoom-in-95 duration-200"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button
-                            onClick={() => setIsDemoModalOpen(false)}
-                            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-                        >
-                            <X className="w-5 h-5" />
-                        </button>
-
-                        <div className="flex flex-col md:flex-row h-[600px]">
-                            {/* Modal Info Side */}
-                            <div className="w-full md:w-1/3 bg-slate-950 p-8 flex flex-col justify-center border-r border-slate-800">
-                                <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6">
-                                    <Bot className="w-6 h-6 text-emerald-500" />
-                                </div>
-                                <h3 className="text-2xl font-bold text-white mb-2">Pruébalo ahora</h3>
-                                <p className="text-slate-400 mb-6">
-                                    Interactúa con nuestro agente de ventas real. Este mismo bot puede estar en tu web en menos de 24h.
-                                </p>
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-2 text-sm text-slate-300">
-                                        <Sparkles className="w-4 h-4 text-emerald-500" />
-                                        <span>Responde 24/7</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-sm text-slate-300">
-                                        <Zap className="w-4 h-4 text-blue-500" />
-                                        <span>Captura leads automáticamente</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-sm text-slate-300">
-                                        <Globe className="w-4 h-4 text-purple-500" />
-                                        <span>Multilenguaje</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Demo Component Wrapper */}
-                            <div className="w-full md:w-2/3 bg-slate-900 relative">
-                                <ChatDemoCard />
-                            </div>
-                        </div>
-                    </div>
-                    {/* Backdrop click to close */}
-                    <div className="absolute inset-0 -z-10" onClick={() => setIsDemoModalOpen(false)} />
-                </div>
-            )}
         </div>
-
     );
 }
+

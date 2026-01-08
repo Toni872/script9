@@ -113,7 +113,7 @@ export function LeadDetailsDrawer({ lead, onClose, onStatusChange, onDelete }: L
                                     <Zap className="w-4 h-4" /> Análisis de IA
                                 </h3>
                                 <p className="text-sm text-slate-300 leading-relaxed">
-                                    El cliente parece interesado en **automatización de procesos**.
+                                    El cliente parece interesado en automatización de procesos.
                                     {lead.message
                                         ? ` Menciona específicamente: "${lead.message.substring(0, 100)}..."`
                                         : ' No ha dejado mensaje detallado.'}

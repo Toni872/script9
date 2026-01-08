@@ -146,13 +146,13 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
     const averageRating = calculateAverageRating();
 
     return (
-        <div className="min-h-screen bg-[#f5f5f7] pb-20">
+        <div className="min-h-screen bg-slate-950 pb-20 pt-20">
             {/* Back Button */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-slate-900/50 backdrop-blur-md border-b border-slate-800 sticky top-20 z-40">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                     <button
                         onClick={() => router.back()}
-                        className="flex items-center gap-2 text-[#1d1d1f] hover:text-[#10B981] transition-colors"
+                        className="flex items-center gap-2 text-slate-300 hover:text-[#10B981] transition-colors"
                     >
                         <ChevronLeft className="w-5 h-5" />
                         Volver
@@ -182,14 +182,14 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg"
                                 aria-label="Imagen anterior"
                             >
-                                <ChevronLeft className="w-6 h-6 text-[#1d1d1f]" />
+                                <ChevronLeft className="w-6 h-6 text-slate-900" />
                             </button>
                             <button
                                 onClick={nextImage}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg"
                                 aria-label="Imagen siguiente"
                             >
-                                <ChevronRight className="w-6 h-6 text-[#1d1d1f]" />
+                                <ChevronRight className="w-6 h-6 text-slate-900" />
                             </button>
                         </>
                     )}
@@ -226,14 +226,14 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white rounded-2xl p-8"
+                            className="bg-slate-900 rounded-2xl p-8 border border-slate-800"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <div>
-                                    <h1 className="text-[40px] font-semibold text-[#1d1d1f] mb-3">
+                                    <h1 className="text-[40px] font-semibold text-white mb-3">
                                         {property.title}
                                     </h1>
-                                    <div className="flex items-center gap-4 text-[#86868b]">
+                                    <div className="flex items-center gap-4 text-slate-400">
                                         <div className="flex items-center gap-2">
                                             <MapPin className="w-5 h-5" />
                                             {property.city}{property.region && `, ${property.region}`}
@@ -253,7 +253,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 {reviews.length > 0 && (
                                     <div className="flex items-center gap-2 bg-[#10B981]/10 px-4 py-2 rounded-xl">
                                         <Star className="w-5 h-5 fill-[#10B981] text-[#10B981]" />
-                                        <span className="text-lg font-bold text-[#1d1d1f]">
+                                        <span className="text-lg font-bold text-white">
                                             {averageRating}
                                         </span>
                                         <span className="text-sm text-[#86868b]">
@@ -263,7 +263,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 )}
                             </div>
 
-                            <p className="text-[17px] text-[#1d1d1f] leading-relaxed">
+                            <p className="text-[17px] text-slate-300 leading-relaxed">
                                 {property.description}
                             </p>
                         </motion.div>
@@ -274,16 +274,16 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-white rounded-2xl p-8"
+                                className="bg-slate-900 rounded-2xl p-8 border border-slate-800"
                             >
-                                <h2 className="text-2xl font-semibold text-[#1d1d1f] mb-6">
+                                <h2 className="text-2xl font-semibold text-white mb-6">
                                     Stack Tecnológico
                                 </h2>
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                     {property.tech_stack?.map((tech, index) => (
                                         <div
                                             key={index}
-                                            className="flex items-center gap-3 text-[#1d1d1f]"
+                                            className="flex items-center gap-3 text-slate-300"
                                         >
                                             <Check className="w-5 h-5 text-[#10B981]" />
                                             <span>{tech}</span>
@@ -298,10 +298,10 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-white rounded-2xl p-8"
+                            className="bg-slate-900 rounded-2xl p-8 border border-slate-800"
                         >
                             <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-2xl font-semibold text-[#1d1d1f]">
+                                <h2 className="text-2xl font-semibold text-white">
                                     Reseñas
                                     {reviews.length > 0 && (
                                         <span className="text-[#86868b] font-normal ml-2">
@@ -313,7 +313,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 {reviews.length > 0 && (
                                     <div className="flex items-center gap-2">
                                         <Star className="w-6 h-6 fill-[#10B981] text-[#10B981]" />
-                                        <span className="text-2xl font-bold text-[#1d1d1f]">
+                                        <span className="text-2xl font-bold text-white">
                                             {averageRating}
                                         </span>
                                     </div>
@@ -361,19 +361,19 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="bg-white rounded-2xl p-8 shadow-lg sticky top-24"
+                            className="bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-800 sticky top-24"
                         >
                             <div className="mb-6">
                                 {property.price_display_text ? (
-                                    <span className="text-[32px] font-bold text-[#1d1d1f]">
+                                    <span className="text-[32px] font-bold text-white">
                                         {property.price_display_text}
                                     </span>
                                 ) : (
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-[40px] font-bold text-[#1d1d1f]">
-                                            €{property.price || property.price_per_hour}
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-xl font-medium text-emerald-400">Totalmente personalizado</span>
+                                        <span className="text-[32px] font-bold text-white">
+                                            Consultar Presupuesto
                                         </span>
-                                        <span className="text-[#86868b]">/ proyecto</span>
                                     </div>
                                 )}
                                 {reviews.length > 0 && (
@@ -388,15 +388,15 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             </div>
 
                             <div className="space-y-4 mb-6">
-                                <div className="flex items-center gap-3 text-[#86868b]">
+                                <div className="flex items-center gap-3 text-slate-400">
                                     <Check className="w-5 h-5" />
                                     <span>{property.maintenance_support || 'Soporte incluido'}</span>
                                 </div>
-                                <div className="flex items-center gap-3 text-[#86868b]">
+                                <div className="flex items-center gap-3 text-slate-400">
                                     <Clock className="w-5 h-5" />
                                     <span>Entrega: {property.delivery_time || 'Consultar'}</span>
                                 </div>
-                                <div className="flex items-center gap-3 text-[#86868b]">
+                                <div className="flex items-center gap-3 text-slate-400">
                                     <Users className="w-5 h-5" />
                                     <span>Trato directo experto</span>
                                 </div>
@@ -406,25 +406,14 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 onClick={handleReservation}
                                 className="w-full px-6 py-4 bg-[#10B981] text-white rounded-xl font-semibold text-lg hover:bg-[#059669] transition-colors shadow-lg hover:shadow-xl hero-text-white"
                             >
-                                Solicitar Auditoría
+                                Agendar Consultoría
                             </button>
 
                             <p className="text-center text-sm text-[#86868b] mt-4">
-                                Pago seguro vía Stripe
+                                Sin compromiso inicial
                             </p>
 
-                            {!property.price_display_text && (
-                                <div className="mt-6 pt-6 border-t border-gray-200">
-                                    <div className="flex items-center justify-between mb-2">
-                                        <span className="text-[#86868b]">Precio del servicio</span>
-                                        <span className="font-semibold">€{property.price || property.price_per_hour}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between mb-2">
-                                        <span className="text-[#86868b]">Protección Script9</span>
-                                        <span className="font-semibold text-green-600">Incluida</span>
-                                    </div>
-                                </div>
-                            )}
+                            {/* Precio fijo footer eliminado para modelo consultoría */}
                         </motion.div>
                     </div>
                 </div>

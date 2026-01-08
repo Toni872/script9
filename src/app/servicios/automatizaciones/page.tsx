@@ -79,7 +79,7 @@ export default function AutomationServicePage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-3">1. Extracción</h3>
                             <p className="text-slate-400">
-                                Nuestros scripts leen tus **Emails, Excels, CRMs o Scrapean Webs** para obtener la materia prima.
+                                Nuestros scripts leen tus Emails, Excels, CRMs o Scrapean Webs para obtener la materia prima.
                                 <br />
                                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Input de Datos</span>
                             </p>
@@ -93,7 +93,7 @@ export default function AutomationServicePage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-3">2. Procesamiento</h3>
                             <p className="text-slate-400">
-                                Limpiamos, formateamos, filtramos y cruzamos los datos automáticamente con **Lógica Python**.
+                                Limpiamos, formateamos, filtramos y cruzamos los datos automáticamente con Lógica Python.
                                 <br />
                                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Transformación</span>
                             </p>
@@ -107,7 +107,7 @@ export default function AutomationServicePage() {
                             </div>
                             <h3 className="text-xl font-bold text-white mb-3">3. Acción</h3>
                             <p className="text-slate-400">
-                                El sistema **envía reportes**, notifica clientes o actualiza tu base de datos final.
+                                El sistema envía reportes, notifica clientes o actualiza tu base de datos final.
                                 <br />
                                 <span className="text-xs text-slate-500 mt-2 block uppercase tracking-wider">Resultado</span>
                             </p>

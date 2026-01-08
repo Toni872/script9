@@ -3,7 +3,7 @@ import LandingClient from '@/components/landing/LandingClient';
 
 export const metadata: Metadata = {
   title: "Script9 | Agencia de Automatización & IA para Negocios",
-  description: "Consultora líder en Automatización de Procesos, Chatbots IA y Workflows. Auditoría gratuita para empresas que quieren escalar.",
+  description: "Consultora líder en Automatización de Procesos, Chatbots IA e Integraciones. Auditoría gratuita para empresas que quieren escalar.",
   alternates: {
     canonical: 'https://script9.com',
   },

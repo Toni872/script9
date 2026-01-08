@@ -111,10 +111,7 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                                 {service.price_display_text ? (
                                     <span>{service.price_display_text}</span>
                                 ) : (
-                                    <>
-                                        €{service.price}
-                                        {service.unit && service.unit !== 'project' && <span className="text-sm font-normal text-slate-500">/{service.unit}</span>}
-                                    </>
+                                    <span className="text-lg">Solución a medida</span>
                                 )}
                             </span>
                         </div>

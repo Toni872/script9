@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Clock, Send, Search, TrendingUp, ShieldCheck, Loader2 } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 export function DetailedContactForm() {
     const [formState, setFormState] = useState({
@@ -94,6 +95,27 @@ export function DetailedContactForm() {
                                 <a href="https://wa.me/34687723287" className="text-slate-400 hover:text-emerald-400 transition-colors">
                                     +34 687 723 287
                                 </a>
+                            </div>
+                        </div>
+                        {/* Social Links */}
+                        <div className="mt-8 pt-8 border-t border-slate-800">
+                            <h4 className="text-white font-bold mb-4">Síguenos en Redes</h4>
+                            <div className="flex space-x-4">
+                                {[
+                                    { Icon: FaGithub, href: 'https://github.com/Toni872', color: 'hover:bg-black hover:text-white hover:border-black' },
+                                    { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/antonio-lloret-sánchez-080166156', color: 'hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]' },
+                                    { Icon: FaInstagram, href: '#', color: 'hover:bg-pink-600 hover:text-white hover:border-pink-600' }
+                                ].map((item, i) => (
+                                    <a
+                                        key={i}
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 ${item.color} transition-all duration-300 transform hover:scale-110`}
+                                    >
+                                        <item.Icon size={20} />
+                                    </a>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -196,6 +218,6 @@ export function DetailedContactForm() {
                     </motion.div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }

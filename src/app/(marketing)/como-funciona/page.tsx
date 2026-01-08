@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Rocket, HelpCircle, ChevronDown, Zap, Code, Settings, Bot, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Sparkles, Rocket, HelpCircle, ChevronDown, Zap, Code, Settings, Bot, CheckCircle2, Shield, Lock, FileKey } from 'lucide-react';
 import { useState } from 'react';
 import { DeepTechHero } from '@/components/ui/DeepTechHero';
 
@@ -14,7 +14,7 @@ export default function ComoFunciona() {
   const faqs = [
     {
       question: '¿Qué es Script9?',
-      answer: 'Script9 es una plataforma de soluciones avanzadas en automatización e inteligencia artificial, orientada a la optimización de procesos y al desarrollo de workflows y scripts personalizados para negocios tanto físicos como digitales. Nuestro objetivo es impulsar su crecimiento, mejorando la eficiencia operativa y facilitando la escalabilidad de sus operaciones.',
+      answer: 'Script9 es una consultora tecnológica especializada en soluciones avanzadas de automatización e inteligencia artificial, orientada a la optimización de procesos y al desarrollo de workflows y scripts personalizados para negocios tanto físicos como digitales. Nuestro objetivo es impulsar su crecimiento, mejorando la eficiencia operativa y facilitando la escalabilidad de sus operaciones.',
     },
     {
       question: '¿Qué tipo de automatizaciones ofrecen?',
@@ -22,7 +22,7 @@ export default function ComoFunciona() {
     },
     {
       question: '¿Cómo funciona el proceso de contratación?',
-      answer: 'Nuestro proceso de contratación es ágil y transparente. Primero, eliges el servicio desde nuestro catálogo. A continuación, completas el pago mediante Stripe, nuestra plataforma de pago seguro. Finalmente, recibirás las instrucciones para la implementación y, en caso de que tengas cualquier duda o necesites asistencia, uno de nuestros expertos se comunicará contigo para ayudarte y garantizar una correcta implementación.',
+      answer: 'Nuestro proceso es consultivo y personalizado. Comienza agendando una auditoría gratuita con nuestros expertos para analizar tus necesidades. A continuación, diseñamos una propuesta estratégica a medida. Una vez aprobada, nuestro equipo técnico se encarga de la implementación completa ("Done-For-You") en tu infraestructura, asegurando que todo funcione perfectamente antes de la entrega final.',
     },
     {
       question: '¿Cuánto cuesta un proyecto de automatización?',
@@ -175,6 +175,94 @@ export default function ComoFunciona() {
                 <p className="text-[14px] text-slate-400 leading-[1.4]">{step.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Visual Workflow Section */}
+      <section className="py-24 bg-slate-950 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-5 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-[40px] md:text-[48px] font-bold text-white mb-6 leading-tight">
+              Ingeniería Visual <span className="text-emerald-500">Limpia</span>
+            </h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              Sin cajas negras. Diseñamos workflows visuales que puedes entender, auditar y escalar sin depender de nadie.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900"
+          >
+            {/* Browser Header Simulation */}
+            <div className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center gap-2">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+                <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+                <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+              </div>
+              <div className="ml-4 px-3 py-1 bg-slate-950 rounded-md text-xs text-slate-400 font-medium border border-slate-800 flex items-center gap-2">
+                <Lock className="w-3 h-3" />
+                n8n_workflow_sales_v2.json
+              </div>
+            </div>
+            <div className="relative aspect-[16/9] w-full bg-white">
+              <Image
+                src="/images/workflow-example.png"
+                alt="Workflow de automatización real"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Security & Guarantee Section */}
+      <section className="py-20 bg-slate-900 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-5">
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="bg-slate-950 p-8 rounded-2xl border border-slate-800">
+              <div className="w-12 h-12 bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 text-emerald-500">
+                <FileKey className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">100% Propiedad</h3>
+              <p className="text-slate-400 leading-relaxed">
+                El código es tuyo. Sin cláusulas de retención ni alquileres. Una vez entregado el proyecto, tienes el control total.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-slate-950 p-8 rounded-2xl border border-slate-800">
+              <div className="w-12 h-12 bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 text-blue-500">
+                <Lock className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Seguridad Blindada</h3>
+              <p className="text-slate-400 leading-relaxed">
+                Jamás almacenamos contraseñas en texto plano. Usamos gestores de secretos y cifrado de grado militar para tus credenciales.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-slate-950 p-8 rounded-2xl border border-slate-800">
+              <div className="w-12 h-12 bg-purple-900/30 rounded-xl flex items-center justify-center mb-6 text-purple-500">
+                <Shield className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Garantía y NDA</h3>
+              <p className="text-slate-400 leading-relaxed">
+                Firmamos acuerdos de confidencialidad antes de empezar. Además, incluimos 30 días de garantía de soporte post-entrega.
+              </p>
+            </div>
           </div>
         </div>
       </section>

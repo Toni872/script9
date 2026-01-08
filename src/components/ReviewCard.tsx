@@ -34,7 +34,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                         key={star}
                         className={`w-4 h-4 ${star <= rating
                             ? 'fill-[#10B981] text-[#10B981]'
-                            : 'text-gray-300'
+                            : 'text-slate-700'
                             }`}
                     />
                 ))}
@@ -52,7 +52,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
     };
 
     return (
-        <div className="bg-white rounded-2xl p-6 border border-gray-200">
+        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -71,17 +71,17 @@ export default function ReviewCard({ review }: ReviewCardProps) {
 
                     {/* Name and Date */}
                     <div>
-                        <p className="font-semibold text-[#1d1d1f]">
+                        <p className="font-semibold text-white">
                             {review.guest.name}
                         </p>
-                        <p className="text-sm text-[#86868b]">{formatDate(review.created_at)}</p>
+                        <p className="text-sm text-slate-400">{formatDate(review.created_at)}</p>
                     </div>
                 </div>
 
                 {/* Overall Rating */}
                 <div className="flex items-center gap-2">
                     {renderStars(review.rating)}
-                    <span className="text-lg font-bold text-[#1d1d1f]">{review.rating}</span>
+                    <span className="text-lg font-bold text-white">{review.rating}</span>
                 </div>
             </div>
 
@@ -91,43 +91,43 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                 review.accuracy_rating ||
                 review.location_rating ||
                 review.value_rating) && (
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4 pb-4 border-b border-gray-200">
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4 pb-4 border-b border-slate-800">
                         {review.cleanliness_rating && (
                             <div className="text-center">
-                                <p className="text-xs text-[#86868b] mb-1">Limpieza</p>
-                                <p className="text-sm font-semibold text-[#1d1d1f]">
+                                <p className="text-xs text-slate-400 mb-1">Limpieza</p>
+                                <p className="text-sm font-semibold text-white">
                                     {review.cleanliness_rating}/5
                                 </p>
                             </div>
                         )}
                         {review.communication_rating && (
                             <div className="text-center">
-                                <p className="text-xs text-[#86868b] mb-1">Comunicación</p>
-                                <p className="text-sm font-semibold text-[#1d1d1f]">
+                                <p className="text-xs text-slate-400 mb-1">Comunicación</p>
+                                <p className="text-sm font-semibold text-white">
                                     {review.communication_rating}/5
                                 </p>
                             </div>
                         )}
                         {review.accuracy_rating && (
                             <div className="text-center">
-                                <p className="text-xs text-[#86868b] mb-1">Exactitud</p>
-                                <p className="text-sm font-semibold text-[#1d1d1f]">
+                                <p className="text-xs text-slate-400 mb-1">Exactitud</p>
+                                <p className="text-sm font-semibold text-white">
                                     {review.accuracy_rating}/5
                                 </p>
                             </div>
                         )}
                         {review.location_rating && (
                             <div className="text-center">
-                                <p className="text-xs text-[#86868b] mb-1">Ubicación</p>
-                                <p className="text-sm font-semibold text-[#1d1d1f]">
+                                <p className="text-xs text-slate-400 mb-1">Ubicación</p>
+                                <p className="text-sm font-semibold text-white">
                                     {review.location_rating}/5
                                 </p>
                             </div>
                         )}
                         {review.value_rating && (
                             <div className="text-center">
-                                <p className="text-xs text-[#86868b] mb-1">Relación calidad-precio</p>
-                                <p className="text-sm font-semibold text-[#1d1d1f]">
+                                <p className="text-xs text-slate-400 mb-1">Relación calidad-precio</p>
+                                <p className="text-sm font-semibold text-white">
                                     {review.value_rating}/5
                                 </p>
                             </div>
@@ -136,15 +136,15 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                 )}
 
             {/* Review Text */}
-            <p className="text-[#1d1d1f] leading-relaxed mb-4">{review.review_text}</p>
+            <p className="text-slate-300 leading-relaxed mb-4">{review.review_text}</p>
 
             {/* Host Response */}
             {review.host_response && (
-                <div className="bg-[#f5f5f7] rounded-xl p-4 mt-4">
-                    <p className="text-sm font-semibold text-[#1d1d1f] mb-2">
+                <div className="bg-slate-800 rounded-xl p-4 mt-4">
+                    <p className="text-sm font-semibold text-white mb-2">
                         Respuesta del proveedor
                     </p>
-                    <p className="text-sm text-[#1d1d1f] mb-2">{review.host_response}</p>
+                    <p className="text-sm text-slate-300 mb-2">{review.host_response}</p>
                     {review.host_response_date && (
                         <p className="text-xs text-[#86868b]">
                             {formatDate(review.host_response_date)}

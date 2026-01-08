@@ -1,6 +1,107 @@
 // Mock data para desarrollo del MVP - Script9 Servicios de Automatización
 
-export const mockServices: any[] = [];
+export const mockServices: any[] = [
+  {
+    id: 's1-ai-sdr',
+    title: 'Sistema de Prospección Automática (AI SDR)',
+    description: 'Delega la prospección en frío. Nuestro sistema busca, cualifica y contacta con tus clientes ideales en piloto automático, agendando reuniones directamente en tu calendario. Incluye scraping ético, enriquecimiento de datos y secuencias de email personalizadas con IA.',
+    property_type: 'ia_chatbot', // Changed from automatizacion to ia_chatbot
+    price: 1500,
+    unit: 'project',
+    // price_display_text removed to trigger 'Solución a medida'
+    amenities: ['Scraping', 'OpenAI', 'Apollo', 'Email Marketing'], // Tech stack compatible legacy
+    features: [
+      { name: 'Scraping LinkedIn' },
+      { name: 'Redacción con IA' },
+      { name: 'Agenda Automática' }
+    ],
+    tech_stack: ['Python', 'n8n', 'OpenAI GPT-4', 'Apollo.io'],
+    rating: 4.9,
+    review_count: 12,
+    image_urls: ['/images/services/ai-sdr-dashboard.png'],
+    is_script9_select: true,
+    location: 'Remoto',
+    city: 'Global',
+    delivery_time: '2 - 3 semanas',
+    maintenance_support: '30 días incluidos',
+    host_id: 'admin'
+  },
+  {
+    id: 's2-financial-dashboard',
+    title: 'Consolidación Financiera Automática',
+    description: 'Olvídate de cerrar el mes a ciegas. Unificamos tus cuentas de Stripe, PayPal, Bancos y gastos en un único Dashboard en tiempo real. Recibe reportes diarios de Cashflow por WhatsApp o Slack y toma decisiones con datos actualizados al minuto, no al mes vencido.',
+    property_type: 'integracion', // Changed from automatizacion to integracion
+    price: 900,
+    unit: 'project',
+    // price_display_text removed
+    amenities: ['Stripe', 'Google Sheets', 'Slack', 'Banca'],
+    features: [
+      { name: 'Reportes Diarios' },
+      { name: 'Conciliación Auto' },
+      { name: 'Alertas Cashflow' }
+    ],
+    tech_stack: ['n8n', 'Stripe API', 'Airtable/Sheets', 'Slack API'],
+    rating: 5.0,
+    review_count: 8,
+    image_urls: ['/images/services/finance-dashboard.png'],
+    is_script9_select: false,
+    location: 'Remoto',
+    city: 'Online',
+    delivery_time: '1 semana',
+    maintenance_support: 'Soporte vitalicio de conexión',
+    host_id: 'admin'
+  },
+  {
+    id: 's3-customer-support',
+    title: 'Agente de Soporte IA 24/7',
+    description: 'Tus clientes no esperan. Implementamos un Chatbot entrenado con TU conocimiento de empresa que resuelve el 80% de las dudas al instante. Si no sabe la respuesta, escala el ticket a un humano. Reduce drásticamente el tiempo de respuesta y mejora la satisfacción del cliente.',
+    property_type: 'ia_chatbot',
+    price: 1200,
+    unit: 'project',
+    // price_display_text removed
+    amenities: ['Chatbot', 'RAG', 'Soporte 24/7', 'CRM'],
+    features: [
+      { name: 'Respuestas Instantáneas' },
+      { name: 'Base de Conocimiento' },
+      { name: 'Escalado a Humano' }
+    ],
+    tech_stack: ['OpenAI Assistants', 'Vector DB', 'WhatsApp/Web', 'HubSopt'],
+    rating: 4.8,
+    review_count: 24,
+    image_urls: ['/images/services/ai-support-agent.png'],
+    is_script9_select: true,
+    location: 'Remoto',
+    city: 'Cloud',
+    delivery_time: '2 semanas',
+    maintenance_support: 'Monitoreo de conversaciones',
+    host_id: 'admin'
+  },
+  {
+    id: 's4-competitor-monitor',
+    title: 'Monitorización de Competencia & Precios',
+    description: 'Vigila a tu mercado sin perder tiempo. Nuestros scrapers revisan diariamente las webs de tus competidores para detectar cambios de precios, ofertas o nuevos productos. Recibe una alerta inmediata cuando ocurra un cambio relevante y ajuste tu estrategia al momento.',
+    property_type: 'script',
+    price: 750,
+    unit: 'project',
+    // price_display_text removed
+    amenities: ['Web Scraping', 'Alertas Email', 'Precios', 'Data'],
+    features: [
+      { name: 'Scraping Diario' },
+      { name: 'Alertas Email' },
+      { name: 'Histórico de Precios' }
+    ],
+    tech_stack: ['Python', 'Selenium/Playwright', 'BeautifulSoup', 'SMTP'],
+    rating: 4.7,
+    review_count: 5,
+    image_urls: ['/images/services/competitor-monitor.png'],
+    is_script9_select: false,
+    location: 'Remoto',
+    city: 'Data',
+    delivery_time: '5 días',
+    maintenance_support: 'Mantenimiento contra bloqueos',
+    host_id: 'admin'
+  }
+];
 
 export const mockProperties = mockServices; // Alias for backward compatibility
 
