@@ -11,6 +11,8 @@ import { IndustryCases } from "@/components/landing/IndustryCases";
 import { DetailedContactForm } from "@/components/landing/DetailedContactForm";
 import { HeroAdvancedVisual } from "@/components/landing/HeroAdvancedVisual";
 import { TechStack } from "@/components/landing/TechStack";
+import AutomationComparison from "@/components/marketing/AutomationComparison";
+import HackerTerminal from "@/components/marketing/HackerTerminal";
 
 
 
@@ -109,6 +111,78 @@ export default function LandingClient() {
             {/* SERVICE PILLARS (NEW) */}
             <ServicePillars />
 
+            {/* VISUAL PERSUASION: AUTOMATION LOOP */}
+            <section className="py-24 bg-slate-950 border-b border-slate-800 relative z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                            Deja de trabajar como un robot.
+                        </h2>
+                        <p className="text-xl text-slate-400 max-w-2xl mx-auto font-light">
+                            Tus competidores ya están automatizando. <br />
+                            Mira la diferencia entre hacerlo a mano y usar Script9.
+                        </p>
+                    </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <AutomationComparison />
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* VISUAL PERSUASION: HACKER TERMINAL */}
+            <section className="py-24 bg-slate-950 border-b border-slate-800 relative z-10 overflow-hidden">
+                {/* Background Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+
+                    {/* Left: Text */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-900 border border-slate-800 text-emerald-400 text-xs font-mono mb-6">
+                            <Terminal className="w-3 h-3" />
+                            <span>PYTHON_ENGINEERING</span>
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                            Potencia bruta.<br />
+                            <span className="text-slate-500">Sin interfaz.</span>
+                        </h2>
+                        <p className="text-xl text-slate-400 font-light mb-8">
+                            Cuando el No-Code se queda corto, desplegamos scripts de Python a medida.
+                            Ideal para <strong>Web Scraping masivo</strong> y APIs complejas.
+                        </p>
+
+                        <ul className="space-y-4 font-mono text-sm text-slate-300">
+                            <li className="flex items-center gap-3">
+                                <span className="text-emerald-500">➜</span> Scrapeo de 10k+ leads/hora
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <span className="text-emerald-500">➜</span> Bypassing de Captchas
+                            </li>
+                        </ul>
+                    </motion.div>
+
+                    {/* Right: Terminal Visual */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <HackerTerminal />
+                    </motion.div>
+                </div>
+            </section>
+
             {/* INDUSTRY CASES (REMOVED FOR SIMPLICITY) */}
             {/* <IndustryCases /> */}
 
@@ -121,6 +195,6 @@ export default function LandingClient() {
             {/* DETAILED CONTACT FORM (NEW) */}
             <DetailedContactForm />
 
-        </div>
+        </div >
     );
 }

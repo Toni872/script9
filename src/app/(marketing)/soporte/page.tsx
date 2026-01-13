@@ -99,7 +99,7 @@ export default function SoportePage() {
                             </CardHeader>
                             <CardContent>
                                 <p className="text-slate-400 mb-4">Para consultas generales o documentos.</p>
-                                <a href="mailto:soporte@script9.com" className="text-emerald-400 font-medium hover:text-emerald-300 transition-colors">soporte@script9.com</a>
+                                <a href="mailto:contact@script-9.com" className="text-emerald-400 font-medium hover:text-emerald-300 transition-colors">contact@script-9.com</a>
                             </CardContent>
                         </Card>
                     </div>

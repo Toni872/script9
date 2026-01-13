@@ -20,7 +20,7 @@ interface WelcomeEmailProps {
 
 export const WelcomeEmail = ({
     name = 'Usuario',
-    email = 'user@script9.es',
+    email = 'contact@script-9.com',
     userType = 'user',
 }: WelcomeEmailProps) => (
     <Html>
@@ -130,7 +130,7 @@ export const WelcomeEmail = ({
                     <strong>Script9</strong> - Automatiza tu negocio, escala sin límites
                     <br />
                     Si necesitas ayuda, escríbenos a{' '}
-                    <Link href="mailto:info@script9.es" style={link}>info@script9.es</Link>
+                    <Link href="mailto:contact@script-9.com" style={link}>contact@script-9.com</Link>
                 </Text>
 
                 <Text style={smallText}>

@@ -37,7 +37,7 @@ export const BookingConfirmationEmail = ({
     totalPrice = 100,
     propertyAddress = 'Madrid, España',
     hostName = 'Anfitrión',
-    hostEmail = 'colaborador@script9.es',
+    hostEmail = 'contact@script-9.com',
 }: BookingConfirmationEmailProps) => (
     <Html>
         <Head />
@@ -139,7 +139,7 @@ export const BookingConfirmationEmail = ({
                     <strong>Script9</strong> - Automatiza tu negocio, escala sin límites
                     <br />
                     Si tienes alguna pregunta, contáctanos en{' '}
-                    <Link href="mailto:info@script9.es" style={link}>info@script9.es</Link>
+                    <Link href="mailto:contact@script-9.com" style={link}>contact@script-9.com</Link>
                 </Text>
 
                 <Text style={smallText}>

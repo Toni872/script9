@@ -131,7 +131,7 @@ export default function NuevaPropiedadPage() {
                                         <label className="text-sm font-medium text-brand-neutral-700">URL del Archivo (.zip, .py, .js)</label>
                                         <Input
                                             required={formData.product_type === 'digital_product'}
-                                            placeholder="https://r2.script9.es/mis-archivos/bot-v1.zip"
+                                            placeholder="https://r2.script-9.com/mis-archivos/bot-v1.zip"
                                             value={formData.download_url}
                                             onChange={(e) => setFormData({ ...formData, download_url: e.target.value })}
                                         />

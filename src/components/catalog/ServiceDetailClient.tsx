@@ -162,58 +162,16 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
 
             {/* Image Gallery */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="relative h-[500px] rounded-3xl overflow-hidden">
+                <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
                     <Image
-                        src={
-                            property.image_urls?.[currentImageIndex] ||
-                            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600'
-                        }
+                        src="/images/services/n8n-workflow-hq.png"
                         alt={property.title}
                         fill
                         className="object-cover"
                         priority
+                        unoptimized
+                        quality={100}
                     />
-
-                    {/* Navigation Arrows */}
-                    {property.image_urls && property.image_urls.length > 1 && (
-                        <>
-                            <button
-                                onClick={prevImage}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg"
-                                aria-label="Imagen anterior"
-                            >
-                                <ChevronLeft className="w-6 h-6 text-slate-900" />
-                            </button>
-                            <button
-                                onClick={nextImage}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg"
-                                aria-label="Imagen siguiente"
-                            >
-                                <ChevronRight className="w-6 h-6 text-slate-900" />
-                            </button>
-                        </>
-                    )}
-
-                    {/* Image Counter */}
-                    <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
-                        {currentImageIndex + 1} / {property.image_urls?.length || 1}
-                    </div>
-
-                    {/* Actions */}
-                    <div className="absolute top-4 right-4 flex gap-2">
-                        <button
-                            className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg"
-                            aria-label="Compartir propiedad"
-                        >
-                            <Share2 className="w-5 h-5 text-[#1d1d1f]" />
-                        </button>
-                        <button
-                            className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg"
-                            aria-label="Guardar en favoritos"
-                        >
-                            <Heart className="w-5 h-5 text-[#1d1d1f]" />
-                        </button>
-                    </div>
                 </div>
             </div>
 

@@ -18,10 +18,29 @@ export function DetailedContactForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate submission
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        setIsSubmitting(false);
-        setIsSuccess(true);
+
+        try {
+            const response = await fetch('/api/submit-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formState)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Error sending message');
+            }
+
+            // Success
+            setIsSubmitting(false);
+            setIsSuccess(true);
+            // Don't clear form yet, so we can show "Thanks [Name]"
+        } catch (error) {
+            console.error('Submit error:', error);
+            setIsSubmitting(false);
+            alert("Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.");
+        }
     };
 
     const ContactFeature = ({ icon: Icon, title, desc }: any) => (
@@ -86,8 +105,8 @@ export function DetailedContactForm() {
                         <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row gap-8">
                             <div>
                                 <h4 className="text-white font-bold mb-2">Email Directo</h4>
-                                <a href="mailto:hola@script9.ai" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                                    hola@script9.ai
+                                <a href="mailto:contact@script-9.com" className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                    contact@script-9.com
                                 </a>
                             </div>
                             <div>
@@ -141,7 +160,10 @@ export function DetailedContactForm() {
                                     Gracias por contactarnos, {formState.name}. Un especialista revisará tu proyecto y te contactará pronto.
                                 </p>
                                 <button
-                                    onClick={() => setIsSuccess(false)}
+                                    onClick={() => {
+                                        setIsSuccess(false);
+                                        setFormState({ name: '', email: '', company: '', message: '' });
+                                    }}
                                     className="px-6 py-2 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                                 >
                                     Enviar otro mensaje

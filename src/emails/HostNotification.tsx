@@ -140,7 +140,7 @@ export const HostNotificationEmail = ({
                     <strong>Script9</strong> - Panel de Colaborador
                     <br />
                     ¿Necesitas ayuda? Escríbenos a{' '}
-                    <Link href="mailto:colaboradores@script9.es" style={link}>colaboradores@script9.es</Link>
+                    <Link href="mailto:contact@script-9.com" style={link}>contact@script-9.com</Link>
                 </Text>
             </Container>
         </Body>
