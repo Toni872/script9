@@ -1,167 +1,98 @@
 'use client';
 
-import { motion, useTime, useTransform } from 'framer-motion';
-import {
-    Zap,
-    Clock,
-    ShieldCheck,
-    Coins,
-    Cpu,
-    RefreshCw
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-
-// Specialized HUD Component (Standardized Size)
-const HolographicHUD = ({ title, value, icon: Icon, color, x, y, delay }: any) => {
-    return (
-        <motion.div
-            className="absolute p-4 rounded-xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-md flex items-center gap-4 shadow-[0_0_20px_rgba(0,0,0,0.6)] min-w-[230px]"
-            initial={{ opacity: 0, x, y, scale: 0.8 }}
-            animate={{
-                opacity: [0.4, 1, 0.4],
-                y: [y - 5, y + 5, y - 5],
-            }}
-            transition={{
-                opacity: { duration: 4, repeat: Infinity, delay },
-                y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay }
-            }}
-        >
-            <div className={`p-2.5 rounded-lg bg-slate-800/80 ${color} shadow-inner`}>
-                <Icon size={20} />
-            </div>
-            <div>
-                <div className="text-[11px] text-slate-400 uppercase tracking-widest font-mono mb-1">{title}</div>
-                <div className="text-sm font-bold text-white font-mono flex items-center gap-2">
-                    {value}
-                    <span className={`block w-1.5 h-1.5 rounded-full ${color.replace('text-', 'bg-')} animate-pulse`} />
-                </div>
-            </div>
-
-            {/* Corner Accents */}
-            <div className={`absolute -top-px -left-px w-2 h-2 border-t border-l ${color.replace('text-', 'border-')} opacity-50`} />
-            <div className={`absolute -bottom-px -right-px w-2 h-2 border-b border-r ${color.replace('text-', 'border-')} opacity-50`} />
-        </motion.div>
-    );
-};
+import { motion } from 'framer-motion';
+import { Database, FileSpreadsheet, Mail, Settings, Check, ArrowRight, Bell } from 'lucide-react';
 
 export function AutomationHeroVisual() {
-    const time = useTime();
-
-    // Standard orbital rotations
-    const rotate1 = useTransform(time, [0, 20000], [0, 360], { clamp: false });
-    const rotate2 = useTransform(time, [0, 25000], [0, -360], { clamp: false });
-    const rotate3 = useTransform(time, [0, 30000], [0, 360], { clamp: false });
-
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
-
-    if (!mounted) return null;
-
     return (
-        <div className="relative w-full h-[550px] flex items-center justify-center overflow-visible perspective-[1200px]">
+        <div className="relative w-full h-[500px] flex items-center justify-center">
 
-            {/* AMBIENT GLOW - Orange/Amber for Automations (Fast/Zap) */}
-            <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[80px]" />
-            </div>
+            {/* Background Decor */}
+            <div className="absolute inset-0 bg-amber-500/5 blur-[100px] rounded-full" />
 
-            {/* 3D CORE SYSTEM */}
-            <motion.div
-                className="relative w-[300px] h-[300px] flex items-center justify-center transform-style-3d"
-                style={{ transformStyle: "preserve-3d" }}
-            >
+            {/* --- PIPELINE CONTAINER --- */}
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-4 scale-75 md:scale-100 origin-center">
 
-                {/* 1. CENTRAL FAST CORE */}
-                <motion.div
-                    className="relative z-20 w-32 h-32 flex items-center justify-center"
-                    animate={{ scale: [1, 1.02, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                    <div className="absolute inset-0 bg-slate-900 rounded-full border border-orange-500/30 shadow-[0_0_30px_rgba(249,115,22,0.2)] flex items-center justify-center overflow-hidden">
+                {/* 1. INPUTS (Manual Chaos) */}
+                <div className="flex flex-col gap-4">
+                    {[
+                        { icon: Mail, color: "text-blue-400", delay: 0 },
+                        { icon: FileSpreadsheet, color: "text-green-400", delay: 1.5 },
+                        { icon: Database, color: "text-slate-400", delay: 3 }
+                    ].map((item, i) => (
+                        <motion.div
+                            key={i}
+                            className="bg-slate-900 border border-slate-700 p-3 rounded-xl shadow-lg flex items-center gap-3 w-40"
+                            initial={{ x: -50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: item.delay }}
+                        >
+                            <div className="bg-slate-800 p-2 rounded-lg">
+                                <item.icon className={`w-5 h-5 ${item.color}`} />
+                            </div>
+                            <div className="h-2 w-16 bg-slate-700 rounded-full animate-pulse" />
 
-                        <Zap className="w-16 h-16 text-orange-400 relative z-10 drop-shadow-[0_0_10px_rgba(249,115,22,0.8)] fill-orange-400/20" />
+                            {/* Particle Moving to Center */}
+                            <motion.div
+                                className="absolute right-[-20px] top-1/2 w-2 h-2 bg-amber-500 rounded-full shadow-[0_0_10px_#f59e0b]"
+                                initial={{ opacity: 0, x: 0 }}
+                                animate={{ opacity: [0, 1, 0], x: 80 }} // Moves towards the gear
+                                transition={{ duration: 1.5, repeat: Infinity, delay: item.delay + 0.5 }}
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* 2. PROCESSING ENGINE (The Gear) */}
+                <div className="relative w-32 h-32 flex items-center justify-center mx-4">
+                    <motion.div
+                        className="absolute inset-0 border border-amber-500/30 rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    />
+                    <motion.div
+                        className="absolute inset-4 border border-dashed border-amber-500/50 rounded-full"
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                    />
+
+                    <div className="bg-slate-900 p-4 rounded-full border border-amber-500 shadow-[0_0_30px_rgba(245,158,11,0.3)] z-10">
+                        <Settings className="w-10 h-10 text-amber-500 animate-spin-slow" />
                     </div>
 
-                    {/* Spinning Energy Ring */}
-                    <motion.div
-                        className="absolute -inset-2 rounded-full border border-orange-400/30 border-t-transparent border-l-transparent"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }} // Faster for automation
-                    />
-                    <motion.div
-                        className="absolute -inset-4 rounded-full border border-yellow-400/20 border-b-transparent border-r-transparent"
-                        animate={{ rotate: -360 }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    />
-                </motion.div>
+                    {/* Status Badge */}
+                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-slate-800 px-3 py-1 rounded-full text-[10px] text-amber-400 font-bold border border-slate-700 whitespace-nowrap">
+                        PROCESSING DATA...
+                    </div>
+                </div>
 
-                {/* 2. ORBITAL RINGS */}
+                {/* 3. OUTPUTS (Clean Results) */}
+                <div className="flex flex-col gap-4">
+                    {[
+                        { label: "Report Sent", icon: Check, color: "text-emerald-400", delay: 1 },
+                        { label: "Admin Alerts", icon: Bell, color: "text-amber-400", delay: 2.5 },
+                    ].map((item, i) => (
+                        <motion.div
+                            key={i}
+                            className="bg-slate-900 border border-emerald-500/30 p-4 rounded-xl shadow-lg flex items-center gap-3 w-48 relative overflow-hidden"
+                            initial={{ x: 50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: item.delay }}
+                        >
+                            <div className="absolute inset-0 bg-emerald-500/5" />
+                            <div className="bg-slate-800 p-2 rounded-lg relative z-10">
+                                <item.icon className={`w-5 h-5 ${item.color}`} />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="text-white font-bold text-sm">{item.label}</div>
+                                <div className="text-[10px] text-slate-400">Automated Action</div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
 
-                <motion.div
-                    className="absolute w-[450px] h-[450px] border border-slate-700/30 rounded-full"
-                    style={{ rotateX: 70, rotateZ: rotate1 }}
-                >
-                    <div className="absolute top-0 left-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-[0_0_10px_#f97316]" />
-                </motion.div>
+            </div>
 
-                <motion.div
-                    className="absolute w-[380px] h-[380px] border border-slate-700/30 rounded-full border-l-orange-500/30"
-                    style={{ rotateY: 70, rotateZ: rotate2 }}
-                />
-
-                <motion.div
-                    className="absolute w-[320px] h-[320px] border border-dashed border-slate-700/40 rounded-full"
-                    style={{ rotateX: 45, rotateY: 45, rotateZ: rotate3 }}
-                />
-
-                {/* 3. FLOATING METRICS (Automation Specific) */}
-
-                {/* Time Saved */}
-                <HolographicHUD
-                    icon={Clock}
-                    title="Efficiency Gain"
-                    value="+40h / WEEK"
-                    color="text-orange-400"
-                    x={-220} y={-80}
-                    delay={0}
-                />
-
-                {/* Process Speed */}
-                <HolographicHUD
-                    icon={RefreshCw}
-                    title="Process Cycle"
-                    value="INSTANT (ms)"
-                    color="text-yellow-400"
-                    x={200} y={20}
-                    delay={1.5}
-                />
-
-                {/* Reliability */}
-                <HolographicHUD
-                    icon={ShieldCheck}
-                    title="Error Rate"
-                    value="0.0% ZERO"
-                    color="text-emerald-400"
-                    x={-160} y={150}
-                    delay={2.5}
-                />
-
-                {/* Connection Lines */}
-                <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none opacity-40">
-                    <motion.line
-                        x1="150" y1="150" x2="-70" y2="70"
-                        stroke="#f97316" strokeWidth="1" strokeDasharray="5,5"
-                        initial={{ strokeDashoffset: 100 }}
-                        animate={{ strokeDashoffset: 0 }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    />
-                    <motion.line
-                        x1="150" y1="150" x2="350" y2="170"
-                        stroke="#eab308" strokeWidth="1" strokeDasharray="2,2"
-                    />
-                </svg>
-
-            </motion.div>
         </div>
     );
 }

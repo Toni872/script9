@@ -1,184 +1,135 @@
 'use client';
 
-import { motion, useTime, useTransform } from 'framer-motion';
-import {
-    Bot,
-    MessageSquare,
-    Zap,
-    Activity,
-    Cpu,
-    Network,
-    Share2,
-    Globe,
-    Fingerprint
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-
-// Specialized HUD Component (Heads-Up Display)
-const HolographicHUD = ({ title, value, icon: Icon, color, x, y, delay }: any) => {
-    return (
-        <motion.div
-            className="absolute p-4 rounded-xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-md flex items-center gap-4 shadow-[0_0_20px_rgba(0,0,0,0.6)] min-w-[230px]"
-            initial={{ opacity: 0, x, y, scale: 0.8 }}
-            animate={{
-                opacity: [0.4, 1, 0.4],
-                y: [y - 5, y + 5, y - 5],
-            }}
-            transition={{
-                opacity: { duration: 4, repeat: Infinity, delay },
-                y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay }
-            }}
-        >
-            <div className={`p-2.5 rounded-lg bg-slate-800/80 ${color} shadow-inner`}>
-                <Icon size={20} />
-            </div>
-            <div>
-                <div className="text-[11px] text-slate-400 uppercase tracking-widest font-mono mb-1">{title}</div>
-                <div className="text-sm font-bold text-white font-mono flex items-center gap-2">
-                    {value}
-                    <span className={`block w-1.5 h-1.5 rounded-full ${color.replace('text-', 'bg-')} animate-pulse`} />
-                </div>
-            </div>
-
-            {/* Corner Accents */}
-            <div className={`absolute -top-px -left-px w-2 h-2 border-t border-l ${color.replace('text-', 'border-')} opacity-50`} />
-            <div className={`absolute -bottom-px -right-px w-2 h-2 border-b border-r ${color.replace('text-', 'border-')} opacity-50`} />
-        </motion.div>
-    );
-};
+import { motion } from 'framer-motion';
+import { Bot, User, CheckCircle2, MessageSquare } from 'lucide-react';
 
 export function AgentHeroVisual() {
-    const time = useTime();
-
-    // Rotations for multiple orbital rings
-    const rotate1 = useTransform(time, [0, 20000], [0, 360], { clamp: false });
-    const rotate2 = useTransform(time, [0, 25000], [0, -360], { clamp: false });
-    const rotate3 = useTransform(time, [0, 30000], [0, 360], { clamp: false });
-
-    // Pulsing core effect (Fixed loop)
-    const glowOpacity = useTransform(time, [0, 2000], [0.3, 0.6], { clamp: false });
-
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
-
-    if (!mounted) return null;
-
     return (
-        <div className="relative w-full h-[550px] flex items-center justify-center overflow-visible perspective-[1200px]">
+        <div className="relative w-full h-[500px] flex items-center justify-center">
 
-            {/* BACKGROUND FIELD */}
-            <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[80px]" />
-            </div>
+            {/* Background Decor */}
+            <div className="absolute inset-0 bg-emerald-500/5 blur-[100px] rounded-full" />
 
-            {/* 3D CORE SYSTEM */}
+            {/* Main Chat Interface Card */}
             <motion.div
-                className="relative w-[300px] h-[300px] flex items-center justify-center transform-style-3d"
-                style={{ transformStyle: "preserve-3d" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="relative w-full max-w-[400px] mx-4 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden"
             >
-
-                {/* 1. CENTRAL NEURAL CORE */}
-                <motion.div
-                    className="relative z-20 w-32 h-32 flex items-center justify-center"
-                    animate={{ scale: [1, 1.02, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                    <div className="absolute inset-0 bg-slate-900 rounded-full border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.2)] flex items-center justify-center overflow-hidden">
-                        {/* Clean Background (No GIF) */}
-
-                        <Bot className="w-16 h-16 text-emerald-400 relative z-10 drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
+                {/* Header */}
+                <div className="bg-slate-800/50 p-4 border-b border-slate-700 flex items-center gap-3">
+                    <div className="relative">
+                        <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center">
+                            <Bot className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-slate-900 rounded-full flex items-center justify-center">
+                            <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
+                        </div>
                     </div>
+                    <div>
+                        <div className="font-bold text-white text-sm">Agente Comercial AI</div>
+                        <div className="text-xs text-emerald-400">En línea ahora</div>
+                    </div>
+                </div>
 
-                    {/* Spinning Energy Ring */}
+                {/* Chat Body */}
+                <div className="p-6 space-y-6 min-h-[320px] bg-slate-950/50 relative">
+
+                    {/* Message 1: User */}
                     <motion.div
-                        className="absolute -inset-2 rounded-full border border-emerald-400/30 border-t-transparent border-l-transparent"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    />
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1 }}
+                        className="flex gap-3"
+                    >
+                        <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center shrink-0">
+                            <User className="w-4 h-4 text-slate-400" />
+                        </div>
+                        <div className="bg-slate-800 text-slate-200 p-3 rounded-2xl rounded-tl-none text-sm max-w-[85%] shadow-sm">
+                            Hola, ¿cuánto cuesta desarrollar una automatización personalizada?
+                        </div>
+                    </motion.div>
+
+                    {/* Message 2: AI (Typing -> Response) */}
                     <motion.div
-                        className="absolute -inset-4 rounded-full border border-cyan-400/20 border-b-transparent border-r-transparent"
-                        animate={{ rotate: -360 }}
-                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                    />
-                </motion.div>
+                        initial={{ opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 2.5 }}
+                        className="flex flex-col gap-1 items-end"
+                    >
+                        <div className="flex gap-3 flex-row-reverse">
+                            <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center shrink-0 border border-emerald-500/30">
+                                <Bot className="w-4 h-4 text-emerald-400" />
+                            </div>
+                            <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-100 p-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-sm">
+                                <p>Hola! Depende del alcance 🚀</p>
+                                <p className="mt-2">Para darte un presupuesto exacto, necesito hacerte 2 preguntas rápidas. ¿Te parece bien?</p>
+                            </div>
+                        </div>
+                        <span className="text-[10px] text-slate-500 pr-12">Leído justo ahora</span>
+                    </motion.div>
 
-                {/* 2. ORBITAL RINGS (Gyroscope) */}
+                    {/* Message 3: User */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 4.5 }}
+                        className="flex gap-3"
+                    >
+                        <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center shrink-0">
+                            <User className="w-4 h-4 text-slate-400" />
+                        </div>
+                        <div className="bg-slate-800 text-slate-200 p-3 rounded-2xl rounded-tl-none text-sm max-w-[85%] shadow-sm">
+                            Claro, adelante.
+                        </div>
+                    </motion.div>
 
-                {/* Large Outer Ring */}
-                <motion.div
-                    className="absolute w-[450px] h-[450px] border border-slate-700/30 rounded-full"
-                    style={{ rotateX: 70, rotateZ: rotate1 }}
-                    transition={{ ease: "linear" }}
-                >
-                    <div className="absolute top-0 left-1/2 w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981]" />
-                    <div className="absolute bottom-0 left-1/2 w-2 h-2 bg-emerald-500/50 rounded-full" />
-                </motion.div>
+                    {/* Message 4: AI Qualification */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 6 }} // Long delay to simulate reading
+                        className="flex gap-3 flex-row-reverse w-full"
+                    >
+                        <div className="bg-slate-900 border border-slate-700 p-3 rounded-xl w-[85%] mr-11">
+                            <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-800">
+                                <MessageSquare className="w-4 h-4 text-emerald-400" />
+                                <span className="text-xs font-bold text-slate-300">MODO CUALIFICACIÓN</span>
+                            </div>
+                            <div className="space-y-2">
+                                <div className="flex items-center gap-2 text-xs text-slate-400">
+                                    <div className="w-4 h-4 rounded-full border border-emerald-500 bg-emerald-500/20 flex items-center justify-center text-emerald-500">✓</div>
+                                    Interés Confirmado
+                                </div>
+                                <div className="flex items-center gap-2 text-xs text-slate-400">
+                                    <div className="w-4 h-4 rounded-full border border-emerald-500 bg-emerald-500/20 flex items-center justify-center text-emerald-500">✓</div>
+                                    Presupuesto: Analizando...
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
 
-                {/* Vertical Ring */}
-                <motion.div
-                    className="absolute w-[380px] h-[380px] border border-slate-700/30 rounded-full border-l-emerald-500/30"
-                    style={{ rotateY: 70, rotateZ: rotate2 }}
-                    transition={{ ease: "linear" }}
-                >
-                    <div className="absolute top-1/2 right-0 w-2 h-2 bg-cyan-500 rounded-full shadow-[0_0_10px_#06b6d4]" />
-                </motion.div>
-
-                {/* Tilted Ring */}
-                <motion.div
-                    className="absolute w-[320px] h-[320px] border border-dashed border-slate-700/40 rounded-full"
-                    style={{ rotateX: 45, rotateY: 45, rotateZ: rotate3 }}
-                    transition={{ ease: "linear" }}
-                />
-
-                {/* 3. FLOATING HOLOGRAPHIC HUDs */}
-
-                {/* Stats Panel Left */}
-                <HolographicHUD
-                    icon={Cpu}
-                    title="Neural Load"
-                    value="42% OPTIMAL"
-                    color="text-emerald-400"
-                    x={-220} y={-80}
-                    delay={0}
-                />
-
-                {/* Stats Panel Right - Active Chats */}
-                <HolographicHUD
-                    icon={MessageSquare}
-                    title="Active Threads"
-                    value="843 SESSIONS"
-                    color="text-cyan-400"
-                    x={200} y={20}
-                    delay={1.5}
-                />
-
-                {/* Security Badge Bottom */}
-                <HolographicHUD
-                    icon={Fingerprint}
-                    title="Security Level"
-                    value="ENCRYPTED"
-                    color="text-purple-400"
-                    x={-160} y={150}
-                    delay={2.5}
-                />
-
-                {/* Connection Lines (SVG) */}
-                <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none opacity-40">
-                    <motion.line
-                        x1="150" y1="150" x2="-70" y2="70"
-                        stroke="#10b981" strokeWidth="1" strokeDasharray="5,5"
-                        initial={{ strokeDashoffset: 100 }}
-                        animate={{ strokeDashoffset: 0 }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    />
-                    <motion.line
-                        x1="150" y1="150" x2="350" y2="170"
-                        stroke="#06b6d4" strokeWidth="1" strokeDasharray="2,2"
-                    />
-                    <motion.circle cx="150" cy="150" r="180" stroke="#334155" strokeWidth="1" opacity="0.2" fill="none" />
-                </svg>
+                </div>
 
             </motion.div>
+
+            {/* Floating Elements */}
+            <motion.div
+                className="absolute -right-10 top-20 bg-slate-800 p-3 rounded-lg border border-slate-700 shadow-xl flex items-center gap-3"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 7 }}
+            >
+                <div className="bg-green-500/20 p-2 rounded-md">
+                    <CheckCircle2 className="w-5 h-5 text-green-500" />
+                </div>
+                <div>
+                    <div className="text-xs text-slate-400 uppercase font-bold">Lead Cualificado</div>
+                    <div className="text-sm font-bold text-white">+1 Venta Potencial</div>
+                </div>
+            </motion.div>
+
         </div>
     );
 }
