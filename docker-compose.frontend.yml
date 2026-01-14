@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  script9-web:
+    build: .
+    restart: always
+    ports:
+      - "80:3000"
+    environment:
+      - NEXT_PUBLIC_N8N_CHAT_WEBHOOK=http://46.224.199.64:5678/webhook/sales-chat
+      - NEXT_PUBLIC_BASE_URL=http://46.224.199.64
+      - NODE_ENV=production

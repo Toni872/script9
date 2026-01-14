@@ -43,11 +43,17 @@ export default function CommercialAgentWidget() {
         scrollToBottom();
     }, [messages]);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!inputValue.trim()) return;
+    const QUICK_ACTIONS = [
+        { label: "🤖 ¿Qué hacen los Agentes?", value: "¿Qué hacen exactamente los Agentes Comerciales IA?" },
+        { label: "🚀 Automatizar SDR", value: "Quiero saber más sobre el AI SDR para prospección." },
+        { label: "💎 Planes a Medida", value: "Explícame cómo funcionan vuestros planes a medida (sin dar precios exactos)." },
+        { label: "📅 Agendar Cita", value: "Me gustaría agendar una cita para ver una demo." },
+    ];
 
-        const userMessage: Message = { role: 'user', content: inputValue };
+    const sendMessage = async (text: string) => {
+        if (!text.trim()) return;
+
+        const userMessage: Message = { role: 'user', content: text };
         setMessages(prev => [...prev, userMessage]);
         setInputValue('');
         setIsLoading(true);
@@ -68,8 +74,6 @@ export default function CommercialAgentWidget() {
             let aiText = data.content || '';
 
             // ✅ DETECT CALENDAR TRIGGER
-            // Use Regex to match the full tag structure: <function=open_calendar>...</function>
-            // or just the opening tag if that's all that exists.
             if (aiText.includes('<function=open_calendar>')) {
                 setShowCalendar(true);
                 // Remove the entire function block including content and closing tag
@@ -89,6 +93,11 @@ export default function CommercialAgentWidget() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        await sendMessage(inputValue);
     };
 
     // Premium Script9 Theme Application
@@ -119,7 +128,7 @@ export default function CommercialAgentWidget() {
             <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
                 {/* Chat Window */}
                 {isOpen && (
-                    <div className="mb-4 w-[350px] sm:w-[400px] h-[550px] bg-slate-950/90 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300 ring-1 ring-white/5">
+                    <div className="mb-4 w-[350px] sm:w-[400px] h-[600px] bg-slate-950/90 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300 ring-1 ring-white/5">
 
                         {/* Header */}
                         <div className="bg-slate-900/50 p-4 flex justify-between items-center border-b border-white/5 backdrop-blur-md">
@@ -174,6 +183,21 @@ export default function CommercialAgentWidget() {
                             )}
                             <div ref={messagesEndRef} />
                         </div>
+
+                        {/* Quick Actions (Chips) */}
+                        {!isLoading && messages.length > 0 && (
+                            <div className="px-5 py-2 overflow-x-auto flex gap-2 scrollbar-none mask-linear-fade">
+                                {QUICK_ACTIONS.map((action, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => sendMessage(action.value)}
+                                        className="whitespace-nowrap px-3 py-1.5 bg-slate-800/80 border border-slate-700 hover:border-emerald-500/50 hover:bg-emerald-950/30 text-emerald-400/90 text-xs rounded-full transition-all duration-200 active:scale-95 backdrop-blur-sm"
+                                    >
+                                        {action.label}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
 
                         {/* Input Area */}
                         <form onSubmit={handleSubmit} className="p-4 bg-slate-900/80 border-t border-white/5 backdrop-blur-md">
