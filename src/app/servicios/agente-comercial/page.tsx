@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ArrowRight, Bot, Clock, BarChart3, Globe, MessageSquare, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { AgentHeroVisual } from '@/components/services/AgentHeroVisual';
+import CommercialAgentWidget from '@/components/ai/CommercialAgentWidget';
 
 export default function AgentServicePage() {
     return (
@@ -62,7 +63,7 @@ export default function AgentServicePage() {
             </section>
 
             {/* 2. SCHEMATIC EXPLANATION (Lo simple y visual) */}
-            <section className="py-24 bg-slate-900/30 border-y border-slate-800/50">
+            <section className="py-24 bg-slate-950 border-y border-slate-800/50">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl font-bold text-white mb-4">¿Cómo funciona exactamente?</h2>
@@ -121,7 +122,7 @@ export default function AgentServicePage() {
 
 
             {/* 4. CTA FINAL */}
-            <section className="py-24 px-6 bg-slate-900 border-t border-slate-800">
+            <section className="py-24 px-6 bg-slate-950 border-t border-slate-800">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-white mb-6">¿Listo para contratar a tu mejor vendedor?</h2>
                     <p className="text-xl text-slate-400 mb-10">
@@ -133,6 +134,8 @@ export default function AgentServicePage() {
                     </Link>
                 </div>
             </section>
+            {/* 5. LIVE DEMO WIDGET */}
+            <CommercialAgentWidget />
         </main>
     );
 }

@@ -12,13 +12,13 @@ import {
     Star,
     Clock,
     Check,
-    Share2,
-    Heart,
     ChevronLeft,
     ChevronRight,
 } from 'lucide-react';
 import ReviewCard from '@/components/ReviewCard';
 import { Service } from '@/types';
+import AISDRVisual from '@/components/marketing/AISDRVisual';
+import CommercialAgentWidget from '@/components/ai/CommercialAgentWidget';
 
 // Define Review type locally if not in shared types, or ideally move to types/index.ts
 export interface Review {
@@ -126,14 +126,14 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
 
     if (!property) {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold text-[#1d1d1f] mb-2">
+                    <h2 className="text-2xl font-bold text-white mb-2">
                         Propiedad no encontrada
                     </h2>
                     <button
                         onClick={() => router.push('/soluciones')}
-                        className="px-6 py-3 bg-[#10B981] text-white rounded-xl font-semibold hover:bg-[#059669] transition-colors hero-text-white"
+                        className="px-6 py-3 bg-[#10B981] text-slate-950 rounded-xl font-semibold hover:bg-[#059669] transition-colors hero-text-white"
                     >
                         Volver al catálogo
                     </button>
@@ -148,7 +148,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
     return (
         <div className="min-h-screen bg-slate-950 pb-20 pt-20">
             {/* Back Button */}
-            <div className="bg-slate-900/50 backdrop-blur-md border-b border-slate-800 sticky top-20 z-40">
+            <div className="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 sticky top-20 z-40">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                     <button
                         onClick={() => router.back()}
@@ -160,18 +160,24 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                 </div>
             </div>
 
-            {/* Image Gallery */}
+            {/* Visual Header (Image or Animation) */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-                    <Image
-                        src="/images/services/n8n-workflow-hq.png"
-                        alt={property.title}
-                        fill
-                        className="object-cover"
-                        priority
-                        unoptimized
-                        quality={100}
-                    />
+                <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900">
+                    {property.title.includes('AI SDR') ? (
+                        <div className="w-full h-full">
+                            <AISDRVisual />
+                        </div>
+                    ) : (
+                        <Image
+                            src={property.image_urls?.[currentImageIndex] || "/images/services/n8n-workflow-hq.png"}
+                            alt={property.title}
+                            fill
+                            className="object-cover"
+                            priority
+                            unoptimized
+                            quality={100}
+                        />
+                    )}
                 </div>
             </div>
 
@@ -208,17 +214,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                 </div>
 
                                 {/* Rating */}
-                                {reviews.length > 0 && (
-                                    <div className="flex items-center gap-2 bg-[#10B981]/10 px-4 py-2 rounded-xl">
-                                        <Star className="w-5 h-5 fill-[#10B981] text-[#10B981]" />
-                                        <span className="text-lg font-bold text-white">
-                                            {averageRating}
-                                        </span>
-                                        <span className="text-sm text-[#86868b]">
-                                            ({reviews.length} reseñas)
-                                        </span>
-                                    </div>
-                                )}
+                                {/* Rating Removed */}
                             </div>
 
                             <p className="text-[17px] text-slate-300 leading-relaxed">
@@ -251,66 +247,16 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             </motion.div>
                         )}
 
-                        {/* Reviews Section */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="bg-slate-900 rounded-2xl p-8 border border-slate-800"
-                        >
-                            <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-2xl font-semibold text-white">
-                                    Reseñas
-                                    {reviews.length > 0 && (
-                                        <span className="text-[#86868b] font-normal ml-2">
-                                            ({reviews.length})
-                                        </span>
-                                    )}
-                                </h2>
-
-                                {reviews.length > 0 && (
-                                    <div className="flex items-center gap-2">
-                                        <Star className="w-6 h-6 fill-[#10B981] text-[#10B981]" />
-                                        <span className="text-2xl font-bold text-white">
-                                            {averageRating}
-                                        </span>
-                                    </div>
-                                )}
-                            </div>
-
-                            {loadingReviews ? (
-                                <div className="text-center py-12 text-gray-500">Cargando reseñas...</div>
-                            ) : reviews.length === 0 ? (
-                                <div className="text-center py-12">
-                                    <Star className="w-16 h-16 text-[#86868b] mx-auto mb-4 opacity-30" />
-                                    <p className="text-[#86868b]">
-                                        Aún no hay reseñas para esta propiedad
-                                    </p>
-                                    <p className="text-sm text-[#86868b] mt-2">
-                                        Sé el primero en dejar una reseña después de tu estancia
-                                    </p>
-                                </div>
-                            ) : (
-                                <>
-                                    <div className="space-y-6">
-                                        {displayedReviews.map((review) => (
-                                            <ReviewCard key={review.id} review={review} />
-                                        ))}
-                                    </div>
-
-                                    {reviews.length > 3 && (
-                                        <button
-                                            onClick={() => setShowAllReviews(!showAllReviews)}
-                                            className="mt-6 w-full px-6 py-3 border border-[#10B981] text-[#10B981] rounded-xl font-semibold hover:bg-[#10B981]/5 transition-colors"
-                                        >
-                                            {showAllReviews
-                                                ? 'Ver menos reseñas'
-                                                : `Ver todas las reseñas (${reviews.length})`}
-                                        </button>
-                                    )}
-                                </>
-                            )}
-                        </motion.div>
+                        {/* Reviews Section Removed - B2B Model */}
+                        <div className="bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                            <h2 className="text-2xl font-semibold text-white mb-4">
+                                ¿Por qué Script9?
+                            </h2>
+                            <p className="text-slate-300">
+                                No competimos por precio, sino por ingeniería.
+                                Cada solución incluye código propiedad del cliente, sin fees ocultos de licencias.
+                            </p>
+                        </div>
                     </div>
 
                     {/* Booking Card */}
@@ -334,15 +280,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                         </span>
                                     </div>
                                 )}
-                                {reviews.length > 0 && (
-                                    <div className="flex items-center gap-2 text-sm mt-2">
-                                        <Star className="w-4 h-4 fill-[#10B981] text-[#10B981]" />
-                                        <span className="font-semibold">{averageRating}</span>
-                                        <span className="text-[#86868b]">
-                                            ({reviews.length} reseñas)
-                                        </span>
-                                    </div>
-                                )}
+                                {/* Rating Removed */}
                             </div>
 
                             <div className="space-y-4 mb-6">
@@ -376,6 +314,8 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                     </div>
                 </div>
             </div>
+            {/* 5. LIVE DEMO WIDGET (Conditional for AI SDR) */}
+            {property.title.includes('AI SDR') && <CommercialAgentWidget />}
         </div>
     );
 }

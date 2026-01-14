@@ -61,7 +61,7 @@ export default function CustomScriptsPage() {
       </section>
 
       {/* 2. SCHEMATIC EXPLANATION */}
-      <section className="py-24 bg-slate-900/30 border-y border-slate-800/50">
+      <section className="py-24 bg-slate-950 border-y border-slate-800/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-4">Arquitectura de Software</h2>
@@ -118,7 +118,7 @@ export default function CustomScriptsPage() {
 
 
       {/* 4. CTA FINAL */}
-      <section className="py-24 px-6 bg-slate-900 border-t border-slate-800">
+      <section className="py-24 px-6 bg-slate-950 border-t border-slate-800">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">¿Tienes una idea en mente?</h2>
           <p className="text-xl text-slate-400 mb-10">

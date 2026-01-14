@@ -25,22 +25,22 @@ export default function AutomationComparison() {
     return (
         <div className="flex flex-col md:flex-row w-full h-[400px] rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
             {/* LADO IZQUIERDO: MANUAL */}
-            <div className="flex-1 bg-slate-100 p-8 relative flex flex-col items-center justify-center border-r border-slate-300">
-                <div className="absolute top-4 left-4 bg-slate-300 px-3 py-1 rounded-full text-xs font-bold text-slate-600 uppercase tracking-widest">
+            <div className="flex-1 bg-slate-900 p-8 relative flex flex-col items-center justify-center border-r border-slate-800">
+                <div className="absolute top-4 left-4 bg-slate-800 px-3 py-1 rounded-full text-xs font-bold text-slate-400 uppercase tracking-widest">
                     Modo Manual (Lento)
                 </div>
 
                 {/* Spreadsheet Mockup */}
-                <div className="w-64 bg-white rounded-lg shadow-sm border border-slate-300 p-4 space-y-3">
+                <div className="w-64 bg-slate-950 rounded-lg shadow-sm border border-slate-800 p-4 space-y-3">
                     <div className="flex items-center gap-2 border-b pb-2 mb-2">
                         <FileSpreadsheet className="w-5 h-5 text-green-700" />
-                        <div className="w-20 h-2 bg-slate-200 rounded"></div>
+                        <div className="w-20 h-2 bg-slate-800 rounded"></div>
                     </div>
                     {/* Filas */}
                     {[1, 2, 3].map((i) => (
                         <div key={i} className="flex gap-2">
-                            <div className="w-8 h-4 bg-slate-100 rounded"></div>
-                            <div className="flex-1 h-4 bg-slate-100 rounded"></div>
+                            <div className="w-8 h-4 bg-slate-800 rounded"></div>
+                            <div className="flex-1 h-4 bg-slate-800 rounded"></div>
                             {i === 2 && (
                                 <motion.div
                                     initial={{ opacity: 0 }}

@@ -269,7 +269,7 @@ export default function PerfilUsuario() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-slate-900/50 rounded-2xl p-8 border border-slate-800 mb-6 backdrop-blur-sm"
+                    className="bg-slate-950/50 rounded-2xl p-8 border border-slate-800 mb-6 backdrop-blur-sm"
                 >
                     <h2 className="text-xl font-semibold text-white mb-6">
                         Foto de Perfil
@@ -326,7 +326,7 @@ export default function PerfilUsuario() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-slate-900/50 rounded-2xl p-8 border border-slate-800 mb-6 backdrop-blur-sm"
+                    className="bg-slate-950/50 rounded-2xl p-8 border border-slate-800 mb-6 backdrop-blur-sm"
                 >
                     <h2 className="text-xl font-semibold text-white mb-6">
                         Información Personal
@@ -405,7 +405,7 @@ export default function PerfilUsuario() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 }}
-                    className="bg-slate-900/50 rounded-2xl p-8 border border-slate-800 backdrop-blur-sm"
+                    className="bg-slate-950/50 rounded-2xl p-8 border border-slate-800 backdrop-blur-sm"
                 >
                     <h2 className="text-xl font-semibold text-white mb-6">
                         Cambiar Contraseña

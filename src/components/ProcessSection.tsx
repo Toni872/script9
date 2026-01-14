@@ -10,8 +10,8 @@ const levels = [
         description: "Analizamos tus procesos actuales para identificar cuellos de botella y oportunidades ocultas de automatización.",
         icon: FileSearch,
         color: "bg-blue-500",
-        lightColor: "bg-blue-100",
-        textColor: "text-blue-600",
+        lightColor: "bg-blue-900/20",
+        textColor: "text-blue-400",
         delay: 0.2
     },
     {
@@ -20,8 +20,8 @@ const levels = [
         description: "Diseñamos un plan de acción detallado y un presupuesto personalizado basado en el ROI proyectado.",
         icon: Brain,
         color: "bg-purple-500",
-        lightColor: "bg-purple-100",
-        textColor: "text-purple-600",
+        lightColor: "bg-purple-900/20",
+        textColor: "text-purple-400",
         delay: 0.4
     },
     {
@@ -30,15 +30,15 @@ const levels = [
         description: "Desarrollamos, probamos y desplegamos tus soluciones de IA mientras tú te enfocas en vender.",
         icon: Rocket,
         color: "bg-emerald-500",
-        lightColor: "bg-emerald-100",
-        textColor: "text-emerald-600",
+        lightColor: "bg-emerald-900/20",
+        textColor: "text-emerald-400",
         delay: 0.6
     }
 ];
 
 export function ProcessSection() {
     return (
-        <section className="py-24 bg-white overflow-hidden">
+        <section className="py-24 bg-slate-950 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* HEADER */}
@@ -49,10 +49,10 @@ export function ProcessSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
                             Tu Camino hacia la <span className="text-[#003D82]">Escalabilidad</span>
                         </h2>
-                        <p className="text-xl text-gray-600 leading-relaxed">
+                        <p className="text-xl text-slate-400 leading-relaxed">
                             No vendemos "paquetes". Construimos soluciones. <br className="hidden md:block" />
                             Nuestro proceso de 3 niveles garantiza resultados antes de escribir una línea de código.
                         </p>
@@ -75,7 +75,7 @@ export function ProcessSection() {
                             className="relative flex flex-col items-center text-center group"
                         >
                             {/* Icon Circle */}
-                            <div className={`w-24 h-24 rounded-2xl ${item.lightColor} flex items-center justify-center mb-8 relative z-10 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-gray-100`}>
+                            <div className={`w-24 h-24 rounded-2xl ${item.lightColor} flex items-center justify-center mb-8 relative z-10 group-hover:scale-110 transition-transform duration-300 shadow-xl shadow-slate-900/50 border border-slate-800`}>
                                 <item.icon className={`w-10 h-10 ${item.textColor}`} />
                                 <div className={`absolute -top-3 -right-3 px-3 py-1 rounded-full text-xs font-bold text-white ${item.color}`}>
                                     {item.level}
@@ -83,8 +83,8 @@ export function ProcessSection() {
                             </div>
 
                             {/* Content */}
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">{item.title}</h3>
-                            <p className="text-gray-600 leading-relaxed max-w-xs mx-auto">
+                            <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+                            <p className="text-slate-400 leading-relaxed max-w-xs mx-auto">
                                 {item.description}
                             </p>
 

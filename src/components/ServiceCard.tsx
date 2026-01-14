@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Star, Zap, Bot, Code, Settings, Globe, MessageSquare, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
 import { Service } from '@/types';
+import AISDRVisualCard from '@/components/marketing/AISDRVisualCard';
 
 interface ServiceCardProps {
     service: Service;
@@ -48,13 +49,17 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
             <article className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 h-full flex flex-col">
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden bg-slate-800">
-                    <Image
-                        src={mainImage}
-                        alt={service.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                        onError={() => setImageError(true)}
-                    />
+                    {service.title.includes('AI SDR') ? (
+                        <AISDRVisualCard />
+                    ) : (
+                        <Image
+                            src={mainImage}
+                            alt={service.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                            onError={() => setImageError(true)}
+                        />
+                    )}
                     <div className="absolute top-3 left-3">
                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-950/60 backdrop-blur-md text-xs font-semibold text-white border border-white/10 shadow-sm">
                             <ServiceIcon className="w-3 h-3 text-emerald-400" />

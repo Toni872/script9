@@ -96,11 +96,11 @@ export class CatalogService {
      */
     static async getServiceById(id: string): Promise<Service> {
         // TEMPORARY: Force mock data as requested
-        const { getMockServiceById } = require('@/lib/mockData');
-        const mockService = getMockServiceById(id);
-        if (mockService) {
-            return mockService;
-        }
+        // const { getMockServiceById } = require('@/lib/mockData');
+        // const mockService = getMockServiceById(id);
+        // if (mockService) {
+        //     return mockService;
+        // }
 
         const { data: record, error } = await supabase
             .from('properties')
@@ -131,12 +131,12 @@ export class CatalogService {
      */
     static async searchServices(filters: ServiceSearchFilters): Promise<PaginatedResponse<Service>> {
         // TEMPORARY: Force mock data as requested by user ("only one test service")
-        // const { page, limit, offset } = calculatePagination({
-        //     page: filters.page,
-        //     limit: filters.limit
-        // });
+        const { page, limit, offset } = calculatePagination({
+            page: filters.page,
+            limit: filters.limit
+        });
 
-        /* 
+
         let query = supabase
             .from('properties')
             .select(`
@@ -160,9 +160,9 @@ export class CatalogService {
 
         const services = (records || []).map(r => this.mapToService(r));
 
-        return createPaginatedResponse(services, count || 0, page, limit); 
-        */
+        return createPaginatedResponse(services, count || 0, page, limit);
 
+        /*
         // Import dynamically to avoid circular ref issues if any, or just use mockData directly
         const { searchMockServices } = require('@/lib/mockData');
         const mockResult = searchMockServices(filters);
@@ -173,6 +173,7 @@ export class CatalogService {
             mockResult.pagination.page,
             mockResult.pagination.limit
         );
+        */
     }
 
     /**

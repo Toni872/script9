@@ -56,14 +56,10 @@ export default function HostPropertiesPage() {
     const fetchProperties = async () => {
         try {
             setLoading(true);
-            console.log('📡 Fetching my properties...');
             const response = await fetch('/api/properties/my-properties');
-
-            console.log('📊 Response status:', response.status);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('✅ Properties loaded:', data.properties?.length || 0);
                 setProperties(data.properties || []);
             } else {
                 const errorData = await response.json();
@@ -108,7 +104,7 @@ export default function HostPropertiesPage() {
 
     if (status === 'loading' || loading) {
         return (
-            <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center">
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -127,7 +123,7 @@ export default function HostPropertiesPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#f5f5f7] py-12">
+        <div className="min-h-screen bg-slate-950 py-12">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Header animado */}
                 <motion.div
@@ -147,10 +143,10 @@ export default function HostPropertiesPage() {
                                 <Sparkles className="h-4 w-4 text-[#8B5CF6]" />
                                 <span className="text-sm font-semibold text-[#8B5CF6]">Panel de Anfitrión</span>
                             </motion.div>
-                            <h1 className="text-[48px] font-semibold text-[#1d1d1f] mb-2 tracking-tight">
+                            <h1 className="text-[48px] font-semibold text-white mb-2 tracking-tight">
                                 Mis Propiedades
                             </h1>
-                            <p className="text-[19px] text-[#86868b]">
+                            <p className="text-[19px] text-slate-400">
                                 Gestiona tus espacios y reservas
                             </p>
                         </div>
@@ -164,7 +160,7 @@ export default function HostPropertiesPage() {
                                     type="button"
                                     className="group relative px-8 py-3.5 bg-[#8B5CF6]/80 !text-white border border-[#8B5CF6] hover:bg-[#8B5CF6] rounded-full transition-all duration-300 hover:shadow-[0_4px_20px_rgba(139,92,246,0.5)] active:scale-[0.98] font-semibold text-[15px]"
                                 >
-                                    <span className="relative z-10 flex items-center gap-2 !text-white">
+                                    <span className="relative z-10 flex items-center gap-2 text-white">
                                         <Plus className="w-5 h-5" />
                                         Nueva Propiedad
                                     </span>
@@ -194,14 +190,14 @@ export default function HostPropertiesPage() {
                                             e.currentTarget.blur();
                                         }
                                     }}
-                                    className="pl-12 pr-4 h-12 border-0 bg-white text-[15px] text-[#1d1d1f] placeholder:text-[#86868b] rounded-xl shadow-sm focus:shadow-md transition-all"
+                                    className="pl-12 pr-4 h-12 border-slate-800 bg-slate-900 text-[15px] text-white placeholder:text-slate-500 rounded-xl shadow-sm focus:shadow-md transition-all focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
                                 />
                             </div>
                             {searchQuery && (
                                 <button
                                     type="button"
                                     onClick={() => setSearchQuery('')}
-                                    className="px-4 h-12 bg-white text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white rounded-xl transition-all duration-300 font-medium text-[14px] border border-[#8B5CF6] shadow-sm"
+                                    className="px-4 h-12 bg-slate-900 text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white rounded-xl transition-all duration-300 font-medium text-[14px] border border-slate-700 shadow-sm"
                                     aria-label="Limpiar búsqueda"
                                 >
                                     Limpiar
@@ -210,7 +206,7 @@ export default function HostPropertiesPage() {
                         </div>
                         {searchQuery && (
                             <p className="text-[13px] text-[#86868b] mt-2">
-                                Mostrando {filteredProperties.length} de {properties.length} propiedades
+                                Show {filteredProperties.length} of {properties.length} properties
                             </p>
                         )}
                     </motion.div>
@@ -222,9 +218,9 @@ export default function HostPropertiesPage() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="mb-6 bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-2xl flex items-center gap-3"
+                        className="mb-6 bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 px-6 py-4 rounded-2xl flex items-center gap-3"
                     >
-                        <Sparkles className="h-5 w-5 text-green-600" />
+                        <Sparkles className="h-5 w-5 text-emerald-500" />
                         <span className="font-medium">Propiedad guardada exitosamente</span>
                     </motion.div>
                 )}
@@ -236,7 +232,7 @@ export default function HostPropertiesPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <Card className="border-dashed border-2 border-gray-300 bg-white rounded-2xl">
+                        <Card className="border-dashed border-2 border-slate-800 bg-slate-900 rounded-2xl">
                             <CardContent className="py-20 text-center">
                                 <motion.div
                                     initial={{ scale: 0 }}
@@ -246,10 +242,10 @@ export default function HostPropertiesPage() {
                                 >
                                     <Plus className="w-12 h-12 text-[#8B5CF6]" />
                                 </motion.div>
-                                <h3 className="text-[28px] font-semibold text-[#1d1d1f] mb-3">
+                                <h3 className="text-[28px] font-semibold text-white mb-3">
                                     No tienes propiedades aún
                                 </h3>
-                                <p className="text-[17px] text-[#86868b] mb-8">
+                                <p className="text-[17px] text-slate-400 mb-8">
                                     Publica tu primer espacio y empieza a recibir reservas
                                 </p>
                                 <Link href="/host/properties/new">
@@ -257,7 +253,7 @@ export default function HostPropertiesPage() {
                                         type="button"
                                         className="group relative px-8 py-3.5 bg-[#8B5CF6]/80 !text-white border border-[#8B5CF6] hover:bg-[#8B5CF6] rounded-full transition-all duration-300 hover:shadow-[0_4px_20px_rgba(139,92,246,0.5)] active:scale-[0.98] font-semibold text-[15px]"
                                     >
-                                        <span className="relative z-10 flex items-center gap-2 !text-white">
+                                        <span className="relative z-10 flex items-center gap-2 text-white">
                                             <Plus className="w-5 h-5" />
                                             Crear Primera Propiedad
                                         </span>
@@ -271,19 +267,19 @@ export default function HostPropertiesPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="text-center py-16 bg-white rounded-2xl border border-gray-200/50"
+                        className="text-center py-16 bg-slate-900 rounded-2xl border border-slate-800"
                     >
                         <Search className="h-16 w-16 text-[#86868b] mx-auto mb-4" />
-                        <h3 className="text-[24px] font-semibold text-[#1d1d1f] mb-2">
-                            No se encontraron resultados
+                        <h3 className="text-[24px] font-semibold text-white mb-2">
+                            No result found
                         </h3>
-                        <p className="text-[17px] text-[#86868b] mb-6">
+                        <p className="text-[17px] text-slate-400 mb-6">
                             Intenta con otro término de búsqueda
                         </p>
                         <button
                             type="button"
                             onClick={() => setSearchQuery('')}
-                            className="px-6 py-2.5 bg-[#8B5CF6] !text-white rounded-lg hover:bg-[#7C3AED] transition-all duration-300 font-medium"
+                            className="px-6 py-2.5 bg-[#8B5CF6] text-white rounded-lg hover:bg-[#7C3AED] transition-all duration-300 font-medium"
                         >
                             Limpiar búsqueda
                         </button>
@@ -298,9 +294,9 @@ export default function HostPropertiesPage() {
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 whileHover={{ y: -8 }}
                             >
-                                <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-2xl border border-gray-200/50 bg-white">
+                                <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-2xl border border-slate-800 bg-slate-900">
                                     {/* Image con hover effect */}
-                                    <div className="relative h-56 bg-[#f5f5f7] overflow-hidden">
+                                    <div className="relative h-56 bg-slate-800 overflow-hidden">
                                         {property.image_urls && property.image_urls.length > 0 ? (
                                             <Image
                                                 src={property.image_urls[0]}
@@ -324,18 +320,18 @@ export default function HostPropertiesPage() {
                                                         : 'bg-emerald-500 hover:bg-emerald-600'
                                                     } !text-white font-medium px-3 py-1 rounded-lg shadow-md`}
                                             >
-                                                {property.status === 'active' ? 'Activa' : property.status === 'draft' ? 'Borrador' : 'Inactiva'}
+                                                {property.status === 'active' ? 'Active' : property.status === 'draft' ? 'Draft' : 'Inactive'}
                                             </Badge>
                                         </div>
                                     </div>
 
                                     {/* Content */}
                                     <CardContent className="p-6">
-                                        <h3 className="text-[19px] font-semibold text-[#1d1d1f] mb-4 line-clamp-2 group-hover:text-[#8B5CF6] transition-colors duration-300">
+                                        <h3 className="text-[19px] font-semibold text-white mb-4 line-clamp-2 group-hover:text-[#8B5CF6] transition-colors duration-300">
                                             {property.title}
                                         </h3>
 
-                                        <div className="space-y-3 text-[14px] text-[#86868b] mb-6">
+                                        <div className="space-y-3 text-[14px] text-slate-400 mb-6">
                                             <div className="flex items-center gap-2">
                                                 <MapPin className="w-4 h-4 text-[#8B5CF6]" />
                                                 <span>{property.city}, {property.region}</span>
@@ -346,7 +342,7 @@ export default function HostPropertiesPage() {
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <DollarSign className="w-4 h-4 text-[#8B5CF6]" />
-                                                <span className="font-semibold text-[#1d1d1f]">€{property.price_per_hour}/hora</span>
+                                                <span className="font-semibold text-white">€{property.price_per_hour}/hora</span>
                                             </div>
                                         </div>
 
@@ -355,7 +351,7 @@ export default function HostPropertiesPage() {
                                             <Link href={`/soluciones/${property.id}`} className="flex-1">
                                                 <button
                                                     type="button"
-                                                    className="w-full px-4 py-2.5 bg-white border-2 border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white rounded-lg transition-all duration-300 font-medium text-[14px] flex items-center justify-center gap-2"
+                                                    className="w-full px-4 py-2.5 bg-slate-900 border-2 border-slate-700 text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white rounded-lg transition-all duration-300 font-medium text-[14px] flex items-center justify-center gap-2"
                                                 >
                                                     <Eye className="w-4 h-4" />
                                                     Ver
@@ -373,7 +369,7 @@ export default function HostPropertiesPage() {
                                             <button
                                                 type="button"
                                                 onClick={() => handleDelete(property.id)}
-                                                className="px-3 py-2.5 bg-white border-2 border-emerald-200 text-emerald-600 hover:bg-emerald-50 hover:border-emerald-400 rounded-lg transition-all duration-300"
+                                                className="px-3 py-2.5 bg-slate-900 border-2 border-slate-700 text-rose-500 hover:bg-rose-500/10 hover:border-rose-500 rounded-lg transition-all duration-300"
                                                 aria-label="Eliminar propiedad"
                                             >
                                                 <Trash2 className="w-4 h-4" />

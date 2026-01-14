@@ -476,6 +476,101 @@ export class EmailService {
   }
 
   /**
+   * Email de soporte (Formulario de Contacto/Soporte)
+   */
+  static async sendSupportMessage(data: { name?: string; email: string; subject: string; message: string; type: 'contact' | 'support' }): Promise<boolean> {
+    const { name, email, subject, message, type } = data;
+    const adminEmail = 'contact@script-9.com'; // Destinatario final
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #0F172A; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background-color: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
+            .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+            .badge-support { background-color: #10B981; color: white; }
+            .badge-contact { background-color: #3B82F6; color: white; }
+            .message-box { background-color: white; padding: 15px; border-left: 4px solid #0F172A; margin-top: 20px; white-space: pre-wrap; }
+            .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.9em; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>Nuevo Mensaje de ${type === 'support' ? 'Soporte' : 'Contacto'}</h1>
+            </div>
+            <div class="content">
+              <p>Has recibido un nuevo mensaje a través de la web:</p>
+              
+              <p><strong>De:</strong> ${name ? `${name} (${email})` : email}</p>
+              <p><strong>Asunto:</strong> ${subject}</p>
+              
+              <div class="message-box">
+                ${message}
+              </div>
+
+              <p style="color: #666; font-size: 0.9em; margin-top: 20px;">
+                Responder a este email directamente contactará al usuario (${email}).
+              </p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    // 1. Enviar notificación al Admin
+    const adminSent = await this.sendEmail({
+      to: adminEmail,
+      subject: `[${type.toUpperCase()}] ${subject}`,
+      html,
+    });
+
+    // 2. Enviar confirmación al Usuario (Auto-reply)
+    const userHtml = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #10B981; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background-color: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
+            .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.9em; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>Mensaje Recibido</h1>
+            </div>
+            <div class="content">
+              <p>Hola,</p>
+              <p>Gracias por contactar con Script9. Hemos recibido tu mensaje correctamente.</p>
+              <p><strong>Asunto:</strong> ${subject}</p>
+              <p>Nuestro equipo revisará tu consulta y te responderá lo antes posible (generalmente en menos de 24 horas).</p>
+            </div>
+            <div class="footer">
+              <p>© ${new Date().getFullYear()} Script9</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    await this.sendEmail({
+      to: email,
+      subject: 'Hemos recibido tu mensaje - Script9',
+      html: userHtml
+    });
+
+    return adminSent;
+  }
+
+  /**
    * Email de error de pago
    */
   static async sendPaymentFailed(data: BookingEmailData, errorMessage?: string): Promise<void> {

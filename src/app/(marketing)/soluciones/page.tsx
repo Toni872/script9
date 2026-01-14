@@ -330,7 +330,7 @@ export default function Catalogo() {
                             </div>
 
                             {/* View Mode Toggle */}
-                            <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-800">
+                            <div className="flex items-center gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
                                 <button
                                     onClick={() => setViewMode('grid')}
                                     className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'}`}
@@ -353,7 +353,7 @@ export default function Catalogo() {
                                 <p className="text-slate-400 font-medium">Buscando las mejores soluciones...</p>
                             </div>
                         ) : error ? (
-                            <div className="text-center py-20 bg-slate-900 rounded-xl border border-emerald-500/20 p-8">
+                            <div className="text-center py-20 bg-slate-950 rounded-xl border border-emerald-500/20 p-8">
                                 <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <Zap className="h-8 w-8 text-emerald-500" />
                                 </div>

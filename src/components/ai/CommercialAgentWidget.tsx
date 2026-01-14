@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { Send, X, MessageSquare, Bot } from 'lucide-react';
@@ -7,6 +7,21 @@ interface Message {
     role: 'user' | 'assistant' | 'system';
     content: string;
 }
+
+// Basic parser for bold text (**text**) to avoid raw asterisks
+const StyledText = ({ text }: { text: string }) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return (
+        <span className="whitespace-pre-wrap">
+            {parts.map((part, i) => {
+                if (part.startsWith('**') && part.endsWith('**')) {
+                    return <strong key={i} className="font-bold text-white/90">{part.slice(2, -2)}</strong>;
+                }
+                return part;
+            })}
+        </span>
+    );
+};
 
 export default function CommercialAgentWidget() {
     const [isOpen, setIsOpen] = useState(false);
@@ -56,54 +71,61 @@ export default function CommercialAgentWidget() {
         }
     };
 
+    // Premium Script9 Theme Application
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
             {/* Chat Window */}
             {isOpen && (
-                <div className="mb-4 w-[350px] sm:w-[400px] h-[500px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+                <div className="mb-4 w-[350px] sm:w-[400px] h-[550px] bg-slate-950/90 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300 ring-1 ring-white/5">
 
                     {/* Header */}
-                    <div className="bg-black text-white p-4 flex justify-between items-center">
-                        <div className="flex items-center gap-2">
-                            <div className="p-1.5 bg-zinc-800 rounded-full">
-                                <Bot className="w-4 h-4 text-emerald-400" />
+                    <div className="bg-slate-900/50 p-4 flex justify-between items-center border-b border-white/5 backdrop-blur-md">
+                        <div className="flex items-center gap-3">
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-emerald-500 blur-sm opacity-40 rounded-full animate-pulse"></div>
+                                <div className="p-2 bg-slate-800 rounded-full relative z-10 border border-slate-700">
+                                    <Bot className="w-5 h-5 text-emerald-400" />
+                                </div>
                             </div>
                             <div>
-                                <h3 className="font-semibold text-sm">Script9 Assistant</h3>
-                                <span className="text-xs text-zinc-400 flex items-center gap-1">
-                                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                                    En línea
+                                <h3 className="font-bold text-base text-white tracking-wide">Script9 Agent</h3>
+                                <span className="text-xs text-emerald-400/80 flex items-center gap-1.5 font-mono">
+                                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                                    ONLINE • N8N CORE
                                 </span>
                             </div>
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="hover:bg-zinc-800 p-1 rounded-full transition-colors">
-                            <X className="w-4 h-4" />
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="text-slate-400 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all"
+                        >
+                            <X className="w-5 h-5" />
                         </button>
                     </div>
 
                     {/* Messages Area */}
-                    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50/50 dark:bg-zinc-900/50">
+                    <div className="flex-1 overflow-y-auto p-5 space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
                         {messages.map((msg, idx) => (
                             <div
                                 key={idx}
                                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                             >
                                 <div
-                                    className={`max-w-[85%] p-3 rounded-2xl text-sm ${msg.role === 'user'
-                                        ? 'bg-black text-white rounded-tr-none'
-                                        : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-tl-none shadow-sm'
+                                    className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-lg backdrop-blur-sm ${msg.role === 'user'
+                                        ? 'bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-tr-none border border-emerald-500/20'
+                                        : 'bg-slate-800/60 text-slate-200 border border-white/5 rounded-tl-none'
                                         }`}
                                 >
-                                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                                    <StyledText text={msg.content} />
                                 </div>
                             </div>
                         ))}
                         {isLoading && (
                             <div className="flex justify-start">
-                                <div className="bg-white dark:bg-zinc-800 p-3 rounded-2xl rounded-tl-none border border-zinc-200 dark:border-zinc-700 shadow-sm flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce"></div>
-                                    <div className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                                    <div className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                <div className="bg-slate-800/60 p-4 rounded-2xl rounded-tl-none border border-white/5 flex items-center gap-2 shadow-lg">
+                                    <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce"></div>
+                                    <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                    <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                 </div>
                             </div>
                         )}
@@ -111,26 +133,26 @@ export default function CommercialAgentWidget() {
                     </div>
 
                     {/* Input Area */}
-                    <form onSubmit={handleSubmit} className="p-4 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800">
-                        <div className="relative flex items-center">
+                    <form onSubmit={handleSubmit} className="p-4 bg-slate-900/80 border-t border-white/5 backdrop-blur-md">
+                        <div className="relative flex items-center group">
                             <input
                                 type="text"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
-                                placeholder="Pregunta sobre automatizaciones..."
-                                className="w-full bg-zinc-100 dark:bg-zinc-800 border-none rounded-full py-3 pl-4 pr-12 text-sm focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-all"
+                                placeholder="Escribe tu consulta..."
+                                className="w-full bg-slate-950/50 border border-slate-700/50 text-white rounded-xl py-4 pl-5 pr-14 text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 outline-none transition-all placeholder:text-slate-500 group-hover:border-slate-600"
                                 disabled={isLoading}
                             />
                             <button
                                 type="submit"
                                 disabled={isLoading || !inputValue.trim()}
-                                className="absolute right-2 p-2 bg-black dark:bg-white text-white dark:text-black rounded-full hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100 transition-all"
+                                className="absolute right-3 p-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] disabled:opacity-50 disabled:shadow-none transition-all transform active:scale-95"
                             >
                                 <Send className="w-4 h-4" />
                             </button>
                         </div>
-                        <div className="text-[10px] text-center mt-2 text-zinc-400">
-                            Tecnología Script9 AI Core
+                        <div className="text-[10px] text-center mt-3 text-slate-500 font-mono">
+                            Powered by Script9 AI • v2.0
                         </div>
                     </form>
                 </div>
@@ -140,13 +162,16 @@ export default function CommercialAgentWidget() {
             {!isOpen && (
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="group relative flex items-center justify-center p-4 bg-black text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 z-50"
+                    className="group relative flex items-center justify-center p-5 bg-slate-900 border border-slate-700 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 z-50 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.2)]"
                 >
-                    <div className="absolute inset-0 bg-emerald-500 rounded-full opacity-20 group-hover:animate-ping"></div>
-                    <MessageSquare className="w-6 h-6" />
-                    {messages.length === 1 && (
-                        <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] flex items-center justify-center rounded-full border-2 border-white">1</span>
-                    )}
+                    <div className="absolute inset-0 bg-emerald-500 rounded-full opacity-10 group-hover:animate-ping duration-[2000ms]"></div>
+                    <div className="absolute -top-1 -right-1">
+                        <span className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                        </span>
+                    </div>
+                    <MessageSquare className="w-6 h-6 text-emerald-400" />
                 </button>
             )}
         </div>

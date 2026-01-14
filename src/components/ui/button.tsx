@@ -16,7 +16,7 @@ const buttonVariants = cva(
         outline:
           "border-2 border-emerald-500 bg-transparent text-emerald-500 hover:bg-emerald-500 hover:text-white transition-colors active:scale-95",
         secondary:
-          "bg-white text-slate-900 border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-slate-300",
+          "bg-slate-800 text-slate-200 border border-slate-700 shadow-sm hover:bg-slate-700 hover:border-slate-600",
         ghost:
           "text-slate-900 hover:bg-slate-100",
         link:

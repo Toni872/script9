@@ -35,8 +35,23 @@ export default function Contacto() {
         setError('');
 
         try {
-            // Simulación de envío
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const response = await fetch('/api/support/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.nombre,
+                    email: formData.email,
+                    subject: formData.asunto || `Contacto de ${formData.empresa || 'Web'}`,
+                    message: formData.mensaje,
+                    type: 'contact',
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to send message');
+            }
 
             setSuccess(true);
             setFormData({
@@ -68,7 +83,7 @@ export default function Contacto() {
             {/* Hero Section */}
             <DeepTechHero
                 badge={
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-md rounded-full border border-emerald-500/20">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-950/50 backdrop-blur-md rounded-full border border-emerald-500/20">
                         <Sparkles className="h-4 w-4 text-emerald-400" />
                         <span className="text-sm font-semibold text-emerald-100">Soporte Premium 24/7</span>
                     </div>
@@ -86,7 +101,7 @@ export default function Contacto() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="space-y-6"
                     >
-                        <div className="bg-slate-900 rounded-2xl p-8 shadow-xl border border-slate-800">
+                        <div className="bg-slate-950 rounded-2xl p-8 shadow-xl border border-slate-800">
                             <h2 className="text-2xl font-bold text-white mb-6">
                                 Canales Directos
                             </h2>
@@ -160,11 +175,23 @@ export default function Contacto() {
                                 <p className="text-white/90 mb-6 font-medium">
                                     Ofrecemos consultoría estratégica y desarrollo a medida para grandes corporaciones.
                                 </p>
-                                <a
-                                    className="inline-block px-6 py-3 bg-white text-emerald-700 font-bold rounded-xl hover:bg-emerald-50 transition-colors shadow-sm"
+                                <button
+                                    onClick={() => {
+                                        setActiveTab('message');
+                                        setFormData(prev => ({
+                                            ...prev,
+                                            asunto: 'consultoria',
+                                            empresa: 'Corporación '
+                                        }));
+                                        // Small delay to allow tab switch if needed, then scroll
+                                        setTimeout(() => {
+                                            document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
+                                        }, 100);
+                                    }}
+                                    className="inline-block px-6 py-3 bg-white text-emerald-700 font-bold rounded-xl hover:bg-emerald-50 transition-colors shadow-sm cursor-pointer"
                                 >
                                     Consultar Servicios
-                                </a>
+                                </button>
                             </div>
                             <div className="absolute right-0 bottom-0 opacity-10 transform translate-x-1/4 translate-y-1/4">
                                 <Building2 className="w-40 h-40" />
@@ -206,7 +233,7 @@ export default function Contacto() {
                                 <BookingCalendar />
                             </div>
                         ) : (
-                            <div className="bg-slate-900 rounded-2xl p-8 shadow-xl border border-slate-800">
+                            <div className="bg-slate-950 rounded-2xl p-8 shadow-xl border border-slate-800">
                                 <h2 className="text-2xl font-bold text-white mb-6">
                                     Inicia tu Transformación
                                 </h2>
@@ -235,7 +262,7 @@ export default function Contacto() {
                                     </motion.div>
                                 )}
 
-                                <form onSubmit={handleSubmit} className="space-y-6">
+                                <form id="contact-form-section" onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="block text-white font-semibold mb-2" htmlFor="nombre">

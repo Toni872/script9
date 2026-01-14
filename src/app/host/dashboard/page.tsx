@@ -45,7 +45,6 @@ export default function CreatorDashboard() {
             const { data: { user } } = await supabase.auth.getUser();
 
             if (!user) {
-                console.log('No user logged in');
                 return;
             }
 
@@ -107,9 +106,9 @@ export default function CreatorDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-[#F5F5F5]">
+        <div className="min-h-screen bg-slate-950 text-slate-200">
             {/* Header */}
-            <div className="bg-[#003D82] text-white py-12">
+            <div className="bg-slate-900 border-b border-slate-800 text-white py-12">
                 <div className="container-script9">
                     <div className="flex items-center justify-between">
                         <div>
@@ -134,14 +133,14 @@ export default function CreatorDashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                     {/* Sidebar */}
                     <aside className="lg:col-span-1">
-                        <Card className="border-gray-200 shadow-sm sticky top-20 bg-white">
+                        <Card className="border-slate-800 shadow-sm sticky top-20 bg-slate-900 text-slate-200">
                             <CardContent className="p-4">
                                 <nav className="space-y-2">
                                     <button
                                         onClick={() => setActiveTab('resumen')}
                                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium ${activeTab === 'resumen'
-                                            ? 'bg-[#003D82] text-white shadow-md'
-                                            : 'text-gray-600 hover:bg-gray-50'
+                                            ? 'bg-emerald-600 text-white shadow-md'
+                                            : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                                             }`}
                                     >
                                         <BarChart3 className="h-5 w-5" />
@@ -189,13 +188,13 @@ export default function CreatorDashboard() {
                         {/* Resumen Tab */}
                         {activeTab === 'resumen' && (
                             <div className="space-y-6">
-                                <h2 className="text-2xl font-bold text-[#333333]">
+                                <h2 className="text-2xl font-bold text-white">
                                     Resumen General
                                 </h2>
 
                                 {/* Stats Cards */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <Card className="border-gray-200 shadow-sm bg-white">
+                                    <Card className="border-slate-800 shadow-sm bg-slate-900 text-white">
                                         <CardContent className="p-6">
                                             <div className="flex items-center justify-between mb-4">
                                                 <div className="p-3 bg-[#003D82]/10 rounded-xl">
@@ -212,7 +211,7 @@ export default function CreatorDashboard() {
                                         </CardContent>
                                     </Card>
 
-                                    <Card className="border-gray-200 shadow-sm bg-white">
+                                    <Card className="border-slate-800 shadow-sm bg-slate-900 text-white">
                                         <CardContent className="p-6">
                                             <div className="flex items-center justify-between mb-4">
                                                 <div className="p-3 bg-[#003D82]/10 rounded-xl">
@@ -220,11 +219,11 @@ export default function CreatorDashboard() {
                                                 </div>
                                             </div>
                                             <p className="text-sm text-gray-500 mb-1">Ventas Totales</p>
-                                            <p className="text-3xl font-bold text-[#333333]">{totalSales}</p>
+                                            <p className="text-3xl font-bold text-white">{totalSales}</p>
                                         </CardContent>
                                     </Card>
 
-                                    <Card className="border-gray-200 shadow-sm bg-white">
+                                    <Card className="border-slate-800 shadow-sm bg-slate-900 text-white">
                                         <CardContent className="p-6">
                                             <div className="flex items-center justify-between mb-4">
                                                 <div className="p-3 bg-[#003D82]/10 rounded-xl">
@@ -232,7 +231,7 @@ export default function CreatorDashboard() {
                                                 </div>
                                             </div>
                                             <p className="text-sm text-gray-500 mb-1">Visualizaciones</p>
-                                            <p className="text-3xl font-bold text-[#333333]">{totalViews}</p>
+                                            <p className="text-3xl font-bold text-white">{totalViews}</p>
                                         </CardContent>
                                     </Card>
                                 </div>
@@ -240,7 +239,7 @@ export default function CreatorDashboard() {
                                 {/* Quick Actions */}
                                 <Card className="border-gray-200 shadow-sm bg-white">
                                     <CardHeader>
-                                        <CardTitle className="text-[#333333]">Acciones Rápidas</CardTitle>
+                                        <CardTitle className="text-white">Acciones Rápidas</CardTitle>
                                     </CardHeader>
                                     <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <Button className="bg-[#003D82] text-white hover:bg-[#002E5C] h-auto py-4 text-lg">
@@ -263,7 +262,7 @@ export default function CreatorDashboard() {
                         {activeTab === 'servicios' && (
                             <div className="space-y-6">
                                 <div className="flex items-center justify-between">
-                                    <h2 className="text-2xl font-bold text-[#333333]">
+                                    <h2 className="text-2xl font-bold text-white">
                                         Mis Servicios Activos
                                     </h2>
                                     <Link href="/anfitrion/propiedades/nueva">
@@ -284,7 +283,7 @@ export default function CreatorDashboard() {
                                                 <div className="flex items-start justify-between mb-4">
                                                     <div className="flex-1">
                                                         <div className="flex items-center gap-2 mb-2">
-                                                            <h3 className="text-xl font-bold text-[#333333]">
+                                                            <h3 className="text-xl font-bold text-white">
                                                                 {service.title}
                                                             </h3>
                                                             {getStatusBadge(service.status)}
@@ -295,7 +294,7 @@ export default function CreatorDashboard() {
                                                 <div className="grid grid-cols-3 gap-4 mb-4">
                                                     <div>
                                                         <p className="text-sm text-gray-500">Ventas</p>
-                                                        <p className="text-xl font-bold text-[#333333]">
+                                                        <p className="text-xl font-bold text-white">
                                                             {service.sales}
                                                         </p>
                                                     </div>
@@ -307,7 +306,7 @@ export default function CreatorDashboard() {
                                                     </div>
                                                     <div>
                                                         <p className="text-sm text-gray-500">Vistas</p>
-                                                        <p className="text-xl font-bold text-[#333333]">
+                                                        <p className="text-xl font-bold text-white">
                                                             {service.views}
                                                         </p>
                                                     </div>
@@ -352,13 +351,13 @@ export default function CreatorDashboard() {
                         {/* Ventas Tab */}
                         {activeTab === 'ventas' && (
                             <div className="space-y-6">
-                                <h2 className="text-2xl font-bold text-[#333333]">
+                                <h2 className="text-2xl font-bold text-white">
                                     Historial de Ventas
                                 </h2>
 
                                 <div className="space-y-4">
                                     {sales.length === 0 ? (
-                                        <Card className="border-gray-200 shadow-sm bg-white">
+                                        <Card className="border-slate-800 shadow-sm bg-slate-900 text-white">
                                             <CardContent className="p-12 text-center text-gray-500">
                                                 No hay ventas registradas aún.
                                             </CardContent>
@@ -371,7 +370,7 @@ export default function CreatorDashboard() {
                                             <CardContent className="p-6">
                                                 <div className="flex items-start justify-between">
                                                     <div>
-                                                        <h3 className="font-bold text-[#333333]">
+                                                        <h3 className="font-bold text-white">
                                                             {sale.serviceTitle}
                                                         </h3>
                                                         <p className="text-sm text-gray-500">

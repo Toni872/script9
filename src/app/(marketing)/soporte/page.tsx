@@ -13,6 +13,9 @@ import { DeepTechHero } from '@/components/ui/DeepTechHero';
 export default function SoportePage() {
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
+    const [email, setEmail] = useState('');
+    const [subject, setSubject] = useState('');
+    const [message, setMessage] = useState('');
     const router = useRouter();
 
 
@@ -20,10 +23,32 @@ export default function SoportePage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSending(true);
-        // Simulate sending
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setSending(false);
-        setSent(true);
+
+        try {
+            const response = await fetch('/api/support/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    subject,
+                    message,
+                    type: 'support'
+                }),
+            });
+
+            if (response.ok) {
+                setSent(true);
+            } else {
+                alert('Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('Error de conexión. Intenta más tarde.');
+        } finally {
+            setSending(false);
+        }
     };
 
     if (sent) {
@@ -111,14 +136,42 @@ export default function SoportePage() {
                             <CardDescription className="text-slate-400">Te responderemos por correo electrónico.</CardDescription>
                         </CardHeader>
                         <CardContent>
+
+
+                            // ... inside return ...
+
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="space-y-2">
+                                    <label className="text-sm font-medium text-slate-300">Email de contacto</label>
+                                    <Input
+                                        type="email"
+                                        placeholder="tu@email.com"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="bg-slate-950 border-slate-800 text-white placeholder:text-slate-600 focus:border-emerald-500/50 focus:ring-emerald-500/20"
+                                    />
+                                </div>
+                                <div className="space-y-2">
                                     <label className="text-sm font-medium text-slate-300">Asunto</label>
-                                    <Input placeholder="Ej: Problema con mi pedido..." required className="bg-slate-950 border-slate-800 text-white placeholder:text-slate-600 focus:border-emerald-500/50 focus:ring-emerald-500/20" />
+                                    <Input
+                                        placeholder="Ej: Problema con mi pedido..."
+                                        required
+                                        value={subject}
+                                        onChange={(e) => setSubject(e.target.value)}
+                                        className="bg-slate-950 border-slate-800 text-white placeholder:text-slate-600 focus:border-emerald-500/50 focus:ring-emerald-500/20"
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-slate-300">Mensaje</label>
-                                    <Textarea placeholder="Cuéntanos más detalles..." rows={5} required className="bg-slate-950 border-slate-800 text-white placeholder:text-slate-600 focus:border-emerald-500/50 focus:ring-emerald-500/20" />
+                                    <Textarea
+                                        placeholder="Cuéntanos más detalles..."
+                                        rows={5}
+                                        required
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        className="bg-slate-950 border-slate-800 text-white placeholder:text-slate-600 focus:border-emerald-500/50 focus:ring-emerald-500/20"
+                                    />
                                 </div>
                                 <Button type="submit" className="w-full bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20" disabled={sending}>
                                     {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Enviar Mensaje'}

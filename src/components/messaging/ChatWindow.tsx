@@ -141,7 +141,7 @@ export default function ChatWindow({ conversation, onBack }: ChatWindowProps) {
     return (
         <div className="flex flex-col h-full">
             {/* Header */}
-            <div className="flex items-center gap-3 p-4 border-b border-gray-200 bg-white">
+            <div className="flex items-center gap-3 p-4 border-b border-slate-800 bg-slate-900">
                 <button
                     onClick={onBack}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors lg:hidden"
@@ -155,10 +155,10 @@ export default function ChatWindow({ conversation, onBack }: ChatWindowProps) {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 truncate">
+                    <h3 className="font-semibold text-white truncate">
                         {otherUser?.name || 'Usuario'}
                     </h3>
-                    <p className="text-sm text-gray-500 truncate">
+                    <p className="text-sm text-slate-400 truncate">
                         {conversation.property?.title || 'Propiedad'}
                     </p>
                 </div>
@@ -200,7 +200,7 @@ export default function ChatWindow({ conversation, onBack }: ChatWindowProps) {
                     max-w-xs lg:max-w-md px-4 py-2 rounded-2xl
                     ${isMyMessage(message)
                                             ? 'bg-[#10B981] text-white'
-                                            : 'bg-gray-100 text-gray-900'
+                                            : 'bg-slate-800 text-slate-200'
                                         }
                   `}
                                 >
@@ -221,14 +221,14 @@ export default function ChatWindow({ conversation, onBack }: ChatWindowProps) {
             </div>
 
             {/* Input de mensaje */}
-            <div className="p-4 border-t border-gray-200 bg-white">
+            <div className="p-4 border-t border-slate-800 bg-slate-900">
                 <div className="flex gap-2">
                     <textarea
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyPress={handleKeyPress}
                         placeholder="Escribe un mensaje..."
-                        className="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
+                        className="flex-1 resize-none border border-slate-700 bg-slate-800 text-white rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#10B981] focus:border-transparent placeholder:text-slate-500"
                         rows={1}
                         disabled={sending}
                     />

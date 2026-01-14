@@ -57,7 +57,7 @@ export default function MapView({ services, onServiceSelect }: MapViewProps) {
 
     if (!isClient || !L) {
         return (
-            <div className="bg-white rounded-2xl p-12 flex items-center justify-center min-h-[600px]">
+            <div className="bg-slate-900 rounded-2xl p-12 flex items-center justify-center min-h-[600px] border border-slate-800">
                 <div className="text-center">
                     <Loader2 className="w-12 h-12 text-[#8B5CF6] mx-auto mb-4 animate-spin" />
                     <p className="text-gray-600">Cargando mapa...</p>
@@ -71,10 +71,10 @@ export default function MapView({ services, onServiceSelect }: MapViewProps) {
 
     if (validServices.length === 0) {
         return (
-            <div className="bg-white rounded-2xl p-12 text-center min-h-[600px] flex items-center justify-center">
+            <div className="bg-slate-900 rounded-2xl p-12 text-center min-h-[600px] flex items-center justify-center border border-slate-800">
                 <div>
-                    <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <MapPin className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-white mb-2">
                         No hay servicios con ubicación
                     </h3>
                     <p className="text-gray-600">
@@ -89,7 +89,7 @@ export default function MapView({ services, onServiceSelect }: MapViewProps) {
     const centerLng = validServices.reduce((sum, p) => sum + (p.longitude || 0), 0) / validServices.length;
 
     return (
-        <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+        <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800">
             <div className="h-[600px] w-full">
                 <MapContainer
                     center={[centerLat, centerLng]}
@@ -100,6 +100,7 @@ export default function MapView({ services, onServiceSelect }: MapViewProps) {
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        className="grayscale invert brightness-75 contrast-125 hue-rotate-180"
                     />
 
                     {validServices.map((service) => (

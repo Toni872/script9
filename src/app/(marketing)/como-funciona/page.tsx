@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Rocket, HelpCircle, ChevronDown, Zap, Code, Settings, Bot, CheckCircle2, Shield, Lock, FileKey } from 'lucide-react';
+import { ArrowRight, Sparkles, Rocket, HelpCircle, ChevronDown, CheckCircle2, Shield, Lock, FileKey } from 'lucide-react';
 import { useState } from 'react';
 import { DeepTechHero } from '@/components/ui/DeepTechHero';
+import ProcessVisual from '@/components/marketing/ProcessVisual';
 
 export default function ComoFunciona() {
   const router = useRouter();
@@ -38,32 +39,7 @@ export default function ComoFunciona() {
     },
   ];
 
-  const services = [
-    {
-      icon: Zap,
-      title: 'Automatizaciones',
-      description: 'Automatiza tareas repetitivas y libera tiempo para lo que importa',
-      features: ['Email automation', 'Data processing', 'Reporting automático'],
-    },
-    {
-      icon: Bot,
-      title: 'IA y Chatbots',
-      description: 'Integra inteligencia artificial en tus procesos de negocio',
-      features: ['Chatbots inteligentes', 'Procesamiento de lenguaje', 'Análisis predictivo'],
-    },
-    {
-      icon: Settings,
-      title: 'Workflows',
-      description: 'Diseña flujos de trabajo eficientes y escalables',
-      features: ['Flujos personalizados', 'Integraciones multi-app', 'Automatización de ventas'],
-    },
-    {
-      icon: Code,
-      title: 'Scripts a Medida',
-      description: 'Desarrollo de scripts personalizados para tus necesidades específicas',
-      features: ['Python & Node.js', 'APIs personalizadas', 'Web scraping'],
-    },
-  ];
+
 
   return (
     <div className="bg-slate-950 min-h-screen font-sans">
@@ -83,57 +59,10 @@ export default function ComoFunciona() {
         subtitle="Servicios de IA, workflows y scripts a medida para negocios digitales que quieren escalar."
       />
 
-      {/* Servicios - Grid */}
-      <section className="py-20 bg-slate-950 border-t border-slate-800">
-        <div className="max-w-[1200px] mx-auto px-5">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-full mb-4 border border-slate-800">
-              <Zap className="h-4 w-4 text-emerald-400" />
-              <span className="text-sm font-semibold text-emerald-400">Nuestros Servicios</span>
-            </div>
-            <h2 className="text-[40px] md:text-[48px] font-bold text-white leading-[1.1] tracking-tight">
-              Todo lo que necesitas para automatizar
-            </h2>
-          </motion.div>
 
-          {/* Grid de servicios */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-slate-900 p-8 rounded-2xl border border-slate-800 hover:border-emerald-500/30 hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-slate-800 text-emerald-400 flex items-center justify-center mb-5 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors duration-300">
-                  <service.icon className="h-7 w-7" />
-                </div>
-                <h3 className="text-[21px] font-bold text-white mb-3 leading-[1.2]">{service.title}</h3>
-                <p className="text-[15px] text-slate-400 leading-[1.4] mb-6">{service.description}</p>
-                <ul className="space-y-3">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="text-[14px] text-slate-500 flex items-center gap-2 font-medium">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Cómo Trabajamos - 4 pasos */}
-      <section className="py-20 bg-slate-900">
+      <section className="py-20 bg-slate-950">
         <div className="max-w-[1200px] mx-auto px-5">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -201,34 +130,15 @@ export default function ComoFunciona() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900"
+            className="w-full"
           >
-            {/* Browser Header Simulation */}
-            <div className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center gap-2">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-              </div>
-              <div className="ml-4 px-3 py-1 bg-slate-950 rounded-md text-xs text-slate-400 font-medium border border-slate-800 flex items-center gap-2">
-                <Lock className="w-3 h-3" />
-                n8n_workflow_sales_v2.json
-              </div>
-            </div>
-            <div className="relative aspect-[16/9] w-full bg-white">
-              <Image
-                src="/images/workflow-example.png"
-                alt="Workflow de automatización real"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <ProcessVisual />
           </motion.div>
         </div>
       </section>
 
       {/* Security & Guarantee Section */}
-      <section className="py-20 bg-slate-900 border-t border-slate-800">
+      <section className="py-20 bg-slate-950 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-5">
           <div className="grid md:grid-cols-3 gap-8">
             {/* Card 1 */}
@@ -323,7 +233,7 @@ export default function ComoFunciona() {
       </section>
 
       {/* CTA Final - Compacto */}
-      <section className="py-24 bg-slate-900 border-t border-slate-800">
+      <section className="py-24 bg-slate-950 border-t border-slate-800">
         <div className="max-w-[980px] mx-auto px-5 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

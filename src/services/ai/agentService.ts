@@ -7,61 +7,66 @@ interface Message {
     content: string;
 }
 
-// Mock Agent Service for Demo purposes (No OpenAI costs)
+const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK || 'http://46.224.199.64:5678/webhook/sales-chat';
+
 export class AgentService {
     /**
-     * Main chat function using simple keyword matching (Rule-Based)
-     * To avoid costs for the demo.
+     * Chat with the N8N AI Agent
+     * @param history Full message history (we send the last one to N8N as prompt)
+     * @param sessionId Optional session ID for context memory in N8N
      */
     static async chat(
-        history: Message[], // Typed message history
+        history: Message[],
+        sessionId: string = 'default-guest-session'
     ): Promise<string | null> {
-        // Extract latest user message
-        const lastMessage = history[history.length - 1];
-        const text = (lastMessage.content || "").toLowerCase();
+        try {
+            // Extract latest user message
+            const lastMessage = history[history.length - 1];
+            const text = (lastMessage.content || "").trim();
 
-        // 1. Simulate Network Delay for realism
-        await new Promise(resolve => setTimeout(resolve, 1500));
+            if (!text) return null;
 
-        // 2. Rule-Based Logic (Mock Brain)
+            console.log('Sending to N8N Agent:', { text, sessionId, url: N8N_WEBHOOK_URL });
 
-        // GREETINGS
-        if (text.includes('hola') || text.includes('buenos') || text.includes('empezar')) {
-            return "¡Hola! Soy el Agente Virtual de Script9. ¿En qué puedo ayudarte? Puedo darte un presupuesto aproximado o explicarte cómo funciona nuestra tecnología.";
+            // Call N8N Webhook
+            const response = await fetch(N8N_WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: text,
+                    sessionId: sessionId,
+                    history: history // Optional: Send full history if N8N supports it, otherwise it relies on sessionId
+                }),
+            });
+
+            if (!response.ok) {
+                console.error(`N8N Error ${response.status}: ${response.statusText}`);
+                throw new Error('Error communicating with AI Agent');
+            }
+
+            // N8N workflow creates a response JSON.
+            // Based on n8n_sales_chat.json, it returns "={{ $json }}", which usually means the full output of the last node (AI Server).
+            // We assume the AI Server returns { response: "text" } or just text.
+            // Let's parse JSON and fallback to text.
+            const data = await response.json();
+
+            // Handle various possible response formats from N8N/AI Server
+            if (typeof data === 'string') return data;
+            if (data.output) return data.output; // Common N8N pattern
+            if (data.response) return data.response; // Common pattern
+            if (data.message) return data.message;
+            if (data.answer) return data.answer;
+            if (Array.isArray(data) && data.length > 0 && data[0].output) return data[0].output;
+
+            // Fallback: Dump JSON
+            return JSON.stringify(data);
+
+        } catch (error) {
+            console.error('AgentService Error:', error);
+            // Fallback to offline message if N8N is down
+            return "Lo siento, mi cerebro en la nube está reconectando. ¿Podrías intentar de nuevo en 10 segundos?";
         }
-
-        // SERVICES & EXPLANATIONS
-        if (text.includes('funciona') || text.includes('que haces') || text.includes('servicios')) {
-            return "Utilizo modelos de IA avanzados conectados a tu base de datos. Puedo atender clientes por WhatsApp, generar facturas PDF automáticamente y guardar los leads en tu CRM sin intervención humana. ¿Te gustaría ver un ejemplo de precios?";
-        }
-
-        if (text.includes('chatbot') || text.includes('whatsapp')) {
-            return "Nuestros Chatbots IA para WhatsApp no son simples flujos de botones. Entienden lenguaje natural, pueden consultar tu stock y agendar citas. La implementación suele tardar menos de 2 semanas.";
-        }
-
-        if (text.includes('crm') || text.includes('lead')) {
-            return "Puedo cualificar leads automáticamente. Cuando un cliente muestra interés real, guardo su contacto en tu CRM (HubSpot, Salesforce, o nuestro propio CRM Script9) y te aviso para que cierres la venta.";
-        }
-
-        // PRICING / QUOTES
-        if (text.includes('precio') || text.includes('coste') || text.includes('cuanto') || text.includes('presupuesto')) {
-            return "Nuestros proyectos suelen oscilar entre 1.500€ y 5.000€ dependiendo de la complejidad. \n\nPor ejemplo:\n- **Chatbot Comercial**: ~1.500€\n- **Sistema Completo (Web+WhatsApp+CRM)**: ~3.500€\n\n¿Qué tipo de automatización tienes en mente?";
-        }
-
-        if (text.includes('caro') || text.includes('barato')) {
-            return "Piensa en el ROI. Un empleado de soporte cuesta ~20.000€/año. Yo trabajo 24/7 por una fracción de ese coste y no cometo errores humanos.";
-        }
-
-        // CLOSING / CONTACT
-        if (text.includes('contactar') || text.includes('hablar') || text.includes('reunion') || text.includes('cita')) {
-            return "¡Genial! La mejor forma de avanzar es agendar una breve sesión técnica de 15 minutos. Puedes hacerlo directamente aquí: [Agendar Reunión](/contacto).";
-        }
-
-        if (text.includes('gracias') || text.includes('adios')) {
-            return "¡Gracias a ti! Espero haberte ayudado. Si tienes más dudas sobre cómo automatizar tu negocio, aquí estaré.";
-        }
-
-        // FALLBACK (Default response)
-        return "Entiendo. Para darte una respuesta precisa sobre eso, lo ideal sería que un consultor humano analice tu caso. ¿Te gustaría agendar una breve llamada técnica?";
     }
 }
