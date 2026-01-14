@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { SessionProvider } from "next-auth/react";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import AuthRoleSync from "@/components/AuthRoleSync";
+import CommercialAgentWidget from "@/components/ai/CommercialAgentWidget";
 
 import Header from "@/components/Header";
 import { usePathname } from "next/navigation";
@@ -25,6 +26,7 @@ export default function RootLayoutClient({
                     </Suspense>
                     {!isDashboard && <Header />}
                     {children}
+                    {!isDashboard && <CommercialAgentWidget />}
                 </div>
             </ReactQueryProvider>
         </SessionProvider>

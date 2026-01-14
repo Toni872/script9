@@ -18,7 +18,7 @@ import {
 import ReviewCard from '@/components/ReviewCard';
 import { Service } from '@/types';
 import AISDRVisual from '@/components/marketing/AISDRVisual';
-import CommercialAgentWidget from '@/components/ai/CommercialAgentWidget';
+
 
 // Define Review type locally if not in shared types, or ideally move to types/index.ts
 export interface Review {
@@ -314,8 +314,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                     </div>
                 </div>
             </div>
-            {/* 5. LIVE DEMO WIDGET (Conditional for AI SDR) */}
-            {property.title.includes('AI SDR') && <CommercialAgentWidget />}
+
         </div>
     );
 }
