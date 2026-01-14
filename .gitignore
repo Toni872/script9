@@ -72,3 +72,5 @@ vercel-env-sin-comillas.txt
 # config files with sensitive data
 config.json
 .env*.local
+
+deploy_frontend.tar
