@@ -25,7 +25,7 @@ export default function AgentServicePage() {
                     >
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-900/20 border border-emerald-800 text-emerald-400 text-sm font-medium mb-6">
                             <Bot className="w-4 h-4" />
-                            <span>Tecnología GPT-4o Integrada</span>
+                            <span>Tecnología Google Gemini Pro</span>
                         </div>
 
                         <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
