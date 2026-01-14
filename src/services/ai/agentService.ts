@@ -51,17 +51,32 @@ export class AgentService {
             // We assume the AI Server returns { response: "text" } or just text.
             // Let's parse JSON and fallback to text.
             const data = await response.json();
+            let cleanResponse = "";
 
             // Handle various possible response formats from N8N/AI Server
-            if (typeof data === 'string') return data;
-            if (data.output) return data.output; // Common N8N pattern
-            if (data.response) return data.response; // Common pattern
-            if (data.message) return data.message;
-            if (data.answer) return data.answer;
-            if (Array.isArray(data) && data.length > 0 && data[0].output) return data[0].output;
-
             // Fallback: Dump JSON
-            return JSON.stringify(data);
+            let finalResponse = JSON.stringify(data);
+
+            // Handle various possible response formats from N8N/AI Server
+            if (typeof data === 'string') finalResponse = data;
+            else if (data.output) finalResponse = data.output;
+            else if (data.response) finalResponse = data.response;
+            else if (data.text) finalResponse = data.text; // Common
+            else if (data.message) finalResponse = data.message;
+            else if (data.answer) finalResponse = data.answer;
+            else if (Array.isArray(data) && data.length > 0 && data[0].output) finalResponse = data[0].output;
+
+            // ✅ CLEANUP: Remove raw function calls (e.g. <function=check_availability>{})
+            // BUT: Keep <function=open_calendar> as it's a frontend trigger
+            if (!cleanResponse.includes('<function=open_calendar>')) {
+                cleanResponse = finalResponse.replace(/<function=(?!open_calendar)[^>]+>.*?<\/function>/g, '').trim();
+            } else {
+                // If it has open_calendar, we want to keep it but strip others?
+                // Simple regex lookahead is tricky. Let's just strip everything EXCEPT open_calendar.
+                cleanResponse = finalResponse.replace(/<function=(?!open_calendar)[^>]+>.*?<\/function>/g, '').trim();
+            }
+
+            return cleanResponse;
 
         } catch (error) {
             console.error('AgentService Error:', error);
