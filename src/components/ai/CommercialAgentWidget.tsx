@@ -68,9 +68,16 @@ export default function CommercialAgentWidget() {
             let aiText = data.content || '';
 
             // ✅ DETECT CALENDAR TRIGGER
+            // Use Regex to match the full tag structure: <function=open_calendar>...</function>
+            // or just the opening tag if that's all that exists.
             if (aiText.includes('<function=open_calendar>')) {
                 setShowCalendar(true);
+                // Remove the entire function block including content and closing tag
+                // Regex explanation: [\s\S] matches ANY character including newlines.
+                aiText = aiText.replace(/<function=open_calendar>[\s\S]*?<\/function>/g, '').trim();
+                // Fallback: If it was just the opening tag without closing
                 aiText = aiText.replace('<function=open_calendar>', '').trim();
+
                 // If text becomes empty after stripping, provide default text
                 if (!aiText) aiText = "¡Claro! Te abro el calendario ahora mismo.";
             }
