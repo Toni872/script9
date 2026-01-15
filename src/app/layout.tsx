@@ -23,12 +23,13 @@ const body = Inter({
 // SEO completo para Script9
 export const metadata: Metadata = {
   title: {
-    default: "Script9 | Automatizaciones, IA y Scripts para Negocios Digitales",
+    default: "Script9 | Consultoría Estratégica en TI + Automatización SaaS",
     template: "%s | Script9"
   },
-  description: "Script9 ofrece servicios de automatización, inteligencia artificial, workflows y scripts a medida para negocios digitales. Potencia tu empresa, ahorra tiempo y escala sin límites.",
+  description: "Script9 es una consultoría estratégica en TI y automatización SaaS. Ayudamos a empresas a escalar sin aumentar personal mediante IA y sistemas inteligentes.",
   keywords: [
-    "automatización empresarial",
+    "consultoría estratégica TI",
+    "automatización SaaS",
     "inteligencia artificial empresas",
     "scripts personalizados",
     "workflows automatizados",
@@ -60,20 +61,20 @@ export const metadata: Metadata = {
     locale: "es_ES",
     url: "/",
     siteName: "Script9",
-    title: "Script9 | Automatizaciones, IA y Scripts para Negocios Digitales",
-    description: "Servicios de automatización, inteligencia artificial, workflows y scripts a medida para negocios digitales. Potencia tu empresa y escala sin límites.",
+    title: "Script9 | Consultoría Estratégica en TI + Automatización SaaS",
+    description: "Consultoría estratégica en TI y automatización SaaS. Potencia tu empresa y escala sin límites.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Script9 - Automatización Inteligente para Negocios",
+        alt: "Script9 - Consultoría Estratégica en TI",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Script9 | Automatizaciones y IA para Negocios",
+    title: "Script9 | Consultoría Estratégica en TI + Automatización SaaS",
     description: "Automatizaciones, workflows y scripts a medida para negocios digitales que quieren escalar.",
     images: ["/og-image.png"],
     creator: "@script9",

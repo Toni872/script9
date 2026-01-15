@@ -1,101 +1,164 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Linkedin, Twitter, Github, Code2, BrainCircuit } from 'lucide-react';
-import Image from 'next/image';
+import { Bot, Zap, Network, Code2, ArrowRight } from 'lucide-react';
 import { DeepTechHero } from '@/components/ui/DeepTechHero';
+import { AboutVisual } from '@/components/marketing/AboutVisual';
+import Link from 'next/link';
 
 export default function AboutPage() {
-    const team = [
+
+    // Texto del usuario:
+    // "Script9 es una consultoría Estratégica en TI + Automatización SaaS..."
+    const pillars = [
         {
-            name: "Daniel Torres",
-            role: "CEO & Lead Architect",
-            bio: "Ingeniero de Software con +10 años en automatización. Obsesionado con eliminar el trabajo repetitivo.",
-            icon: BrainCircuit
+            title: "Agentes IA",
+            description: "Empleados digitales que atienden, cualifican y venden 24/7.",
+            icon: Bot,
+            color: "text-blue-400",
+            border: "group-hover:border-blue-500/50"
         },
         {
-            name: "Alex Riva",
-            role: "CTO & AI Specialist",
-            bio: "Experto en LLMs y arquitecturas escalables. Construyendo el futuro de los agentes autónomos.",
-            icon: Code2
+            title: "Automatización (N8N)",
+            description: "Workflows que conectan todo tu ecosistema (Stripe, Slack, CRM).",
+            icon: Zap,
+            color: "text-amber-400",
+            border: "group-hover:border-amber-500/50"
+        },
+        {
+            title: "Integraciones",
+            description: "Unificamos tus herramientas dispersas en un solo flujo de datos.",
+            icon: Network,
+            color: "text-purple-400",
+            border: "group-hover:border-purple-500/50"
+        },
+        {
+            title: "Scripts a Medida",
+            description: "Desarrollo Python/Node.js para problemas que el No-Code no resuelve.",
+            icon: Code2,
+            color: "text-emerald-400",
+            border: "group-hover:border-emerald-500/50"
         }
     ];
 
-    return (
-        <div className="min-h-screen bg-slate-950 text-white font-sans">
-            {/* Hero Section */}
-            <DeepTechHero
-                title={<>Quiénes <span className="text-emerald-400">Somos</span></>}
-                subtitle="Somos un equipo de ingenieros y estrategas dedicados a una misión: democratizar la automatización inteligente para empresas que quieren liderar, no solo competir."
-            />
+    const stack = ["Python", "TypeScript", "N8N", "Google Gemini", "Supabase", "Next.js"];
 
-            {/* History Section */}
-            <section className="py-24 bg-slate-900/50 border-y border-slate-900">
-                <div className="max-w-4xl mx-auto px-5">
-                    <div className="grid md:grid-cols-12 gap-12 items-center">
-                        <div className="md:col-span-4 relative">
-                            <div className="aspect-square rounded-2xl bg-gradient-to-br from-emerald-500/20 to-indigo-500/20 border border-slate-800 flex items-center justify-center p-8">
-                                <div className="text-8xl font-bold text-white/5 font-mono select-none">S9</div>
-                                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mixed-blend-overlay rounded-2xl" />
-                            </div>
-                        </div>
-                        <div className="md:col-span-8 space-y-6">
-                            <h2 className="text-3xl font-bold text-white">Nuestros Orígenes</h2>
-                            <div className="space-y-4 text-slate-400 leading-relaxed text-lg font-light">
-                                <p>
-                                    Nacimos en 2023 con una premisa radical pero necesaria: <span className="text-emerald-400 font-medium">la automatización de élite no debería ser exclusiva de las grandes corporaciones.</span>
+    return (
+        <div className="min-h-screen bg-slate-950 text-white font-sans selection:bg-emerald-500/30">
+            {/* Hero Section */}
+            <div className="pt-32 pb-16 px-6">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+                    {/* Left: Copy */}
+                    <div className="space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-emerald-400 text-sm font-medium"
+                        >
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            Consultoría Estratégica TI + Automatización
+                        </motion.div>
+
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-4xl md:text-5xl font-bold leading-tight"
+                        >
+                            Ingeniería de Producto que <span className="text-emerald-400">Ejecuta Rápido</span>
+                        </motion.h1>
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-lg text-slate-400 leading-relaxed"
+                        >
+                            Ayudamos a empresas a escalar sin aumentar su estructura de personal, sustituyendo tareas manuales por sistemas inteligentes. <br /><br />
+                            <span className="text-white font-medium">No somos una consultora tradicional.</span> Somos ingenieros obsesionados con la eficiencia.
+                        </motion.p>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                        >
+                            <Link href="/contacto" className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-medium transition-all group">
+                                Automatizar mi negocio
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </motion.div>
+                    </div>
+
+                    {/* Right: Visual */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <AboutVisual />
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Pillars Section */}
+            <section className="py-24 bg-slate-900/30 border-y border-slate-900">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold mb-4">Nuestros 4 Pilares</h2>
+                        <p className="text-slate-400 max-w-2xl mx-auto">
+                            Una arquitectura completa para cubrir todos los ángulos de tu crecimiento digital.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {pillars.map((pillar, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                                viewport={{ once: true }}
+                                className={`bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:bg-slate-900/50 transition-all group ${pillar.border}`}
+                            >
+                                <div className={`w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center mb-6 ${pillar.color}`}>
+                                    <pillar.icon className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-xl font-bold mb-3">{pillar.title}</h3>
+                                <p className="text-slate-400 text-sm leading-relaxed">
+                                    {pillar.description}
                                 </p>
-                                <p>
-                                    Todo comenzó en un pequeño coworking de Madrid, cuando ayudamos a una agencia local a recuperar 20 horas semanales automatizando sus reportes manuales. Lo que empezó como una colección de scripts personales (de ahí el nombre "Script9", por nuestro noveno script que cambió la arquitectura por completo) se transformó rápidamente en algo más grande.
-                                </p>
-                                <p>
-                                    Hoy, Script9 no es solo una consultora de software. Somos arquitectos de tiempo. Diseñamos ecosistemas digitales que permiten a los fundadores dejar de operar su negocio para empezar a dirigirlo.
-                                </p>
-                            </div>
-                        </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Team Grid */}
-            <section className="py-20 relative z-10">
-                <div className="max-w-6xl mx-auto px-5">
-                    <div className="grid md:grid-cols-2 gap-12">
-                        {team.map((member, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: idx * 0.2 }}
-                                viewport={{ once: true }}
-                                className="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-emerald-500/30 transition-all group"
-                            >
-                                <div className="flex items-center gap-6 mb-6">
-                                    <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 group-hover:bg-slate-800/80 transition-colors">
-                                        <member.icon className="w-10 h-10 text-emerald-400" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-white">{member.name}</h3>
-                                        <p className="text-emerald-400 font-medium">{member.role}</p>
-                                    </div>
-                                </div>
-                                <p className="text-slate-400 leading-relaxed mb-6">
-                                    {member.bio}
-                                </p>
-                                <div className="flex gap-4">
-                                    <button className="p-2 text-slate-500 hover:text-white transition-colors">
-                                        <Linkedin className="w-5 h-5" />
-                                    </button>
-                                    <button className="p-2 text-slate-500 hover:text-white transition-colors">
-                                        <Twitter className="w-5 h-5" />
-                                    </button>
-                                    <button className="p-2 text-slate-500 hover:text-white transition-colors">
-                                        <Github className="w-5 h-5" />
-                                    </button>
-                                </div>
-                            </motion.div>
-                        ))}
+            {/* Stack & Mission */}
+            <section className="py-24 px-6 relative overflow-hidden">
+                <div className="max-w-4xl mx-auto text-center space-y-12">
+
+                    {/* Mission */}
+                    <div className="space-y-6">
+                        <h2 className="text-2xl font-mono text-emerald-400">NUESTRA MISIÓN</h2>
+                        <p className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                            "Eliminar el trabajo repetitivo para que los humanos se dediquen a crear."
+                        </p>
                     </div>
+
+                    {/* Stack */}
+                    <div className="pt-12 border-t border-slate-800">
+                        <p className="text-slate-500 text-sm font-mono mb-8 uppercase tracking-widest">Stack Tecnológico</p>
+                        <div className="flex flex-wrap justify-center gap-4">
+                            {stack.map((tech, i) => (
+                                <span key={i} className="px-4 py-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-300 font-medium text-sm">
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </div>

@@ -97,6 +97,7 @@ export default function Header() {
                         </div>
 
                         <NavLink href="/como-funciona">Cómo Funciona</NavLink>
+                        <NavLink href="/sobre-nosotros">Quiénes Somos</NavLink>
                         <NavLink href="/contacto">Contacto</NavLink>
                         {(isHost || isAdmin) && (
                             <NavLink href="/host/properties">Mis Servicios</NavLink>
@@ -276,6 +277,7 @@ export default function Header() {
                                     </div>
 
                                     <MobileLink href="/como-funciona" onClick={() => setMobileMenuOpen(false)}>Cómo Funciona</MobileLink>
+                                    <MobileLink href="/sobre-nosotros" onClick={() => setMobileMenuOpen(false)}>Quiénes Somos</MobileLink>
                                     <MobileLink href="/contacto" onClick={() => setMobileMenuOpen(false)}>Contacto</MobileLink>
                                 </nav>
 

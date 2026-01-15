@@ -47,7 +47,7 @@ export default function LandingClient() {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-emerald-400 text-sm font-medium mb-8 backdrop-blur-sm shadow-lg shadow-emerald-900/10">
                             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                            Agencia de Automatización & IA
+                            Consultoría Estratégica en TI + Automatización SaaS
                         </div>
 
                         <h1 className="text-4xl lg:text-7xl font-bold text-white tracking-tight mb-6 leading-[1.1]">

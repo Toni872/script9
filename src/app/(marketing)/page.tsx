@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 import LandingClient from '@/components/landing/LandingClient';
 
 export const metadata: Metadata = {
-  title: "Script9 | Agencia de Automatización & IA para Negocios",
-  description: "Consultora líder en Automatización de Procesos, Chatbots IA e Integraciones. Auditoría gratuita para empresas que quieren escalar.",
+  title: "Script9 | Consultoría Estratégica en TI + Automatización SaaS",
+  description: "Consultoría estratégica en TI y automatización SaaS. Ayudamos a empresas a escalar sin aumentar personal mediante IA y sistemas inteligentes.",
   alternates: {
     canonical: 'https://script9.com',
   },
   openGraph: {
-    title: 'Script9 | Escala tu Negocio con Automatización e IA',
-    description: 'Delega el trabajo manual a scripts inteligentes y céntrate en vender. Auditoría de procesos gratuita.',
+    title: 'Script9 | Consultoría Estratégica en TI + Automatización SaaS',
+    description: 'Consultoría Estratégica en TI + Automatización SaaS. Auditoría de procesos gratuita.',
     url: 'https://script9.com',
     siteName: 'Script9',
     images: [
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: 'https://script9.com/og-image.png', // Ensure this image exists
         width: 1200,
         height: 630,
-        alt: 'Script9 Consultoría de Automatización',
+        alt: 'Script9 Consultoría Estratégica en TI',
       },
     ],
     locale: 'es_ES',
@@ -52,7 +52,7 @@ export default function Home() {
           "addressCountry": "ES"
         },
         "priceRange": "$$$",
-        "description": "Agencia especializada en automatización de procesos mediante IA y desarrollo de scripts a medida.",
+        "description": "Consultoría Estratégica en TI + Automatización SaaS especializada en Automatización de Procesos e Inteligencia Artificial.",
         "serviceArea": {
           "@type": "Country",
           "name": "España"
