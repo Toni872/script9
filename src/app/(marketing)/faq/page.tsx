@@ -52,7 +52,7 @@ export default function FAQ() {
         {
             category: 'servicios',
             question: '¿Qué herramientas de IA utilizan?',
-            answer: 'Trabajamos con las últimas tecnologías de IA: OpenAI (GPT-4, DALL-E), Anthropic (Claude), Google AI, modelos open source como Llama, y APIs especializadas según las necesidades del proyecto.'
+            answer: 'Trabajamos con lo último en IA: Google Gemini Pro (nuestro estándar), Anthropic (Claude) y modelos Open Source. Hemos migrado todo nuestro stack a Google Cloud para máxima velocidad y seguridad.'
         },
         {
             category: 'servicios',
@@ -68,7 +68,7 @@ export default function FAQ() {
         {
             category: 'tecnico',
             question: '¿Qué tecnologías utilizan para las automatizaciones?',
-            answer: 'Utilizamos Python, Node.js, y plataformas como Make (Integromat), Zapier, n8n, para automatizaciones. Para desarrollo de APIs usamos FastAPI, Express.js. Para IA: LangChain, OpenAI API, y modelos personalizados.'
+            answer: 'Utilizamos Python, Node.js y N8N para automatizaciones. Para IA: Google Gemini API (Vertex AI) y modelos personalizados.'
         },
         {
             category: 'tecnico',

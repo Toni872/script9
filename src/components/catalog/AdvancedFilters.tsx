@@ -37,7 +37,7 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
     const amenityOptions = [
         { value: 'python', label: 'Python' },
         { value: 'nodejs', label: 'Node.js' },
-        { value: 'openai', label: 'OpenAI / GPT' },
+        { value: 'gemini', label: 'Google Gemini' },
         { value: 'make', label: 'Make (Integromat)' },
         { value: 'zapier', label: 'Zapier' },
         { value: 'n8n', label: 'n8n' },

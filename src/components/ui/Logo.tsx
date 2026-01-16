@@ -24,7 +24,7 @@ export function Logo({ variant = 'light', className = '' }: LogoProps) {
                     x="0"
                     y="30"
                     fontSize="32"
-                    fontFamily="var(--font-geist-sans), sans-serif"
+                    fontFamily="var(--font-heading), sans-serif"
                     fontWeight="800"
                     fill={textColor}
                     letterSpacing="-1.5"

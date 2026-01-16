@@ -1,23 +1,30 @@
 import { createServerSupabaseClient } from '@/lib/supabase';
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Initialize OpenAI (ensure OPENAI_API_KEY is in .env)
-// const openai = new OpenAI(...);
+// Initialize Gemini (ensure GEMINI_API_KEY is in .env)
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 export class RagService {
     /**
-     * Generates embedding for a text string
+     * Generates embedding for a text string using Google Gemini
+     * Model: embedding-001 (Optimized for retrieval)
      */
     private static async generateEmbedding(text: string): Promise<number[]> {
-        const openai = new OpenAI({
-            apiKey: process.env.OPENAI_API_KEY,
-        });
+        if (!process.env.GEMINI_API_KEY) {
+            console.error("Missing GEMINI_API_KEY");
+            return [];
+        }
 
-        const response = await openai.embeddings.create({
-            model: 'text-embedding-3-small',
-            input: text.replace(/\n/g, ' '),
-        });
-        return response.data[0].embedding;
+        try {
+            const model = genAI.getGenerativeModel({ model: "embedding-001" });
+            const result = await model.embedContent(text);
+            const embedding = result.embedding;
+            return embedding.values;
+        } catch (error) {
+            console.error("Gemini Embedding Error:", error);
+            // Return empty array or throw, depending on resilience needed
+            return [];
+        }
     }
 
     /**
@@ -26,6 +33,10 @@ export class RagService {
     static async addDocument(content: string, metadata: Record<string, any> = {}) {
         const supabase = createServerSupabaseClient();
         const embedding = await this.generateEmbedding(content);
+
+        if (embedding.length === 0) {
+            throw new Error("Failed to generate embedding");
+        }
 
         const { error } = await supabase.from('knowledge_base').insert({
             content,
@@ -44,6 +55,8 @@ export class RagService {
     static async search(query: string, threshold = 0.5, limit = 5) {
         const supabase = createServerSupabaseClient();
         const embedding = await this.generateEmbedding(query);
+
+        if (embedding.length === 0) return [];
 
         const { data: documents, error } = await supabase.rpc('match_documents', {
             query_embedding: embedding,

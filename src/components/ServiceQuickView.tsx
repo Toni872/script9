@@ -32,7 +32,7 @@ const serviceTypeConfig: Record<string, { icon: typeof Zap; label: string; color
 const techLabels: Record<string, string> = {
     python: 'Python',
     nodejs: 'Node.js',
-    openai: 'OpenAI / GPT',
+    openai: 'Google Gemini',
     make: 'Make',
     zapier: 'Zapier',
     n8n: 'n8n',

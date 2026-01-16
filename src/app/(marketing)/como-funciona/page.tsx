@@ -31,7 +31,7 @@ export default function ComoFunciona() {
     },
     {
       question: '¿Qué herramientas utilizan?',
-      answer: 'Trabajamos con tecnologías y plataformas líderes del mercado, como Python, Node.js, APIs REST, Make (Integromat), Zapier, n8n y soluciones de inteligencia artificial como OpenAI, Perplexity, entre otras. Seleccionamos la tecnología más adecuada en función de los requisitos y objetivos de cada proyecto.',
+      answer: 'Trabajamos con tecnologías líderes: Python, Node.js, N8N (Automatización) y Google Gemini Pro para toda la capa de inteligencia artificial.',
     },
     {
       question: '¿Ofrecen soporte después de la implementación?',

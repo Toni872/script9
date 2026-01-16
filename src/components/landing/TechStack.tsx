@@ -6,7 +6,7 @@ import {
     SiGooglecloud,
     SiN8N,
     SiMake,
-    SiOpenai,
+    SiGoogle,
     SiPython,
     SiReact,
     SiStripe,
@@ -55,8 +55,8 @@ export function TechStack() {
             color: "text-purple-500"
         },
         {
-            name: "OpenAI",
-            icon: SiOpenai,
+            name: "Google Gemini",
+            icon: SiGoogle,
             color: "text-green-400"
         },
         {
