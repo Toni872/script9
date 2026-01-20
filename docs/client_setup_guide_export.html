@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Activación - Cliente</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #525659;
+            color: #1e293b;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .page {
+            background-color: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            box-sizing: border-box;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 2px solid #0f172a;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            margin: 0;
+            color: #0f172a;
+            font-size: 1.6em;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin: 5px 0 0;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .logo svg {
+            height: 35px;
+            width: auto;
+        }
+
+        /* Steps */
+        .step-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: #10b981;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        ol {
+            margin: 0;
+            padding-left: 20px;
+            color: #475569;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        /* Warnings & Tips */
+        .warning {
+            background: #fff1f2;
+            border-left: 4px solid #f43f5e;
+            padding: 10px 15px;
+            font-size: 0.9em;
+            color: #be123c;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .code-snippet {
+            font-family: 'JetBrains Mono', monospace;
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #0f172a;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 20px;
+            font-size: 0.8em;
+            color: #94a3b8;
+        }
+
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: auto;
+                height: auto;
+            }
+
+            @page {
+                margin: 0;
+                size: A4;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <header>
+            <div>
+                <h1>Guía de Activación</h1>
+                <p class="subtitle">Requisitos para despliegue de S9-Hunter</p>
+            </div>
+            <div class="logo">
+                <svg width="120" height="35" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="30" fontSize="32" fontFamily="'Inter', Arial, sans-serif" fontWeight="800"
+                        fill="#0f172a" letterSpacing="-1.5">
+                        Script<tspan fill="#10B981">9</tspan>
+                    </text>
+                </svg>
+            </div>
+        </header>
+
+        <p>Para configurar su sistema de búsqueda automática, necesitamos que nos envíe los siguientes 3 datos. Siga
+            estos pasos para obtenerlos de forma segura.</p>
+
+        <!-- STEP 1 -->
+        <div class="step-box">
+            <div class="step-title">
+                <div class="step-number">1</div>
+                <div>Google Maps API Key</div>
+            </div>
+            <p style="font-size: 0.9em; margin-bottom: 15px;">Necesaria para localizar empresas por ubicación exacta.
+            </p>
+            <ol>
+                <li>Acceda a <strong>Google Cloud Console</strong>: <a href="#">console.cloud.google.com</a> con su
+                    cuenta corporativa.</li>
+                <li>Cree un <strong>Nuevo Proyecto</strong> y póngale de nombre "Buscador Prácticas".</li>
+                <li>En el menú, vaya a <strong>"Facturación"</strong> y asocie una cuenta (Google requiere tarjeta
+                    aunque tiene una capa gratuita generosa).</li>
+                <li>Vaya a <strong>"APIs y Servicios" > "Biblioteca"</strong>. Busque y habilite: <strong>"Places API
+                        (New)"</strong>.</li>
+                <li>Vaya a <strong>"Credenciales" > "Crear Credenciales" > "Clave de API"</strong>.</li>
+                <li>Copie el código que empieza por <code>AIzaSy...</code></li>
+            </ol>
+            <div class="warning">
+                <strong>Importante:</strong> No comparta esta clave con nadie más. Script9 la almacenará de forma
+                encriptada.
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-box">
+            <div class="step-title">
+                <div class="step-number">2</div>
+                <div>ID Carpeta de Google Drive</div>
+            </div>
+            <p style="font-size: 0.9em; margin-bottom: 15px;">Lugar donde se guardarán automáticamente los CVs y
+                reportes.</p>
+            <ol>
+                <li>Vaya a su Google Drive corporativo.</li>
+                <li>Cree una carpeta nueva llamada <strong>"S9 Candidatos"</strong> (o el nombre que prefiera).</li>
+                <li>Entre dentro de la carpeta vacía.</li>
+                <li>Mire la dirección URL en su navegador. Será algo así:<br>
+                    <code>drive.google.com/drive/folders/<strong>1LbrMq6tyW29McmCCr46...</strong></code>
+                </li>
+                <li>Copie solo la parte final (la cadena de letras y números después de "folders/").</li>
+            </ol>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-box">
+            <div class="step-title">
+                <div class="step-number">3</div>
+                <div>Email de Notificaciones</div>
+            </div>
+            <p style="font-size: 0.9em; margin-bottom: 15px;">La dirección que recibirá los correos con los nuevos
+                candidatos.</p>
+            <ul>
+                <li>Simplemente indíquenos a qué email debemos enviar los avisos (ej: dirección@, secretaria@,
+                    jefe.estudios@...).</li>
+            </ul>
+        </div>
+
+        <div
+            style="margin-top: 40px; padding: 20px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;">
+            <p style="margin: 0; color: #166534; font-weight: 600;">📩 Envíe estos 3 datos respondiendo al último email
+                de Script9.</p>
+        </div>
+
+        <div class="footer">
+            Script9 - Ingeniería de Automatización &bull; Documento para Cliente Final
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto P-2026-001-FP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #525659;
+            /* Fondo gris tipo Acrobat Reader */
+            color: #1e293b;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Flex Layout for Sticky Footer */
+        .page {
+            background-color: white;
+            width: 210mm;
+            min-height: 297mm;
+            /* A4 */
+            padding: 20mm;
+            box-sizing: border-box;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ... Content Sections expand naturally ... */
+
+        /* --- Global Grid & Typography --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
+            border-bottom: 2px solid #0f172a;
+            padding-bottom: 20px;
+        }
+
+        .logo svg {
+            height: 45px;
+            width: auto;
+        }
+
+        .meta {
+            text-align: right;
+        }
+
+        .meta h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+
+        .meta p {
+            margin: 4px 0 0;
+            color: #64748b;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        /* --- Client Info Grid --- */
+        .client-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .info-block h3 {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .editable {
+            background-color: #fef9c3;
+            padding: 2px 5px;
+            border-radius: 4px;
+            cursor: text;
+        }
+
+        .info-block p {
+            margin: 4px 0;
+            font-weight: 600;
+            color: #334155;
+            font-size: 1.05em;
+        }
+
+        /* --- Resumen --- */
+        .executive-summary {
+            background-color: #f8fafc;
+            border-left: 4px solid #10b981;
+            padding: 15px 20px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 40px;
+        }
+
+        .executive-summary h2 {
+            margin-top: 0;
+            font-size: 1em;
+            color: #0f172a;
+            text-transform: uppercase;
+        }
+
+        .executive-summary p {
+            margin-bottom: 0;
+            color: #475569;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* --- Pricing Table --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 0;
+            border-bottom: 2px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 20px 0;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+
+        .concept-title {
+            display: block;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+
+        .concept-desc {
+            display: block;
+            font-size: 0.9em;
+            color: #64748b;
+            line-height: 1.5;
+            max-width: 90%;
+        }
+
+        .col-price {
+            text-align: right;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #0f172a;
+            white-space: nowrap;
+        }
+
+        .col-delivery {
+            font-size: 0.9em;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* --- Totals --- */
+        .totals-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .totals-box {
+            width: 45%;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.95em;
+            color: #64748b;
+        }
+
+        .total-row.final {
+            border-top: 2px solid #0f172a;
+            margin-top: 10px;
+            padding-top: 15px;
+            color: #0f172a;
+            font-weight: 800;
+            font-size: 1.4em;
+            align-items: center;
+        }
+
+        .tax-note {
+            text-align: right;
+            font-size: 0.7em;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        /* --- Maintenance --- */
+        .maintenance-block {
+            margin-top: 40px;
+            border: 1px dashed #cbd5e1;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .maint-title {
+            font-weight: 700;
+            color: #334155;
+            font-size: 0.95em;
+        }
+
+        .maint-desc {
+            font-size: 0.9em;
+            color: #64748b;
+            margin-left: 10px;
+        }
+
+        .maint-price {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* --- Footer (Fixed) --- */
+        .footer {
+            margin-top: auto;
+            /* This pushes it to bottom in Flexbox */
+            text-align: center;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 20px;
+            padding-bottom: 0;
+        }
+
+        .footer p {
+            margin: 3px 0;
+            font-size: 0.85em;
+            color: #334155;
+            /* Darker Text */
+        }
+
+        /* --- PRINT OPTIMIZATIONS --- */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: auto;
+                height: auto;
+                overflow: hidden;
+            }
+
+            @page {
+                margin: 0;
+                size: A4;
+            }
+
+            .editable {
+                background-color: transparent !important;
+                /* Quitar fondo amarillo al imprimir */
+                padding: 0;
+            }
+
+            /* Asegurar que los colores de fondo (ej. resumen) se impriman */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page" contenteditable="true"> <!-- contenteditable permite editar todo directo en navegador -->
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <!-- LOGO INCRUSTADO (SVG Code) -->
+                <!-- Fill cambiado a #0f172a para que sea visible en papel blanco -->
+                <svg width="180" height="50" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="30" fontSize="32" fontFamily="'Inter', Arial, sans-serif" fontWeight="800"
+                        fill="#0f172a" letterSpacing="-1.5">
+                        Script<tspan fill="#10B981">9</tspan>
+                    </text>
+                </svg>
+            </div>
+            <div class="meta">
+                <h1>PRESUPUESTO</h1>
+                <p>Ref: <span class="editable">P-2026-001-FP</span></p>
+                <p>Fecha: <span class="editable">16/01/2026</span></p>
+            </div>
+        </div>
+
+        <!-- CLIENT INFO -->
+        <div class="client-info">
+            <div class="info-block">
+                <h3>Cliente</h3>
+                <p class="editable">[Nombre Centro Educativo]</p>
+                <p class="editable">[Dirección Completa]</p>
+                <p class="editable">[CIF / NIF]</p>
+            </div>
+            <div class="info-block" style="text-align: right;">
+                <h3>Proyecto</h3>
+                <p>Automatización Búsqueda FP</p>
+                <p>S9-Hunter v1.0</p>
+            </div>
+        </div>
+
+        <!-- RESUMEN EJECUTIVO -->
+        <div class="executive-summary">
+            <h2>Resumen Ejecutivo</h2>
+            <p class="editable">
+                Implementación de un sistema de captación automática de empresas para prácticas de FP.
+                El software localiza empresas por geolocalización, filtra competidores y extrae contactos de RRHH
+                mediante Inteligencia Artificial, reduciendo la carga administrativa docente en un 90%.
+            </p>
+        </div>
+
+        <!-- TABLA PRECIOS -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 55%">Concepto</th>
+                    <th style="width: 20%">Plazo</th>
+                    <th style="text-align: right; width: 25%">Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="concept-title">1. Consultoría & Setup</span>
+                        <span class="concept-desc">Análisis de requisitos, configuración de servidor VPS privado y
+                            entorno seguro N8N Enterprise.</span>
+                    </td>
+                    <td class="col-delivery">1 Semana</td>
+                    <td class="col-price">350,00 €</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="concept-title">2. Desarrollo "S9-Hunter"</span>
+                        <span class="concept-desc">Algoritmo de búsqueda geolocalizada (Google Maps API) + Extracción de
+                            emails con IA (Perplexity) + Filtrado inteligente.</span>
+                    </td>
+                    <td class="col-delivery">2 Semanas</td>
+                    <td class="col-price">850,00 €</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="concept-title">3. Integración CRM/Drive</span>
+                        <span class="concept-desc">Generación automática de carpetas Drive, Excel de reporte y sistema
+                            de notificaciones email.</span>
+                    </td>
+                    <td class="col-delivery">1 Semana</td>
+                    <td class="col-price">200,00 €</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="concept-title">4. Formación y Entrega</span>
+                        <span class="concept-desc">Sesión formativa (1h) con el staff técnico y documentación de uso
+                            detallada.</span>
+                    </td>
+                    <td class="col-delivery">Final</td>
+                    <td class="col-price">100,00 €</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- TOTALES -->
+        <div class="totals-container">
+            <div class="totals-box">
+                <div class="total-row">
+                    <span>Base Imponible</span>
+                    <span>1.500,00 €</span>
+                </div>
+                <div class="total-row">
+                    <span>IVA (0%)</span>
+                    <span>0,00 €</span>
+                </div>
+                <div class="total-row final">
+                    <span>TOTAL</span>
+                    <span>1.500,00 €</span>
+                </div>
+                <p class="tax-note">* Operación exenta o no sujeta según Art. 7 Ley 37/1992</p>
+            </div>
+        </div>
+
+        <!-- MANTENIMIENTO OPCIONAL -->
+        <div class="maintenance-block">
+            <div>
+                <span class="maint-title">OPCIONAL: Mantenimiento & Soporte</span>
+                <span class="maint-desc">Incluye monitoreo 24/7, coste de servidor VPS y actualizaciones de API.</span>
+            </div>
+            <span class="maint-price">90,00 € / mes</span>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>Script9 - Ingeniería de Automatización</strong></p>
+            <p class="editable">España (Remote) &bull; contact@script-9.com &bull; https://script-9.com</p>
+            <p>Presupuesto válido por 15 días.</p>
+        </div>
+
+    </div>
+
+    <!-- Script para limpiar placeholders al hacer click -->
+    <script>
+        document.querySelectorAll('.editable').forEach(el => {
+            el.addEventListener('focus', function () {
+                // Si tiene corchetes, seleccionar todo para borrar facil
+                if (this.innerText.includes('[')) {
+                    document.execCommand('selectAll', false, null);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
