@@ -2,46 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import {
     MapPin,
-    Users,
     Home,
-    Star,
     Clock,
     Check,
     ChevronLeft,
-    ChevronRight,
+    Users
 } from 'lucide-react';
-import ReviewCard from '@/components/ReviewCard';
 import { Service } from '@/types';
 import AISDRVisual from '@/components/marketing/AISDRVisual';
 import { IntegrationsVisual } from '@/components/services/visuals/IntegrationsVisual';
 import { FinanceVisual } from '@/components/services/visuals/FinanceVisual';
 import { ScriptVisual } from '@/components/services/visuals/ScriptVisual';
-
-
-// Define Review type locally if not in shared types, or ideally move to types/index.ts
-export interface Review {
-    id: string;
-    rating: number;
-    cleanliness_rating?: number;
-    communication_rating?: number;
-    accuracy_rating?: number;
-    location_rating?: number;
-    value_rating?: number;
-    review_text: string;
-    host_response?: string;
-    host_response_date?: string;
-    created_at: string;
-    guest: {
-        id: string;
-        name: string;
-        avatar_url?: string;
-    };
-}
+import { motion } from 'framer-motion';
 
 interface ServiceDetailClientProps {
     initialProperty: Service | null;
@@ -50,81 +25,31 @@ interface ServiceDetailClientProps {
 
 export default function ServiceDetailClient({ initialProperty, propertyId }: ServiceDetailClientProps) {
     const router = useRouter();
-    const { data: session } = useSession();
 
     const [property, setProperty] = useState<Service | null>(initialProperty);
-    const [reviews, setReviews] = useState<Review[]>([]);
-    const [loadingReviews, setLoadingReviews] = useState(true);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [showAllReviews, setShowAllReviews] = useState(false);
 
     useEffect(() => {
-        // If no initial property (e.g. static gen failed or fallback), fetch it
+        const fetchProperty = async () => {
+            try {
+                const response = await fetch(`/api/properties/${propertyId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setProperty(data);
+                }
+            } catch (error) {
+                console.error('Error fetching property:', error);
+            }
+        };
+
         if (!property && propertyId) {
             fetchProperty();
         }
-        if (propertyId) {
-            fetchReviews();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [propertyId]);
-
-    const fetchProperty = async () => {
-        try {
-            const response = await fetch(`/api/properties/${propertyId}`);
-            if (response.ok) {
-                const data = await response.json();
-                // Transformation logic similar to original page if needed, 
-                // but ideally API returns standard format.
-                // For now assuming the API returns what we need or we reuse the transformation logic here if strictly necessary.
-                // Given the context, let's keep it simple.
-                setProperty(data); // Note: Might need the transformation logic if API is raw DB.
-            }
-        } catch (error) {
-            console.error('Error fetching property:', error);
-        }
-    };
-
-    const fetchReviews = async () => {
-        try {
-            const response = await fetch(`/api/reviews?propertyId=${propertyId}`);
-            if (response.ok) {
-                const data = await response.json();
-                setReviews(data.reviews || []);
-            }
-        } catch (error) {
-            console.error('Error fetching reviews:', error);
-        } finally {
-            setLoadingReviews(false);
-        }
-    };
-
-    const calculateAverageRating = () => {
-        if (reviews.length === 0) return 0;
-        const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
-        return (sum / reviews.length).toFixed(1);
-    };
+    }, [property, propertyId]);
 
     const handleReservation = () => {
-        // Pivot to High-Touch: Redirect to Contact instead of Checkout
         const subject = encodeURIComponent(`Solicitud de Auditoría: ${property?.title}`);
         router.push(`/contacto?subject=${subject}`);
-    };
-
-    const nextImage = () => {
-        if (property?.image_urls && property.image_urls.length > 0) {
-            setCurrentImageIndex((prev) =>
-                prev === property.image_urls!.length - 1 ? 0 : prev + 1
-            );
-        }
-    };
-
-    const prevImage = () => {
-        if (property?.image_urls && property.image_urls.length > 0) {
-            setCurrentImageIndex((prev) =>
-                prev === 0 ? property.image_urls!.length - 1 : prev - 1
-            );
-        }
     };
 
     if (!property) {
@@ -136,7 +61,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                     </h2>
                     <button
                         onClick={() => router.push('/soluciones')}
-                        className="px-6 py-3 bg-[#10B981] text-slate-950 rounded-xl font-semibold hover:bg-[#059669] transition-colors hero-text-white"
+                        className="px-6 py-3 bg-[#10B981] text-slate-950 rounded-xl font-semibold hover:bg-[#059669] transition-colors"
                     >
                         Volver al catálogo
                     </button>
@@ -144,9 +69,6 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
             </div>
         );
     }
-
-    const displayedReviews = showAllReviews ? reviews : reviews.slice(0, 3);
-    const averageRating = calculateAverageRating();
 
     return (
         <div className="min-h-screen bg-slate-950 pb-20 pt-20">
@@ -166,19 +88,20 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
             {/* Visual Header (Image or Animation) */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900">
-                    {property.property_type === 'ia_chatbot' || property.title.includes('AI SDR') ? (
+                    {/* Visual Logic matching ServiceCard but larger */}
+                    {(property.property_type === 'ia_chatbot' || property.property_type === 'ia_agent' || property.title.includes('AI SDR')) ? (
                         <div className="w-full h-full">
                             <AISDRVisual />
                         </div>
-                    ) : (property.property_type === 'integracion' || property.category === 'integracion' || property.title.toLowerCase().includes('workflow')) ? (
+                    ) : (property.property_type === 'integracion' || property.property_type === 'desarrollo_medida' || property.title.toLowerCase().includes('workflow')) ? (
                         <div className="w-full h-full">
                             <IntegrationsVisual className="border-none rounded-none" contentClassName="max-w-[400px] scale-125 md:scale-150" />
                         </div>
-                    ) : (property.property_type === 'automatizacion' || property.category === 'automatizacion') ? (
+                    ) : (property.property_type === 'automatizacion') ? (
                         <div className="w-full h-full">
                             <FinanceVisual className="border-none rounded-none" contentClassName="max-w-[400px] scale-125 md:scale-150" />
                         </div>
-                    ) : (property.property_type === 'script' || property.category === 'script') ? (
+                    ) : (property.property_type === 'script' || property.property_type === 'data_intelligence') ? (
                         <div className="w-full h-full">
                             <ScriptVisual className="border-none rounded-none" contentClassName="max-w-[400px] scale-125 md:scale-150" />
                         </div>
@@ -227,9 +150,6 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* Rating */}
-                                {/* Rating Removed */}
                             </div>
 
                             <p className="text-[17px] text-slate-300 leading-relaxed">
@@ -262,7 +182,6 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             </motion.div>
                         )}
 
-                        {/* Reviews Section Removed - B2B Model */}
                         <div className="bg-slate-900 rounded-2xl p-8 border border-slate-800">
                             <h2 className="text-2xl font-semibold text-white mb-4">
                                 ¿Por qué Script9?
@@ -295,7 +214,6 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                                         </span>
                                     </div>
                                 )}
-                                {/* Rating Removed */}
                             </div>
 
                             <div className="space-y-4 mb-6">
@@ -315,7 +233,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
 
                             <button
                                 onClick={handleReservation}
-                                className="w-full px-6 py-4 bg-[#10B981] text-white rounded-xl font-semibold text-lg hover:bg-[#059669] transition-colors shadow-lg hover:shadow-xl hero-text-white"
+                                className="w-full px-6 py-4 bg-[#10B981] text-white rounded-xl font-semibold text-lg hover:bg-[#059669] transition-colors shadow-lg hover:shadow-xl"
                             >
                                 Agendar Consultoría
                             </button>
@@ -323,13 +241,10 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
                             <p className="text-center text-sm text-[#86868b] mt-4">
                                 Sin compromiso inicial
                             </p>
-
-                            {/* Precio fijo footer eliminado para modelo consultoría */}
                         </motion.div>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

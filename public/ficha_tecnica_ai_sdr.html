@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Técnica - Script9 AI SDR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --dark: #0f172a;
+            --text: #334155;
+            --light-bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        .page {
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            padding: 40px;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .page {
+                margin: 0;
+                padding: 40px;
+                box-shadow: none;
+                width: 100%;
+                border: none;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Logo SVG */
+        .logo svg {
+            height: 40px;
+            width: auto;
+        }
+
+        .doc-meta {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--dark);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box {
+            background: var(--light-bg);
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+            transition: transform 0.2s;
+            z-index: 100;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button onclick="window.print()" class="btn-print no-print">🖨️ Descargar PDF</button>
+
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <!-- Embedded SVG of Script9 Logo -->
+                <svg viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="30" font-size="32" font-family="Inter, sans-serif" font-weight="800" fill="#0f172a"
+                        letter-spacing="-1.5">
+                        Script<tspan fill="#10B981">9</tspan>
+                    </text>
+                </svg>
+            </div>
+            <div class="doc-meta">
+                <strong>FICHA TÉCNICA v2.5</strong><br>
+                Enero 2026
+            </div>
+        </div>
+
+        <!-- TITLE -->
+        <span class="badge">Deep Tech Automation</span>
+        <h1>AI Sales Development Rep (SDR)</h1>
+        <p style="font-size: 1.1rem; color: #64748b;">
+            Sistema autónomo de prospección, cualificación y gestión comercial B2B.
+        </p>
+
+        <!-- CONTENT -->
+        <div class="highlight-box">
+            <strong>Resumen Ejecutivo:</strong><br>
+            El AI SDR de Script9 no es un chatbot convencional. Es un agente inteligente integrado en la infraestructura
+            de la empresa (CRM, Calendario, Slack) capaz de mantener conversaciones complejas, tomar decisiones de
+            negocio y cerrar reuniones sin intervención humana.
+        </div>
+
+        <h2>1. Arquitectura Técnica ("El Cerebro")</h2>
+        <p>Diseñado con una arquitectura modular serverless para máxima escalabilidad y seguridad.</p>
+
+        <ul>
+            <li><strong>Orquestación (Backend):</strong> n8n Self-Hosted. Gestiona la lógica de negocio y mantiene el
+                estado de las sesiones.</li>
+            <li><strong>Modelos de Lenguaje (LLMs):</strong>
+                <ul>
+                    <li><strong style="color:var(--dark)">Google Gemini 1.5 Pro:</strong> Motor principal. Se encarga
+                        tanto del razonamiento lógico (Scoring) como de la conversación natural (Chat), optimizando
+                        costi y latencia.</li>
+                </ul>
+            </li>
+            <li><strong>Almacenamiento:</strong> Supabase (PostgreSQL) con Row Level Security (RLS) para máxima
+                privacidad.</li>
+        </ul>
+
+        <h2>2. Funcionalidades Core</h2>
+
+        <h3>Captación Multicanal Omnipresente</h3>
+        <ul>
+            <li><strong>Widget Web Inteligente:</strong> Interactúa proactivamente con visitantes web.</li>
+            <li><strong>Ingesta de Formularios:</strong> Procesa leads de formularios estáticos y los inyecta en el
+                flujo de cualificación automática.</li>
+        </ul>
+
+        <h3>Scoring BANT en Tiempo Real</h3>
+        <p>El sistema analiza semánticamente cada conversación para extraer:</p>
+        <table style="width:100%; border-collapse: collapse; margin-top:10px;">
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; font-weight: bold; width: 120px;">BUDGET</td>
+                <td style="padding: 8px;">¿El cliente tiene capacidad económica?</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; font-weight: bold;">AUTHORITY</td>
+                <td style="padding: 8px;">¿Es el decisor final o un intermediario?</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; font-weight: bold;">NEED</td>
+                <td style="padding: 8px;">¿Identificamos un "pain point" claro?</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; font-weight: bold;">TIMELINE</td>
+                <td style="padding: 8px;">¿Cuándo necesita la solución?</td>
+            </tr>
+        </table>
+
+        <h3>Tool Calling & Automatización</h3>
+        <p>El agente tiene permisos de ejecución (Tool Use):</p>
+        <ul>
+            <li><strong>Agendamiento Automático:</strong> Despliegue de Calendly cuando el scoring supera el umbral de
+                70 puntos.</li>
+            <li><strong>Live Handoff:</strong> Escalado a agente humano si detecta frustración o temas críticos.</li>
+        </ul>
+
+        <h2>3. Integraciones & Alertas</h2>
+        <ul>
+            <li><strong>Slack / WhatsApp Business:</strong> Notificación "Hot Lead" instantánea al equipo comercial.
+            </li>
+            <li><strong>CRM Bidireccional:</strong> Sincronización automática de contactos y notas de la reunión.</li>
+        </ul>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            Script9 Consultoría Estratégica en TI <br>
+            <a href="https://script-9.com" style="color: var(--primary); text-decoration: none;">www.script-9.com</a> |
+            contact@script-9.com
+        </div>
+    </div>
+
+</body>
+
+</html>
