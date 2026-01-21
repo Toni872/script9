@@ -19,9 +19,12 @@ interface ServiceCardProps {
 const serviceTypeConfig: Record<string, { icon: typeof Zap; label: string }> = {
     automatizacion: { icon: Zap, label: 'Automatización' },
     ia_chatbot: { icon: Bot, label: 'IA & Chatbot' },
+    ia_agent: { icon: Bot, label: 'Agente IA' },
     workflow: { icon: Settings, label: 'Workflow' },
     script: { icon: Code, label: 'Script' },
+    data_intelligence: { icon: Code, label: 'Intelligence' }, // Uses Code icon for Python/Scraping
     integracion: { icon: Globe, label: 'Integración' },
+    desarrollo_medida: { icon: Globe, label: 'Ingeniería SaaS' }, // Uses Globe for Architecture
     consultoria: { icon: MessageSquare, label: 'Consultoría' },
 };
 
@@ -53,13 +56,13 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden bg-slate-800">
                     {/* Dynamic Visual Rendering */}
-                    {service.property_type === 'ia_chatbot' ? (
+                    {(service.property_type === 'ia_chatbot' || service.property_type === 'ia_agent') ? (
                         <AISDRVisualCard />
-                    ) : (service.property_type === 'integracion' || service.category === 'integracion' || service.title.toLowerCase().includes('workflow')) ? (
+                    ) : (service.property_type === 'integracion' || service.property_type === 'desarrollo_medida' || service.title.toLowerCase().includes('workflow')) ? (
                         <IntegrationsVisual />
-                    ) : (service.property_type === 'automatizacion' || service.category === 'automatizacion') ? (
+                    ) : (service.property_type === 'automatizacion') ? (
                         <FinanceVisual />
-                    ) : (service.property_type === 'script' || service.category === 'script') ? (
+                    ) : (service.property_type === 'script' || service.property_type === 'data_intelligence') ? (
                         <ScriptVisual />
                     ) : (
                         <Image
