@@ -110,6 +110,7 @@ export default function Catalogo() {
 
             const { properties: result } = searchMockServices(searchParams);
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const transformedProperties: Service[] = result.map((prop: any) => ({
                 id: prop.id,
                 title: prop.title || prop.name,

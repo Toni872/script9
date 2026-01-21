@@ -61,7 +61,7 @@ async function getProperty(id: string): Promise<Service | null> {
             max_guests: dataToTransform.max_guests || dataToTransform.capacity || 10,
             image_urls: dataToTransform.image_urls || [],
             rating: dataToTransform.average_rating || dataToTransform.rating || 0,
-            review_count: dataToTransform.review_count || (dataToTransform.reviews as any)?.[0]?.count || 0,
+            review_count: dataToTransform.review_count || (dataToTransform.reviews as unknown as { count: number }[])?.[0]?.count || 0,
             features: dataToTransform.features || [],
             amenities: dataToTransform.amenities || [],
             provider_id: dataToTransform.host_id,

@@ -18,6 +18,9 @@ import {
 import ReviewCard from '@/components/ReviewCard';
 import { Service } from '@/types';
 import AISDRVisual from '@/components/marketing/AISDRVisual';
+import { IntegrationsVisual } from '@/components/services/visuals/IntegrationsVisual';
+import { FinanceVisual } from '@/components/services/visuals/FinanceVisual';
+import { ScriptVisual } from '@/components/services/visuals/ScriptVisual';
 
 
 // Define Review type locally if not in shared types, or ideally move to types/index.ts
@@ -163,9 +166,21 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
             {/* Visual Header (Image or Animation) */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900">
-                    {property.title.includes('AI SDR') ? (
+                    {property.property_type === 'ia_chatbot' || property.title.includes('AI SDR') ? (
                         <div className="w-full h-full">
                             <AISDRVisual />
+                        </div>
+                    ) : (property.property_type === 'integracion' || property.category === 'integracion' || property.title.toLowerCase().includes('workflow')) ? (
+                        <div className="w-full h-full">
+                            <IntegrationsVisual className="border-none rounded-none" contentClassName="max-w-[400px] scale-125 md:scale-150" />
+                        </div>
+                    ) : (property.property_type === 'automatizacion' || property.category === 'automatizacion') ? (
+                        <div className="w-full h-full">
+                            <FinanceVisual className="border-none rounded-none" contentClassName="max-w-[400px] scale-125 md:scale-150" />
+                        </div>
+                    ) : (property.property_type === 'script' || property.category === 'script') ? (
+                        <div className="w-full h-full">
+                            <ScriptVisual className="border-none rounded-none" contentClassName="max-w-[400px] scale-125 md:scale-150" />
                         </div>
                     ) : (
                         <Image

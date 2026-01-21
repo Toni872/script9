@@ -44,6 +44,7 @@ export interface Service {
     host_id: string;     // kept for DB compatibility
 
     rating: number;
+    average_rating?: number; // Legacy alias
     review_count: number;
     image_urls: string[];
     features: Array<{

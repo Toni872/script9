@@ -6,6 +6,9 @@ import { Star, Zap, Bot, Code, Settings, Globe, MessageSquare, ArrowRight, Check
 import { useState } from 'react';
 import { Service } from '@/types';
 import AISDRVisualCard from '@/components/marketing/AISDRVisualCard';
+import { IntegrationsVisual } from '@/components/services/visuals/IntegrationsVisual';
+import { FinanceVisual } from '@/components/services/visuals/FinanceVisual';
+import { ScriptVisual } from '@/components/services/visuals/ScriptVisual';
 
 interface ServiceCardProps {
     service: Service;
@@ -34,23 +37,30 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
     };
 
     // Fallback logic for property_type legacy field
-    const serviceType = (service as any).property_type || 'automatizacion';
+    const serviceType = service.property_type || 'automatizacion';
     const config = serviceTypeConfig[serviceType] || serviceTypeConfig.automatizacion;
     const ServiceIcon = config.icon;
     const mainImage = service.image_urls?.[0] || 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop&q=80';
     // Handle both rating fields during migration
-    const displayRating = service.rating || (service as any).average_rating || 5.0;
+    const displayRating = service.rating || service.average_rating || 5.0;
 
     // Handle amenities/features legacy
-    const technologies = service.features?.map(f => f.name) || (service as any).amenities || [];
+    const technologies = service.features?.map(f => f.name) || service.amenities || [];
 
     return (
         <Link href={service.custom_url || `/soluciones/${service.id}`} className="group block h-full">
             <article className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 h-full flex flex-col">
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden bg-slate-800">
-                    {service.title.includes('AI SDR') ? (
+                    {/* Dynamic Visual Rendering */}
+                    {service.property_type === 'ia_chatbot' ? (
                         <AISDRVisualCard />
+                    ) : (service.property_type === 'integracion' || service.category === 'integracion' || service.title.toLowerCase().includes('workflow')) ? (
+                        <IntegrationsVisual />
+                    ) : (service.property_type === 'automatizacion' || service.category === 'automatizacion') ? (
+                        <FinanceVisual />
+                    ) : (service.property_type === 'script' || service.category === 'script') ? (
+                        <ScriptVisual />
                     ) : (
                         <Image
                             src={mainImage}
@@ -67,7 +77,7 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                         </span>
                     </div>
                     {/* is_script9_select logic */}
-                    {(service as any).is_script9_select && (
+                    {service.is_script9_select && (
                         <div className="absolute top-3 right-3">
                             <span className="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-900/20">
                                 SELECT

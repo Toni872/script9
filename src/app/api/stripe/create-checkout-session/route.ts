@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
             .select('id, title, price_per_hour, host_id')
             .single();
 
-        let service = serviceData as any;
+        const service = serviceData as any;
 
         if (serviceError || !service) {
             console.warn('⚠️ Supabase fetch failed/empty. Trying Mock Data fallback for ID:', id);

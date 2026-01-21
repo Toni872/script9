@@ -2,37 +2,51 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
+// Rate Limiting Config (In-Memory for Demo / Single Instance)
+const WINDOW_MS = 60 * 1000; // 1 minuto
+const MAX_REQUESTS = 100; // 100 peticiones / minuto (ajustado para navegacion normal)
+const ipStore = new Map<string, { count: number; start: number }>();
+
 export async function middleware(req: NextRequest) {
     const res = NextResponse.next();
-
-    // 1. Cabeceras de Seguridad (Security Headers)
-    const headers = res.headers;
-    headers.set('X-XSS-Protection', '1; mode=block'); // Previene ataques XSS básicos
-    headers.set('X-Frame-Options', 'SAMEORIGIN'); // Evita Clickjacking
-    headers.set('X-Content-Type-Options', 'nosniff'); // Evita MIME sniffing
-    headers.set('Referrer-Policy', 'strict-origin-when-cross-origin'); // Privacidad
-    headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()'); // Bloquea APIs sensibles no usadas
-
-    // Configuración CSP (Opcional, puede ser estricta)
-    // headers.set('Content-Security-Policy', "default-src 'self' ... ");
-
-    // 2. Lógica de Rutas Protegidas
     const path = req.nextUrl.pathname;
 
-    // Definir rutas sensibles
-    const esRutaAdmin = path.startsWith('/admin');
-    // const esPanelUsuario = path.startsWith('/usuario'); // Descomentar para proteger panel usuario globalmente
+    // 1. Rate Limiting (Protección Anti-DDoS básica)
+    // Se aplica a rutas API y Contacto para evitar spam
+    if (path.startsWith('/api') || path === '/contacto') {
+        const ip = req.ip || req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+        const now = Date.now();
+        const record = ipStore.get(ip);
 
-    // NOTA: El panel de usuario ya suele tener protección por componente, 
-    // pero aquí añadimos una capa extra de seguridad a nivel de servidor.
+        if (!record) {
+            ipStore.set(ip, { count: 1, start: now });
+        } else {
+            if (now - record.start < WINDOW_MS) {
+                record.count += 1;
+                if (record.count > MAX_REQUESTS) {
+                    return new NextResponse('Too many requests. Please try again later.', { status: 429 });
+                }
+            } else {
+                record.count = 1;
+                record.start = now;
+            }
+            // Update store
+            ipStore.set(ip, record);
+        }
+    }
+
+    // 2. Lógica de Rutas Protegidas (Auth & RBAC)
+    const esRutaAdmin = path.startsWith('/admin');
+    // const esPanelUsuario = path.startsWith('/usuario'); // Descomentar si se requiere protección global de usuario
+
     const requiereProteccion = esRutaAdmin; // || esPanelUsuario;
 
     if (requiereProteccion) {
+        // Obtenemos el token de sesión
         const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
         // Si no está logueado -> Redirigir a Login
         if (!token) {
-            // Usamos la ruta de login configurada o la default de NextAuth
             const url = new URL('/api/auth/signin', req.url);
             url.searchParams.set('callbackUrl', path);
             return NextResponse.redirect(url);
@@ -40,8 +54,8 @@ export async function middleware(req: NextRequest) {
 
         // Si intenta entrar a Admin pero NO es admin
         if (esRutaAdmin && token.role !== 'admin') {
-            // Redirigir a página "No Autorizado"
-            return NextResponse.redirect(new URL('/unauthorized', req.url));
+            // Redirigir a página "No Autorizado" home
+            return NextResponse.redirect(new URL('/', req.url));
         }
     }
 

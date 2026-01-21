@@ -86,11 +86,11 @@ export const NeuroSphere = ({
             // Project and Rotate points
             const projectedParticles = particles.map(p => {
                 // Rotation Y
-                let x = p.baseX * Math.cos(rotationY) - p.baseZ * Math.sin(rotationY);
+                const x = p.baseX * Math.cos(rotationY) - p.baseZ * Math.sin(rotationY);
                 let z = p.baseX * Math.sin(rotationY) + p.baseZ * Math.cos(rotationY);
 
                 // Rotation X
-                let y = p.baseY * Math.cos(rotationX) - z * Math.sin(rotationX);
+                const y = p.baseY * Math.cos(rotationX) - z * Math.sin(rotationX);
                 z = p.baseY * Math.sin(rotationX) + z * Math.cos(rotationX);
 
                 // Perspective Projection
