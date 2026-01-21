@@ -49,8 +49,8 @@ const nextConfig = {
                             "font-src 'self' https://fonts.gstatic.com data:",
                             // Connect: propios, stripe, google maps
                             "connect-src 'self' https://api.stripe.com https://maps.googleapis.com https://*.tile.openstreetmap.org",
-                            // Frames: stripe
-                            "frame-src 'self' https://js.stripe.com",
+                            // Frames: stripe, cal.com
+                            "frame-src 'self' https://js.stripe.com https://cal.com",
                             // Workers
                             "worker-src 'self' blob:",
                             'upgrade-insecure-requests',
