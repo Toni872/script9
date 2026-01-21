@@ -98,16 +98,8 @@ export default function Registro() {
 
                 {/* Content */}
                 <div className="relative z-10 p-16 flex flex-col justify-between h-full">
-                    {/* Logo */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.1 }}
-                    >
-                        <Link href="/" className="inline-block">
-                            <Logo />
-                        </Link>
-                    </motion.div>
+                    {/* Spacer for where Logo used to be */}
+                    <div className="h-20"></div>
 
                     {/* Main Content - Static */}
                     <div>
@@ -171,14 +163,14 @@ export default function Registro() {
                     transition={{ duration: 0.6 }}
                     className="w-full max-w-md"
                 >
-                    {/* Mobile Logo */}
-                    <div className="lg:hidden text-center mb-8 sm:mb-12">
-                        <Link href="/" className="inline-block">
-                            <Logo />
-                        </Link>
-                    </div>
-
                     <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-xl max-h-[85vh] overflow-y-auto">
+                        {/* Logo Centered */}
+                        <div className="flex justify-center mb-8">
+                            <Link href="/" className="inline-block">
+                                <Logo />
+                            </Link>
+                        </div>
+
                         <h1 className="text-[32px] sm:text-[40px] font-semibold text-white mb-3 tracking-tight">
                             Crear Cuenta
                         </h1>
