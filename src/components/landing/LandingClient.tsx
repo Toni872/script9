@@ -150,23 +150,23 @@ export default function LandingClient() {
                     >
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-900 border border-slate-800 text-emerald-400 text-xs font-mono mb-6">
                             <Terminal className="w-3 h-3" />
-                            <span>PYTHON_ENGINEERING</span>
+                            <span>DEEP_TECH_INFRASTRUCTURE</span>
                         </div>
                         <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                            Potencia bruta.<br />
-                            <span className="text-slate-500">Sin interfaz.</span>
+                            Arquitectura escalable.<br />
+                            <span className="text-slate-500">Más allá del No-Code.</span>
                         </h2>
                         <p className="text-xl text-slate-400 font-light mb-8">
-                            Cuando el No-Code se queda corto, desplegamos scripts de Python a medida.
-                            Ideal para <strong>Web Scraping masivo</strong> y APIs complejas.
+                            Cuando las herramientas visuales no bastan, desplegamos <strong>ingeniería de software a medida</strong>.
+                            Diseñamos sistemas robustos capaces de procesar millones de datos sin interrupciones.
                         </p>
 
                         <ul className="space-y-4 font-mono text-sm text-slate-300">
                             <li className="flex items-center gap-3">
-                                <span className="text-emerald-500">➜</span> Scrapeo de 10k+ leads/hora
+                                <span className="text-emerald-500">➜</span> Procesamiento de 1M+ registros/hora
                             </li>
                             <li className="flex items-center gap-3">
-                                <span className="text-emerald-500">➜</span> Bypassing de Captchas
+                                <span className="text-emerald-500">➜</span> Seguridad Bancaria End-to-End
                             </li>
                         </ul>
                     </motion.div>

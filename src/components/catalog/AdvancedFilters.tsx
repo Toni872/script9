@@ -28,7 +28,7 @@ export default function AdvancedFilters({ filters, onFilterChange, onClearFilter
         { value: 'automatizacion', label: 'Automatizaciones' },
         { value: 'ia_chatbot', label: 'IA & Chatbots' },
         { value: 'workflow', label: 'Workflows' },
-        { value: 'script', label: 'Scripts a Medida' },
+        { value: 'script', label: 'Ingeniería de Software' },
         { value: 'integracion', label: 'Integraciones API' },
         { value: 'consultoria', label: 'Consultoría' },
     ];

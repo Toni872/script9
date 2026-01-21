@@ -89,7 +89,7 @@ export default function Header() {
                                             <DropdownLink href="/servicios/agente-comercial" icon={Bot} title="Agentes IA" desc="Ventas & Atención 24/7" color="emerald" />
                                             <DropdownLink href="/servicios/automatizaciones" icon={Zap} title="Automatizaciones" desc="Email, Datos & Reporting" color="amber" />
                                             <DropdownLink href="/servicios/integraciones" icon={Globe} title="Integraciones" desc="Integraciones End-to-End" color="purple" />
-                                            <DropdownLink href="/servicios/scripts-a-medida" icon={Code2} title="Scripts a Medida" desc="Python & Node.js" color="blue" />
+                                            <DropdownLink href="/servicios/scripts-a-medida" icon={Code2} title="Ingeniería de Software" desc="Desarrollo SaaS & APIs" color="blue" />
                                         </div>
                                     </motion.div>
                                 )}
@@ -223,7 +223,7 @@ export default function Header() {
                                 <div className="p-6 bg-slate-950/50">
                                     <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Sugerencias Populares</p>
                                     <div className="flex flex-wrap gap-2">
-                                        {['Agentes IA', 'Chatbots WhatsApp', 'Scraping Inmobiliario', 'CRM Automático', 'Python Scripts', 'Consultoría'].map((term) => (
+                                        {['Agentes IA', 'SDR Automático', 'Auditoría de Procesos', 'Dashboard Financiero', 'Ingeniería SaaS', 'Consultoría'].map((term) => (
                                             <button
                                                 key={term}
                                                 onClick={() => {
