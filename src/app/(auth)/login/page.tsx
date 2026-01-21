@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, Lock, CheckCircle, Star, Users } from 'lucide-react';
+import { Logo } from '@/components/ui/Logo';
 
 export default function Login() {
     const router = useRouter();
@@ -82,11 +83,8 @@ export default function Login() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.1 }}
                     >
-                        <Link href="/" className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#003D82] to-[#10B981] flex items-center justify-center text-white font-bold text-xl shadow-xl">
-                                S9
-                            </div>
-                            <span className="text-white text-[32px] font-bold tracking-tight">Script9</span>
+                        <Link href="/" className="inline-block">
+                            <Logo />
                         </Link>
                     </motion.div>
 
@@ -154,11 +152,8 @@ export default function Login() {
                 >
                     {/* Mobile Logo */}
                     <div className="lg:hidden text-center mb-8 sm:mb-12">
-                        <Link href="/" className="inline-flex items-center gap-2">
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#003D82] to-[#10B981] flex items-center justify-center text-white font-bold text-lg shadow-md">
-                                S9
-                            </div>
-                            <span className="text-[#1d1d1f] text-[28px] sm:text-[32px] font-bold">Script9</span>
+                        <Link href="/" className="inline-block">
+                            <Logo />
                         </Link>
                     </div>
 
