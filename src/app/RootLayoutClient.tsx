@@ -15,6 +15,7 @@ export default function RootLayoutClient({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const isDashboard = pathname?.startsWith("/dashboard") || pathname?.startsWith("/admin");
     const isAuthPage = pathname?.startsWith("/login") || pathname?.startsWith("/registro") || pathname?.startsWith("/(auth)");
     const showHeader = !isDashboard && !isAuthPage;
 
