@@ -79,7 +79,7 @@ export default function Footer() {
                             <ul className="space-y-3">
                                 {[
                                     { label: 'Centro de Ayuda', href: '/faq' },
-                                    { label: 'Términos y Condiciones', href: '/legal' },
+                                    { label: 'Términos y Condiciones', href: '/terminos' },
                                     { label: 'Política de Privacidad', href: '/privacidad' },
                                     { label: 'Contacto', href: '/contacto' },
                                 ].map((item) => (
@@ -99,7 +99,12 @@ export default function Footer() {
                         <div>
                             <h3 className="text-white font-bold text-lg mb-6">Contáctanos</h3>
                             <ul className="space-y-4">
-
+                                <li className="flex items-center space-x-3">
+                                    <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
+                                    <a href="mailto:contact@script-9.com" className="text-zinc-400 text-sm hover:text-emerald-400 transition-colors">
+                                        contact@script-9.com
+                                    </a>
+                                </li>
                                 <li className="flex items-center space-x-3">
                                     <Phone className="w-5 h-5 text-emerald-500 shrink-0" />
                                     <span className="text-zinc-400 text-sm">+34 687 723 287</span>
