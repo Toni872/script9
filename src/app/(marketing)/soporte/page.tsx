@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Mail, MessageSquare, Phone, Send, Loader2, Bot, Headphones } from 'lucide-react';
+import { Mail, MessageSquare, Send, Loader2, Headphones } from 'lucide-react';
 
 import { useRouter } from 'next/navigation';
 import { DeepTechHero } from '@/components/ui/DeepTechHero';

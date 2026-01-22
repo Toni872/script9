@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Search, Zap, Code, CreditCard, Shield, HelpCircle, Bot, Settings } from 'lucide-react';
-import Image from 'next/image';
+import { ChevronDown, Search, Zap, Code, CreditCard, HelpCircle, Bot, Settings } from 'lucide-react';
 import { DeepTechHero } from '@/components/ui/DeepTechHero';
 
 interface FAQItem {

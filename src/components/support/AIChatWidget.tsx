@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Bot, Send, X, Loader2, Sparkles, User } from 'lucide-react';
+import { Bot, Send, X, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 interface Message {

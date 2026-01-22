@@ -143,7 +143,7 @@ export default function AboutPage() {
                     <div className="space-y-6">
                         <h2 className="text-2xl font-mono text-emerald-400">NUESTRA MISIÓN</h2>
                         <p className="text-4xl md:text-5xl font-bold text-white leading-tight">
-                            "Eliminar el trabajo repetitivo para que los humanos se dediquen a crear."
+                            &quot;Eliminar el trabajo repetitivo para que los humanos se dediquen a crear.&quot;
                         </p>
                     </div>
 

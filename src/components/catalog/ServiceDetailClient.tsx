@@ -27,7 +27,7 @@ export default function ServiceDetailClient({ initialProperty, propertyId }: Ser
     const router = useRouter();
 
     const [property, setProperty] = useState<Service | null>(initialProperty);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentImageIndex] = useState(0);
 
     useEffect(() => {
         const fetchProperty = async () => {

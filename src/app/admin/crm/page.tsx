@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { CRMLead } from '@/types/agent';
 import {
     createColumnHelper,
@@ -37,15 +36,15 @@ export default function AdminCRMPage() {
             .select('*')
             .order('created_at', { ascending: false });
 
-        if (data) setLeads(data as any);
+        if (data) setLeads(data as CRMLead[]);
         setLoading(false);
     };
 
     const handleStatusChange = async (leadId: string, newStatus: string) => {
         // Optimistic update
-        setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status: newStatus as any } : l));
+        setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status: newStatus as CRMLead['status'] } : l));
         if (selectedLead && selectedLead.id === leadId) {
-            setSelectedLead({ ...selectedLead, status: newStatus as any });
+            setSelectedLead({ ...selectedLead, status: newStatus as CRMLead['status'] });
         }
 
         const { error } = await supabase
@@ -130,7 +129,7 @@ export default function AdminCRMPage() {
         columnHelper.display({
             id: 'actions',
             header: '',
-            cell: (info) => (
+            cell: () => (
                 <button
                     onClick={(e) => {
                         e.stopPropagation();

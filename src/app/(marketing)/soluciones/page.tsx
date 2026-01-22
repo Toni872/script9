@@ -7,9 +7,8 @@ import { useSearchParams } from 'next/navigation';
 import SearchBar, { SearchParams } from '@/components/SearchBar';
 import ServiceCard from '@/components/ServiceCard';
 import { Service } from '@/types';
-import AdvancedFilters from '@/components/catalog/AdvancedFilters';
 import { Button } from '@/components/ui/button';
-import { Loader2, Zap, SlidersHorizontal, Grid3x3, LayoutGrid, Sparkles, Code, Bot, Globe } from 'lucide-react';
+import { Loader2, Zap, Grid3x3, LayoutGrid, Sparkles, Code, Bot, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface AdvancedFilterOptions {
@@ -28,7 +27,7 @@ export default function Catalogo() {
     const [properties, setProperties] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [showFilters, setShowFilters] = useState(false);
+
     const [viewMode, setViewMode] = useState<'grid' | 'compact'>('grid');
 
     // State for filters

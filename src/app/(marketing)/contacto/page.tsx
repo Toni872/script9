@@ -3,9 +3,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2, Building2, Sparkles, TrendingUp, ShieldCheck, Clock } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle2, AlertCircle, Loader2, Building2, Sparkles, TrendingUp, ShieldCheck, Clock } from 'lucide-react';
 import { FaLinkedin } from 'react-icons/fa';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import BookingCalendar from '@/components/BookingCalendar';
@@ -64,7 +63,7 @@ export default function Contacto() {
             });
 
             setTimeout(() => setSuccess(false), 5000);
-        } catch (err) {
+        } catch {
             setError('Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo.');
         } finally {
             setLoading(false);

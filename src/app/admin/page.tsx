@@ -217,31 +217,7 @@ export default function AdminDashboard() {
                         </p>
                     </button>
 
-                    <button
-                        onClick={() => router.push('/admin/propiedades')}
-                        className="bg-slate-900/50 rounded-xl p-6 border border-slate-800 hover:border-purple-500/50 hover:bg-slate-900 transition-all text-left group"
-                    >
-                        <Home className="w-8 h-8 text-purple-500 mb-4 group-hover:text-purple-400 transition-colors" />
-                        <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
-                            Gestionar Propiedades
-                        </h3>
-                        <p className="text-sm text-slate-400 mt-2 group-hover:text-slate-300">
-                            Aprobar, rechazar y editar propiedades publicadas
-                        </p>
-                    </button>
 
-                    <button
-                        onClick={() => router.push('/admin/reservas')}
-                        className="bg-slate-900/50 rounded-xl p-6 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all text-left group"
-                    >
-                        <Calendar className="w-8 h-8 text-emerald-500 mb-4 group-hover:text-emerald-400 transition-colors" />
-                        <h3 className="text-lg font-semibold text-white group-hover:text-emerald-400 transition-colors">
-                            Gestionar Reservas
-                        </h3>
-                        <p className="text-sm text-slate-400 mt-2 group-hover:text-slate-300">
-                            Ver todas las reservas y resolver problemas
-                        </p>
-                    </button>
                 </motion.div>
 
                 {/* Recent Activity */}

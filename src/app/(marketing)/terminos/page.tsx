@@ -28,7 +28,7 @@ export default function TerminosPage() {
 
                     <h3>1. Información General</h3>
                     <p>
-                        Script9 ("nosotros", "nuestro") es una consultoría estratégica en TI y automatización SaaS. Nuestra plataforma ofrece servicios de desarrollo de software, automatización de procesos, y venta de scripts y workflows digitales.
+                        Script9 (&quot;nosotros&quot;, &quot;nuestro&quot;) es una consultoría estratégica en TI y automatización SaaS. Nuestra plataforma ofrece servicios de desarrollo de software, automatización de procesos, y venta de scripts y workflows digitales.
                     </p>
 
                     <h3>2. Uso de los Servicios</h3>
