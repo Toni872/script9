@@ -130,6 +130,18 @@ export default function Contacto() {
                                     </div>
                                 </div>
 
+                                <div className="flex items-start gap-4 group">
+                                    <div className="p-3 bg-emerald-500/10 rounded-xl group-hover:bg-emerald-500/20 transition-colors">
+                                        <Mail className="h-6 w-6 text-emerald-400" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-white mb-1">Email</h3>
+                                        <a href="mailto:contact@script-9.com" className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                            contact@script-9.com
+                                        </a>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>
