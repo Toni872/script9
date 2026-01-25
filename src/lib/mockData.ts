@@ -4,7 +4,7 @@ export const mockServices: any[] = [
   {
     id: 's1-ai-sdr',
     title: 'Sistema de Prospección Automática (AI SDR)',
-    description: 'Nuestro sistema propietario de generación de ventas. Conecta formularios web y bases de datos externas directamente a ujn cerebro IA (n8n + Gemini 2.5). Analiza cada lead en tiempo real, clasifica su potencial (Scoring BANT) y ejecuta acciones automáticas: registro en CRM, alerta a Slack y email de bienvenida ultra-personalizado. Es el mismo motor que usamos en Script9.',
+    description: 'Nuestro sistema propietario de generación de ventas. Conecta formularios web y bases de datos externas directamente a un cerebro IA (n8n + Gemini 2.5). Analiza cada lead en tiempo real, clasifica su potencial (Scoring BANT) y ejecuta acciones automáticas: registro en CRM, alerta a Slack y email de bienvenida ultra-personalizado. Es el mismo motor que usamos en Script9.',
     property_type: 'ia_agent',
     price: 1500,
     unit: 'setup',

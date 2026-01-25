@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo de Despliegue Script9 | AI SDR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --dark: #0f172a;
+            --text: #334155;
+            --light-bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            background: #e2e8f0;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+            padding: 15mm;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                min-height: 100%;
+                page-break-after: always;
+                page-break-before: avoid;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .logo svg {
+            height: 36px;
+            width: auto;
+        }
+
+        .doc-title {
+            text-align: right;
+        }
+
+        .doc-title h1 {
+            font-size: 14pt;
+            margin: 0;
+            color: var(--dark);
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .doc-title span {
+            font-size: 9pt;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* CHECKLIST SYSTEM */
+        .phase-title {
+            background: var(--dark);
+            color: white;
+            padding: 6px 12px;
+            font-size: 10pt;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .phase-title span {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 8pt;
+        }
+
+        .checklist-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 3px;
+            background: white;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+
+        .content h3 {
+            margin: 0 0 2px 0;
+            font-size: 9.5pt;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .content p {
+            margin: 0;
+            font-size: 8.5pt;
+            color: var(--text);
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 7.5pt;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .client-action {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        /* INFO GRID */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .info-box h4 {
+            margin: 0 0 5px 0;
+            font-size: 9pt;
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+
+        .info-box ul {
+            margin: 0;
+            padding-left: 15px;
+            font-size: 8.5pt;
+        }
+
+        /* WARNING BOX */
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 8.5pt;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .footer {
+            font-size: 8pt;
+            text-align: center;
+            color: #94a3b8;
+            margin-top: auto;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="window.print()" class="btn-print no-print">🖨️ Imprimir Protocolo</button>
+
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <svg viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="28" font-size="32" font-family="Inter, sans-serif" font-weight="800" fill="#0f172a"
+                        letter-spacing="-1.5">
+                        Script<tspan fill="#10B981">9</tspan>
+                    </text>
+                </svg>
+            </div>
+            <div class="doc-title">
+                <h1>Roadmap de Despliegue</h1>
+                <span>Protocolo Técnico Completo • AI SDR</span>
+            </div>
+        </div>
+
+        <p style="font-size: 9pt; color: #64748b; margin-top: -10px; margin-bottom: 20px;">
+            Este documento detalla secuencialmente todas las acciones necesarias para desplegar la infraestructura de un
+            cliente desde cero. Seguir estrictamente para garantizar seguridad y calidad.
+        </p>
+
+        <!-- PHASE 0: PRE-REQUISITES -->
+        <div class="phase-title">
+            0. Fase Preliminar & Compras (Cliente) <span>Día 0</span>
+        </div>
+        <div class="info-grid">
+            <div class="info-box" style="border-color: #fca5a5; background: #fef2f2;">
+                <h4 style="color: #991b1b;">⚠️ A nombre del Cliente</h4>
+                <div class="checklist-item" style="background: none; border: none; padding: 0; margin: 5px 0;">
+                    <div class="checkbox"></div>
+                    <div class="content">
+                        <p><b>Alta Heter/DigitalOcean (+Tarjeta):</b> Crear la cuenta donde se alojará el servidor VPS.
+                            Vital para que la factura vaya a su nombre.</p>
+                    </div>
+                </div>
+                <div class="checklist-item" style="background: none; border: none; padding: 0; margin: 5px 0;">
+                    <div class="checkbox"></div>
+                    <div class="content">
+                        <p><b>Alta OpenAI/Google (+Tarjeta):</b> Crear cuentas de desarrollador para facturar el consumo
+                            de tokens.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="info-box">
+                <h4>Material Necesario</h4>
+                <ul>
+                    <li>Accesos al Gestor de Dominios (DNS) del cliente.</li>
+                    <li>PDFs/Docs de conocimiento del producto.</li>
+                    <li>Logo en formato SVG/PNG transparente.</li>
+                    <li>Lista de emails para notificaciones.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PHASE 1: INFRASTRUCTURE -->
+        <div class="phase-title">
+            1. Infraestructura Base (Hardware & Red) <span>Día 1</span>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Provisionamiento VPS</h3>
+                <p>Desplegar instancia Ubuntu 24.04 LTS (x86/ARM). Mínimo 2 vCPU / 4GB RAM.</p>
+                <span class="tech-tag">Hetzner CPX11</span> <span class="tech-tag">DigitalOcean Droplet</span>
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Configuración DNS</h3>
+                <p>Apuntar subdominios A Records hacia la IP del VPS:</p>
+                <p style="font-family:monospace; color:#64748b; margin-top:2px;">- a.cliente.com (n8n dashboard)<br>-
+                    db.cliente.com (Supabase/Postgres)</p>
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Seguridad Base (Hardening)</h3>
+                <p>Crear usuario no-root, denegar acceso root SSH por contraseña, configurar UFW (Firewall) permitiendo
+                    solo puertos 22, 80, 443.</p>
+                <span class="tech-tag">SSH Keys</span> <span class="tech-tag">UFW</span>
+            </div>
+        </div>
+
+        <!-- PHASE 2: SOFTWARE STACK -->
+        <div class="phase-title">
+            2. Instalación del "Motor" (Software) <span>Día 2</span>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Despliegue Docker Compose</h3>
+                <p>Clonar repositorio "Script9-Client-Core". Levantar contenedores:</p>
+                <p style="font-family:monospace; color:#64748b; margin-top:2px;">[Traefik] -> [n8n] + [PostgreSQL] +
+                    [Redis] + [Qdrant]</p>
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Configuración SSL (Traefik)</h3>
+                <p>Verificar generación automática de certificados Let's Encrypt para los subdominios. Comprobar candado
+                    verde.</p>
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Inyección de Credenciales</h3>
+                <p>Configurar variables de entorno en n8n:</p>
+                <span class="tech-tag">OPENAI_API_KEY</span> <span class="tech-tag">SLACK_BOT_TOKEN</span> <span
+                    class="tech-tag">SUPABASE_URL</span>
+            </div>
+        </div>
+
+        <!-- PHASE 3: LOGIC & TESTING -->
+        <div class="phase-title">
+            3. Lógica de Negocio & Validación <span>Día 3-5</span>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Importación de Workflows</h3>
+                <p>Cargar los JSONs estándar de Script9 (Ingestión, RAG, Scoring, Respuesta).</p>
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Creación de Vector Store (RAG)</h3>
+                <p>Procesar los PDFs del cliente, "chunkear" el texto y generar embeddings en la base de datos vectorial
+                    (Qdrant/Supabase).</p>
+                <span class="tech-tag">Embeddings</span> <span class="tech-tag">RAG Estricto</span>
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="content">
+                <h3>Pruebas de Estrés (Red Team)</h3>
+                <p>Intentar "romper" el bot. Probar alucinaciones, inyección de prompts y respuestas fuera de contexto.
+                    Calibrar temperatura del modelo.</p>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <span style="font-size:14pt;">⛔</span>
+            <b>Punto de No Retorno:</b> No entregar al cliente hasta que el "Scoring de Alucinación" sea 0 en las
+            pruebas de estrés.
+        </div>
+
+        <!-- NEW COSTS SECTION LINK -->
+        <div class="costs-section"
+            style="margin-top:20px; background:var(--dark); color:white; padding:15px; border-radius:8px;">
+            <h2 style="color:white; border-color:#475569; margin-top:0;"><span>5</span> Costes Operativos (Híbrido)</h2>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; text-align:center;">
+                <div>
+                    <span style="font-size:16pt; font-weight:800; color:var(--primary);">6€ - 50€</span>
+                    <span style="display:block; font-size:8pt; color:#94a3b8; text-transform:uppercase;">Rango
+                        Mensual</span>
+                </div>
+                <div>
+                    <span style="font-size:16pt; font-weight:800; color:var(--primary);">Cliente</span>
+                    <span style="display:block; font-size:8pt; color:#94a3b8; text-transform:uppercase;">Pagador
+                        Directo</span>
+                </div>
+            </div>
+            <p style="text-align:center; font-size:8pt; margin-top:10px; color:#94a3b8; font-style:italic;">
+                *Ver documento "Estudio de Costes & ROI" para desglose detallado.
+            </p>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <b>Script9</b> • Protocolo de Despliegue v2.1 • Uso Interno Estrictamente Confidencial
+        </div>
+    </div>
+</body>
+
+</html>

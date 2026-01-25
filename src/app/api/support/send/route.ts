@@ -22,6 +22,20 @@ export async function POST(req: Request) {
             type
         });
 
+        // --- NEW: Forward to N8N (AI SDR) ---
+        if (process.env.N8N_WEBHOOK_URL) {
+            try {
+                // Fire and forget (don't wait for N8N to respond to not slow down the UI)
+                fetch(process.env.N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                }).catch(err => console.error('Error forwarding to N8N:', err));
+            } catch (e) {
+                console.error('N8N Trigger Failed');
+            }
+        }
+
         if (success) {
             return NextResponse.json({ success: true });
         } else {

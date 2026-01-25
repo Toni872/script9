@@ -53,7 +53,10 @@ export default function AppLayout({
                             <AppSidebar subscriptionTier={userTier} />
                         </div>
                         <main className="lg:col-span-3">
-                            {children}
+                            {/* Page Transition Wrapper */}
+                            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+                                {children}
+                            </div>
                         </main>
                     </div>
                 </div>

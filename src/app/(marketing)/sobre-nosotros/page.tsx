@@ -1,166 +1,141 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Bot, Zap, Network, Code2, ArrowRight } from 'lucide-react';
-import { DeepTechHero } from '@/components/ui/DeepTechHero';
+import { Bot, Zap, Network, Code2, ArrowRight, Terminal, Cpu, ShieldCheck } from 'lucide-react';
 import { AboutVisual } from '@/components/marketing/AboutVisual';
 import Link from 'next/link';
 
 export default function AboutPage() {
-
-    // Texto del usuario:
-    // "Script9 es una consultoría Estratégica en TI + Automatización SaaS..."
-    const pillars = [
-        {
-            title: "Agentes IA",
-            description: "Empleados digitales que atienden, cualifican y venden 24/7.",
-            icon: Bot,
-            color: "text-blue-400",
-            border: "group-hover:border-blue-500/50"
-        },
-        {
-            title: "Automatización (N8N)",
-            description: "Workflows que conectan todo tu ecosistema (Stripe, Slack, CRM).",
-            icon: Zap,
-            color: "text-amber-400",
-            border: "group-hover:border-amber-500/50"
-        },
-        {
-            title: "Integraciones",
-            description: "Unificamos tus herramientas dispersas en un solo flujo de datos.",
-            icon: Network,
-            color: "text-purple-400",
-            border: "group-hover:border-purple-500/50"
-        },
-        {
-            title: "Scripts a Medida",
-            description: "Desarrollo Python/Node.js para problemas que el No-Code no resuelve.",
-            icon: Code2,
-            color: "text-emerald-400",
-            border: "group-hover:border-emerald-500/50"
-        }
-    ];
-
-    const stack = ["Python", "TypeScript", "N8N", "Google Gemini", "Supabase", "Next.js"];
-
     return (
         <div className="min-h-screen bg-slate-950 text-white font-sans selection:bg-emerald-500/30">
-            {/* Hero Section */}
-            <div className="pt-32 pb-16 px-6">
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
-                    {/* Left: Copy */}
-                    <div className="space-y-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-emerald-400 text-sm font-medium"
-                        >
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            Consultoría Estratégica TI + Automatización
-                        </motion.div>
-
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-5xl font-bold leading-tight"
-                        >
-                            Ingeniería de Producto que <span className="text-emerald-400">Ejecuta Rápido</span>
-                        </motion.h1>
-
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-lg text-slate-400 leading-relaxed"
-                        >
-                            Ayudamos a empresas a escalar sin aumentar su estructura de personal, sustituyendo tareas manuales por sistemas inteligentes. <br /><br />
-                            <span className="text-white font-medium">No somos una consultora tradicional.</span> Somos ingenieros obsesionados con la eficiencia.
-                        </motion.p>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                        >
-                            <Link href="/contacto" className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-medium transition-all group">
-                                Automatizar mi negocio
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </motion.div>
-                    </div>
-
-                    {/* Right: Visual */}
+            {/* 1. HERO MANIFESTO: Bold, Text-Heavy, Editorial Style */}
+            <section className="pt-32 pb-24 px-6 border-b border-slate-900">
+                <div className="max-w-5xl mx-auto text-center">
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-slate-800 text-emerald-400 text-xs font-mono tracking-widest uppercase mb-8"
                     >
-                        <AboutVisual />
+                        <Terminal className="w-3 h-3" />
+                        System.Init(Script9)
                     </motion.div>
-                </div>
-            </div>
 
-            {/* Pillars Section */}
-            <section className="py-24 bg-slate-900/30 border-y border-slate-900">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold mb-4">Nuestros 4 Pilares</h2>
-                        <p className="text-slate-400 max-w-2xl mx-auto">
-                            Una arquitectura completa para cubrir todos los ángulos de tu crecimiento digital.
-                        </p>
-                    </div>
+                    <motion.h1
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-white"
+                    >
+                        Ingeniería Primero.<br />
+                        <span className="text-slate-600">Marketing Segundo.</span>
+                    </motion.h1>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {pillars.map((pillar, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                viewport={{ once: true }}
-                                className={`bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:bg-slate-900/50 transition-all group ${pillar.border}`}
-                            >
-                                <div className={`w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center mb-6 ${pillar.color}`}>
-                                    <pillar.icon className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-3">{pillar.title}</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">
-                                    {pillar.description}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="text-xl md:text-2xl text-slate-400 leading-relaxed max-w-3xl mx-auto font-light"
+                    >
+                        Script9 nació de una frustración: ver a empresas pagar fortunas por "consultoría digital" que terminaba en PDFs vacíos.
+                        <br /><br />
+                        Nosotros no vendemos humo. Vendemos <span className="text-white font-medium border-b border-emerald-500/50">Sistemas que Funcionan</span>.
+                    </motion.p>
                 </div>
             </section>
 
-            {/* Stack & Mission */}
-            <section className="py-24 px-6 relative overflow-hidden">
-                <div className="max-w-4xl mx-auto text-center space-y-12">
+            {/* 2. THE PHILOSOPHY (Grid) */}
+            <section className="py-24 px-6 bg-slate-950">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+                                <Cpu className="w-8 h-8 text-emerald-500" />
+                                Nuestra Filosofía Técnica
+                            </h2>
+                            <div className="space-y-8">
+                                <PhilosophyItem
+                                    title="Código sobre No-Code"
+                                    desc="El No-Code es genial para prototipos. Para escalar, usamos Python, Typscript y SQL. Construimos activos sólidos, no parches temporales."
+                                />
+                                <PhilosophyItem
+                                    title="Automatización Radical"
+                                    desc="Si se hace más de 3 veces, se automatiza. Creemos que el talento humano es demasiado valioso para desperdiciarlo en 'Copy-Paste'."
+                                />
+                                <PhilosophyItem
+                                    title="Privacidad por Diseño"
+                                    desc="Tus datos operan en silos seguros. No compartimos modelos ni datos entre clientes. Tu IP es tuya."
+                                />
+                            </div>
+                        </div>
 
-                    {/* Mission */}
-                    <div className="space-y-6">
-                        <h2 className="text-2xl font-mono text-emerald-400">NUESTRA MISIÓN</h2>
-                        <p className="text-4xl md:text-5xl font-bold text-white leading-tight">
-                            &quot;Eliminar el trabajo repetitivo para que los humanos se dediquen a crear.&quot;
-                        </p>
-                    </div>
-
-                    {/* Stack */}
-                    <div className="pt-12 border-t border-slate-800">
-                        <p className="text-slate-500 text-sm font-mono mb-8 uppercase tracking-widest">Stack Tecnológico</p>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            {stack.map((tech, i) => (
-                                <span key={i} className="px-4 py-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-300 font-medium text-sm">
-                                    {tech}
-                                </span>
-                            ))}
+                        {/* Right: Technical Visual */}
+                        <div className="relative h-[500px] bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden transform md:rotate-3 transition-transform hover:rotate-0 duration-500">
+                            <AboutVisual />
                         </div>
                     </div>
-
                 </div>
             </section>
+
+            {/* 3. METRICS / IMPACT (Dark Strip) */}
+            <section className="py-20 bg-slate-900 border-y border-slate-800">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <MetricItem value="25,000+" label="Horas Ahorradas/Año" />
+                        <MetricItem value="99.9%" label="Uptime de Sistemas" />
+                        <MetricItem value="< 2s" label="Tiempo de Respuesta IA" />
+                        <MetricItem value="100%" label="Propiedad del Código" />
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. FOUNDER BIO / CTA */}
+            <section className="py-24 px-6">
+                <div className="max-w-4xl mx-auto bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-12 rounded-3xl relative overflow-hidden text-center">
+
+                    <div className="absolute top-0 right-0 p-12 opacity-10">
+                        <Code2 className="w-64 h-64 text-emerald-500 transform rotate-12" />
+                    </div>
+
+                    <div className="relative z-10">
+                        <h2 className="text-3xl font-bold mb-6 text-white">¿Por qué Script9?</h2>
+                        <p className="text-slate-400 text-lg mb-10 leading-relaxed">
+                            Porque necesitas un socio que entienda tanto de <strong>Balance de Situación</strong> como de <strong>APIs REST</strong>.
+                            Script9 es el puente entre el negocio y la tecnología profunda.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link href="/contacto" className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-8 py-4 rounded-xl font-bold transition-all transform hover:-translate-y-1 shadow-lg shadow-emerald-500/20">
+                                Hablar con un Ingeniero
+                                <ArrowRight className="w-5 h-5" />
+                            </Link>
+                            <Link href="/soluciones" className="inline-flex items-center justify-center gap-2 bg-transparent border border-slate-700 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-medium transition-all">
+                                Ver Soluciones
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
     );
 }
+
+function PhilosophyItem({ title, desc }: { title: string, desc: string }) {
+    return (
+        <div className="pl-6 border-l-2 border-slate-800 hover:border-emerald-500 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+        </div>
+    );
+}
+
+function MetricItem({ value, label }: { value: string, label: string }) {
+    return (
+        <div className="space-y-2">
+            <div className="text-4xl md:text-5xl font-bold text-white font-mono">{value}</div>
+            <div className="text-xs text-emerald-500 font-bold tracking-widest uppercase">{label}</div>
+        </div>
+    );
+}
+

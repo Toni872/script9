@@ -1,0 +1,264 @@
+{
+    "name": "Script9 AI SDR - Master Workflow (v2)",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "webhook",
+                "options": {}
+            },
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                100,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "operation": "executeQuery",
+                "query": "SELECT * FROM leads WHERE email = $1;",
+                "additionalFields": {
+                    "queryParams": "={{$json.body.email}}"
+                }
+            },
+            "name": "Check Lead Exists",
+            "type": "n8n-nodes-base.postgres",
+            "typeVersion": 1,
+            "position": [
+                300,
+                300
+            ],
+            "credentials": {
+                "postgres": {
+                    "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+                    "name": "Supabase Production"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "boolean": [
+                        {
+                            "value1": "={{$json.id}}",
+                            "operator": "notEmpty"
+                        }
+                    ]
+                }
+            },
+            "name": "Is Returning Lead?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 1,
+            "position": [
+                500,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "operation": "executeQuery",
+                "query": "INSERT INTO leads (email, status, created_at) VALUES ($1, 'new', NOW()) RETURNING id;",
+                "additionalFields": {
+                    "queryParams": "={{$node[\"Webhook\"].json.body.email}}"
+                }
+            },
+            "name": "Create New Lead",
+            "type": "n8n-nodes-base.postgres",
+            "typeVersion": 1,
+            "position": [
+                700,
+                400
+            ]
+        },
+        {
+            "parameters": {
+                "operation": "executeQuery",
+                "query": "SELECT content, role FROM messages WHERE lead_id = $1 ORDER BY created_at DESC LIMIT 5;",
+                "additionalFields": {
+                    "queryParams": "={{$json.id}}"
+                }
+            },
+            "name": "Get Chat History",
+            "type": "n8n-nodes-base.postgres",
+            "typeVersion": 1,
+            "position": [
+                700,
+                200
+            ]
+        },
+        {
+            "parameters": {
+                "modelId": "gemini-1.5-pro-latest",
+                "prompt": {
+                    "messages": [
+                        {
+                            "role": "system",
+                            "content": "Eres un AI SDR experto. Tu objetivo es cualificar al lead. \n\nContexto Histórico:\n{{$node[\"Get Chat History\"].json}}\n\nPregunta del Usuario:\n{{$node[\"Webhook\"].json.body.message}}\n\nResponde de forma corta, persuasiva y orientada a cerrar una reunión."
+                        },
+                        {
+                            "role": "user",
+                            "content": "={{$node[\"Webhook\"].json.body.message}}"
+                        }
+                    ]
+                }
+            },
+            "name": "Gemini AI Brain",
+            "type": "n8n-nodes-base.googleGemini",
+            "typeVersion": 1,
+            "position": [
+                1000,
+                300
+            ],
+            "credentials": {
+                "googleGeminiApi": {
+                    "id": "YOUR_GOOGLE_KEY_ID",
+                    "name": "Gemini Pro Client Account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "operation": "executeQuery",
+                "query": "INSERT INTO messages (lead_id, role, content) VALUES ($1, 'assistant', $2);",
+                "additionalFields": {
+                    "queryParams": "={{$node[\"Check Lead Exists\"].json.id}}, {{$json.content}}"
+                }
+            },
+            "name": "Save AI Response",
+            "type": "n8n-nodes-base.postgres",
+            "typeVersion": 1,
+            "position": [
+                1200,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "options": {}
+            },
+            "name": "Slack Notification (Sales)",
+            "type": "n8n-nodes-base.slack",
+            "typeVersion": 1,
+            "position": [
+                1400,
+                200
+            ],
+            "notes": "Notifies sales team via Slack"
+        },
+        {
+            "parameters": {
+                "fromEmail": "bot@script-9.com",
+                "toEmail": "contact@script-9.com",
+                "subject": "🔔 Nuevo Lead Cualificado",
+                "text": "Nuevo lead procesado por el bot.\n\nUsuario: {{$node[\"Webhook\"].json.body.email}}\nMensaje: {{$node[\"Webhook\"].json.body.message}}\nRespuesta IA: {{$node[\"Gemini AI Brain\"].json.content}}",
+                "options": {}
+            },
+            "name": "Send Email Alert",
+            "type": "n8n-nodes-base.emailSend",
+            "typeVersion": 1,
+            "position": [
+                1400,
+                400
+            ],
+            "credentials": {
+                "smtp": {
+                    "id": "YOUR_SMTP_CREDENTIALS",
+                    "name": "Company Email SMTP"
+                }
+            }
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Check Lead Exists",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Check Lead Exists": {
+            "main": [
+                [
+                    {
+                        "node": "Is Returning Lead?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Is Returning Lead?": {
+            "main": [
+                [
+                    {
+                        "node": "Get Chat History",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Create New Lead",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Get Chat History": {
+            "main": [
+                [
+                    {
+                        "node": "Gemini AI Brain",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Create New Lead": {
+            "main": [
+                [
+                    {
+                        "node": "Gemini AI Brain",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Gemini AI Brain": {
+            "main": [
+                [
+                    {
+                        "node": "Save AI Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Save AI Response": {
+            "main": [
+                [
+                    {
+                        "node": "Slack Notification (Sales)",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Send Email Alert",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint Técnico | Arquitectura AI SDR</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --dark: #0f172a;
+            --code-bg: #1e293b;
+            --text: #334155;
+            --light-bg: #f8fafc;
+            --accent: #6366f1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background: #e2e8f0;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+            padding: 15mm;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                min-height: 100%;
+                page-break-after: always;
+                page-break-before: avoid;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* HEADER */
+        .header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header h1 {
+            font-size: 20pt;
+            margin: 0;
+            color: var(--dark);
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .header h2 {
+            font-size: 10pt;
+            margin: 5px 0 0 0;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 8pt;
+            color: #64748b;
+        }
+
+        /* SECTIONS */
+        .section-title {
+            background: var(--dark);
+            color: white;
+            padding: 8px 15px;
+            font-size: 11pt;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 8pt;
+            text-transform: uppercase;
+        }
+
+        /* DATABASE SCHEMA */
+        .schema-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .table-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            background: #f1f5f9;
+            padding: 8px 12px;
+            font-size: 9pt;
+            font-weight: 700;
+            color: var(--dark);
+            border-bottom: 1px solid #cbd5e1;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .table-row {
+            padding: 6px 12px;
+            font-size: 8.5pt;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .type {
+            color: #64748b;
+            font-size: 7.5pt;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* LOGIC FLOW */
+        .flow-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 15px;
+        }
+
+        .step-num {
+            background: var(--dark);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9pt;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content h3 {
+            margin: 0 0 5px 0;
+            font-size: 10pt;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            margin: 0 0 10px 0;
+            font-size: 9pt;
+            color: #475569;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            color: #a5b4fc;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8pt;
+            white-space: pre-wrap;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* PROMPT DESIGN */
+        .prompt-box {
+            border: 1px dashed #94a3b8;
+            background: #fff;
+            padding: 15px;
+            font-size: 9pt;
+            color: #334155;
+            font-style: italic;
+            border-radius: 6px;
+        }
+
+        .footer {
+            font-size: 8pt;
+            text-align: center;
+            color: #94a3b8;
+            margin-top: auto;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="window.print()" class="btn-print no-print">🖨️ Imprimir Blueprint</button>
+
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div>
+                <h1>Blueprint Técnico</h1>
+                <h2>Arquitectura AI SDR (n8n + Supabase + Gemini)</h2>
+            </div>
+            <div class="meta-info">
+                REF: S9-ARCH-V3<br>
+                STATUS: PRODUCTION READY
+            </div>
+        </div>
+
+        <p style="font-size:9pt; margin-bottom:10px;">
+            Este documento define la lógica exacta, el esquema de base de datos y los prompts maestros para implementar
+            el sistema AI SDR. Usar como referencia para la configuración de nodos en n8n.
+        </p>
+
+        <!-- 1. DATABASE SCHEMA -->
+        <div class="section-title">
+            1. Esquema de Base de Datos (Supabase) <span class="badge">SQL</span>
+        </div>
+        <div class="schema-container">
+            <div class="table-card">
+                <div class="table-header">public.leads</div>
+                <div class="table-row">
+                    <span>id</span> <span class="type">uuid (PK)</span>
+                </div>
+                <div class="table-row">
+                    <span>email</span> <span class="type">text (Unique)</span>
+                </div>
+                <div class="table-row">
+                    <span>status</span> <span class="type">text (new, qualified, booked)</span>
+                </div>
+                <div class="table-row">
+                    <span>lead_score</span> <span class="type">int4 (0-100)</span>
+                </div>
+                <div class="table-row">
+                    <span>thread_summary</span> <span class="type">text (IA Generated)</span>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-header">public.messages</div>
+                <div class="table-row">
+                    <span>id</span> <span class="type">uuid (PK)</span>
+                </div>
+                <div class="table-row">
+                    <span>lead_id</span> <span class="type">uuid (FK)</span>
+                </div>
+                <div class="table-row">
+                    <span>role</span> <span class="type">text (user/assistant)</span>
+                </div>
+                <div class="table-row">
+                    <span>content</span> <span class="type">text</span>
+                </div>
+                <div class="table-row">
+                    <span>created_at</span> <span class="type">timestamptz</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. WORKFLOW LOGIC -->
+        <div class="section-title">
+            2. Lógica de Flujo (n8n Core) <span class="badge">WORKFLOW</span>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">1</div>
+            <div class="step-content" style="width:100%">
+                <h3>Ingestión & Contexto</h3>
+                <p>El Webhook recibe el mensaje. Buscamos al lead en Supabase por email/telefono. Si existe, recuperamos
+                    los últimos 5 mensajes (Memoria a Corto Plazo).</p>
+                <div class="code-block">SELECT * FROM messages WHERE lead_id = '{{json.user_id}}' ORDER BY created_at
+                    DESC LIMIT 5;</div>
+            </div>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">2</div>
+            <div class="step-content" style="width:100%">
+                <h3>RAG (Recuperación de Conocimiento)</h3>
+                <p>Si la pregunta es técnica, consultamos la Vector Store (Qdrant). Si es saludo, saltamos este paso
+                    para ahorrar latencia.</p>
+                <div class="code-block">IF input.length > 10 THEN Qdrant.search(embedding) ELSE return null;</div>
+            </div>
+        </div>
+
+        <div class="flow-step">
+            <div class="step-num">3</div>
+            <div class="step-content" style="width:100%">
+                <h3>Razonamiento IA (Gemini 1.5 Pro)</h3>
+                <p>Enviamos al LLM: [Contexto RAG] + [Historial Chat] + [System Prompt]. La IA decide si responder o
+                    "escalar a humano".</p>
+            </div>
+        </div>
+
+        <!-- 3. SYSTEM PROMPT -->
+        <div class="section-title">
+            3. Master System Prompt <span class="badge">GEMINI / GPT-4</span>
+        </div>
+        <div class="prompt-box">
+            "Eres Ana, la asistente de ventas senior de [CLIENTE].
+            <br><br>
+            <b>Tus Objetivos:</b><br>
+            1. Cualificar al lead usando el framework BANT (Budget, Authority, Need, Timing).<br>
+            2. Responder dudas usando SOLO el contexto proporcionado (CONTEXT_RAG). Si no lo sabes, di: 'Esa es una
+            excelente pregunta técnica, deja que consulte con un ingeniero'.<br>
+            3. Tu meta final es conseguir que agenden una reunión en: [CALENDLY_LINK].<br>
+            <br>
+            <b>Reglas de Estilo:</b><br>
+            - Sé concisa (máximo 2 párrafos).<br>
+            - Usa tono profesional pero cercano.<br>
+            - Termina siempre con una pregunta cerrada para avanzar la venta."
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            Script9 Technical Department • Documento Confidencial
+        </div>
+    </div>
+
+</body>
+
+</html>

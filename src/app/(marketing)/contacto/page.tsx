@@ -45,6 +45,7 @@ export default function Contacto() {
                     subject: formData.asunto || `Contacto de ${formData.empresa || 'Web'}`,
                     message: formData.mensaje,
                     type: 'contact',
+                    company: formData.empresa, // NEW: Field for AI SDR
                 }),
             });
 

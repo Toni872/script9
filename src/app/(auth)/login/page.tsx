@@ -300,13 +300,13 @@ export default function Login() {
                             </button>
                         </div>
 
-                        {/* Register Link */}
-                        <p className="text-center text-[15px] text-slate-500 mt-8">
-                            ¿No tienes una cuenta?{' '}
-                            <Link href="/registro" className="text-emerald-400 hover:text-emerald-300 font-semibold">
-                                Regístrate gratis
-                            </Link>
-                        </p>
+                        {/* Invite Only Notice */}
+                        <div className="text-center mt-8 pt-6 border-t border-slate-800">
+                            <p className="text-[13px] text-slate-500 flex items-center justify-center gap-2">
+                                <Lock className="w-3 h-3" />
+                                Acceso exclusivo para clientes activos
+                            </p>
+                        </div>
                     </div>
                 </motion.div>
             </div>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Ventas Script9 | One Pager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --dark: #0f172a;
+            --text: #334155;
+            --light-bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            background: #e2e8f0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+            padding: 15mm;
+            /* Márgenes seguros para impresión */
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                height: 100%;
+                page-break-after: avoid;
+                page-break-before: avoid;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* HEADER COMPACTO */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .logo svg {
+            height: 32px;
+            width: auto;
+        }
+
+        .doc-title {
+            text-align: right;
+        }
+
+        .doc-title h1 {
+            font-size: 14pt;
+            margin: 0;
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+
+        .doc-title span {
+            font-size: 9pt;
+            color: #64748b;
+        }
+
+        /* GRID LAYOUT */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            flex-grow: 1;
+        }
+
+        /* CARD STYLES */
+        .section-card {
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--dark);
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h2 span {
+            background: var(--dark);
+            color: white;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 9pt;
+        }
+
+        p,
+        li {
+            font-size: 9pt;
+            margin-bottom: 6px;
+        }
+
+        ul,
+        ol {
+            padding-left: 15px;
+            margin: 0 0 10px 0;
+        }
+
+        b {
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 9pt;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        /* PRICING BOX (Full Width) */
+        .pricing-section {
+            background: var(--dark);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: auto;
+            /* Push to near bottom */
+            margin-bottom: 20px;
+        }
+
+        .pricing-section h2 {
+            color: white;
+            border-color: #334155;
+        }
+
+        .pricing-section h2 span {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .price-item .amount {
+            font-size: 16pt;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .price-item .desc {
+            font-size: 9pt;
+            color: #94a3b8;
+        }
+
+        /* OBJECTIONS (Bottom Columns) */
+        .objections-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .obj-card {
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .obj-card h3 {
+            font-size: 9pt;
+            color: #ef4444;
+            margin: 0 0 5px 0;
+        }
+
+        .obj-card p {
+            font-size: 8pt;
+            margin: 0;
+            color: #334155;
+        }
+
+        .footer {
+            font-size: 8pt;
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 10px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="window.print()" class="btn-print no-print">🖨️ Imprimir 1 Hoja</button>
+
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <svg viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="28" font-size="32" font-family="Inter, sans-serif" font-weight="800" fill="#0f172a"
+                        letter-spacing="-1.5">
+                        Script<tspan fill="#10B981">9</tspan>
+                    </text>
+                </svg>
+            </div>
+            <div class="doc-title">
+                <h1>Sales Engineering Playbook</h1>
+                <span>AI SDR (High-Ticket) • v3.0</span>
+            </div>
+        </div>
+
+        <!-- 2 COLUMN CONTENT -->
+        <div class="main-grid">
+            <!-- COL 1: DIAGNOSTIC -->
+            <div class="col-left">
+                <div class="section-card">
+                    <h2><span>1</span> Fase de Diagnóstico (Auditoría)</h2>
+                    <p><strong>Objetivo:</strong> Diagnosticar un problema costoso. Hacer que el cliente admita la
+                        ineficiencia.</p>
+
+                    <div style="background:#f8fafc; padding:8px; border-radius:4px; margin-bottom:10px;">
+                        <p
+                            style="font-size:8pt; text-transform:uppercase; font-weight:700; color:#64748b; margin-bottom:4px;">
+                            Preguntas de Ingeniería Inversa</p>
+                        <ol>
+                            <li><b>Volumen:</b> "¿Cuántos MQLs entraron la semana pasada?"</li>
+                            <li><b>Latencia:</b> "¿Quién responde? ¿Tarda >1h?"</li>
+                            <li><b>Oportunidad:</b> "¿Qué pasa con un lead el viernes a las 18:00?"</li>
+                            <li><b>Coste:</b> "Un SDR junior cuesta ~25k-30k€. ¿Es eficiente?"</li>
+                        </ol>
+                    </div>
+
+                    <div class="highlight-box">
+                        "Estáis perdiendo el 40% de leads por latencia y gastando 30k€ en filtrado manual. <b>Si
+                            reducimos la espera a 0s y el coste al 10%, ¿os cuadra técnicamente?</b>"
+                    </div>
+                </div>
+            </div>
+
+            <!-- COL 2: SOLUTION -->
+            <div class="col-right">
+                <div class="section-card">
+                    <h2><span>2</span> Autoridad Técnica (Solución)</h2>
+                    <p>No vendemos chatbots. Vendemos <b>Infraestructura Propia de IA</b>.</p>
+
+                    <ul>
+                        <li><b>Gemini 1.5 Pro (Cerebro):</b> Contexto infinito (1M tokens). Lee vuestros PDFs. No
+                            alucina (RAG Estricto).</li>
+                        <li><b>n8n (Sistema Nervioso):</b> Lógica real. Conecta HubSpot y Slack.</li>
+                        <li><b>Supabase (Memoria):</b> Recuerda a cada cliente para siempre.</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        "Esto no es un plugin con cuota mensual. Es un <b>empleado digital de vuestra propiedad</b>,
+                        trabajando 24/7 en vuestra infraestructura."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRICING STRIP -->
+        <div class="pricing-section">
+            <h2><span>3</span> Inversión y ROI (Anclaje)</h2>
+            <div class="pricing-grid">
+                <div class="price-item">
+                    <span class="amount">3.500€</span>
+                    <span class="desc">Setup Único (Infraestructura + IP)</span>
+                </div>
+                <div class="price-item">
+                    <span class="amount">250€</span>
+                    <span class="desc">Mensual (Mantenimiento Servidor / Tokens)</span>
+                </div>
+            </div>
+            <p style="text-align:center; font-size:9pt; margin-top:10px; color:#cbd5e1;">
+                *Comparativa: Un equipo humano 24/7 costaría >90.000€/año.
+            </p>
+        </div>
+
+        <!-- OBJECTIONS GRID -->
+        <h2 style="font-size:10pt; margin-bottom:5px;"><span>4</span> Manejo de Objeciones (Killer Responses)</h2>
+        <div class="objections-grid">
+            <div class="obj-card">
+                <h3>"Es caro (He visto bots 20€)"</h3>
+                <p>Esos son juguetes SaaS. Aquí pagas por <b>TU infraestructura</b> y el código fuente. Es un activo
+                    empresarial, no un alquiler.</p>
+            </div>
+            <div class="obj-card">
+                <h3>"¿Alucinaciones?"</h3>
+                <p>Usamos <b>RAG Estricto</b>. Tiene prohibido inventar. Si no sabe la respuesta, escala a un humano en
+                    Slack. Riesgo 0.</p>
+            </div>
+            <div class="obj-card">
+                <h3>"¿Pago mensual?"</h3>
+                <p>Cubre estrictamente el consumo (tokens + servidor). Es el coste de la electricidad del empleado
+                    digital.</p>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <b>Script9</b> • Ingeniería de Software & Inteligencia Artificial • www.script-9.com
+        </div>
+    </div>
+</body>
+
+</html>

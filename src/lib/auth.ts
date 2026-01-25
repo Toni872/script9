@@ -177,14 +177,57 @@ export const authOptions: NextAuthOptions = {
             console.log('🟡 [AUTH] ===== SIGNIN CALLBACK =====');
             console.log('🟡 [AUTH] Provider:', account?.provider);
             console.log('🟡 [AUTH] User email:', user.email);
-            console.log('🟡 [AUTH] User name:', user.name);
-            console.log('🟡 [AUTH] Account type:', account?.type);
-            console.log('🟡 [AUTH] Profile picture:', user.image);
-            console.log('🟡 [AUTH] NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
-            console.log('🟡 [AUTH] NODE_ENV:', process.env.NODE_ENV);
 
-            // SIEMPRE permitir el login - NO bloquear por errores de DB
-            console.log('🟢 [MOBILE AUTH] ✅ Login permitido - Retornando TRUE (sin bloquear por errores de DB)');
+            // 1. Si es login con Credenciales, ya pasó por 'authorize', así que está bien.
+            if (account?.provider === 'credentials') {
+                return true;
+            }
+
+            // 2. Si es Google, VERIFICAR que el usuario exista en la DB (Whitelist de facto)
+            if (account?.provider === 'google') {
+                try {
+                    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+                    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY; // Usamos Service Role para leer tabla users
+
+                    if (!supabaseUrl || !serviceKey) {
+                        console.error('❌ [AUTH] Falta configuración de Supabase para verificar usuario');
+                        return false; // Bloquear si no hay config
+                    }
+
+                    const { createClient } = await import('@supabase/supabase-js');
+                    const supabase = createClient(supabaseUrl, serviceKey, {
+                        auth: { persistSession: false }
+                    });
+
+                    // Buscamos si el email existe en la tabla 'users'
+                    const { data: existingUser, error } = await supabase
+                        .from('users')
+                        .select('id, role')
+                        .eq('email', user.email)
+                        .single();
+
+                    if (error || !existingUser) {
+                        console.warn(`⛔ [AUTH] Login bloqueado: ${user.email} no es cliente de Script9.`);
+                        return false; // ⛔ RECHAZAR acceso
+                    }
+
+                    console.log(`✅ [AUTH] Usuario verificado: ${user.email} es ${existingUser.role}`);
+
+                    // Opcional: Si quieres actualizar su avatar de Google en tu DB
+                    /*
+                    if (user.image) {
+                        await supabase.from('users').update({ image: user.image }).eq('id', existingUser.id);
+                    }
+                    */
+
+                    return true; // ✅ PERMITIR acceso
+
+                } catch (err) {
+                    console.error('❌ [AUTH] Error verificando usuario Google:', err);
+                    return false; // Bloquear por seguridad ante error
+                }
+            }
+
             return true;
         },
         async session({ session, token }) {
