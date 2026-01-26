@@ -5,6 +5,8 @@ import { Bot, Zap, Network, Code2, ArrowRight, Terminal, Cpu, ShieldCheck } from
 import { AboutVisual } from '@/components/marketing/AboutVisual';
 import Link from 'next/link';
 
+import { AboutFounder } from '@/components/landing/AboutFounder';
+
 export default function AboutPage() {
     return (
         <div className="min-h-screen bg-slate-950 text-white font-sans selection:bg-emerald-500/30">
@@ -89,34 +91,8 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* 4. FOUNDER BIO / CTA */}
-            <section className="py-24 px-6">
-                <div className="max-w-4xl mx-auto bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-12 rounded-3xl relative overflow-hidden text-center">
-
-                    <div className="absolute top-0 right-0 p-12 opacity-10">
-                        <Code2 className="w-64 h-64 text-emerald-500 transform rotate-12" />
-                    </div>
-
-                    <div className="relative z-10">
-                        <h2 className="text-3xl font-bold mb-6 text-white">¿Por qué Script9?</h2>
-                        <p className="text-slate-400 text-lg mb-10 leading-relaxed">
-                            Porque necesitas un socio que entienda tanto de <strong>Balance de Situación</strong> como de <strong>APIs REST</strong>.
-                            Script9 es el puente entre el negocio y la tecnología profunda.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link href="/contacto" className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-8 py-4 rounded-xl font-bold transition-all transform hover:-translate-y-1 shadow-lg shadow-emerald-500/20">
-                                Hablar con un Ingeniero
-                                <ArrowRight className="w-5 h-5" />
-                            </Link>
-                            <Link href="/soluciones" className="inline-flex items-center justify-center gap-2 bg-transparent border border-slate-700 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-medium transition-all">
-                                Ver Soluciones
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+            {/* 4. FOUNDER BIO / TEAM SECTION */}
+            <AboutFounder />
         </div>
     );
 }

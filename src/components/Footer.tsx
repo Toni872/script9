@@ -25,23 +25,7 @@ export default function Footer() {
                             <p className="text-sm text-zinc-400 leading-relaxed max-w-xs">
                                 Transformamos negocios digitales mediante IA, automatización y desarrollo de software a medida. Escala sin límites.
                             </p>
-                            <div className="flex space-x-4">
-                                {[
-                                    { Icon: FaGithub, href: 'https://github.com/Toni872', color: 'hover:bg-black hover:text-white hover:border-black' },
-                                    { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/antonio-lloret-sánchez-080166156', color: 'hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]' },
-                                    { Icon: FaInstagram, href: '#', color: 'hover:bg-pink-600 hover:text-white hover:border-pink-600' }
-                                ].map((item, i) => (
-                                    <a
-                                        key={i}
-                                        href={item.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 ${item.color} transition-all duration-300 transform hover:scale-110`}
-                                    >
-                                        <item.Icon size={20} />
-                                    </a>
-                                ))}
-                            </div>
+
                         </div>
 
                         {/* Quick Links */}
@@ -111,8 +95,14 @@ export default function Footer() {
                                 </li>
                                 <li className="flex items-center space-x-3">
                                     <FaLinkedin className="w-5 h-5 text-emerald-500 shrink-0" />
-                                    <a href="https://www.linkedin.com/in/antonio-lloret-sánchez-080166156" target="_blank" rel="noopener noreferrer" className="text-zinc-400 text-sm hover:text-emerald-400 transition-colors">
-                                        Conectar en LinkedIn
+                                    <a href="https://www.linkedin.com/in/tony-lloret-080166156" target="_blank" rel="noopener noreferrer" className="text-zinc-400 text-sm hover:text-emerald-400 transition-colors">
+                                        Tony Lloret (Founder)
+                                    </a>
+                                </li>
+                                <li className="flex items-center space-x-3">
+                                    <FaLinkedin className="w-5 h-5 text-blue-500 shrink-0" />
+                                    <a href="https://www.linkedin.com/in/christian-hernández" target="_blank" rel="noopener noreferrer" className="text-zinc-400 text-sm hover:text-blue-400 transition-colors">
+                                        Christian Hernández (Co-Founder)
                                     </a>
                                 </li>
                             </ul>
@@ -123,9 +113,7 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="border-t border-slate-800 py-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
                     <p>&copy; {currentYear} Script9. Todos los derechos reservados.</p>
-                    <p className="mt-2 md:mt-0 flex items-center">
-                        Hecho con <Heart className="w-4 h-4 mx-1 text-emerald-500 fill-current animate-pulse" /> para el futuro digital
-                    </p>
+
                 </div>
             </div>
         </footer>

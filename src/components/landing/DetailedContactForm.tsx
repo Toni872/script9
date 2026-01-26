@@ -122,7 +122,8 @@ export function DetailedContactForm() {
                             <div className="flex space-x-4">
                                 {[
                                     { Icon: FaGithub, href: 'https://github.com/Toni872', color: 'hover:bg-black hover:text-white hover:border-black' },
-                                    { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/antonio-lloret-sánchez-080166156', color: 'hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]' },
+                                    { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/tony-lloret-080166156', color: 'hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]' },
+                                    { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/christian-hernández', color: 'hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]' },
                                     { Icon: FaInstagram, href: '#', color: 'hover:bg-pink-600 hover:text-white hover:border-pink-600' }
                                 ].map((item, i) => (
                                     <a

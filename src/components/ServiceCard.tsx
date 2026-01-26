@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Star, Zap, Bot, Code, Settings, Globe, MessageSquare, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Star, Zap, Bot, Code, Settings, Globe, MessageSquare, ArrowRight, CheckCircle2, Search } from 'lucide-react';
 import { useState } from 'react';
 import { Service } from '@/types';
 import AISDRVisualCard from '@/components/marketing/AISDRVisualCard';
+import EnrichmentVisualCard from '@/components/services/visuals/EnrichmentVisualCard';
 import { IntegrationsVisual } from '@/components/services/visuals/IntegrationsVisual';
 import { FinanceVisual } from '@/components/services/visuals/FinanceVisual';
 import { ScriptVisual } from '@/components/services/visuals/ScriptVisual';
@@ -22,9 +23,10 @@ const serviceTypeConfig: Record<string, { icon: typeof Zap; label: string }> = {
     ia_agent: { icon: Bot, label: 'Agente IA' },
     workflow: { icon: Settings, label: 'Workflow' },
     script: { icon: Code, label: 'Script' },
-    data_intelligence: { icon: Code, label: 'Intelligence' }, // Uses Code icon for Python/Scraping
+    data_intelligence: { icon: Code, label: 'Intelligence' },
+    data_mining: { icon: Search, label: 'Data Mining' }, // New Type
     integracion: { icon: Globe, label: 'Integración' },
-    desarrollo_medida: { icon: Globe, label: 'Ingeniería SaaS' }, // Uses Globe for Architecture
+    desarrollo_medida: { icon: Globe, label: 'Ingeniería SaaS' },
     consultoria: { icon: MessageSquare, label: 'Consultoría' },
 };
 
@@ -58,6 +60,8 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                     {/* Dynamic Visual Rendering */}
                     {(service.property_type === 'ia_chatbot' || service.property_type === 'ia_agent') ? (
                         <AISDRVisualCard />
+                    ) : (service.property_type === 'data_mining') ? (
+                        <EnrichmentVisualCard />
                     ) : (service.property_type === 'integracion' || service.property_type === 'desarrollo_medida' || service.title.toLowerCase().includes('workflow')) ? (
                         <IntegrationsVisual />
                     ) : (service.property_type === 'automatizacion') ? (
@@ -101,22 +105,37 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                         </div>
                     </div>
 
-                    <p className="text-sm text-slate-400 line-clamp-2 mb-4 flex-1">
-                        {service.description.replace(/\*\*/g, '')}
-                    </p>
+                    {/* Target Audience & Result - Concrete Details */}
+                    {(service.target_audience || service.expected_result) ? (
+                        <div className="mb-4 space-y-3">
+                            {service.target_audience && (
+                                <div className="text-xs text-slate-400">
+                                    <span className="text-slate-500 font-semibold block mb-0.5 uppercase tracking-wider text-[10px]">Ideal para:</span>
+                                    {service.target_audience}
+                                </div>
+                            )}
+                            {service.expected_result && (
+                                <div className="text-xs text-emerald-100/80 bg-emerald-500/10 p-2 rounded border border-emerald-500/20">
+                                    <span className="text-emerald-400 font-bold block mb-0.5 text-[10px] uppercase">Resultado:</span>
+                                    {service.expected_result}
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <p className="text-sm text-slate-400 line-clamp-3 mb-4 flex-1">
+                            {service.description.replace(/\*\*/g, '')}
+                        </p>
+                    )}
 
                     {/* Tech Stack / Features */}
                     {technologies.length > 0 && (
                         <div className="flex flex-wrap gap-2 mb-4">
                             {technologies.slice(0, 3).map((tech: string, i: number) => (
-                                <span key={i} className="inline-flex items-center gap-1 text-xs text-slate-300 bg-slate-800 px-2 py-1 rounded-md border border-slate-700">
+                                <span key={i} className="inline-flex items-center gap-1 text-[10px] text-slate-300 bg-slate-800 px-2 py-1 rounded-md border border-slate-700">
                                     <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                                     {tech}
                                 </span>
                             ))}
-                            {technologies.length > 3 && (
-                                <span className="text-xs text-slate-500 self-center">+{technologies.length - 3}</span>
-                            )}
                         </div>
                     )}
 

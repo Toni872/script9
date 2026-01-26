@@ -245,16 +245,16 @@ export default function Catalogo() {
 
                                 {/* Agentes IA */}
                                 <button
-                                    onClick={() => handleFilterChange({ ...filters, propertyTypes: ['ia_chatbot'] })}
+                                    onClick={() => handleFilterChange({ ...filters, propertyTypes: ['ia_chatbot', 'ia_agent'] })}
                                     className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 group flex items-center gap-3
-                                        ${filters.propertyTypes?.includes('ia_chatbot')
+                                        ${filters.propertyTypes?.some(t => ['ia_chatbot', 'ia_agent'].includes(t))
                                             ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
                                             : 'text-slate-400 hover:bg-slate-900 hover:text-white hover:translate-x-1'}`}
                                 >
                                     <Bot className="w-5 h-5 flex-shrink-0" />
                                     <div className="flex flex-col text-left">
                                         <span className="font-medium">Agentes IA</span>
-                                        <span className={`text-xs transition-colors ${filters.propertyTypes?.includes('ia_chatbot') ? 'text-emerald-100/70' : 'text-slate-500 group-hover:text-slate-400'}`}>Vendedores 24/7</span>
+                                        <span className={`text-xs transition-colors ${filters.propertyTypes?.some(t => ['ia_chatbot', 'ia_agent'].includes(t)) ? 'text-emerald-100/70' : 'text-slate-500 group-hover:text-slate-400'}`}>Vendedores 24/7</span>
                                     </div>
                                 </button>
 

@@ -197,7 +197,7 @@ export default function Registro() {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        placeholder="Antonio García"
+                                        placeholder="Tony García"
                                         className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-[17px] text-white placeholder:text-slate-600"
                                         required
                                     />

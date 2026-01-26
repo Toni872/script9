@@ -47,12 +47,25 @@ export interface Service {
     average_rating?: number; // Legacy alias
     review_count: number;
     image_urls: string[];
+    video_url?: string; // New: 4K Video Loop Support
     features: Array<{
         id: string;
         name: string;
         icon?: string;
     }>;
     created_at: string;
+    target_audience?: string;   // Who is it for?
+    use_cases?: string[];       // 3 examples of automated tasks
+    expected_result?: string;   // Typical result expected
+
+    // Deep Dive Content
+    content_blocks?: {
+        title: string;
+        content: string;
+        type: 'text' | 'list' | 'steps' | 'roi';
+        items?: { title?: string; description: string; icon?: string }[];
+    }[];
+
     updated_at: string;
 }
 

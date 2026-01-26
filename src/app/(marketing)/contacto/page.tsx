@@ -113,8 +113,11 @@ export default function Contacto() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-white mb-1">LinkedIn</h3>
-                                        <a href="https://www.linkedin.com/in/antonio-lloret-sánchez-080166156" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                                            Conectar ahora
+                                        <a href="https://www.linkedin.com/in/tony-lloret-080166156" target="_blank" rel="noopener noreferrer" className="block text-slate-400 hover:text-emerald-400 transition-colors mb-1">
+                                            Tony Lloret
+                                        </a>
+                                        <a href="https://www.linkedin.com/in/christian-hernández" target="_blank" rel="noopener noreferrer" className="block text-slate-400 hover:text-blue-400 transition-colors">
+                                            Christian Hernández
                                         </a>
                                     </div>
                                 </div>

@@ -43,9 +43,7 @@ export default function AutomationServicePage() {
                                 Auditar mis Procesos
                                 <ArrowRight className="w-5 h-5 ml-2" />
                             </Link>
-                            <Link href="/#portfolio" className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700 hover:border-slate-600">
-                                Ver Ejemplos
-                            </Link>
+
                         </div>
                     </motion.div>
 

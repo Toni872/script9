@@ -16,6 +16,10 @@ import HackerTerminal from "@/components/marketing/HackerTerminal";
 
 
 
+import { BlueprintsLabs } from "@/components/landing/BlueprintsLabs";
+import { AboutFounder } from "@/components/landing/AboutFounder";
+import { SocialProof } from "@/components/landing/SocialProof";
+
 export default function LandingClient() {
     const router = useRouter();
 
@@ -55,7 +59,11 @@ export default function LandingClient() {
                             Semanales
                         </h1>
 
-                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mb-8 text-lg font-medium text-emerald-400/90 font-mono">
+                        <p className="text-lg text-emerald-400/80 mb-6 font-mono tracking-wide">
+                            Especializados en Agencias, SaaS y Ecommerce B2B
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mb-8 text-lg font-medium text-slate-300 font-mono">
                             <span className="flex items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-default">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                                 Implementación en 4 Semanas
@@ -67,10 +75,20 @@ export default function LandingClient() {
                             </span>
                         </div>
 
-                        <p className="text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed font-light">
-                            Genera leads 24/7 con scripts IA personalizados.
-                            Sin contratar más personal. Sin sorpresas.
-                        </p>
+                        <ul className="space-y-3 mb-10 text-slate-300 text-lg leading-relaxed font-light text-left inline-block">
+                            <li className="flex items-start gap-3">
+                                <Zap className="w-5 h-5 text-emerald-500 shrink-0 mt-1" />
+                                <span><strong>Automatizamos tareas repetitivas</strong> (reportes, soporte, facturación).</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <Bot className="w-5 h-5 text-emerald-500 shrink-0 mt-1" />
+                                <span><strong>Implementamos agentes IA</strong> que venden y cualifican 24/7.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <Terminal className="w-5 h-5 text-emerald-500 shrink-0 mt-1" />
+                                <span><strong>Integramos tus herramientas</strong> (Stripe, Slack, CRM) sin romper nada.</span>
+                            </li>
+                        </ul>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <button
@@ -110,6 +128,9 @@ export default function LandingClient() {
 
             {/* SERVICE PILLARS (NEW) */}
             <ServicePillars />
+
+            {/* BLUEPRINTS / LABS (REPLACES INDUSTRY CASES) */}
+            <BlueprintsLabs />
 
             {/* VISUAL PERSUASION: AUTOMATION LOOP */}
             <section className="py-24 bg-slate-950 border-b border-slate-800 relative z-10">
@@ -183,14 +204,14 @@ export default function LandingClient() {
                 </div>
             </section>
 
-            {/* INDUSTRY CASES (REMOVED FOR SIMPLICITY) */}
-            {/* <IndustryCases /> */}
-
-            {/* CATEGORIES GRID (REMOVED FOR SIMPLICITY) */}
-
+            {/* SOCIAL PROOF */}
+            <SocialProof />
 
             {/* NEW PROCESS SECTION (Replaces Pricing) */}
             <ProcessSteps />
+
+            {/* ABOUT FOUNDER */}
+            <AboutFounder />
 
             {/* DETAILED CONTACT FORM (NEW) */}
             <DetailedContactForm />

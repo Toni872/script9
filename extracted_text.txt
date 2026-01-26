@@ -1,0 +1,159 @@
+--- PAGE 1 ---
+Preguntas  Para  Entender  Necesidades  Del  Cliente   1.  ¿Qué  tarea  o  proceso  te  gustaría  que  dejara  de  hacerse  manualmente?  2.  ¿Qué  es  lo  que  más  te  molesta  o  te  hace  perder  tiempo  hoy  en  ese  proceso?  3.  Si  esta  automatización  funcionara  perfecto,  ¿qué  cambiaría  en  tu  día  a  día?  4.  ¿Cómo  haces  hoy  este  proceso?  Explícamelo  como  si  yo  fuera  nuevo  en  la  empresa.  5.  ¿Cada  cuánto  se  repite  este  proceso?  (todos  los  días,  algunas  veces  al  mes,  solo  cuando  
+pasa
+ 
+algo,
+ 
+etc.)
+ 6.  ¿Qué  información  usas  para  hacer  este  proceso?  ¿De  dónde  la  sacas?  7.  ¿Qué  parte  te  gustaría  que  el  sistema  hiciera  solo  y  en  qué  parte  prefieres  seguir  
+participando
+ 
+tú
+ 
+o
+ 
+tu
+ 
+equipo?
+ 8.  ¿Qué  errores,  problemas  o  casos  raros  suelen  aparecer  cuando  haces  este  proceso?  9.  ¿Quiénes  más  participan  en  este  proceso  o  necesitan  usar  la  automatización?  10.  ¿Qué  pasaría  si  esta  automatización  no  funcionara  por  unas  horas  o  un  día?   
+
+--- PAGE 2 ---
+Contrato   I.  PARTES   De  una  parte,  [Nombre  legal  /  Empresa],  con  domicilio  en  [dirección],  y  NIF/CIF  [número],  en  adelante  
+EL
+ 
+PROVEEDOR.
+  Y  de  otra  parte,  [Nombre  del  cliente  /  Empresa],  con  domicilio  en  [dirección],  y  NIF/CIF  [número],  en  
+adelante
+ 
+EL
+ 
+CLIENTE.
+  Ambas  partes,  reconociéndose  capacidad  legal  suficiente,  acuerdan  celebrar  el  presente  contrato.   II.  OBJETO  DEL  CONTRATO   EL  PROVEEDOR  prestará  a  EL  CLIENTE  servicios  profesionales  de  análisis,  diseño,  desarrollo,  
+implementación
+ 
+y
+ 
+entrega
+ 
+de
+ 
+soluciones
+ 
+de
+ 
+automatización
+ 
+de
+ 
+procesos,
+ 
+conforme
+ 
+a
+ 
+los
+ 
+requerimientos
+ 
+definidos
+ 
+y
+ 
+aceptados
+ 
+por
+ 
+ambas
+ 
+partes.
+  El  alcance  concreto  del  servicio  se  describe  en  una  Propuesta,  Anexo  o  Documento  de  Alcance,  que  
+formará
+ 
+parte
+ 
+inseparable
+ 
+de
+ 
+este
+ 
+contrato.
+  III.  ALCANCE  DEL  SERVICIO   El  servicio  incluye  únicamente  las  funcionalidades,  integraciones  y  procesos  descritos  en  el  alcance  
+aprobado.
+  Cualquier  modificación,  ampliación  o  funcionalidad  no  contemplada  inicialmente  será  considerada  
+trabajo
+ 
+adicional,
+ 
+y
+ 
+deberá
+ 
+ser
+ 
+presupuestada
+ 
+y
+ 
+aprobada
+ 
+por
+ 
+escrito.
+  EL  CLIENTE  entiende  que  la  automatización  replica  el  proceso  definido  y  validado,  no  corrige  errores  
+estructurales
+ 
+del
+ 
+negocio
+ 
+salvo
+ 
+acuerdo
+ 
+expreso.
+  IV.  OBLIGACIONES  DEL  PROVEEDOR   EL  PROVEEDOR  se  compromete  a:   Ejecutar  el  servicio  con  diligencia  profesional  y  buenas  prácticas.   Informar  de  avances,  riesgos  o  limitaciones  técnicas  relevantes.   Implementar  la  automatización  conforme  al  alcance  acordado.   Mantener  la  confidencialidad  de  la  información  proporcionada  por  EL  CLIENTE.   Entregar  la  solución  funcional,  sujeta  a  validación.   V.  OBLIGACIONES  DEL  CLIENTE   EL  CLIENTE  se  compromete  a:   Proporcionar  información  veraz  y  completa.   
+
+--- PAGE 3 ---
+Facilitar  accesos,  credenciales,  licencias  y  permisos  necesarios.   Validar  entregables  en  los  plazos  acordados.   Realizar  los  pagos  según  lo  establecido.   Comprender  que  retrasos  en  respuestas  o  accesos  pueden  afectar  plazos  y  costos.   VI.  PLAZOS  Y  CRONOGRAMA   Los  plazos  indicados  son  estimaciones,  no  garantías  absolutas.   Los  plazos  podrán  verse  afectados  por:   Cambios  de  alcance   Falta  de  respuesta  del  cliente   Incidencias  en  servicios  de  terceros   EL  PROVEEDOR  no  será  responsable  por  retrasos  imputables  a  EL  CLIENTE  o  a  terceros.   VII.  PRECIO  Y  FORMA  DE  PAGO   El  precio  del  servicio  será  el  establecido  en  la  propuesta  aceptada.   Salvo  pacto  distinto:   [ejemplo:  50%  al  inicio  y  50%  a  la  entrega]   Los  pagos  no  son  reembolsables  una  vez  iniciado  el  servicio.   La  falta  de  pago  faculta  a  EL  PROVEEDOR  a  suspender  el  servicio.   VIII.  SERVICIOS  DE  TERCEROS   La  automatización  puede  depender  de  plataformas,  APIs  o  herramientas  de  terceros.   EL  CLIENTE  será  responsable  de  los  costos,  licencias  y  cuentas  necesarias.   EL  PROVEEDOR  no  se  responsabiliza  por:   Cambios  en  precios  o  políticas   Caídas  del  servicio   Limitaciones  técnicas  externas   IX.  SOPORTE,  GARANTÍA  Y  MANTENIMIENTO   Salvo  acuerdo  expreso,  el  servicio  no  incluye  mantenimiento  continuo.   
+
+--- PAGE 4 ---
+Se  incluye  únicamente  una  garantía  limitada  para  corrección  de  errores  atribuibles  al  desarrollo,  
+dentro
+ 
+de
+ 
+un
+ 
+plazo
+ 
+de
+ 
+[X
+ 
+días]
+ 
+tras
+ 
+la
+ 
+entrega.
+  Cambios,  mejoras  o  soporte  posterior  serán  objeto  de  un  nuevo  acuerdo.   X.  PROPIEDAD  INTELECTUAL   Hasta  el  pago  completo,  la  automatización  es  propiedad  de  EL  PROVEEDOR.   Una  vez  pagado:   EL  CLIENTE  obtiene  derecho  de  uso  interno.   No  podrá  revender,  sublicenciar  o  redistribuir  sin  autorización.   EL  PROVEEDOR  conserva  el  derecho  a  reutilizar  metodologías,  estructuras  y  conocimientos  
+generales.
+  XI.  CONFIDENCIALIDAD   Ambas  partes  se  obligan  a:   No  divulgar  información  técnica,  comercial  o  estratégica.   Usar  la  información  sólo  para  la  ejecución  del  contrato.   Mantener  esta  obligación  incluso  tras  la  finalización  del  contrato.   XII.  PROTECCIÓN  DE  DATOS   EL  CLIENTE  garantiza  que  tiene  derecho  a  tratar  los  datos  usados.   EL  PROVEEDOR  actuará  como  encargado  del  tratamiento  cuando  corresponda.   Ambas  partes  cumplirán  la  normativa  de  protección  de  datos  aplicable.   XIII.  RESPONSABILIDAD  Y  LIMITACIÓN   EL  PROVEEDOR  no  será  responsable  por:   Pérdida  de  beneficios   Daños  indirectos   Errores  derivados  de  uso  incorrecto   La  responsabilidad  máxima  se  limita  al  importe  efectivamente  pagado  por  EL  CLIENTE.   XIV.  CANCELACIÓN  Y  RESOLUCIÓN   Cualquiera  de  las  partes  podrá  resolver  el  contrato  por  incumplimiento  grave.   
+
+--- PAGE 5 ---
+EL  CLIENTE  podrá  cancelar  el  proyecto,  debiendo  abonar  el  trabajo  ya  realizado.   No  habrá  devoluciones  por  trabajos  ejecutados.   XV.  FUERZA  MAYOR   Ninguna  de  las  partes  será  responsable  por  incumplimientos  causados  por  fuerza  mayor  (fallos  de  
+red,
+ 
+desastres,
+ 
+decisiones
+ 
+gubernamentales,
+ 
+etc.).
+  XVI.  NO  RELACIÓN  LABORAL   Este  contrato  no  crea  relación  laboral,  societaria  ni  de  exclusividad  entre  las  partes.   XVII.  CESIÓN   EL  CLIENTE  no  podrá  ceder  este  contrato  sin  autorización  escrita  de  EL  PROVEEDOR.   XVIII.  LEGISLACIÓN  Y  JURISDICCIÓN   El  presente  contrato  se  regirá  por  las  leyes  de  [país],  sometiéndose  las  partes  a  los  tribunales  de  
+[ciudad].
+  XIX.  ACEPTACIÓN   El  presente  contrato  se  entiende  aceptado  mediante:   Firma  física  o  digital   Aceptación  de  la  propuesta   Inicio  del  servicio   Firma  EL  PROVEEDOR:  ____________________  Firma  EL  CLIENTE:  ____________________  Fecha:  ____________________   
+

@@ -149,7 +149,7 @@ export default function AISDRVisual() {
     }, []);
 
     return (
-        <div className="w-full h-[500px] bg-slate-950 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 flex flex-col md:flex-row relative group">
+        <div className="w-full h-full bg-slate-950 flex flex-col md:flex-row relative group">
             {/* Background Grid */}
             <div className="absolute inset-0 z-0 opacity-20 bg-[url('/images/grid.svg')] pointer-events-none" />
 
