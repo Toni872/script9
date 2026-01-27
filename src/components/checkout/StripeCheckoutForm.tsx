@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CreditCard, Lock, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 
@@ -18,7 +18,7 @@ interface CheckoutFormProps {
 function CheckoutForm({ bookingId, amount }: { bookingId: string; amount: number }) {
     const stripe = useStripe();
     const elements = useElements();
-    const router = useRouter();
+    // const router = useRouter();
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [paymentSuccess, setPaymentSuccess] = useState(false);

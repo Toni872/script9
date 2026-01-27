@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default function MarketingPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
