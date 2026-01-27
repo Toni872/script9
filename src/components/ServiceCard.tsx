@@ -97,7 +97,7 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                 <div className="p-5 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-2">
                         <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors line-clamp-1">
-                            {service.title.replace(/\*\*/g, '')}
+                            {service.title}
                         </h3>
                         <div className="flex items-center gap-1 text-sm font-medium text-slate-300">
                             <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
@@ -123,7 +123,7 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                         </div>
                     ) : (
                         <p className="text-sm text-slate-400 line-clamp-3 mb-4 flex-1">
-                            {service.description.replace(/\*\*/g, '')}
+                            {service.description}
                         </p>
                     )}
 

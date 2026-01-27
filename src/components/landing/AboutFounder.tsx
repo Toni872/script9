@@ -26,13 +26,13 @@ export function AboutFounder() {
                         className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-emerald-500/30 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left group"
                     >
                         <div className="shrink-0 relative">
-                            <div className="w-32 h-32 rounded-xl overflow-hidden border-2 border-slate-800 bg-slate-950 relative z-10 group-hover:border-emerald-500/50 transition-colors">
+                            <div className="w-40 h-56 rounded-xl overflow-hidden border-2 border-slate-800 bg-slate-950 relative z-10 group-hover:border-emerald-500/50 transition-colors">
                                 <Image
                                     src="/images/team/tony.jpg"
                                     alt="Tony Lloret"
                                     fill
-                                    sizes="128px"
-                                    className="object-cover"
+                                    sizes="160px"
+                                    className="object-cover object-top"
                                 />
                             </div>
                             <div className="absolute -top-4 -left-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all" />
@@ -46,11 +46,11 @@ export function AboutFounder() {
                             </div>
 
                             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                                Arquitecto de sistemas de automatización escalables. Especializado en convertir procesos caóticos en pipelines de código robusto.
+                                Ingeniero de Software especializado en sistemas de automatización escalables. Convierte procesos caóticos en pipelines de código robusto.
                             </p>
 
                             <div className="space-y-2 mb-6 text-left">
-                                <SkillItem icon={Code2} text="Arquitectura de Software" />
+                                <SkillItem icon={Code2} text="Ingeniería de Software" />
                                 <SkillItem icon={Terminal} text="Automatización con n8n/Python" />
                             </div>
 
@@ -76,13 +76,13 @@ export function AboutFounder() {
                         className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/30 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left group"
                     >
                         <div className="shrink-0 relative">
-                            <div className="w-32 h-32 rounded-xl overflow-hidden border-2 border-slate-800 bg-slate-950 relative z-10 group-hover:border-blue-500/50 transition-colors">
+                            <div className="w-40 h-56 rounded-xl overflow-hidden border-2 border-slate-800 bg-slate-950 relative z-10 group-hover:border-blue-500/50 transition-colors">
                                 <Image
                                     src="/images/team/chris.jpg"
                                     alt="Christian Hernández"
                                     fill
-                                    sizes="128px"
-                                    className="object-cover"
+                                    sizes="160px"
+                                    className="object-cover object-top"
                                 />
                             </div>
                             <div className="absolute -top-4 -right-4 w-20 h-20 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-all" />

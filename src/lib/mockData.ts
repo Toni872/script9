@@ -80,7 +80,7 @@ export const mockServices: any[] = [
     
     La mayoría de empresas compran bases de datos estáticas (ZoomInfo, Apollo) que tienen una tasa de rebote del 30% y contactos que cambiaron de trabajo hace meses.
     
-    Nuestro **Motor de Enriquecimiento** no es una base de datos. Es un **sistema de minería en tiempo real** que:
+    Nuestro Motor de Enriquecimiento no es una base de datos. Es un sistema de minería en tiempo real que:
     1. Escanea Google Maps y LinkedIn en el momento exacto que lo activas.
     2. Entra en la web de cada empresa y "lee" su página de equipo.
     3. Encuentra el email verificado del tomador de decisiones real (Dueño, CEO, Marketing Manager).

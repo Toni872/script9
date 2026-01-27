@@ -1,81 +1,118 @@
+
 import { Metadata } from 'next';
+import { Scale, FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Términos y Condiciones',
+    title: 'Términos y Condiciones | Script9',
     description: 'Términos y condiciones de uso de la plataforma Script9.',
 };
 
 export default function TerminosPage() {
     return (
-        <div className="bg-[#0A0A0A] min-h-screen text-slate-300 py-20 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto space-y-12">
+        <div className="bg-slate-950 min-h-screen pt-32 pb-24 relative overflow-hidden">
+            {/* Background Decorations */}
+            <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-900/10 to-transparent pointer-events-none" />
+            <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-                {/* Header */}
-                <div className="text-center space-y-4">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                        Términos y <span className="text-[#10B981]">Condiciones</span>
+            <div className="max-w-3xl mx-auto px-6 relative z-10">
+                {/* Header Section */}
+                <div className="text-center mb-16">
+                    <div className="inline-flex items-center justify-center p-3 bg-blue-500/10 rounded-2xl mb-6 ring-1 ring-blue-500/20">
+                        <Scale className="w-8 h-8 text-blue-400" />
+                    </div>
+                    <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6">
+                        Términos y <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Condiciones</span>
                     </h1>
-                    <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+                    <div className="flex items-center justify-center gap-2 text-sm text-slate-400 font-mono bg-slate-900/50 inline-block px-4 py-1.5 rounded-full border border-slate-800 mx-auto">
+                        <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
                         Última actualización: Enero 2026
-                    </p>
+                    </div>
                 </div>
 
-                {/* Content */}
-                <div className="prose prose-invert prose-lg max-w-none">
-                    <p className="lead">
-                        Bienvenido a Script9. Al acceder a nuestro sitio web y utilizar nuestros servicios, aceptas cumplir con estos términos y condiciones. Por favor, léelos cuidadosamente.
-                    </p>
+                {/* Content Container */}
+                <div className="prose prose-invert prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white prose-p:text-slate-400 prose-p:leading-relaxed prose-li:text-slate-400 prose-strong:text-blue-400 prose-a:text-blue-400 hover:prose-a:text-blue-300">
 
-                    <h3>1. Información General</h3>
-                    <p>
-                        Script9 (&quot;nosotros&quot;, &quot;nuestro&quot;) es una consultoría estratégica en TI y automatización SaaS. Nuestra plataforma ofrece servicios de desarrollo de software, automatización de procesos, y venta de scripts y workflows digitales.
-                    </p>
+                    <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-sm">
+                        <p className="lead text-xl text-slate-300 mb-10 border-b border-slate-800 pb-10">
+                            Bienvenido a Script9. Estos términos regulan el uso de nuestra plataforma de automatización y servicios de ingeniería. Al operar en nuestra infraestructura, aceptas este marco legal.
+                        </p>
 
-                    <h3>2. Uso de los Servicios</h3>
-                    <p>
-                        Te comprometes a utilizar nuestros servicios únicamente para fines legales y de acuerdo con estos términos. Queda prohibido:
-                    </p>
-                    <ul>
-                        <li>Vulnerar la seguridad de la plataforma o intentar acceder a áreas restringidas.</li>
-                        <li>Utilizar los scripts o workflows adquiridos para fines ilícitos o malintencionados.</li>
-                        <li>Revender, redistribuir o sublicenciar los productos digitales adquiridos sin nuestra autorización expresa por escrito.</li>
-                    </ul>
+                        <section className="space-y-12">
+                            <article>
+                                <h3 className="flex items-center gap-3 text-2xl mb-4">
+                                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 text-sm border border-slate-700 text-blue-500">01</span>
+                                    Información General
+                                </h3>
+                                <p>
+                                    Script9 ("nosotros", "la plataforma") es una consultora de ingeniería de software especializada en automatización B2B. Proveemos scripts, workflows de n8n, agentes IA y servicios de integración a medida para escalar operaciones digitales.
+                                </p>
+                            </article>
 
-                    <h3>3. Propiedad Intelectual</h3>
-                    <p>
-                        Todo el contenido, marcas, logos, código fuente (de la plataforma) y materiales disponibles en Script9 son propiedad exclusiva nuestra o de nuestros licenciantes y están protegidos por las leyes de propiedad intelectual internacionales y de España.
-                    </p>
-                    <p>
-                        Al adquirir un servicio o producto digital (script/workflow), se te otorga una licencia de uso personal y empresarial, no exclusiva e intransferible, pero no la titularidad de los derechos de autor del mismo, salvo acuerdo específico en contratos de desarrollo a medida.
-                    </p>
+                            <article>
+                                <h3 className="flex items-center gap-3 text-2xl mb-4">
+                                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 text-sm border border-slate-700 text-blue-500">02</span>
+                                    Uso de Servicios y Licencia
+                                </h3>
+                                <p>Al adquirir nuestros productos digitales o servicios, te otorgamos una licencia:</p>
+                                <ul className="space-y-2 mt-4 marker:text-blue-500">
+                                    <li><strong>Uso Operativo:</strong> Derecho a desplegar el código en tu propia infraestructura o clientes finales.</li>
+                                    <li><strong>No Exclusiva:</strong> Salvo pacto contrario en desarrollo a medida ("Select"), el código base es propiedad intelectual de Script9.</li>
+                                    <li><strong>Prohibiciones:</strong> Está estrictamente prohibida la reventa, redistribución masiva o sublicencia del código fuente "crudo" sin autorización Enterprise.</li>
+                                </ul>
+                            </article>
 
-                    <h3>4. Pagos y Reembolsos</h3>
-                    <p>
-                        Los precios de nuestros servicios y productos se indican claramente en la plataforma. Nos reservamos el derecho de modificar los precios en cualquier momento.
-                    </p>
-                    <p>
-                        Dada la naturaleza digital de nuestros productos (scripts y workflows descargables o accesibles inmediatamente) y servicios de consultoría, <strong>no se admiten devoluciones ni reembolsos</strong> una vez entregado el producto o iniciado el servicio, salvo error técnico imputable a Script9 que impida su funcionamiento.
-                    </p>
+                            <article>
+                                <h3 className="flex items-center gap-3 text-2xl mb-4">
+                                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 text-sm border border-slate-700 text-blue-500">03</span>
+                                    Propiedad Intelectual
+                                </h3>
+                                <div className="p-6 rounded-xl bg-slate-950/50 border border-slate-800/50">
+                                    <p className="m-0 text-sm">
+                                        Todo el código fuente de la plataforma, diseño de interfaz, marcas y algoritmos propietarios son activos de Script9. El cliente retiene la propiedad total de SU data y de las configuraciones específicas realizadas en su instancia.
+                                    </p>
+                                </div>
+                            </article>
 
-                    <h3>5. Limitación de Responsabilidad</h3>
-                    <p>
-                        Script9 no se hace responsable de daños directos, indirectos, incidentales o consecuentes que resulten del uso o la imposibilidad de uso de nuestros servicios. No garantizamos que nuestros scripts o automatizaciones funcionen sin errores en todos los entornos o con futuras actualizaciones de terceros (APIs, plataformas externas, etc.).
-                    </p>
+                            <article>
+                                <h3 className="flex items-center gap-3 text-2xl mb-4">
+                                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 text-sm border border-slate-700 text-blue-500">04</span>
+                                    Pagos y Garantía
+                                </h3>
+                                <ul className="space-y-2 marker:text-blue-500">
+                                    <li><strong>Pagos Finales:</strong> Las compras de productos digitales (scripts) son definitivas debido a la naturaleza irrevocable del software descargable.</li>
+                                    <li><strong>Servicios:</strong> Los proyectos a medida pueden estar sujetos a hitos de pago.</li>
+                                    <li><strong>Garantía Técnica:</strong> Garantizamos que nuestro código cumple con las especificaciones descritas en el momento de la entrega. No nos hacemos responsables de roturas por cambios en APIs de terceros (ej. cambios en API de OpenAI o Google) posteriores a la entrega.</li>
+                                </ul>
+                            </article>
 
-                    <h3>6. Modificaciones</h3>
-                    <p>
-                        Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio web. El uso continuado de la plataforma tras dichos cambios implica su aceptación.
-                    </p>
+                            <article>
+                                <h3 className="flex items-center gap-3 text-2xl mb-4">
+                                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 text-sm border border-slate-700 text-blue-500">05</span>
+                                    Limitación de Responsabilidad
+                                </h3>
+                                <p>
+                                    Script9 provee herramientas de potencia industrial. No nos responsabilizamos por pérdidas de datos, lucro cesante o interrupciones de servicio derivadas de una mala configuración por parte del usuario o fallos en servicios de terceros (AWS, OpenAI, etc.).
+                                </p>
+                            </article>
 
-                    <h3>7. Ley Aplicable y Jurisdicción</h3>
-                    <p>
-                        Estos términos se rigen por las leyes de España. Cualquier disputa relacionada con estos términos se someterá a la jurisdicción exclusiva de los tribunales de la ciudad de Madrid, España.
-                    </p>
+                            <article>
+                                <h3 className="flex items-center gap-3 text-2xl mb-4">
+                                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 text-sm border border-slate-700 text-blue-500">06</span>
+                                    Jurisdicción
+                                </h3>
+                                <p>
+                                    Este acuerdo se rige por las leyes de España. Cualquier disputa se resolverá en los tribunales de Madrid, renunciando a cualquier otro fuero.
+                                </p>
+                            </article>
+                        </section>
 
-                    <h3>8. Contacto</h3>
-                    <p>
-                        Si tienes alguna pregunta sobre estos Términos y Condiciones, por favor contáctanos en <a href="mailto:contact@script-9.com" className="text-[#10B981] hover:underline">contact@script-9.com</a>.
-                    </p>
+                        <div className="mt-16 pt-8 border-t border-slate-800 text-center">
+                            <p className="text-sm text-slate-500 m-0">
+                                ¿Necesitas un acuerdo de nivel de servicio (SLA) personalizado? <br />
+                                <a href="mailto:contact@script-9.com" className="no-underline text-blue-400 font-medium hover:text-blue-300">Contactar a ventas Enterprise &rarr;</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
