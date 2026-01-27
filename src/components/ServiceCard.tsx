@@ -54,39 +54,41 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
 
     return (
         <Link href={service.custom_url || `/soluciones/${service.id}`} className="group block h-full">
-            <article className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 h-full flex flex-col">
-                {/* Image Section */}
-                <div className="relative h-48 overflow-hidden bg-slate-800">
+            <article className="relative bg-[#020617] rounded-2xl border border-slate-800/60 overflow-hidden hover:border-emerald-500/50 transition-all duration-500 h-full flex flex-col group-hover:shadow-[0_0_40px_rgba(16,185,129,0.1)]">
+                {/* Header Background Image/Visual */}
+                <div className="relative h-52 overflow-hidden bg-slate-900">
                     {/* Dynamic Visual Rendering */}
-                    {(service.property_type === 'ia_chatbot' || service.property_type === 'ia_agent') ? (
-                        <AISDRVisualCard />
+                    {(service.property_type === 'ia_agent') ? (
+                        <div className="absolute inset-0">
+                            <AISDRVisualCard />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent" />
+                        </div>
                     ) : (service.property_type === 'data_mining') ? (
-                        <EnrichmentVisualCard />
-                    ) : (service.property_type === 'integracion' || service.property_type === 'desarrollo_medida' || service.title.toLowerCase().includes('workflow')) ? (
-                        <IntegrationsVisual />
-                    ) : (service.property_type === 'automatizacion') ? (
-                        <FinanceVisual />
-                    ) : (service.property_type === 'script' || service.property_type === 'data_intelligence') ? (
-                        <ScriptVisual />
+                        <div className="absolute inset-0">
+                            <EnrichmentVisualCard />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent" />
+                        </div>
                     ) : (
                         <Image
                             src={mainImage}
                             alt={service.title}
                             fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                            onError={() => setImageError(true)}
+                            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                         />
                     )}
-                    <div className="absolute top-3 left-3">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-950/60 backdrop-blur-md text-xs font-semibold text-white border border-white/10 shadow-sm">
-                            <ServiceIcon className="w-3 h-3 text-emerald-400" />
-                            {config.label}
-                        </span>
+
+                    {/* Status Indicators (Cyber Style) */}
+                    <div className="absolute top-4 left-4 flex gap-2">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-md text-xs font-mono tracking-widest text-emerald-400 uppercase">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            {service.property_type === 'data_mining' ? 'SCANNING' : 'ONLINE'}
+                        </div>
                     </div>
-                    {/* is_script9_select logic */}
+
+                    {/* SELECT Badge */}
                     {service.is_script9_select && (
-                        <div className="absolute top-3 right-3">
-                            <span className="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-900/20">
+                        <div className="absolute top-4 right-4">
+                            <span className="px-2.5 py-1 bg-emerald-500 text-slate-950 text-xs font-bold tracking-tight uppercase rounded-sm shadow-lg">
                                 SELECT
                             </span>
                         </div>
@@ -94,80 +96,43 @@ export default function ServiceCard({ service, onFavoriteToggle, onDemoClick }: 
                 </div>
 
                 {/* Content Section */}
-                <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors line-clamp-1">
-                            {service.title}
-                        </h3>
-                        <div className="flex items-center gap-1 text-sm font-medium text-slate-300">
-                            <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                            {displayRating.toFixed(1)}
-                        </div>
-                    </div>
+                <div className="p-6 flex-1 flex flex-col relative">
+                    {/* Decorative Line */}
+                    <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-emerald-500/0 via-emerald-500/20 to-emerald-500/0" />
 
-                    {/* Target Audience & Result - Concrete Details */}
-                    {(service.target_audience || service.expected_result) ? (
-                        <div className="mb-4 space-y-3">
-                            {service.target_audience && (
-                                <div className="text-xs text-slate-400">
-                                    <span className="text-slate-500 font-semibold block mb-0.5 uppercase tracking-wider text-[10px]">Ideal para:</span>
-                                    {service.target_audience}
-                                </div>
-                            )}
-                            {service.expected_result && (
-                                <div className="text-xs text-emerald-100/80 bg-emerald-500/10 p-2 rounded border border-emerald-500/20">
-                                    <span className="text-emerald-400 font-bold block mb-0.5 text-[10px] uppercase">Resultado:</span>
-                                    {service.expected_result}
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        <p className="text-sm text-slate-400 line-clamp-3 mb-4 flex-1">
-                            {service.description}
-                        </p>
-                    )}
+                    <h3 className="text-xl font-bold text-white mb-3 leading-tight group-hover:text-emerald-400 transition-colors">
+                        {service.title}
+                    </h3>
 
-                    {/* Tech Stack / Features */}
-                    {technologies.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {technologies.slice(0, 3).map((tech: string, i: number) => (
-                                <span key={i} className="inline-flex items-center gap-1 text-[10px] text-slate-300 bg-slate-800 px-2 py-1 rounded-md border border-slate-700">
-                                    <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                    {/* Description - Truncated cleanly */}
+                    <p className="text-sm text-slate-300 leading-relaxed mb-6 line-clamp-3">
+                        {service.description.split('\n')[0]} {/* Take first paragraph only for card */}
+                    </p>
+
+                    {/* Tech Stack Chips */}
+                    <div className="mb-6">
+                        <p className="text-xs uppercase tracking-widest text-slate-500 mb-3 font-bold">Tech Stack</p>
+                        <div className="flex flex-wrap gap-2">
+                            {technologies.slice(0, 3).map((tech, i) => (
+                                <span key={i} className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-md text-xs text-slate-200 font-medium flex items-center gap-1.5 shadow-sm">
+                                    {tech === 'n8n' && <Zap className="w-3.5 h-3.5 text-yellow-500" />}
+                                    {tech.includes('Gemini') && <Bot className="w-3.5 h-3.5 text-blue-400" />}
                                     {tech}
                                 </span>
                             ))}
                         </div>
-                    )}
+                    </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-slate-800 mt-auto">
-                        <div className="flex flex-col">
-                            <span className="text-xs text-slate-500 uppercase tracking-wide">
-                                {service.unit === 'project' ? 'Precio fijo' : 'Inversión'}
-                            </span>
-                            <span className="text-xl font-bold text-white">
-                                {service.price_display_text ? (
-                                    <span>{service.price_display_text}</span>
-                                ) : (
-                                    <span className="text-lg">Solución a medida</span>
-                                )}
-                            </span>
+                    {/* Footer */}
+                    <div className="mt-auto pt-5 border-t border-slate-800/60 flex items-end justify-between">
+                        <div>
+                            <p className="text-xs uppercase text-slate-500 font-bold mb-1">Inversión</p>
+                            <p className="text-lg font-bold text-white tracking-tight">
+                                {service.price_display_text || 'A medida'}
+                            </p>
                         </div>
-                        <div className="flex gap-2">
-                            {onDemoClick && (
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        onDemoClick();
-                                    }}
-                                    className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold hover:bg-emerald-500 hover:text-white transition-all border border-emerald-500/20"
-                                >
-                                    Ver Demo
-                                </button>
-                            )}
-                            <button className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all">
-                                <ArrowRight className="w-5 h-5" />
-                            </button>
+                        <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:border-emerald-500 transition-all duration-300 shadow-emerald-500/10 group-hover:shadow-emerald-500/50 hover:shadow-lg">
+                            <ArrowRight className="w-5 h-5 text-emerald-500 group-hover:text-slate-950" />
                         </div>
                     </div>
                 </div>
