@@ -11,7 +11,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@auth/supabase-adapter": "^1.10.0",
+    "@auth/supabase-adapter": "^1.11.1",
     "@aws-sdk/client-s3": "^3.896.0",
     "@aws-sdk/s3-request-presigner": "^3.896.0",
     "@google/generative-ai": "^0.24.1",
