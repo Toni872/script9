@@ -65,7 +65,6 @@ export async function middleware(req: NextRequest) {
 export const config = {
     matcher: [
         // Aplicar a todas las rutas EXCEPTO archivos estáticos, api auth, imágenes, favicon
-        // EXPLICIT FIXED: Excluded api/submit-lead from auth matcher
         '/((?!api/auth|api/submit-lead|_next/static|_next/image|favicon.ico).*)',
     ],
 };

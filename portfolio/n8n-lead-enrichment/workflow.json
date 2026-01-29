@@ -1,0 +1,1005 @@
+{
+  "name": "PRACTICASFP",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "EMPRESAS",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nombre",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Apellidos",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Correo Electrónico",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Teléfono",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Provincia",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Centro Educativo",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Ciclo Impartido",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -1760,
+        256
+      ],
+      "id": "c62a5eed-d886-4bfa-ba9c-b9757367ca13",
+      "name": "On form submission",
+      "webhookId": "e2b621f5-2657-4ae4-8e8c-fc79ff701332"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1664,
+        240
+      ],
+      "id": "d4ebbae7-37a4-4823-9ea0-08e21706268e",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "messages": {
+          "message": [
+            {
+              "content": "=You are an expert web content analyst specialized in extracting verified business contact emails from website HTML or text.\n\nThis is the website where you have to search: {{ $json.website }}\n\nYour task:\n1. Focus exclusively on the CONTACT or ABOUT sections of the provided content (or equivalent phrases such as \"Contact\", \"Contact us\", \"Get in touch\", \"Información de contacto\", \"Atención al cliente\", etc.).\n2. Identify and extract all email addresses found.\n3. Validate that each email:\n   - Belongs to a real company domain (not generic placeholders like example.com, noreply@, webmaster@, info@ hosting providers, etc.).\n   - Looks professional (not random personal ones like gmail.com, yahoo.com, unless it’s clearly the company’s main contact).\n4. If multiple emails appear:\n   - Prefer the one that corresponds to **customer service** or **general inquiries** (e.g., “contact@”, “info@”, “sales@”, “atencion@”, “support@”, “hello@”).\n   - If you cannot identify a clear customer service email, return only **one** email that is valid and most likely used for public contact.\n5. Do NOT include any explanation, notes, or multiple lines.\n\nYour response format must be strictly:\n\ncorreo: [correo electrónico válido]\n"
+            }
+          ]
+        },
+        "simplify": true,
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexity",
+      "typeVersion": 1,
+      "position": [
+        2368,
+        416
+      ],
+      "id": "7321ccad-ae9d-4688-a3c1-e0eadfa898f4",
+      "name": "Message a model",
+      "credentials": {
+        "perplexityApi": {
+          "id": "kKUCCtxWXMVGNAMB",
+          "name": "Perplexity account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code node (JavaScript)\n// Extrae un email válido desde item.json.message (e.g. \"correo: xxx\").\n// Soporta emails escritos del revés (p.ej. \"moc.dominio@ofni\") y los corrige.\n// Output: item.json.email (string o null)\n\nconst EMAIL_RE = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/i;\n\nfunction extractEmailFromText(txt = '') {\n  if (!txt) return null;\n\n  // 1) Busca \"correo: <email>\" o cualquier email en el texto\n  const m1 = EMAIL_RE.exec(txt);\n  if (m1) return m1[0].trim();\n\n  // 2) Si no encuentra, prueba a invertir el texto (para casos tipo \"moc....@ofni\")\n  const reversed = txt.split('').reverse().join('');\n  const m2 = EMAIL_RE.exec(reversed);\n  if (m2) {\n    // invierte solo el match para recuperar el email correcto\n    const fixed = m2[0].split('').reverse().join('');\n    return EMAIL_RE.test(fixed) ? fixed : null;\n  }\n\n  return null;\n}\n\nconst out = $input.all().map(item => {\n  const msg = String(item.json?.message ?? '');\n  const email = extractEmailFromText(msg);\n\n  return {\n    json: {\n      ...item.json,\n      email: email || null,          // <- arrastra este campo\n      email_is_valid: !!email\n    }\n  };\n});\n\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2592,
+        512
+      ],
+      "id": "726f826a-85ba-4e48-842a-0abfd1c9e89b",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const out = [];\nconst blacklist = [\n  'colegio oficial','colegio profesional',\n  'asociación','asociacion',\n  'fundación','fundacion',\n  'cámara','camara',\n  'consejo','gremio','colegio de'\n];\n\nfor (const item of $input.all()) {\n  const places = item.json?.places || [];\n  for (const p of places) {\n    const name = (p.displayName?.text || '').toLowerCase();\n    if (blacklist.some(w => name.includes(w))) continue;\n    out.push({ json: p });\n  }\n}\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1152,
+        240
+      ],
+      "id": "d0ffbadd-e08d-4b4d-a090-4d22885f0898",
+      "name": "Elimina Colegios/Asociaciones"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code node (JavaScript)\n// Soporta dos formas de entrada:\n//  A) item.json.places => array de places\n//  B) item.json        => un place ya \"plano\" por item\n// Filtro único: solo pasar empresas con websiteUri no vacío.\n\nconst out = [];\n\nfor (const item of $input.all()) {\n  let candidates = [];\n\n  if (Array.isArray(item.json?.places)) {\n    candidates = item.json.places;\n  } else {\n    // si ya viene un place plano por item, lo tratamos como tal\n    const maybePlace = item.json;\n    // heurística mínima para no colar items no-place\n    if (maybePlace && (maybePlace.websiteUri || maybePlace.displayName || maybePlace.formattedAddress)) {\n      candidates = [maybePlace];\n    }\n  }\n\n  for (const p of candidates) {\n    const website = String(p?.websiteUri ?? '').trim();\n    if (!website) continue;                        // único filtro obligatorio\n    // Si quieres exigir https://, descomenta:\n    // if (!website.toLowerCase().startsWith('https://')) continue;\n\n    out.push({\n      json: {\n        id: p?.id ?? null,\n        name: p?.displayName?.text ?? null,\n        website,\n        address: p?.formattedAddress ?? null,\n        maps_url: p?.googleMapsUri ?? null,\n        phone: p?.internationalPhoneNumber ?? null,\n        latitude: p?.location?.latitude ?? null,\n        longitude: p?.location?.longitude ?? null,\n        types: p?.types ?? []\n      }\n    });\n  }\n}\n\nreturn out;\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1392,
+        240
+      ],
+      "id": "a37f7413-ee3a-4e13-8f2f-fb39115d6bf0",
+      "name": "Filtra Empresas Con Web Disponible"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8478fc46-b774-47f2-b3b6-8f22639dfb1c",
+              "name": "Provincia",
+              "value": "={{ $('On form submission').first().json.Provincia }}",
+              "type": "string"
+            },
+            {
+              "id": "30f680f0-c2ba-4445-adaa-7afe77c03c33",
+              "name": "Centro Educativo",
+              "value": "={{ $('On form submission').first().json['Centro Educativo'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e4d96ce4-a26d-4538-b69e-a5420911c525",
+              "name": "Nombre Empresa",
+              "value": "={{ $('Filtra Empresas Con Web Disponible').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "ae9f304b-97d8-480d-a933-8f57dd520ca2",
+              "name": "Email Empresa",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "66b46945-0c53-4582-b673-585a27ee967b",
+              "name": "Web Empresa",
+              "value": "={{ $('Filtra Empresas Con Web Disponible').item.json.website }}",
+              "type": "string"
+            },
+            {
+              "id": "b4f67f64-d317-4a7e-a8f0-6b0b100e0fd8",
+              "name": "Direccion Empresa",
+              "value": "={{ $('Filtra Empresas Con Web Disponible').item.json.address }}",
+              "type": "string"
+            },
+            {
+              "id": "c2125a93-8fe4-47bb-be23-6832751937a0",
+              "name": "Numero Empresa",
+              "value": "={{ $('Loop Over Items').item.json.phone ? ($('Loop Over Items').item.json.phone.startsWith('+') ? $('Loop Over Items').item.json.phone.slice(1) : $('Loop Over Items').item.json.phone) : '' }}",
+              "type": "string"
+            },
+            {
+              "id": "6ad9ae9a-5cc4-4281-9f2d-fc5de201c0e4",
+              "name": "Borrador",
+              "value": "=Estimado/a responsable de Recursos Humanos,\n\nMi nombre es {{ $('On form submission').first().json['Nombre'] }} {{ $('On form submission').first().json['Apellidos'] }}, y soy profesor/a en {{ $('On form submission').first().json['Centro Educativo'] }}, donde impartimos el ciclo de {{ $('On form submission').first().json['Ciclo Impartido'] }}.\nMe pongo en contacto con usted para consultar si la empresa {{ $('Filtra Empresas Con Web Disponible').item.json.name }} estaría interesada en acoger alumnado en prácticas como parte de su formación profesional.\n\nLas prácticas tienen como objetivo ofrecer a los estudiantes una experiencia real en el entorno laboral, aplicando los conocimientos adquiridos en el aula y contribuyendo al mismo tiempo a las actividades de la empresa. Desde el centro nos encargamos de toda la gestión administrativa y del seguimiento del alumno/a durante el periodo de prácticas.\n\nEn caso de estar interesados, estaría encantado/a de ampliar la información o concertar una breve reunión para comentar los detalles y resolver cualquier duda.\n\nAgradezco de antemano su atención y quedo a su disposición.\n\nAtentamente,\n{{ $('On form submission').first().json['Nombre'] }} {{ $('On form submission').first().json['Apellidos'] }}\nDepartamento de {{ $('On form submission').first().json['Ciclo Impartido'] }}\n{{ $('On form submission').first().json['Centro Educativo'] }}\n{{ $('On form submission').first().json['Teléfono'] }}\n{{ $('On form submission').first().json['Correo Electrónico'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2800,
+        608
+      ],
+      "id": "9a6a94cf-fdb7-459c-a33d-909f7d875aa3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('On form submission').item.json.Nombre }} {{ $('On form submission').item.json.Apellidos }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1LbrMq6tyW29McmCCr46TItft2h5LvByE",
+          "mode": "list",
+          "cachedResultName": "FORMULARIOS",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1LbrMq6tyW29McmCCr46TItft2h5LvByE"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1120,
+        528
+      ],
+      "id": "b5b7e2dc-5e74-47b8-854e-2667e36b52c5",
+      "name": "Crear Carpeta Profesor",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "tCDAcoXxskwdWvgI",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ $json.Nombre }} {{ $json.Apellidos }}",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1LbrMq6tyW29McmCCr46TItft2h5LvByE",
+            "mode": "list",
+            "cachedResultName": "FORMULARIOS",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1LbrMq6tyW29McmCCr46TItft2h5LvByE"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1552,
+        256
+      ],
+      "id": "1236844b-7dc0-47eb-a1ed-dc242f219ecf",
+      "name": "Buscar Si Carpeta Profesor Existe",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "tCDAcoXxskwdWvgI",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "391ab185-5aaf-4936-99fc-4d5d162e1197",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1264,
+        256
+      ],
+      "id": "f35a2a86-67d2-4d72-841c-f03be851bc92",
+      "name": "¿Existe?"
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "title": "=Centro {{ $('On form submission').item.json['Centro Educativo'] }} y Ciclo {{ $('On form submission').item.json['Ciclo Impartido'] }} - {{ DateTime.now().setZone(\"Europe/Madrid\").toFormat(\"dd-MM-yyyy\") }}\n\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        528
+      ],
+      "id": "4de30994-c23f-486e-ba58-43c5ea170c74",
+      "name": "Crear CSV",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ocf09d9VbHKbQZS6",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "title": "=Centro {{ $('On form submission').item.json['Centro Educativo'] }} y Ciclo {{ $('On form submission').item.json['Ciclo Impartido'] }} - {{ DateTime.now().setZone(\"Europe/Madrid\").toFormat(\"dd-MM-yyyy\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -784,
+        240
+      ],
+      "id": "91981d80-5645-4849-b450-8622a38f148d",
+      "name": "Crear CSV1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ocf09d9VbHKbQZS6",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Obtener ID Csv y Url').item.json.id_csv }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1X-tQaZuBKkdlXIl8nGzZpiIIXngh1UDBAeteCGrfOtY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Provincia": "={{ $json.Provincia }}",
+            "Centro Educativo": "={{ $json['Centro Educativo'] }}",
+            "Nombre Empresa": "={{ $json['Nombre Empresa'] }}",
+            "Email Empresa": "={{ $json['Email Empresa'] }}",
+            "Web Empresa": "={{ $json['Web Empresa'] }}",
+            "Direccion Empresa": "={{ $json['Direccion Empresa'] }}",
+            "Numero Empresa": "={{ $json['Numero Empresa'] }}",
+            "Borrador": "={{ $json.Borrador }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Provincia",
+              "displayName": "Provincia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Centro Educativo",
+              "displayName": "Centro Educativo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre Empresa",
+              "displayName": "Nombre Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email Empresa",
+              "displayName": "Email Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Web Empresa",
+              "displayName": "Web Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Direccion Empresa",
+              "displayName": "Direccion Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Numero Empresa",
+              "displayName": "Numero Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id_carpeta",
+              "displayName": "id_carpeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Borrador",
+              "displayName": "Borrador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3024,
+        704
+      ],
+      "id": "2a95d82b-ea79-47ed-ac65-8d1f6e34b581",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ocf09d9VbHKbQZS6",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Crear CSV1').first().json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Buscar Si Carpeta Profesor Existe').first().json.id }}",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -368,
+        240
+      ],
+      "id": "6f1214e7-e778-4f29-9545-cae945f9159f",
+      "name": "Mover Csv",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "tCDAcoXxskwdWvgI",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Crear CSV').first().json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Crear Carpeta Profesor').first().json.id }}",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -240,
+        528
+      ],
+      "id": "b297b68d-4b8e-4744-822d-042f57b99470",
+      "name": "Mover Csv1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "tCDAcoXxskwdWvgI",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://places.googleapis.com/v1/places:searchText",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Goog-Api-Key",
+              "value": "AIzaSyAeZgGKJSsleBq1mswMi1cll8kQlb09IwI"
+            },
+            {
+              "name": "X-Goog-FieldMask",
+              "value": "places.id,places.displayName,places.formattedAddress,places.location"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "textQuery",
+              "value": "={{ $('On form submission').item.json['Centro Educativo'] }}, {{ $('On form submission').item.json.Provincia }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        704,
+        240
+      ],
+      "id": "883a0b35-05d6-4daf-b81a-1778555edac2",
+      "name": "GeoLocalizar Centro"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://places.googleapis.com/v1/places:searchText",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Goog-Api-Key",
+              "value": "AIzaSyAeZgGKJSsleBq1mswMi1cll8kQlb09IwI"
+            },
+            {
+              "name": "X-Goog-FieldMask",
+              "value": "places.id,places.displayName,places.formattedAddress,places.location,places.types,places.websiteUri,places.internationalPhoneNumber,places.googleMapsUri"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"textQuery\": \"empresas en {{ $('On form submission').item.json.Provincia }}, relacionadas con {{ $('On form submission').item.json['Ciclo Impartido'] }}\",\n  \"languageCode\": \"es\",\n  \"regionCode\": \"ES\",\n  \"pageSize\": 20,\n  \"rankPreference\": \"DISTANCE\",\n  \"locationBias\": {\n    \"circle\": {\n      \"center\": {\n        \"latitude\": {{ $json.places[0].location.latitude }},\n        \"longitude\": {{ $json.places[0].location.longitude }}\n      },\n      \"radius\": 15000\n    }\n  }\n\n  \n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        928,
+        240
+      ],
+      "id": "1931dce1-e4d9-4d78-90d4-12a444c424eb",
+      "name": "Buscar Empresas"
+    },
+    {
+      "parameters": {
+        "sendTo": "borjamart30@gmail.com",
+        "subject": "Nuevo Contacto",
+        "emailType": "text",
+        "message": "=Buenos dias {{ $('On form submission').first().json.Nombre }},\n\nTe envío el acceso a las nuevas empresas encontradas para el ciclo de {{ $('On form submission').first().json['Ciclo Impartido'] }}.\n\n{{ $('Obtener ID Csv y Url').first().json.spreadsheetUrl }}\n\n\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2816,
+        224
+      ],
+      "id": "5848befd-ce70-446e-a6e9-bbb8eaca6a81",
+      "name": "Send a message",
+      "webhookId": "372dbc5b-3405-40ab-8b6b-9c9c2e70b5a9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "LMd7wBgHb4Pl757D",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5e0d1ccf-3171-4142-9210-d467a3aed83d",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "a13ebdce-175f-4799-895a-f631f5e5ac1c",
+              "name": "spreadsheetUrl",
+              "value": "={{ $('Crear CSV1').item.json.spreadsheetUrl }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -160,
+        240
+      ],
+      "id": "2afb049a-7672-4fda-a089-17ade677e6a0",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5e0d1ccf-3171-4142-9210-d467a3aed83d",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "a13ebdce-175f-4799-895a-f631f5e5ac1c",
+              "name": "spreadsheetUrl",
+              "value": "={{ $('Crear CSV').item.json.spreadsheetUrl }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        528
+      ],
+      "id": "18ae3699-77e0-497c-9ccf-47ae9fdd6c6d",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code Node\n// Este nodo recibe 1 item desde una rama u otra del IF\n// Tanto si venimos del search como del create\n// y saca SIEMPRE un item con \"id_csv\" y \"spreadsheetUrl\"\n\nconst item = $input.first().json;\n\nlet id_csv;\n\n// Si venimos del SEARCH (Google Drive \"Search\" node)\nif (Array.isArray(item.files) && item.files.length > 0) {\n  id_csv = item.files[0].id;\n}\n// Si venimos del CREATE (Google Drive \"Create\" node)\nelse if (item.id) {\n  id_csv = item.id;\n}\n\n// Extrae también spreadsheetUrl si existe\nconst spreadsheetUrl = item.spreadsheetUrl || null;\n\n// Devuelve ambos valores como output\nreturn [\n  {\n    json: {\n      id_csv,\n      spreadsheetUrl\n    }\n  }\n];\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        464,
+        240
+      ],
+      "id": "f1035229-5c4d-44d5-8f0c-a5bf89bf06db",
+      "name": "Obtener ID Csv y Url"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2304,
+        224
+      ],
+      "id": "dd85940f-7403-40b5-b9e6-10a250df32df",
+      "name": "Aggregate"
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "Nombre": "Jaime",
+          "Apellidos": "Lluch García",
+          "Correo Electrónico": "jaime@gmail.com",
+          "Teléfono": "645345677",
+          "Provincia": "Valencia",
+          "Centro Educativo": "Centre Educatiu Comenius",
+          "Ciclo Impartido": "Imagen y sonido",
+          "submittedAt": "2025-11-01T18:49:23.496+01:00",
+          "formMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Buscar Si Carpeta Profesor Existe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Elimina Colegios/Asociaciones": {
+      "main": [
+        [
+          {
+            "node": "Filtra Empresas Con Web Disponible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtra Empresas Con Web Disponible": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Carpeta Profesor": {
+      "main": [
+        [
+          {
+            "node": "Crear CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Si Carpeta Profesor Existe": {
+      "main": [
+        [
+          {
+            "node": "¿Existe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Existe?": {
+      "main": [
+        [
+          {
+            "node": "Crear CSV1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crear Carpeta Profesor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear CSV": {
+      "main": [
+        [
+          {
+            "node": "Mover Csv1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear CSV1": {
+      "main": [
+        [
+          {
+            "node": "Mover Csv",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mover Csv": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mover Csv1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GeoLocalizar Centro": {
+      "main": [
+        [
+          {
+            "node": "Buscar Empresas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Empresas": {
+      "main": [
+        [
+          {
+            "node": "Elimina Colegios/Asociaciones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Obtener ID Csv y Url",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Obtener ID Csv y Url",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener ID Csv y Url": {
+      "main": [
+        [
+          {
+            "node": "GeoLocalizar Centro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fe7b1bb0-876c-4049-b70f-b96fe4ebb4e7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cd5764b1a2e6b9b5223c90cf1a924c3624ff6f5bcfa283ace4d7122a80a88bc0"
+  },
+  "id": "boZcLlXnkT6J4qdN",
+  "tags": []
+}

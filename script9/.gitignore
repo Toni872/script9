@@ -12,6 +12,12 @@
 
 # testing
 /coverage
+*.test.js
+*.test.ts
+*.test.tsx
+/e2e
+/tests
+/__mocks__
 
 # next.js
 /.next/
@@ -32,6 +38,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -40,8 +47,30 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# railway
-railway-variables.env
+# IDE
+.vscode/
+.cursor/
+.idea/
 
-.vercel
+# temp files
+*.tmp
+*.temp
+*_TEMP.*
+VERCEL_TEST.txt
+BUILD_TRIGGER.txt
+verify-files.js
+VERCEL_VARIABLES_LISTAS.txt
+COPIAR_VARIABLES_VERCEL.txt
+vercel-env-import.txt
+vercel-env-solo-nuevas.txt
+vercel-env-sin-comillas.txt
+
+# Supabase
+/supabase/.branches
+/supabase/.temp
+
+# config files with sensitive data
+config.json
 .env*.local
+
+deploy_frontend.tar

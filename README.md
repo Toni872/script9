@@ -1,59 +1,99 @@
-# Script9
-> **Automatización Inteligente para Negocios Digitales**
+# 🤖 Script9 - Automatización Inteligente para Negocios Digitales
 
-![Script9 Banner](public/script9_banner.png)
+<div align="center">
 
-**Script9** es una plataforma avanzada de marketplace enfocada en soluciones digitales de **Inteligencia Artificial, Automatización de Workflows y Scripting a medida**. Conectamos empresas con soluciones técnicas de alto impacto como bots de Telegram con GPT-4, sistemas de scraping automatizado y asistentes virtuales.
+![Script9 Logo](https://img.shields.io/badge/Script9-Automatización-magenta?style=for-the-badge)
 
-## 🚀 Características Principales
+**Servicios de IA, automatizaciones, workflows y scripts a medida para negocios digitales**
 
-- **Marketplace de Servicios AI**: Catálogo curado de soluciones de automatización.
-- **Pagos Seguros**: Integración completa con Stripe para transacciones protegidas.
-- **Gestión de Usuarios y Roles**: Sistema robusto de perfiles para Clientes y Anfitriones (Creadores).
-- **Dashboard en Tiempo Real**: Métricas de ventas, gestión de reservas y estado de proyectos.
-- **Diseño Moderno "Deep Tech"**: Interfaz limpia y profesional construida con los últimos estándares de UX/UI.
+[Características](#-características) • [Tecnologías](#-tecnologías) • [Instalación](#-instalación) • [Configuración](#-configuración) • [Uso](#-uso)
 
-## 🛠️ Stack Tecnológico
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react)](https://react.dev/)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-green?style=flat-square&logo=supabase)](https://supabase.com/)
+[![Stripe](https://img.shields.io/badge/Stripe-Payments-635bff?style=flat-square&logo=stripe)](https://stripe.com/)
 
-Script9 está construido sobre una arquitectura moderna y escalable:
+</div>
 
-- **Frontend**: [Next.js 14](https://nextjs.org/) (App Router), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), [Framer Motion](https://www.framer.com/motion/).
-- **Backend & Base de Datos**: [Supabase](https://supabase.com/) (PostgreSQL, Auth, Storage).
-- **Pagos**: [Stripe](https://stripe.com/) Connect & Checkout.
-- **Emails**: [Resend](https://resend.com/) para notificaciones transaccionales.
-- **Despliegue**: Optimizado para [Vercel](https://vercel.com/).
+---
 
-## 📦 Instalación y Configuración
+## 📖 Acerca del Proyecto
 
-1. **Clonar el repositorio**:
-   ```bash
-   git clone https://github.com/Toni872/script9.git
-   cd script9
-   ```
+**Script9** es una plataforma de automatización inteligente que ofrece servicios de IA, workflows personalizados y scripts a medida para negocios digitales. El proyecto proporciona una infraestructura robusta para implementar soluciones tecnológicas avanzadas que optimizan procesos empresariales.
 
-2. **Instalar dependencias**:
-   ```bash
-   npm install
-   ```
+### 🎯 Objetivo
 
-3. **Configurar Variables de Entorno**:
-   Crea un archivo `.env.local` basado en el ejemplo y añade tus claves de Supabase, Stripe y Resend.
+Proporcionar herramientas y servicios de automatización que permitan a negocios digitales escalar sus operaciones, optimizar flujos de trabajo y aprovechar el poder de la inteligencia artificial para mejorar su productividad.
 
-4. **Ejecutar en Desarrollo**:
-   ```bash
-   npm run dev
-   ```
+---
 
-## 🔐 Variables de Entorno Requeridas
+## ⚠️ Términos de Uso y Licencia
 
-| Variable | Descripción |
-|----------|-------------|
-| `NEXT_PUBLIC_SUPABASE_URL` | URL de tu proyecto Supabase |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clave pública de Supabase |
-| `STRIPE_SECRET_KEY` | Clave secreta de Stripe |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Clave pública de Stripe |
-| `RESEND_API_KEY` | API Key para envío de emails |
+Este repositorio es **público únicamente para fines de visualización y contemplación**. 
 
-## 📄 Licencia
+### 🔒 Protección de Propiedad Intelectual
 
-Este proyecto es propiedad de **Script9**. Todos los derechos reservados.
+El código fuente, diseño, arquitectura y cualquier material relacionado con este proyecto son **propiedad exclusiva de Antonio Lloret**. Todos los derechos reservados.
+
+### ✅ Lo que SÍ puedes hacer:
+- 👀 Visualizar y explorar el código fuente
+- 📚 Estudiar el código con fines educativos y aprendizaje personal
+- 🔍 Contemplar la estructura, arquitectura y diseño del proyecto
+
+### ❌ Lo que NO puedes hacer:
+- 🚫 Copiar, reproducir, distribuir o crear obras derivadas
+- 🚫 Utilizar el código para fines comerciales o proyectos propios
+- 🚫 Implementar o desplegar el código en producción
+- 🚫 Plagiar o apropiarse del código
+- 🚫 Utilizar el código como base para otros proyectos
+
+### 📝 Autorizaciones Especiales
+
+Si deseas utilizar partes de este código con fines educativos, académicos o cualquier otro propósito, **debes contactar previamente al autor** para obtener autorización expresa.
+
+**Para más información, consulta el archivo [LICENSE](LICENSE) en este repositorio.**
+
+---
+
+## 📁 Estructura del Proyecto
+
+El código fuente principal se encuentra en el directorio `script9`.
+
+```
+Script9-Project/
+├── script9/                # Aplicación principal Next.js
+│   ├── src/               # Código fuente
+│   │   ├── app/          # App Router
+│   │   ├── components/   # Componentes
+│   │   └── lib/          # Logica
+│   ├── database/          # Scripts SQL
+│   └── public/            # Archivos estáticos
+└── README.md
+```
+
+## 🚀 Inicio Rápido
+
+1.  Entrar al directorio del proyecto:
+    ```bash
+    cd script9
+    ```
+
+2.  Instalar dependencias:
+    ```bash
+    npm install
+    ```
+
+3.  Ejecutar en desarrollo:
+    ```bash
+    npm run dev
+    ```
+
+La aplicación estará disponible en `http://localhost:3000`.
+
+---
+
+## 📞 Contacto
+
+- 📧 **Email**: [antohachi@gmail.com](mailto:antohachi@gmail.com)
+- 📱 **WhatsApp**: [+34 687 723 287](https://wa.me/34687723287)
