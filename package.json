@@ -1,0 +1,17 @@
+{
+    "name": "script9-root-proxy",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "build": "cd script9 && npm install && npm run build && cp -r .next ../.next",
+        "dev": "cd script9 && npm run dev",
+        "start": "cd script9 && npm start",
+        "lint": "cd script9 && npm run lint"
+    },
+    "devDependencies": {
+        "prettier": "^3.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
