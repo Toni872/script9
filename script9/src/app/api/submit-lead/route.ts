@@ -5,7 +5,8 @@ export async function POST(req: Request) {
         const body = await req.json();
 
         // This variable must be set in your .env.local file
-        const webhookUrl = process.env.N8N_WEBHOOK_URL;
+        // Fallback to hardcoded URL if Env Var fails (Temporary Fix for Production)
+        const webhookUrl = process.env.N8N_WEBHOOK_URL || 'http://46.224.199.64.nip.io:5678/webhook/lead-form-gemini';
 
         if (!webhookUrl) {
             console.error('SERVER ERROR: N8N_WEBHOOK_URL is missing in .env.local');
