@@ -8,9 +8,7 @@
         "start": "cd script9 && npm start",
         "lint": "cd script9 && npm run lint"
     },
-    "dependencies": {
-        "next": "^14.0.0"
-    },
+    "dependencies": {},
     "devDependencies": {
         "prettier": "^3.0.0"
     },
