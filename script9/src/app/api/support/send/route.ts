@@ -23,10 +23,14 @@ export async function POST(req: Request) {
         });
 
         // --- NEW: Forward to N8N (AI SDR) ---
-        if (process.env.N8N_WEBHOOK_URL) {
+        // Fallback to hardcoded URL to ensure reliability
+        const n8nUrl = process.env.N8N_WEBHOOK_URL || 'http://46.224.199.64.nip.io:5678/webhook/lead-form-gemini';
+
+        if (n8nUrl) {
             try {
                 // Fire and forget (don't wait for N8N to respond to not slow down the UI)
-                fetch(process.env.N8N_WEBHOOK_URL, {
+                console.log('Sending to N8N:', n8nUrl);
+                fetch(n8nUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
