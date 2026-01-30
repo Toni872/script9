@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
 
     // 0. EXCEPCIÓN CRÍTICA: Rutas públicas permitidas explícitamente (bypass total)
     // Usamos startsWith para evitar problemas con barras finales o query params
-    if (path.startsWith('/api/submit-lead') || path.startsWith('/api/test-n8n')) {
+    if (path.startsWith('/api/submit-lead') || path.startsWith('/api/test-n8n') || path.startsWith('/api/support/send')) {
         return NextResponse.next();
     }
 
