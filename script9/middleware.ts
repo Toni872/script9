@@ -12,7 +12,8 @@ export async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
 
     // 0. EXCEPCIÓN CRÍTICA: Rutas públicas permitidas explícitamente (bypass total)
-    if (path === '/api/submit-lead' || path === '/api/test-n8n') {
+    // Usamos startsWith para evitar problemas con barras finales o query params
+    if (path.startsWith('/api/submit-lead') || path.startsWith('/api/test-n8n')) {
         return NextResponse.next();
     }
 
