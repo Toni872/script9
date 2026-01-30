@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
+    console.log('--- [DEBUG] API HIT DETECTED: /api/submit-lead ---');
+    console.log('--- [DEBUG] Headers:', JSON.stringify(Object.fromEntries(req.headers)));
     try {
         const body = await req.json();
 
