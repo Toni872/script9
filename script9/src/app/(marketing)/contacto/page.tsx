@@ -34,7 +34,8 @@ export default function Contacto() {
         setError('');
 
         try {
-            const response = await fetch('/api/support/send', {
+            // SWITCHED TO PROVEN ENDPOINT: Uses validated /api/submit-lead logic
+            const response = await fetch('/api/submit-lead', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,10 +43,11 @@ export default function Contacto() {
                 body: JSON.stringify({
                     name: formData.nombre,
                     email: formData.email,
-                    subject: formData.asunto || `Contacto de ${formData.empresa || 'Web'}`,
+                    company: formData.empresa,
                     message: formData.mensaje,
-                    type: 'contact',
-                    company: formData.empresa, // NEW: Field for AI SDR
+                    // Extra fields useful for N8N context
+                    subject: formData.asunto || `Contacto de ${formData.empresa || 'Web'}`,
+                    source: 'contact-page'
                 }),
             });
 
