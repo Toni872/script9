@@ -11,6 +11,11 @@ export async function middleware(req: NextRequest) {
     const res = NextResponse.next();
     const path = req.nextUrl.pathname;
 
+    // 0. EXCEPCIÓN CRÍTICA: Rutas públicas permitidas explícitamente (bypass total)
+    if (path === '/api/submit-lead' || path === '/api/test-n8n') {
+        return NextResponse.next();
+    }
+
     // 1. Rate Limiting (Protección Anti-DDoS básica)
     // Se aplica a rutas API y Contacto para evitar spam
     if (path.startsWith('/api') || path === '/contacto') {
